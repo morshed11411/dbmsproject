@@ -55,7 +55,7 @@
                                         } else {
                                             $e = oci_error($stmt);
                                             if ($e['code'] == 1 && strpos($e['message'], 'SYS_C007204') !== false) {
-                                                echo "Company ID already exists, enter a unique Company ID.";
+                                                echo "Failed to insert company data: The Company ID already exists. Please enter a unique Company ID.";
                                             } else {
                                                 echo "Failed to insert company data: Please enter valid data.";
                                             }
