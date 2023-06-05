@@ -14,7 +14,6 @@
                     <h1>Insert Company Data</h1>
                 </div>
             </div>
-
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -34,52 +33,92 @@
                                                 class="form-control" required>
                                         </div>
 
-                                        <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+
+                                   <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                                     </form>
+                                    <?php
+if (isset($_POST['submit'])) {
+    $company_id = $_POST['company_id'];
+    $company_name = $_POST['company_name'];
+
+    $conn = oci_connect('UMS', '12345', 'localhost/XE');
+    if (!$conn) {
+        $e = oci_error();
+        echo "Failed to connect to Oracle: " . $e['message'];
+    } else {
+        $query = "INSERT INTO Company (CompanyID, CompanyName) VALUES (:company_id, :company_name)";
+        $stmt = oci_parse($conn, $query);
+
+        oci_bind_by_name($stmt, ':company_id', $company_id);
+        oci_bind_by_name($stmt, ':company_name', $company_name);
+
+        $result = oci_execute($stmt);
+        if ($result) {
+            echo "Company data inserted successfully.";
+        } else {
+            $e = oci_error($stmt);
+            if ($e['code'] == 1 && strpos($e['message'], 'SYS_C007204') !== false) {
+                echo "Failed to insert company data: The Company ID already exists. Please enter a unique Company ID.";
+            } else {
+                echo "Failed to insert company data: Please enter valid data.";
+            }
+        }
+
+        oci_free_statement($stmt);
+        oci_close($conn);
+    }
+}
+?>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Company ID</th>
+                                                <th>Company Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $conn = oci_connect('UMS', '12345', 'localhost/XE');
+                                            if (!$conn) {
+                                                $e = oci_error();
+                                                echo "Failed to connect to Oracle: " . $e['message'];
+                                            } else {
+                                                $query = "SELECT * FROM Company";
+                                                $stmt = oci_parse($conn, $query);
+                                                oci_execute($stmt);
+
+                                                while ($row = oci_fetch_assoc($stmt)) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row['COMPANYID'] . "</td>";
+                                                    echo "<td>" . $row['COMPANYNAME'] . "</td>";
+                                                    echo "</tr>";
+                                                }
+
+                                                oci_free_statement($stmt);
+                                                oci_close($conn);
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Page content -->
         </div>
-
-
-
-        <?php
-        include 'views/footer.php';
-        if (isset($_POST['submit'])) {
-            $company_id = $_POST['company_id'];
-            $company_name = $_POST['company_name'];
-
-            $conn = oci_connect('UMS', '12345', 'localhost/XE');
-            if (!$conn) {
-                $e = oci_error();
-                echo "Failed to connect to Oracle: " . $e['message'];
-            } else {
-                $query = "INSERT INTO Company (CompanyID, CompanyName) VALUES (:company_id, :company_name)";
-                $stmt = oci_parse($conn, $query);
-
-                oci_bind_by_name($stmt, ':company_id', $company_id);
-                oci_bind_by_name($stmt, ':company_name', $company_name);
-
-                $result = oci_execute($stmt);
-                if ($result) {
-                    echo "Company data inserted successfully.";
-                } else {
-                    $e = oci_error($stmt);
-                    echo "Failed to insert company data: " . $e['message'];
-                }
-
-                oci_free_statement($stmt);
-                oci_close($conn);
-            }
-        }
-        ?>
+        <?php include 'views/footer.php';?>
 
     </div>
+
 </body>
 
 </html>
