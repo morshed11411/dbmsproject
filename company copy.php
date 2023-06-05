@@ -1,8 +1,8 @@
-<?php include 'views/auth.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'views/head.php'; ?>
+<?php include 'views/head.php';
+      include 'views/auth.php';
+?>
 
 <body>
     <div class="wrapper">
@@ -37,11 +37,11 @@
                                         <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                                     </form>
                                     <?php
+                                    include 'conn.php'; // Include the conn.php file for database connection
+
                                     if (isset($_POST['submit'])) {
                                         $company_id = $_POST['company_id'];
                                         $company_name = $_POST['company_name'];
-
-                                        include 'conn.php'; // Include the conn.php file for database connection
 
                                         $query = "INSERT INTO Company (CompanyID, CompanyName) VALUES (:company_id, :company_name)";
                                         $stmt = oci_parse($conn, $query);
@@ -55,15 +55,18 @@
                                         } else {
                                             $e = oci_error($stmt);
                                             if ($e['code'] == 1 && strpos($e['message'], 'SYS_C007204') !== false) {
-                                                echo "Failed to insert company data: The Company ID already exists. Please enter a unique Company ID.";
+                                                echo "Company ID already exists, enter a unique Company ID.";
                                             } else {
                                                 echo "Failed to insert company data: Please enter valid data.";
                                             }
                                         }
 
                                         oci_free_statement($stmt);
-                                        oci_close($conn);
                                     }
+
+                                    $query = "SELECT * FROM Company";
+                                    $stmt = oci_parse($conn, $query);
+                                    oci_execute($stmt);
                                     ?>
 
                                 </div>
@@ -78,28 +81,16 @@
                                             <tr>
                                                 <th>Company ID</th>
                                                 <th>Company Name</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            include 'conn.php'; // Include the conn.php file for database connection
-
-                                            $query = "SELECT * FROM Company";
-                                            $stmt = oci_parse($conn, $query);
-                                            oci_execute($stmt);
-
                                             while ($row = oci_fetch_assoc($stmt)) {
                                                 echo "<tr>";
                                                 echo "<td>" . $row['COMPANYID'] . "</td>";
                                                 echo "<td>" . $row['COMPANYNAME'] . "</td>";
-                                                echo "<td>";
-                                                echo "<a href='edit_company.php?company_id=" . $row['COMPANYID'] . "'>Edit</a> | ";
-                                                echo "<a href='delete_company.php?company_id=" . $row['COMPANYID'] . "'>Delete</a>";
-                                                echo "</td>";
                                                 echo "</tr>";
                                             }
-
                                             oci_free_statement($stmt);
                                             oci_close($conn);
                                             ?>
