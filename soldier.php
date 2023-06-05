@@ -20,6 +20,8 @@
                                     <th>Gender</th>
                                     <th>Marital Status</th>
                                     <th>District</th>
+                                    <th>Select</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,6 +52,12 @@
                                         echo "<td>".$row['GENDER']."</td>";
                                         echo "<td>".$row['MARITALSTATUS']."</td>";
                                         echo "<td>".$row['DISTRICT']."</td>";
+                                        
+                                        // Select Option
+                                        echo "<td><a href='edit_soldier.php?soldierId=".$row['SOLDIERID']."'>Edit</a></td>";
+
+                                        // Delete Option
+                                        echo "<td><a href='delete_soldier.php?soldierId=".$row['SOLDIERID']."'>Delete</a></td>";
 
                                         echo "</tr>";
                                     }
