@@ -23,18 +23,18 @@
                                     <form method="post" action="">
                                         <div class="form-group">
                                             <label for="appointment_id">Appointment ID:</label>
-                                            <input type="text" name="appointment_id" id="appointment_id" class="form-control"
-                                                required>
+                                            <input type="text" name="appointment_id" id="appointment_id"
+                                                class="form-control" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="appointment_name">Appointment Name:</label>
-                                            <input type="text" name="appointment_name" id="appointment_name" class="form-control"
-                                                required>
+                                            <input type="text" name="appointment_name" id="appointment_name"
+                                                class="form-control" required>
                                         </div>
 
 
-                                   <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                                        <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                                     </form>
                                     <?php
                                     if (isset($_POST['submit'])) {
@@ -99,7 +99,7 @@
                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                     echo "<tr>";
                                                     echo "<td>" . $row['APPOINTMENTID'] . "</td>";
-                                                    echo "<td>" . $row['APPOINTMENTNAME'] . "</td>";
+                                                    echo "<td><a href='soldier_details.php?appointment_id=" . $row['APPOINTMENTID'] . "'>" . $row['APPOINTMENTNAME'] . "</a></td>";
                                                     echo "<td>";
                                                     echo "<a href='edit_appointment.php?appointment_id=" . $row['APPOINTMENTID'] . "'>Edit</a> | ";
                                                     echo "<a href='delete_appointment.php?appointment_id=" . $row['APPOINTMENTID'] . "'>Delete</a>";
@@ -120,7 +120,7 @@
                 </div>
             </section>
         </div>
-        <?php include 'views/footer.php';?>
+        <?php include 'views/footer.php'; ?>
 
     </div>
 

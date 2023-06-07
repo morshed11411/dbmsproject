@@ -88,6 +88,24 @@ oci_close($conn);
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <th>Trade:</th>
+                                                        <td>
+                                                            <?php echo $soldier['TRADE']; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Rank:</th>
+                                                        <td>
+                                                            <?php echo $soldier['RANK']; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Company:</th>
+                                                        <td>
+                                                            <?php echo $soldier['COMPANYNAME']; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <th>Marital Status:</th>
                                                         <td>
                                                             <?php echo $soldier['MARITALSTATUS']; ?>
@@ -183,24 +201,7 @@ oci_close($conn);
                                                             <?php echo $soldier['SERVINGSTATUS']; ?>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Trade:</th>
-                                                        <td>
-                                                            <?php echo $soldier['TRADE']; ?>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Rank:</th>
-                                                        <td>
-                                                            <?php echo $soldier['RANK']; ?>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Company:</th>
-                                                        <td>
-                                                            <?php echo $soldier['COMPANYNAME']; ?>
-                                                        </td>
-                                                    </tr>
+
                                                 </table>
                                             </div>
 

@@ -199,12 +199,12 @@ if (!$conn) {
                                                         class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="height">Height:</label>
+                                                    <label for="height">Height (cm):</label>
                                                     <input type="text" name="height" id="height" class="form-control"
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="weight">Weight:</label>
+                                                    <label for="weight">Weight (lbs):</label>
                                                     <input type="text" name="weight" id="weight" class="form-control"
                                                         required>
                                                 </div>
@@ -319,14 +319,7 @@ if (!$conn) {
                                         }
                                     }
                                     ?>
-
-
                                 </div>
-
-
-
-
-
                             </div>
                         </div>
                     </div>
