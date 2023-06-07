@@ -54,7 +54,7 @@
                                         echo "<td>".$row['DISTRICT']."</td>";
                                         
                                         // Select Option
-                                        echo "<td><a href='edit_soldier.php?soldierId=".$row['SOLDIERID']."'>Edit</a></td>";
+                                        echo "<td><a href='edit_soldier.php?soldier_id=".$row['SOLDIERID']."'>Edit</a></td>";
 
                                         // Delete Option
                                         echo "<td><a href='delete_soldier.php?soldierId=".$row['SOLDIERID']."'>Delete</a></td>";

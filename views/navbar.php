@@ -189,7 +189,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="appointment.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage Appointment</p>
                 </a>

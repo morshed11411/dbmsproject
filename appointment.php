@@ -11,7 +11,7 @@
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
-                    <h1>Insert Trade Data</h1>
+                    <h1>Insert Appointment Data</h1>
                 </div>
             </div>
             <section class="content">
@@ -22,14 +22,14 @@
                                 <div class="card-body">
                                     <form method="post" action="">
                                         <div class="form-group">
-                                            <label for="trade_id">Trade ID:</label>
-                                            <input type="text" name="trade_id" id="trade_id" class="form-control"
+                                            <label for="appointment_id">Appointment ID:</label>
+                                            <input type="text" name="appointment_id" id="appointment_id" class="form-control"
                                                 required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="trade_name">Trade Name:</label>
-                                            <input type="text" name="trade_name" id="trade_name" class="form-control"
+                                            <label for="appointment_name">Appointment Name:</label>
+                                            <input type="text" name="appointment_name" id="appointment_name" class="form-control"
                                                 required>
                                         </div>
 
@@ -38,29 +38,29 @@
                                     </form>
                                     <?php
                                     if (isset($_POST['submit'])) {
-                                        $trade_id = $_POST['trade_id'];
-                                        $trade_name = $_POST['trade_name'];
+                                        $appointment_id = $_POST['appointment_id'];
+                                        $appointment_name = $_POST['appointment_name'];
 
                                         $conn = oci_connect('UMS', '12345', 'localhost/XE');
                                         if (!$conn) {
                                             $e = oci_error();
                                             echo "Failed to connect to Oracle: " . $e['message'];
                                         } else {
-                                            $query = "INSERT INTO TRADE (TRADEID, TRADE) VALUES (:trade_id, :trade_name)";
+                                            $query = "INSERT INTO APPOINTMENTS (APPOINTMENTID, APPOINTMENTNAME) VALUES (:appointment_id, :appointment_name)";
                                             $stmt = oci_parse($conn, $query);
 
-                                            oci_bind_by_name($stmt, ':trade_id', $trade_id);
-                                            oci_bind_by_name($stmt, ':trade_name', $trade_name);
+                                            oci_bind_by_name($stmt, ':appointment_id', $appointment_id);
+                                            oci_bind_by_name($stmt, ':appointment_name', $appointment_name);
 
                                             $result = oci_execute($stmt);
                                             if ($result) {
-                                                echo "Trade data inserted successfully.";
+                                                echo "Appointment data inserted successfully.";
                                             } else {
                                                 $e = oci_error($stmt);
                                                 if ($e['code'] == 1 && strpos($e['message'], 'SYS_C007204') !== false) {
-                                                    echo "Failed to insert trade data: The Trade ID already exists. Please enter a unique Trade ID.";
+                                                    echo "Failed to insert Appointment data: The Appointment ID already exists. Please enter a unique Appointment ID.";
                                                 } else {
-                                                    echo "Failed to insert trade data: Please enter valid data.";
+                                                    echo "Failed to insert Appointment data: Please enter valid data.";
                                                 }
                                             }
 
@@ -80,8 +80,8 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Trade ID</th>
-                                                <th>Trade Name</th>
+                                                <th>Appointment ID</th>
+                                                <th>Appointment Name</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -92,17 +92,17 @@
                                                 $e = oci_error();
                                                 echo "Failed to connect to Oracle: " . $e['message'];
                                             } else {
-                                                $query = "SELECT * FROM TRADE";
+                                                $query = "SELECT * FROM APPOINTMENTS";
                                                 $stmt = oci_parse($conn, $query);
                                                 oci_execute($stmt);
 
                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                     echo "<tr>";
-                                                    echo "<td>" . $row['TRADEID'] . "</td>";
-                                                    echo "<td>" . $row['TRADE'] . "</td>";
+                                                    echo "<td>" . $row['APPOINTMENTID'] . "</td>";
+                                                    echo "<td>" . $row['APPOINTMENTNAME'] . "</td>";
                                                     echo "<td>";
-                                                    echo "<a href='edit_trade.php?trade_id=" . $row['TRADEID'] . "'>Edit</a> | ";
-                                                    echo "<a href='delete_trade.php?trade_id=" . $row['TRADEID'] . "'>Delete</a>";
+                                                    echo "<a href='edit_appointment.php?appointment_id=" . $row['APPOINTMENTID'] . "'>Edit</a> | ";
+                                                    echo "<a href='delete_appointment.php?appointment_id=" . $row['APPOINTMENTID'] . "'>Delete</a>";
                                                     echo "</td>";
                                                     echo "</tr>";
                                                 }

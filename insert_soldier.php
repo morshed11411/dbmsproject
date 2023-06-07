@@ -78,10 +78,10 @@ if (!$conn) {
         <label for="blood_group">Blood Group:</label>
         <input type="text" name="blood_group" id="blood_group" required><br>
 
-        <label for="weight">Weight:</label>
+        <label for="weight">Weight (lbs):</label>
         <input type="text" name="weight" id="weight" required><br>
 
-        <label for="height">Height:</label>
+        <label for="height">Height (cm):</label>
         <input type="text" name="height" id="height" required><br>
 
         <label for="religion">Religion:</label>
