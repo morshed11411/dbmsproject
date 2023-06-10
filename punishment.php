@@ -75,20 +75,26 @@
                                         // Insert the punishment into the Punishment table
                                         include 'conn.php';
 
-                                        $query = "INSERT INTO Punishment (SoldierID, Punishment, Reason, PunishmentDate) 
-                                                  VALUES (:soldier_id, :punishment, :reason, TO_DATE(:punishment_date, 'YYYY-MM-DD'))";
+                                        $query = "INSERT INTO Punishment (PunishmentID, SoldierID, Punishment, Reason, PunishmentDate) 
+                                                  VALUES (Punishment_Seq.nextval, :soldier_id, :punishment, :reason, TO_DATE(:punishment_date, 'YYYY-MM-DD'))";
                                         $stmt = oci_parse($conn, $query);
                                         oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
                                         oci_bind_by_name($stmt, ':punishment', $punishment);
                                         oci_bind_by_name($stmt, ':reason', $reason);
                                         oci_bind_by_name($stmt, ':punishment_date', $punishment_date);
-                                        oci_execute($stmt);
+                                        $result = oci_execute($stmt);
 
-                                        echo "Punishment added successfully.";
+                                        if ($result) {
+                                            echo "Punishment added successfully.";
+                                        } else {
+                                            $e = oci_error($stmt);
+                                            echo "Failed to add punishment: " . $e['message'];
+                                        }
 
                                         oci_free_statement($stmt);
                                         oci_close($conn);
                                     }
+
                                     ?>
 
                                 </div>
