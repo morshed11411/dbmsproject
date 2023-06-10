@@ -60,6 +60,7 @@
                       if ($row = oci_fetch_assoc($stmt)) {
                         // User is authenticated
                         $_SESSION['username'] = $row['NAME']; // Ensure the column name is correct
+                        $_SESSION['userid'] = $row['SOLDIERID'];
                         // You can store other relevant data as needed
                   
                         // Redirect to the dashboard or desired page

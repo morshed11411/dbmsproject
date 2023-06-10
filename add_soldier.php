@@ -93,6 +93,39 @@ if (!$conn) {
                                                     <input type="text" name="name" id="name" class="form-control"
                                                         required>
                                                 </div>
+                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        // Hide the password field by default
+                                                        $('#password-field').hide();
+
+                                                        // Handle the change event of the rank field
+                                                        $('#rank').change(function () {
+                                                            var selectedRank = $(this).val();
+                                                            if (selectedRank === 'officer') {
+                                                                // Show the password field if officer is selected
+                                                                $('#password-field').show();
+                                                            } else {
+                                                                // Hide the password field for other ranks
+                                                                $('#password-field').hide();
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+
+                                    
+
+                                                    <div class="form-group">
+                                                        <label for="rank">User Type:</label>
+                                                        <select name="rank" id="rank" class="form-control" required>
+                                                            <option value="">Select Type</option>
+                                                            <option value="officer">Officer</option>
+                                                            <option value="soldier">Soldier</option>
+                                                        </select>
+                                                    </div>
+
+                                             
+
 
                                                 <div class="form-group">
                                                     <label for="rank_id">Rank:</label>
@@ -219,16 +252,16 @@ if (!$conn) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" id="password-field">
                                                 <div class="form-group">
                                                     <label for="password">Password:</label>
                                                     <input type="password" name="password" id="password"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="confirm_password">Confirm Password:</label>
                                                     <input type="password" name="confirm_password" id="confirm_password"
-                                                        class="form-control" required>
+                                                        class="form-control" >
                                                 </div>
                                             </div>
                                         </div>

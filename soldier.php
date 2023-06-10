@@ -8,7 +8,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="soldierTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Soldier ID</th>
@@ -20,7 +20,7 @@
                                     <th>Gender</th>
                                     <th>Marital Status</th>
                                     <th>District</th>
-                                    <th>Select</th>
+                                    <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -55,7 +55,6 @@
                                         
                                         // Select Option
                                         echo "<td><a href='edit_soldier.php?soldier_id=".$row['SOLDIERID']."'>Edit</a></td>";
-
                                         // Delete Option
                                         echo "<td><a href='delete_soldier.php?soldierId=".$row['SOLDIERID']."'>Delete</a></td>";
 
@@ -79,3 +78,30 @@
     </div>
     <!-- /.container-fluid -->
 </section>
+
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Page specific script -->
+<script>
+    $(function () {
+        $("#soldierTable").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#soldierTable_wrapper .col-md-6:eq(0)');
+    });
+</script>

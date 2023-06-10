@@ -1,0 +1,16 @@
+drop table	TEAM	cascade constraints;
+drop table	TRADE	cascade constraints;
+drop table	COMPANY	cascade constraints;
+drop table	RANKS	cascade constraints;
+drop table	CARRIERPLAN	cascade constraints;
+drop table	ADVANCETRAINING	cascade constraints;
+drop table	BASICTRAINING	cascade constraints;
+drop table	SOLDIER	cascade constraints;
+drop table	CONTACTNUMBER	cascade constraints;
+drop table	AUTHORIZATION	cascade constraints;
+drop table	MEDICALINFO	cascade constraints;
+drop table	LEAVEMODULE	cascade constraints;
+drop table	PUNISHMENT	cascade constraints;
+drop table	SOLDIERBASICTRAINING	cascade constraints;
+drop table	APPOINTMENTS	cascade constraints;
+drop table	SOLDIERAPPOINTMENT	cascade constraints;

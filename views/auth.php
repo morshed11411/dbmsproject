@@ -21,4 +21,6 @@ if (isset($_POST['logout'])) {
 
 // Retrieve the username from the session
 $username = $_SESSION['username'];
+$userid = $_SESSION['userid'];
+
 ?>
