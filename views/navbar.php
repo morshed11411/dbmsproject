@@ -214,7 +214,7 @@
         <li class="nav-header">User Options</li>
         <li class="nav-item">
         <li class="nav-item">
-          <a href="profile.php?soldierid=<?php echo $userid; ?>" class="nav-link">
+          <a href="profile.php?soldierId=<?php echo $userid; ?>" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p class="text">Profile</p>
           </a>
