@@ -209,72 +209,78 @@ oci_close($conn);
                                                 aria-labelledby="trainingInfoTab">
                                                 <h5>Assigned Teams</h5>
                                                 <?php
-include 'conn.php';
+                                                include 'conn.php';
 
-// Get Soldier ID from the URL parameter
-$soldier_id = $_GET['soldierid'];
+                                                // Get Soldier ID from the URL parameter
+                                                $soldier_id = $_GET['soldierid'];
 
-// Query to retrieve assigned teams for the soldier
-$query = "SELECT t.TeamID, t.TeamName, t.StartDate
+                                                // Query to retrieve assigned teams for the soldier
+                                                $query = "SELECT t.TeamID, t.TeamName, t.StartDate
           FROM Team t
           INNER JOIN SoldierTeam st ON t.TeamID = st.TeamID
           WHERE st.SoldierID = :soldier_id";
-$stmt = oci_parse($conn, $query);
-oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-oci_execute($stmt);
+                                                $stmt = oci_parse($conn, $query);
+                                                oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+                                                oci_execute($stmt);
 
-$assignedTeams = [];
-while ($team = oci_fetch_assoc($stmt)) {
-    $assignedTeams[] = $team;
-}
-?>
+                                                $assignedTeams = [];
+                                                while ($team = oci_fetch_assoc($stmt)) {
+                                                    $assignedTeams[] = $team;
+                                                }
+                                                ?>
 
-<!-- HTML structure for displaying assigned teams -->
-<?php
-include 'conn.php';
+                                                <!-- HTML structure for displaying assigned teams -->
+                                                <?php
+                                                include 'conn.php';
 
-// Get Soldier ID from the URL parameter
-$soldier_id = $_GET['soldierid'];
+                                                // Get Soldier ID from the URL parameter
+                                                $soldier_id = $_GET['soldierid'];
 
-// Query to retrieve data from SoldierTeam for the soldier
-$query = "SELECT st.TeamID, t.TeamName, t.StartDate
+                                                // Query to retrieve data from SoldierTeam for the soldier
+                                                $query = "SELECT st.TeamID, t.TeamName, t.StartDate
           FROM SoldierTeam st
           INNER JOIN Team t ON st.TeamID = t.TeamID
           WHERE st.SoldierID = :soldier_id";
-$stmt = oci_parse($conn, $query);
-oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-oci_execute($stmt);
+                                                $stmt = oci_parse($conn, $query);
+                                                oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+                                                oci_execute($stmt);
 
-$assignedTeams = [];
-while ($team = oci_fetch_assoc($stmt)) {
-    $assignedTeams[] = $team;
-}
-?>
+                                                $assignedTeams = [];
+                                                while ($team = oci_fetch_assoc($stmt)) {
+                                                    $assignedTeams[] = $team;
+                                                }
+                                                ?>
 
-<!-- HTML structure for displaying assigned teams -->
+                                                <!-- HTML structure for displaying assigned teams -->
 
-            <?php if (count($assignedTeams) > 0) : ?>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Team ID</th>
-                            <th>Team Name</th>
-                            <th>Start Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($assignedTeams as $team) : ?>
-                            <tr>
-                                <td><?php echo $team['TeamID']; ?></td>
-                                <td><?php echo $team['TeamName']; ?></td>
-                                <td><?php echo $team['StartDate']; ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else : ?>
-                <p>No teams assigned to this soldier.</p>
-            <?php endif; ?>
+                                                <?php if (count($assignedTeams) > 0): ?>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Team ID</th>
+                                                                <th>Team Name</th>
+                                                                <th>Start Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($assignedTeams as $team): ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $team['TeamID']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $team['TeamName']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $team['StartDate']; ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php else: ?>
+                                                    <p>No teams assigned to this soldier.</p>
+                                                <?php endif; ?>
 
 
 

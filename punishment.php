@@ -76,7 +76,7 @@
                                         include 'conn.php';
 
                                         $query = "INSERT INTO Punishment (PunishmentID, SoldierID, Punishment, Reason, PunishmentDate) 
-                                                  VALUES (Punishment_Seq.nextval, :soldier_id, :punishment, :reason, TO_DATE(:punishment_date, 'YYYY-MM-DD'))";
+                                  VALUES (PunishmentSeq.NEXTVAL, :soldier_id, :punishment, :reason, TO_DATE(:punishment_date, 'YYYY-MM-DD'))";
                                         $stmt = oci_parse($conn, $query);
                                         oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
                                         oci_bind_by_name($stmt, ':punishment', $punishment);
@@ -94,6 +94,7 @@
                                         oci_free_statement($stmt);
                                         oci_close($conn);
                                     }
+
 
                                     ?>
 

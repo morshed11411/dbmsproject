@@ -84,7 +84,7 @@
                                         <tbody>
                                             <?php
                                             include 'conn.php'; // Include the conn.php file for database connection
-
+                                            
                                             $query = "SELECT * FROM Company";
                                             $stmt = oci_parse($conn, $query);
                                             oci_execute($stmt);

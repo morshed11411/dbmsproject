@@ -28,6 +28,17 @@ CREATE TABLE Soldier (
   FOREIGN KEY (CarrierPlanID) REFERENCES CarrierPlan(PlanID)
 );
 
+
+CREATE TABLE Punishment (
+  PunishmentID NUMBER PRIMARY KEY,
+  SoldierID NUMBER,
+  Punishment VARCHAR2(255),
+  Reason VARCHAR2(255),
+  PunishmentDate DATE,
+  FOREIGN KEY (SoldierID) REFERENCES Soldier(SoldierID)
+);
+
+
 CREATE TABLE UserAccess (
   SoldierID NUMBER(7) PRIMARY KEY,
   AccessLevel VARCHAR2(20),
@@ -104,15 +115,6 @@ CREATE TABLE CarrierPlan (
   SecondCycle VARCHAR2(255),
   ThirdCycle VARCHAR2(255),
   FourthCycle VARCHAR2(255)
-);
-
-CREATE TABLE Punishment (
-  PunishmentID NUMBER PRIMARY KEY,
-  SoldierID NUMBER,
-  Punishment VARCHAR2(255),
-  Reason VARCHAR2(255),
-  PunishmentDate DATE,
-  FOREIGN KEY (SoldierID) REFERENCES Soldier(SoldierID)
 );
 
 CREATE TABLE AdvanceTraining (
