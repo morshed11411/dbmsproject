@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
-    $query = "UPDATE TRADE SET TRADE = :trade_name WHERE TRADEID = :trade_id";
+    $query = "UPDATE TRADE SET TRADE = :trade_name WHERE TRADEID = :trade_id ";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':trade_name', $trade_name);
     oci_bind_by_name($stmt, ':trade_id', $trade_id);
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
         oci_commit($conn); // Commit the transaction
         oci_free_statement($stmt);
         oci_close($conn);
-        header("Location: trade.php"); // Redirect back to trade.php
+        header("Location: manage_trade.php"); // Redirect back to trade.php
         exit;
     } else {
         $e = oci_error($stmt);

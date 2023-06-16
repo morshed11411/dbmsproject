@@ -23,21 +23,20 @@ include 'views/auth.php';
                                 <div class="card-body">
                                     <?php
                                     include 'conn.php'; // Include the conn.php file for database connection
-
+                                    
                                     // Add Medical Information
                                     if (isset($_POST['add'])) {
-                                        $medicalID = $_POST['medical_id'];
                                         $soldierID = $_POST['soldier_id'];
                                         $disposalType = $_POST['disposal_type'];
                                         $startDate = $_POST['start_date'];
                                         $endDate = $_POST['end_date'];
                                         $reason = $_POST['reason'];
 
-                                        $query = "INSERT INTO MedicalInfo (MedicalID, SoldierID, DisposalType, StartDate, EndDate, Reason)
-                                                  VALUES (:medical_id, :soldier_id, :disposal_type, TO_DATE(:start_date, 'YYYY-MM-DD'), TO_DATE(:end_date, 'YYYY-MM-DD'), :reason)";
+                                        // Generate the Medical ID automatically as an integer
+                                        $query = "INSERT INTO MedicalInfo (SoldierID, DisposalType, StartDate, EndDate, Reason)
+              VALUES (:soldier_id, :disposal_type, TO_DATE(:start_date, 'YYYY-MM-DD'), TO_DATE(:end_date, 'YYYY-MM-DD'), :reason)";
                                         $stmt = oci_parse($conn, $query);
 
-                                        oci_bind_by_name($stmt, ':medical_id', $medicalID);
                                         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
                                         oci_bind_by_name($stmt, ':disposal_type', $disposalType);
                                         oci_bind_by_name($stmt, ':start_date', $startDate);
@@ -46,7 +45,8 @@ include 'views/auth.php';
 
                                         $result = oci_execute($stmt);
                                         if ($result) {
-                                            echo "Medical information added successfully.";
+                                            $medicalID = oci_fetch_row(oci_parse($conn, 'SELECT MedicalIDSeq.CURRVAL FROM dual'))[0];
+                                            echo "Medical information added successfully. Medical ID: " . $medicalID;
                                         } else {
                                             $e = oci_error($stmt);
                                             echo "Failed to add medical information: " . $e['message'];
@@ -54,6 +54,7 @@ include 'views/auth.php';
 
                                         oci_free_statement($stmt);
                                     }
+
 
                                     // Delete Medical Information
                                     if (isset($_GET['delete'])) {
@@ -111,34 +112,36 @@ include 'views/auth.php';
 
                                     <!-- Add/Update Medical Information Form -->
                                     <form method="post" action="">
-                                        <div class="form-group">
-                                            <label for="medical_id">Medical ID:</label>
-                                            <input type="text" name="medical_id" id="medical_id" class="form-control" required>
-                                        </div>
+         
 
                                         <div class="form-group">
                                             <label for="soldier_id">Soldier ID:</label>
-                                            <input type="text" name="soldier_id" id="soldier_id" class="form-control" required>
+                                            <input type="text" name="soldier_id" id="soldier_id" class="form-control"
+                                                required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="disposal_type">Disposal Type:</label>
-                                            <input type="text" name="disposal_type" id="disposal_type" class="form-control" required>
+                                            <input type="text" name="disposal_type" id="disposal_type"
+                                                class="form-control" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="start_date">Start Date:</label>
-                                            <input type="date" name="start_date" id="start_date" class="form-control" required>
+                                            <input type="date" name="start_date" id="start_date" class="form-control"
+                                                required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="end_date">End Date:</label>
-                                            <input type="date" name="end_date" id="end_date" class="form-control" required>
+                                            <input type="date" name="end_date" id="end_date" class="form-control"
+                                                required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="reason">Reason:</label>
-                                            <textarea name="reason" id="reason" class="form-control" rows="3" required></textarea>
+                                            <textarea name="reason" id="reason" class="form-control" rows="3"
+                                                required></textarea>
                                         </div>
 
                                         <input type="submit" name="add" value="Add" class="btn btn-primary">

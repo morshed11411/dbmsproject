@@ -1,53 +1,53 @@
 <?php
-    include 'conn.php';
+include 'conn.php';
 
-    // Fetch data for the trade table
-    $queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
-    $stmtTrade = oci_parse($conn, $queryTrade);
-    oci_execute($stmtTrade);
+// Fetch data for the trade table
+$queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
+$stmtTrade = oci_parse($conn, $queryTrade);
+oci_execute($stmtTrade);
 
-    $tradeList = array();
-    while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
-        $trade = new stdClass();
-        $trade->TradeID = $rowTrade['TRADEID'];
-        $trade->Trade = $rowTrade['TRADE'];
-        $tradeList[] = $trade;
-    }
+$tradeList = array();
+while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
+    $trade = new stdClass();
+    $trade->TradeID = $rowTrade['TRADEID'];
+    $trade->Trade = $rowTrade['TRADE'];
+    $tradeList[] = $trade;
+}
 
-    oci_free_statement($stmtTrade);
+oci_free_statement($stmtTrade);
 
-    // Fetch data for the rank table
-    $queryRank = "SELECT RANKID, RANK FROM Ranks";
-    $stmtRank = oci_parse($conn, $queryRank);
-    oci_execute($stmtRank);
+// Fetch data for the rank table
+$queryRank = "SELECT RANKID, RANK FROM Ranks";
+$stmtRank = oci_parse($conn, $queryRank);
+oci_execute($stmtRank);
 
-    $rankList = array();
-    while ($rowRank = oci_fetch_assoc($stmtRank)) {
-        $rank = new stdClass();
-        $rank->RankID = $rowRank['RANKID'];
-        $rank->Rank = $rowRank['RANK'];
-        $rankList[] = $rank;
-    }
+$rankList = array();
+while ($rowRank = oci_fetch_assoc($stmtRank)) {
+    $rank = new stdClass();
+    $rank->RankID = $rowRank['RANKID'];
+    $rank->Rank = $rowRank['RANK'];
+    $rankList[] = $rank;
+}
 
-    oci_free_statement($stmtRank);
+oci_free_statement($stmtRank);
 
-    $query = "SELECT COMPANYID, COMPANYNAME FROM Company";
-    $stmt = oci_parse($conn, $query);
-    oci_execute($stmt);
+$query = "SELECT COMPANYID, COMPANYNAME FROM Company";
+$stmt = oci_parse($conn, $query);
+oci_execute($stmt);
 
-    $companyList = array();
+$companyList = array();
 
-    while ($row = oci_fetch_assoc($stmt)) {
-        $company = new stdClass();
-        $company->COMPANYID = $row['COMPANYID'];
-        $company->COMPANYNAME = $row['COMPANYNAME'];
-        $companyList[] = $company;
-    }
+while ($row = oci_fetch_assoc($stmt)) {
+    $company = new stdClass();
+    $company->COMPANYID = $row['COMPANYID'];
+    $company->COMPANYNAME = $row['COMPANYNAME'];
+    $companyList[] = $company;
+}
 
-    oci_free_statement($stmt);
+oci_free_statement($stmt);
 
 
-    oci_close($conn);
+oci_close($conn);
 
 ?>
 
@@ -177,23 +177,7 @@
                                                         <option value="Unmarried">Unmarried</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="village">Village:</label>
-                                                    <input type="text" name="village" id="village" class="form-control"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="thana">Thana:</label>
-                                                    <input type="text" name="thana" id="thana" class="form-control"
-                                                        required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="district">District:</label>
-                                                    <input type="text" name="district" id="district"
-                                                        class="form-control" required>
-                                                </div>
+
                                                 <div class="form-group">
                                                     <label for="height">Height:</label>
                                                     <input type="text" name="height" id="height" class="form-control"
@@ -214,19 +198,31 @@
                                                         <option value="Barak">Barak</option>
                                                     </select>
                                                 </div>
+                                                
                                             </div>
+
+
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="password">Password:</label>
-                                                    <input type="password" name="password" id="password"
-                                                        class="form-control" required>
+                                            <div class="form-group">
+                                                    <label for="village">Village:</label>
+                                                    <input type="text" name="village" id="village" class="form-control"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="confirm_password">Confirm Password:</label>
-                                                    <input type="password" name="confirm_password" id="confirm_password"
+                                                    <label for="thana">Thana:</label>
+                                                    <input type="text" name="thana" id="thana" class="form-control"
+                                                        required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="district">District:</label>
+                                                    <input type="text" name="district" id="district"
                                                         class="form-control" required>
                                                 </div>
+                                                
                                             </div>
+                                            
+                                            <!-- Add others here  form -->
                                         </div>
 
 
@@ -245,7 +241,6 @@
                                     if (isset($_POST['submit'])) {
                                         // Get the form data
                                         $soldier_id = $_POST['soldier_id'];
-                                        $password = $_POST['password'];
                                         $name = $_POST['name'];
                                         $rank = $_POST['rank_id'];
                                         $trade = $_POST['trade_id'];
@@ -262,13 +257,6 @@
                                         $height = $_POST['height'];
                                         $weight = $_POST['weight'];
                                         $living_status = $_POST['living_status'];
-                                        $confirm_password = $_POST['confirm_password'];
-
-                                        // Check if the password matches the confirmation
-                                        if ($password !== $confirm_password) {
-                                            echo "Password confirmation does not match.";
-                                            exit;
-                                        }
 
                                         // Establish a connection to the Oracle database
                                         $conn = oci_connect('UMS', '12345', 'localhost/XE');
@@ -277,13 +265,12 @@
                                             echo "Failed to connect to Oracle: " . $e['message'];
                                         } else {
                                             // Prepare the INSERT statement
-                                            $query = "INSERT INTO Soldier (SoldierID, Password, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
-                  VALUES (:soldier_id, :password, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
+                                            $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
+                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
                                             $stmt = oci_parse($conn, $query);
 
                                             // Bind the parameters
                                             oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-                                            oci_bind_by_name($stmt, ':password', $password);
                                             oci_bind_by_name($stmt, ':name', $name);
                                             oci_bind_by_name($stmt, ':rank', $rank);
                                             oci_bind_by_name($stmt, ':trade', $trade);

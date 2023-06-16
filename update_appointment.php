@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (oci_execute($stmt)) {
             echo "Appointment updated successfully.";
-            header("Location: appointment.php"); // Redirect back to company.php
+            header("Location: manage_appointment.php"); // Redirect back to company.php
         } else {
             $e = oci_error($stmt);
             echo "Failed to update appointment: " . $e['message'];

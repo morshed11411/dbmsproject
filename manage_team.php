@@ -164,7 +164,7 @@ include 'conn.php';
                                                 }
                                                 echo "<td>" . $row['TEAMOIC'] . "</td>";
                                                 echo "<td>";
-                                                echo "<form method='post' action='team.php'>";
+                                                echo "<form method='post' action='manage_team.php'>";
                                                 echo "<input type='hidden' name='team_id' value='" . $row['TEAMID'] . "'>";
                                                 if ($row['ENDDATE'] === null) {
                                                     echo "<button type='submit' name='end_team' class='btn btn-danger'>End Team</button> ";

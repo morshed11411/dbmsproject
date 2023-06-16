@@ -72,11 +72,8 @@ INSERT INTO SoldierAppointment (SoldierID, AppointmentID) VALUES (33333, 4);
 INSERT INTO SoldierAppointment (SoldierID, AppointmentID) VALUES (44444, 3);
 
 
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (1, 'TRG-01', 'CDO');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (2, 'TRG-02', 'IT-1');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (3, 'TRG-03', 'BMR');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (4, 'TRG-04', 'FIRING');
+INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (1, 'TRG-01', 'IPFT');
+INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (2, 'TRG-02', 'RET');
+INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (3, 'TRG-03', 'GRENADE FIRING');
+INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (4, 'TRG-04', 'SPEED MARCH');
 INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (5, 'TRG-05', 'GRENADE FIRING');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (6, 'TRG-06', 'NCOC');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (7, 'TRG-07', 'JCOC');
-INSERT INTO BasicTraining (TrainingID, TrainingCode, TrainingName) VALUES (8, 'TRG-08', 'IPFT');

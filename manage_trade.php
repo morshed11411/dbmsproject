@@ -92,7 +92,7 @@
                                                 $e = oci_error();
                                                 echo "Failed to connect to Oracle: " . $e['message'];
                                             } else {
-                                                $query = "SELECT * FROM TRADE";
+                                                $query = "SELECT * FROM TRADE ORDER BY TRADEID";
                                                 $stmt = oci_parse($conn, $query);
                                                 oci_execute($stmt);
 
