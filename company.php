@@ -42,7 +42,7 @@
                                         $company_name = $_POST['company_name'];
 
                                         include 'conn.php'; // Include the conn.php file for database connection
-
+                                    
                                         $query = "INSERT INTO Company (CompanyID, CompanyName) VALUES (:company_id, :company_name)";
                                         $stmt = oci_parse($conn, $query);
 
@@ -94,6 +94,7 @@
                                                 echo "<td>" . $row['COMPANYID'] . "</td>";
                                                 echo "<td>" . $row['COMPANYNAME'] . "</td>";
                                                 echo "<td>";
+                                                echo "<a href='company_details.php?company_id=" . $row['COMPANYID'] . "'>View Details</a> | ";
                                                 echo "<a href='edit_company.php?company_id=" . $row['COMPANYID'] . "'>Edit</a> | ";
                                                 echo "<a href='delete_company.php?company_id=" . $row['COMPANYID'] . "'>Delete</a>";
                                                 echo "</td>";
@@ -105,6 +106,7 @@
                                             ?>
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
