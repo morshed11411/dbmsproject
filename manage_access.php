@@ -127,7 +127,7 @@
                                             // Perform the necessary database operations to remove user access
                                             // For example, you can execute an UPDATE query on the Soldier table to remove the access role
                                         
-                                            $query = "UPDATE Soldier SET AccessRole = NULL  WHERE SoldierID = :soldier_id";
+                                            $query = "UPDATE Soldier SET AccessRole = NULL, PASSWORD = NULL   WHERE SoldierID = :soldier_id";
                                             $stmt = oci_parse($conn, $query);
                                             oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
                                             oci_execute($stmt);

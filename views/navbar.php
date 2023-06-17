@@ -59,6 +59,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="soldier_option.php" class="nav-link">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Soldier Options</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="punishment.php" class="nav-link">
                 <i class="fas fa-gavel nav-icon"></i>
                 <p>Punishment</p>
@@ -142,9 +148,9 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="fas fa-bed nav-icon"></i>
+          <i class="fas fa-user-clock nav-icon"> </i>            
             <p>
-              Leave
+              Leave Management
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -219,7 +225,12 @@
             </li>
           </ul>
         </li>
-
+        <li class="nav-item">
+          <a href="manage_team.php" class="nav-link">
+            <i class="fas fa-users nav-icon"></i>
+            <p>Manage Team</p>
+          </a>
+        </li>
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="fas fa-cogs nav-icon"></i>
@@ -262,12 +273,7 @@
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a href="manage_team.php" class="nav-link">
-            <i class="fas fa-users nav-icon"></i>
-            <p>Manage Team</p>
-          </a>
-        </li>
+        
 
         <li class="nav-header">User Options</li>
         <li class="nav-item">

@@ -96,8 +96,8 @@ oci_close($conn);
                         echo "Failed to connect to Oracle: " . $e['message'];
                     } else {
                         // Prepare the INSERT statement
-                        $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Address, Height, Weight, LivingStatus) 
-              VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, AddressType(:village, :thana, :district), :height, :weight, :living_status)";
+                        $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
+                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
                         $stmt = oci_parse($conn, $query);
 
                         // Bind the parameters
@@ -123,19 +123,18 @@ oci_close($conn);
                         $result = oci_execute($stmt);
                         if ($result) {
                             echo '<div class="alert alert-success" role="alert">
-                  Soldier data inserted successfully.
-              </div>';
+                                                          Soldier data updated successfully.
+                                                      </div>';
                         } else {
                             $e = oci_error($stmt);
                             echo '<div class="alert alert-danger" role="alert">
-                  Failed to insert soldier data: ' . $e['message'] . '
-              </div>';
+                                                          Failed to update soldier data: ' . $e['message'] . '
+                                                      </div>';
                         }
 
                         oci_free_statement($stmt);
                         oci_close($conn);
                     }
-
                 }
                 ?>
             </div>
@@ -262,14 +261,14 @@ oci_close($conn);
                                                     </select>
                                                 </div>
 
-
-
+                                                
+                                                
 
                                             </div>
 
 
                                             <div class="col-md-3">
-                                                <div class="form-group">
+                                            <div class="form-group">
                                                     <label for="height">Height (cm):</label>
                                                     <input type="text" name="height" id="height" class="form-control"
                                                         required>
@@ -289,13 +288,12 @@ oci_close($conn);
                                                     <input type="text" name="thana" id="thana" class="form-control"
                                                         required>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="district">District:</label>
                                                     <input type="text" name="district" id="district"
                                                         class="form-control" required>
                                                 </div>
-
-
 
                                             </div>
 

@@ -53,3 +53,59 @@ WHERE l.LeaveStartDate <= TRUNC(SYSDATE)
 AND l.LeaveEndDate >= TRUNC(SYSDATE);
 
 
+CREATE OR REPLACE TRIGGER check_leave_trigger
+BEFORE INSERT OR UPDATE ON LeaveModule
+FOR EACH ROW
+DECLARE
+    leave_count NUMBER;
+BEGIN
+    -- Check if the soldier's previous leave overlaps with the system date
+    SELECT COUNT(*) INTO leave_count
+    FROM LeaveModule
+    WHERE SoldierID = :NEW.SoldierID
+        AND (LeaveStartDate <= SYSDATE AND SYSDATE <= LeaveEndDate);
+
+    -- If the soldier's previous leave overlaps with the system date, raise an exception
+    IF leave_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Soldier is already on leave');
+    END IF;
+END;
+/
+
+
+
+CREATE OR REPLACE FUNCTION CalculateIsPresent(p_soldier_id IN NUMBER)
+  RETURN NUMBER
+DETERMINISTIC
+IS
+  l_leave_count NUMBER;
+  l_temp_command VARCHAR2(3);
+  l_ere VARCHAR2(3);
+  l_serving_status VARCHAR2(10);
+BEGIN
+  -- Check if the soldier is on leave
+  SELECT COUNT(*) INTO l_leave_count
+  FROM TODAYS_LEAVE_VIEW
+  WHERE SoldierID = p_soldier_id;
+
+  -- Check the soldier's temporary command, ere, and serving status
+  SELECT TemporaryCommand, ERE, ServingStatus
+  INTO l_temp_command, l_ere, l_serving_status
+  FROM Soldier
+  WHERE SoldierID = p_soldier_id;
+
+  -- Return 0 if soldier is on leave or meets additional conditions, 1 otherwise
+  RETURN CASE
+    WHEN l_leave_count > 0 THEN 0
+    WHEN l_temp_command = 'Yes' OR l_ere = 'Yes' OR l_serving_status <> 'Serving' THEN 0
+    ELSE 1
+  END;
+END;
+/
+
+
+
+ALTER TABLE Soldier DROP COLUMN ISPRESENT;
+
+ALTER TABLE Soldier ADD ISPRESENT GENERATED ALWAYS AS (CalculateIsPresent(SoldierID)) VIRTUAL;
+

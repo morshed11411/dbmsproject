@@ -26,17 +26,11 @@ $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 $totalTeams = oci_fetch_assoc($stmt)['TOTAL_TEAMS'];
 
-// Count number of soldiers on leave
-$query = "SELECT COUNT(*) AS soldiers_on_leave FROM Soldier WHERE STATUS = 'Leave'";
-$stmt = oci_parse($conn, $query);
-oci_execute($stmt);
-$soldiersOnLeave = oci_fetch_assoc($stmt)['SOLDIERS_ON_LEAVE'];
-
-// Count number of soldiers present
-$query = "SELECT COUNT(*) AS soldiers_present FROM Soldier WHERE STATUS = 'Present'";
-$stmt = oci_parse($conn, $query);
-oci_execute($stmt);
-$soldiersPresent = oci_fetch_assoc($stmt)['SOLDIERS_PRESENT'];
+// Fetch the leave count from the TODAYS_LEAVE_VIEW
+$queryLeaveCount = "SELECT COUNT(*) AS LeaveCount FROM TODAYS_LEAVE_VIEW";
+$stmtLeaveCount = oci_parse($conn, $queryLeaveCount);
+oci_execute($stmtLeaveCount);
+$leaveCount = oci_fetch_assoc($stmtLeaveCount)['LEAVECOUNT'];
 
 oci_free_statement($stmt);
 oci_close($conn);
@@ -73,12 +67,24 @@ oci_close($conn);
                         <div class="col-md-3">
                             <div class="info-box">
                                 <span class="info-box-icon bg-success"><i class="fas fa-user-check"></i></span>
+                                <?php
+                                // Query to count the number of present soldiers
+                                $query = "SELECT COUNT(*) AS numPresentSoldiers FROM Soldier WHERE ISPRESENT = 1";
+                                $stmt = oci_parse($conn, $query);
+                                oci_execute($stmt);
+                                $row = oci_fetch_assoc($stmt);
+                                $numPresentSoldiers = $row['NUMPRESENTSOLDIERS'];
+
+                                oci_free_statement($stmt);
+                                ?>
+
                                 <div class="info-box-content">
                                     <span class="info-box-text">Soldiers Present</span>
                                     <span class="info-box-number">
-                                        <?php echo $soldiersPresent; ?>
+                                        <?php echo $numPresentSoldiers; ?>
                                     </span>
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -93,28 +99,21 @@ oci_close($conn);
                             </div>
                         </div>
                         <div class="col-md-3">
+
+
+
+                            <!-- Display the leave count in the dashboard -->
                             <div class="info-box">
                                 <span class="info-box-icon bg-warning"><i class="fas fa-user-clock"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Soldiers on Leave</span>
-                                    <?php
-                                    // Write the SQL query to count the number of soldiers on leave today
-                                    $query = "SELECT COUNT(*) AS SoldiersOnLeave
-                                            FROM Soldier s
-                                            JOIN LeaveModule l ON s.SoldierID = l.SoldierID
-                                            WHERE TRUNC(l.LeaveStartDate) = TRUNC(SYSDATE)";
-                                    $stmt = oci_parse($conn, $query);
-                                    oci_execute($stmt);
-
-                                    $row = oci_fetch_assoc($stmt);
-                                    $soldiersOnLeave = $row['SOLDIERSONLEAVE'];
-
-                                    echo "<span class='info-box-number'>$soldiersOnLeave</span>";
-
-                                    oci_free_statement($stmt);
-                                    ?>
+                                    <span class="info-box-number">
+                                        <?php echo $leaveCount; ?>
+                                    </span>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 

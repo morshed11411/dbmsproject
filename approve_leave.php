@@ -23,34 +23,59 @@ include 'views/auth.php';
                                 <div class="card-body">
                                     <?php
                                     include 'conn.php'; // Include the conn.php file for database connection
-                                    
-                                    // Add Leave Information
-                                    if (isset($_POST['add'])) {
+
+                                    // Add/Update Leave Information
+                                    if (isset($_POST['add']) || isset($_POST['update'])) {
                                         $leaveID = $_POST['leave_id'];
                                         $soldierID = $_POST['soldier_id'];
                                         $leaveType = $_POST['leave_type'];
                                         $leaveStartDate = $_POST['leave_start_date'];
                                         $leaveEndDate = $_POST['leave_end_date'];
 
-                                        $query = "INSERT INTO LeaveModule (LeaveID, SoldierID, LeaveType, LeaveStartDate, LeaveEndDate)
-                                                  VALUES (:leave_id, :soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'))";
+                                        // Check if the soldier is already on leave
+                                        $query = "SELECT COUNT(*) AS leave_count FROM LeaveModule WHERE SoldierID = :soldier_id";
                                         $stmt = oci_parse($conn, $query);
-
-                                        oci_bind_by_name($stmt, ':leave_id', $leaveID);
                                         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
-                                        oci_bind_by_name($stmt, ':leave_type', $leaveType);
-                                        oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
-                                        oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
-
-                                        $result = oci_execute($stmt);
-                                        if ($result) {
-                                            echo "Leave information added successfully.";
-                                        } else {
-                                            $e = oci_error($stmt);
-                                            echo "Failed to add leave information: " . $e['message'];
-                                        }
-
+                                        oci_execute($stmt);
+                                        $result = oci_fetch_assoc($stmt);
+                                        $leaveCount = $result['LEAVE_COUNT'];
                                         oci_free_statement($stmt);
+
+                                        if ($leaveCount > 0) {
+                                            echo "Soldier is already on leave. Cannot add or update leave information.";
+                                        } else {
+                                            // Insert or update the leave information
+                                            if (isset($_POST['add'])) {
+                                                $query = "INSERT INTO LeaveModule (LeaveID, SoldierID, LeaveType, LeaveStartDate, LeaveEndDate)
+                                                          VALUES (:leave_id, :soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'))";
+                                            } else {
+                                                $query = "UPDATE LeaveModule 
+                                                          SET SoldierID = :soldier_id, LeaveType = :leave_type, LeaveStartDate = TO_DATE(:leave_start_date, 'YYYY-MM-DD'), LeaveEndDate = TO_DATE(:leave_end_date, 'YYYY-MM-DD')
+                                                          WHERE LeaveID = :leave_id";
+                                            }
+
+                                            $stmt = oci_parse($conn, $query);
+
+                                            oci_bind_by_name($stmt, ':leave_id', $leaveID);
+                                            oci_bind_by_name($stmt, ':soldier_id', $soldierID);
+                                            oci_bind_by_name($stmt, ':leave_type', $leaveType);
+                                            oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
+                                            oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
+
+                                            $result = oci_execute($stmt);
+                                            if ($result) {
+                                                echo "Leave information ";
+                                                echo isset($_POST['add']) ? "added" : "updated";
+                                                echo " successfully.";
+                                            } else {
+                                                $e = oci_error($stmt);
+                                                echo "Failed to ";
+                                                echo isset($_POST['add']) ? "add" : "update";
+                                                echo " leave information: " . $e['message'];
+                                            }
+
+                                            oci_free_statement($stmt);
+                                        }
                                     }
 
                                     // Delete Leave Information
@@ -68,36 +93,6 @@ include 'views/auth.php';
                                         } else {
                                             $e = oci_error($stmt);
                                             echo "Failed to delete leave information: " . $e['message'];
-                                        }
-
-                                        oci_free_statement($stmt);
-                                    }
-
-                                    // Update Leave Information
-                                    if (isset($_POST['update'])) {
-                                        $leaveID = $_POST['leave_id'];
-                                        $soldierID = $_POST['soldier_id'];
-                                        $leaveType = $_POST['leave_type'];
-                                        $leaveStartDate = $_POST['leave_start_date'];
-                                        $leaveEndDate = $_POST['leave_end_date'];
-
-                                        $query = "UPDATE LeaveModule 
-                                                  SET SoldierID = :soldier_id, LeaveType = :leave_type, LeaveStartDate = TO_DATE(:leave_start_date, 'YYYY-MM-DD'), LeaveEndDate = TO_DATE(:leave_end_date, 'YYYY-MM-DD')
-                                                  WHERE LeaveID = :leave_id";
-                                        $stmt = oci_parse($conn, $query);
-
-                                        oci_bind_by_name($stmt, ':soldier_id', $soldierID);
-                                        oci_bind_by_name($stmt, ':leave_type', $leaveType);
-                                        oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
-                                        oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
-                                        oci_bind_by_name($stmt, ':leave_id', $leaveID);
-
-                                        $result = oci_execute($stmt);
-                                        if ($result) {
-                                            echo "Leave information updated successfully.";
-                                        } else {
-                                            $e = oci_error($stmt);
-                                            echo "Failed to update leave information: " . $e['message'];
                                         }
 
                                         oci_free_statement($stmt);
@@ -165,7 +160,7 @@ include 'views/auth.php';
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $query = "SELECT * FROM LeaveModule";
+                                            $query = "SELECT * FROM LeaveModule ORDER BY LEAVEID";
                                             $stmt = oci_parse($conn, $query);
                                             oci_execute($stmt);
 
@@ -181,7 +176,7 @@ include 'views/auth.php';
                                                 $startDate = strtotime($row['LEAVESTARTDATE']);
                                                 $endDate = strtotime($row['LEAVEENDDATE']);
                                                 $duration = round(($endDate - $startDate) / (60 * 60 * 24)); // Duration in days
-                                            
+
                                                 echo "<td>" . $duration . " days</td>";
                                                 echo "<td><a href='?delete=" . $row['LEAVEID'] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
                                                 echo "</tr>";
