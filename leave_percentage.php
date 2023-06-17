@@ -54,8 +54,10 @@ include 'conn.php';
                                             FROM Soldier s
                                             JOIN Company c ON s.CompanyID = c.CompanyID
                                             JOIN LeaveModule l ON s.SoldierID = l.SoldierID
-                                            WHERE TRUNC(l.LeaveStartDate) = TRUNC(SYSDATE)
+                                            WHERE l.LeaveStartDate <= TRUNC(SYSDATE)
+                                            AND l.LeaveEndDate >= TRUNC(SYSDATE)
                                             AND c.CompanyName = :company_name";
+
                                             $stmtOnLeave = oci_parse($conn, $queryOnLeave);
                                             oci_bind_by_name($stmtOnLeave, ':company_name', $row['COMPANYNAME']);
                                             oci_execute($stmtOnLeave);

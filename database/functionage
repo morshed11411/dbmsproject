@@ -24,9 +24,9 @@ END;
 /
 
 
-
 CREATE OR REPLACE VIEW manage_company_view AS
 SELECT
+  C.COMPANYID,
   C.COMPANYNAME,
   S.NAME AS "Coy Comd",
   (SELECT COUNT(*) FROM SOLDIER WHERE COMPANYID = C.COMPANYID) AS TotalManpower
@@ -37,4 +37,19 @@ FROM
   JOIN APPOINTMENTS A ON SA.APPOINTMENTID = A.APPOINTMENTID
 WHERE
   A.APPOINTMENTNAME = 'COY COMD';
+
+
+
+
+CREATE OR REPLACE VIEW todays_leave_view AS
+SELECT s.SoldierID, s.Name, r.Rank, t.Trade, c.CompanyName, l.LeaveType, l.LeaveStartDate, l.LeaveEndDate,
+       (l.LeaveEndDate - TRUNC(SYSDATE)) AS RemainingLeave
+FROM Soldier s
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Trade t ON s.TradeID = t.TradeID
+JOIN Company c ON s.CompanyID = c.CompanyID
+JOIN LeaveModule l ON s.SoldierID = l.SoldierID
+WHERE l.LeaveStartDate <= TRUNC(SYSDATE)
+AND l.LeaveEndDate >= TRUNC(SYSDATE);
+
 

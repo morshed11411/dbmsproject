@@ -64,16 +64,20 @@ oci_close($conn);
                                 <span class="info-box-icon bg-primary"><i class="fas fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Soldiers</span>
-                                    <span class="info-box-number"><?php echo $totalSoldiers; ?></span>
+                                    <span class="info-box-number">
+                                        <?php echo $totalSoldiers; ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
-                        <div class="info-box">
+                            <div class="info-box">
                                 <span class="info-box-icon bg-success"><i class="fas fa-user-check"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Soldiers Present</span>
-                                    <span class="info-box-number"><?php echo $soldiersPresent; ?></span>
+                                    <span class="info-box-number">
+                                        <?php echo $soldiersPresent; ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +86,9 @@ oci_close($conn);
                                 <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Teams</span>
-                                    <span class="info-box-number"><?php echo $totalTeams; ?></span>
+                                    <span class="info-box-number">
+                                        <?php echo $totalTeams; ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +97,22 @@ oci_close($conn);
                                 <span class="info-box-icon bg-warning"><i class="fas fa-user-clock"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Soldiers on Leave</span>
-                                    <span class="info-box-number"><?php echo $soldiersOnLeave; ?></span>
+                                    <?php
+                                    // Write the SQL query to count the number of soldiers on leave today
+                                    $query = "SELECT COUNT(*) AS SoldiersOnLeave
+                                            FROM Soldier s
+                                            JOIN LeaveModule l ON s.SoldierID = l.SoldierID
+                                            WHERE TRUNC(l.LeaveStartDate) = TRUNC(SYSDATE)";
+                                    $stmt = oci_parse($conn, $query);
+                                    oci_execute($stmt);
+
+                                    $row = oci_fetch_assoc($stmt);
+                                    $soldiersOnLeave = $row['SOLDIERSONLEAVE'];
+
+                                    echo "<span class='info-box-number'>$soldiersOnLeave</span>";
+
+                                    oci_free_statement($stmt);
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +120,7 @@ oci_close($conn);
 
                 </div>
             </section>
-            <?php include 'soldier.php'; ?>
+
         </div>
         <?php include 'views/footer.php'; ?>
     </div>

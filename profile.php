@@ -208,80 +208,7 @@ oci_close($conn);
                                             <div class="tab-pane fade" id="trainingInfo" role="tabpanel"
                                                 aria-labelledby="trainingInfoTab">
                                                 <h5>Assigned Teams</h5>
-                                                <?php
-                                                include 'conn.php';
-
-                                                // Get Soldier ID from the URL parameter
-                                                $soldier_id = $_GET['soldierid'];
-
-                                                // Query to retrieve assigned teams for the soldier
-                                                $query = "SELECT t.TeamID, t.TeamName, t.StartDate
-          FROM Team t
-          INNER JOIN SoldierTeam st ON t.TeamID = st.TeamID
-          WHERE st.SoldierID = :soldier_id";
-                                                $stmt = oci_parse($conn, $query);
-                                                oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-                                                oci_execute($stmt);
-
-                                                $assignedTeams = [];
-                                                while ($team = oci_fetch_assoc($stmt)) {
-                                                    $assignedTeams[] = $team;
-                                                }
-                                                ?>
-
-                                                <!-- HTML structure for displaying assigned teams -->
-                                                <?php
-                                                include 'conn.php';
-
-                                                // Get Soldier ID from the URL parameter
-                                                $soldier_id = $_GET['soldierid'];
-
-                                                // Query to retrieve data from SoldierTeam for the soldier
-                                                $query = "SELECT st.TeamID, t.TeamName, t.StartDate
-          FROM SoldierTeam st
-          INNER JOIN Team t ON st.TeamID = t.TeamID
-          WHERE st.SoldierID = :soldier_id";
-                                                $stmt = oci_parse($conn, $query);
-                                                oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-                                                oci_execute($stmt);
-
-                                                $assignedTeams = [];
-                                                while ($team = oci_fetch_assoc($stmt)) {
-                                                    $assignedTeams[] = $team;
-                                                }
-                                                ?>
-
-                                                <!-- HTML structure for displaying assigned teams -->
-
-                                                <?php if (count($assignedTeams) > 0): ?>
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Team ID</th>
-                                                                <th>Team Name</th>
-                                                                <th>Start Date</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($assignedTeams as $team): ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php echo $team['TeamID']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $team['TeamName']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $team['StartDate']; ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php endforeach; ?>
-                                                        </tbody>
-                                                    </table>
-                                                <?php else: ?>
-                                                    <p>No teams assigned to this soldier.</p>
-                                                <?php endif; ?>
-
+                                                
 
 
                                                 <!-- Add training info content here -->
@@ -319,8 +246,8 @@ oci_close($conn);
                                             
                                                 // Write the SQL query to fetch the leave history for the specified soldier
                                                 $query = "SELECT lm.LeaveStartDate, lm.LeaveType, (lm.LeaveEndDate - lm.LeaveStartDate + 1) AS LeaveDuration
-              FROM LeaveModule lm
-              WHERE lm.SoldierID = :soldierId";
+                                                FROM LeaveModule lm
+                                                WHERE lm.SoldierID = :soldierId";
                                                 $stmt = oci_parse($conn, $query);
                                                 oci_bind_by_name($stmt, ':soldierId', $soldierId);
                                                 oci_execute($stmt);
@@ -329,15 +256,15 @@ oci_close($conn);
                                                 if (oci_fetch($stmt)) {
                                                     // Display the leave history in a table format
                                                     echo "<div class='table-responsive'>
-        <table class='table table-bordered'>
-            <thead>
-                <tr>
-                    <th>Leave Date</th>
-                    <th>Leave Type</th>
-                    <th>Duration</th>
-                </tr>
-            </thead>
-            <tbody>";
+                                                        <table class='table table-bordered'>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Leave Date</th>
+                                                                    <th>Leave Type</th>
+                                                                    <th>Duration</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>";
 
                                                     // Iterate over the result set and display each leave history record
                                                     do {
@@ -346,15 +273,15 @@ oci_close($conn);
                                                         $duration = oci_result($stmt, 'LEAVEDURATION');
 
                                                         echo "<tr>
-            <td>$leaveDate</td>
-            <td>$leaveType</td>
-            <td>$duration</td>
-        </tr>";
+                                                                <td>$leaveDate</td>
+                                                                <td>$leaveType</td>
+                                                                <td>$duration</td>
+                                                            </tr>";
                                                     } while (oci_fetch($stmt));
 
                                                     echo "</tbody>
-    </table>
-</div>";
+                                                        </table>
+                                                    </div>";
                                                 } else {
                                                     echo "No leave history found for the specified soldier.";
                                                 }

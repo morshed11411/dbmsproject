@@ -108,7 +108,7 @@
                                                 echo "<td>" . $row['SOLDIERID'] . "</td>";
                                                 echo "<td>" . $row['NAME'] . "</td>";
                                                 echo "<td>" . $row['COMPANYID'] . "</td>";
-                                                echo "<td><a href='access.php?soldier_id=" . $row['SOLDIERID'] . "'>Remove Access</a></td>";
+                                                echo "<td><a href='manage_access.php?soldier_id=" . $row['SOLDIERID'] . "'>Remove Access</a></td>";
                                                 echo "</tr>";
                                             }
 
@@ -127,7 +127,7 @@
                                             // Perform the necessary database operations to remove user access
                                             // For example, you can execute an UPDATE query on the Soldier table to remove the access role
                                         
-                                            $query = "UPDATE Soldier SET AccessRole = NULL WHERE SoldierID = :soldier_id";
+                                            $query = "UPDATE Soldier SET AccessRole = NULL  WHERE SoldierID = :soldier_id";
                                             $stmt = oci_parse($conn, $query);
                                             oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
                                             oci_execute($stmt);
@@ -136,7 +136,7 @@
                                             oci_close($conn);
 
                                             
-                                            header("Location: access.php");
+                                            header("Location: manage_access.php");
                                         }
                                         ?>
 

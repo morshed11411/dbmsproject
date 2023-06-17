@@ -37,7 +37,7 @@
 
                                     while ($row = oci_fetch_assoc($stmt)) {
                                         echo "<tr>";
-                                        echo "<td><a href='company_details.php?company=" . $row['COMPANYNAME'] . "'>" . $row['COMPANYNAME'] . "</a></td>";
+                                        echo "<td><a href='company_details.php?company_id=" . $row['COMPANYID'] . "'>" . $row['COMPANYNAME'] . "</a></td>";
                                         echo "<td>" . $row['Coy Comd'] . "</td>";
                                         echo "<td>" . $row['TOTALMANPOWER'] . "</td>";
                                         echo "</tr>";

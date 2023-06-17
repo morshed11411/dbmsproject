@@ -117,6 +117,31 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
+            <i class="fas fa-suitcase nav-icon"></i>
+            <p>
+              Career Plan
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+           <li class="nav-item">
+              <a href="manage_plan.php" class="nav-link">
+                <i class="fas fa-edit nav-icon"></i>
+                <p>Manage Plan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="view_plan.php" class="nav-link">
+                <i class="fas fa-eye nav-icon"></i>
+                <p>View Plan</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
             <i class="fas fa-bed nav-icon"></i>
             <p>
               Leave

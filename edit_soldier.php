@@ -61,14 +61,14 @@ if (isset($_GET['soldier_id'])) {
 
     // Fetch soldier data for the given soldier ID
     $query = "SELECT s.SOLDIERID, s.NAME, s.RANKID, s.TRADEID, s.COMPANYID, s.GENDER, s.RELIGION, 
-              TO_CHAR(s.DATEOFBIRTH, 'YYYY-MM-DD') AS DATEOFBIRTH, TO_CHAR(s.DATEOFENROLL, 'YYYY-MM-DD') AS DATEOFENROLL, 
-              s.BLOODGROUP, s.MARITALSTATUS, s.VILLAGE, s.THANA, s.DISTRICT, s.HEIGHT, s.WEIGHT, s.LIVINGSTATUS,
-              r.RANK, t.TRADE, c.COMPANYNAME
-              FROM Soldier s
-              JOIN Ranks r ON s.RANKID = r.RANKID
-              JOIN Trade t ON s.TRADEID = t.TRADEID
-              JOIN Company c ON s.COMPANYID = c.COMPANYID
-              WHERE s.SOLDIERID = :soldier_id";
+    TO_CHAR(s.DATEOFBIRTH, 'YYYY-MM-DD') AS DATEOFBIRTH, TO_CHAR(s.DATEOFENROLL, 'YYYY-MM-DD') AS DATEOFENROLL, 
+    s.BLOODGROUP, s.MARITALSTATUS, s.VILLAGE, s.THANA, s.DISTRICT, s.HEIGHT, s.WEIGHT, s.LIVINGSTATUS,
+    r.RANK, t.TRADE, c.COMPANYNAME
+    FROM Soldier s
+    JOIN Ranks r ON s.RANKID = r.RANKID
+    JOIN Trade t ON s.TRADEID = t.TRADEID
+    JOIN Company c ON s.COMPANYID = c.COMPANYID
+    WHERE s.SOLDIERID = :soldier_id";
 
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
@@ -105,6 +105,91 @@ if (isset($_GET['soldier_id'])) {
                 <div class="container-fluid">
                     <h2>Edit Soldier Data</h2>
                 </div>
+                <?php
+                                    // Check if the form is submitted
+                                    if (isset($_POST['submit'])) {
+                                        // Get the form data
+                                        $name = $_POST['name'];
+                                        $rank = $_POST['rank_id'];
+                                        $trade = $_POST['trade_id'];
+                                        $company = $_POST['company_id'];
+                                        $gender = $_POST['gender'];
+                                        $religion = $_POST['religion'];
+                                        $date_of_birth = $_POST['date_of_birth'];
+                                        $date_of_joining = $_POST['date_of_joining'];
+                                        $blood_group = $_POST['blood_group'];
+                                        $marital_status = $_POST['marital_status'];
+                                        $village = $_POST['village'];
+                                        $thana = $_POST['thana'];
+                                        $district = $_POST['district'];
+                                        $height = $_POST['height'];
+                                        $weight = $_POST['weight'];
+                                        $living_status = $_POST['living_status'];
+
+                                        // Establish a connection to the Oracle database
+                                        $conn = oci_connect('UMS', '12345', 'localhost/XE');
+                                        if (!$conn) {
+                                            $e = oci_error();
+                                            echo "Failed to connect to Oracle: " . $e['message'];
+                                        } else {
+                                            // Prepare the UPDATE statement
+                                            $query = "UPDATE Soldier SET 
+                                                  NAME = :name, 
+                                                  RANKID = :rank, 
+                                                  TRADEID = :trade, 
+                                                  COMPANYID = :company, 
+                                                  GENDER = :gender, 
+                                                  RELIGION = :religion, 
+                                                  DATEOFBIRTH = TO_DATE(:date_of_birth, 'YYYY-MM-DD'), 
+                                                  DATEOFENROLL = TO_DATE(:date_of_joining, 'YYYY-MM-DD'), 
+                                                  BLOODGROUP = :blood_group, 
+                                                  MARITALSTATUS = :marital_status, 
+                                                  VILLAGE = :village, 
+                                                  THANA = :thana, 
+                                                  DISTRICT = :district, 
+                                                  HEIGHT = :height, 
+                                                  WEIGHT = :weight, 
+                                                  LIVINGSTATUS = :living_status
+                                                  WHERE SOLDIERID = :soldier_id";
+                                            $stmt = oci_parse($conn, $query);
+
+                                            // Bind the parameters
+                                            oci_bind_by_name($stmt, ':name', $name);
+                                            oci_bind_by_name($stmt, ':rank', $rank);
+                                            oci_bind_by_name($stmt, ':trade', $trade);
+                                            oci_bind_by_name($stmt, ':company', $company);
+                                            oci_bind_by_name($stmt, ':gender', $gender);
+                                            oci_bind_by_name($stmt, ':religion', $religion);
+                                            oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
+                                            oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
+                                            oci_bind_by_name($stmt, ':blood_group', $blood_group);
+                                            oci_bind_by_name($stmt, ':marital_status', $marital_status);
+                                            oci_bind_by_name($stmt, ':village', $village);
+                                            oci_bind_by_name($stmt, ':thana', $thana);
+                                            oci_bind_by_name($stmt, ':district', $district);
+                                            oci_bind_by_name($stmt, ':height', $height);
+                                            oci_bind_by_name($stmt, ':weight', $weight);
+                                            oci_bind_by_name($stmt, ':living_status', $living_status);
+                                            oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+
+                                            // Execute the UPDATE statement
+                                            $result = oci_execute($stmt);
+                                            if ($result) {
+                                                echo '<div class="alert alert-success" role="alert">
+                                                          Soldier data updated successfully.
+                                                      </div>';
+                                            } else {
+                                                $e = oci_error($stmt);
+                                                echo '<div class="alert alert-danger" role="alert">
+                                                          Failed to update soldier data: ' . $e['message'] . '
+                                                      </div>';
+                                            }
+
+                                            oci_free_statement($stmt);
+                                            oci_close($conn);
+                                        }
+                                    }
+                                    ?>
             </div>
             <section class="content">
                 <div class="container-fluid">
@@ -235,12 +320,12 @@ if (isset($_GET['soldier_id'])) {
                                                         required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="height">Height:</label>
+                                                    <label for="height">Height (cm):</label>
                                                     <input type="text" name="height" id="height" class="form-control"
                                                         value="<?php echo $soldier['HEIGHT']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="weight">Weight:</label>
+                                                    <label for="weight">Weight (lbs):</label>
                                                     <input type="text" name="weight" id="weight" class="form-control"
                                                         value="<?php echo $soldier['WEIGHT']; ?>" required>
                                                 </div>
@@ -256,113 +341,14 @@ if (isset($_GET['soldier_id'])) {
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="password">Password:</label>
-                                                    <input type="password" name="password" id="password"
-                                                        class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="confirm_password">Confirm Password:</label>
-                                                    <input type="password" name="confirm_password" id="confirm_password"
-                                                        class="form-control" required>
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <input type="submit" name="submit" value="Update" class="btn btn-primary">
                                     </form>
 
-                                    <?php
-                                    // Check if the form is submitted
-                                    if (isset($_POST['submit'])) {
-                                        // Get the form data
-                                        $password = $_POST['password'];
-                                        $name = $_POST['name'];
-                                        $rank = $_POST['rank_id'];
-                                        $trade = $_POST['trade_id'];
-                                        $company = $_POST['company_id'];
-                                        $gender = $_POST['gender'];
-                                        $religion = $_POST['religion'];
-                                        $date_of_birth = $_POST['date_of_birth'];
-                                        $date_of_joining = $_POST['date_of_joining'];
-                                        $blood_group = $_POST['blood_group'];
-                                        $marital_status = $_POST['marital_status'];
-                                        $village = $_POST['village'];
-                                        $thana = $_POST['thana'];
-                                        $district = $_POST['district'];
-                                        $height = $_POST['height'];
-                                        $weight = $_POST['weight'];
-                                        $living_status = $_POST['living_status'];
-                                        $confirm_password = $_POST['confirm_password'];
-
-                                        // Check if the password matches the confirmation
-                                        if ($password !== $confirm_password) {
-                                            echo "Password confirmation does not match.";
-                                            exit;
-                                        }
-
-                                        // Establish a connection to the Oracle database
-                                        $conn = oci_connect('UMS', '12345', 'localhost/XE');
-                                        if (!$conn) {
-                                            $e = oci_error();
-                                            echo "Failed to connect to Oracle: " . $e['message'];
-                                        } else {
-                                            // Prepare the UPDATE statement
-                                            $query = "UPDATE Soldier SET 
-                                                  PASSWORD = :password, 
-                                                  NAME = :name, 
-                                                  RANKID = :rank, 
-                                                  TRADEID = :trade, 
-                                                  COMPANYID = :company, 
-                                                  GENDER = :gender, 
-                                                  RELIGION = :religion, 
-                                                  DATEOFBIRTH = TO_DATE(:date_of_birth, 'YYYY-MM-DD'), 
-                                                  DATEOFENROLL = TO_DATE(:date_of_joining, 'YYYY-MM-DD'), 
-                                                  BLOODGROUP = :blood_group, 
-                                                  MARITALSTATUS = :marital_status, 
-                                                  VILLAGE = :village, 
-                                                  THANA = :thana, 
-                                                  DISTRICT = :district, 
-                                                  HEIGHT = :height, 
-                                                  WEIGHT = :weight, 
-                                                  LIVINGSTATUS = :living_status
-                                                  WHERE SOLDIERID = :soldier_id";
-                                            $stmt = oci_parse($conn, $query);
-
-                                            // Bind the parameters
-                                            oci_bind_by_name($stmt, ':password', $password);
-                                            oci_bind_by_name($stmt, ':name', $name);
-                                            oci_bind_by_name($stmt, ':rank', $rank);
-                                            oci_bind_by_name($stmt, ':trade', $trade);
-                                            oci_bind_by_name($stmt, ':company', $company);
-                                            oci_bind_by_name($stmt, ':gender', $gender);
-                                            oci_bind_by_name($stmt, ':religion', $religion);
-                                            oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
-                                            oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
-                                            oci_bind_by_name($stmt, ':blood_group', $blood_group);
-                                            oci_bind_by_name($stmt, ':marital_status', $marital_status);
-                                            oci_bind_by_name($stmt, ':village', $village);
-                                            oci_bind_by_name($stmt, ':thana', $thana);
-                                            oci_bind_by_name($stmt, ':district', $district);
-                                            oci_bind_by_name($stmt, ':height', $height);
-                                            oci_bind_by_name($stmt, ':weight', $weight);
-                                            oci_bind_by_name($stmt, ':living_status', $living_status);
-                                            oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-
-                                            // Execute the UPDATE statement
-                                            $result = oci_execute($stmt);
-                                            if ($result) {
-                                                echo "<h3>Soldier data updated successfully.</h3>";
-                                            } else {
-                                                $e = oci_error($stmt);
-                                                echo "Failed to update soldier data: " . $e['message'];
-                                            }
-
-                                            oci_free_statement($stmt);
-                                            oci_close($conn);
-                                        }
-                                    }
-                                    ?>
+                                   
                                 </div>
                             </div>
                         </div>

@@ -67,6 +67,76 @@ oci_close($conn);
                 <div class="container-fluid">
                     <h2>Insert Soldier Data</h2>
                 </div>
+                <?php
+                // Check if the form is submitted
+                if (isset($_POST['submit'])) {
+                    // Get the form data
+                    $soldier_id = $_POST['soldier_id'];
+                    $name = $_POST['name'];
+                    $rank = $_POST['rank_id'];
+                    $trade = $_POST['trade_id'];
+                    $company = $_POST['company_id'];
+                    $gender = $_POST['gender'];
+                    $religion = $_POST['religion'];
+                    $date_of_birth = $_POST['date_of_birth'];
+                    $date_of_joining = $_POST['date_of_joining'];
+                    $blood_group = $_POST['blood_group'];
+                    $marital_status = $_POST['marital_status'];
+                    $village = $_POST['village'];
+                    $thana = $_POST['thana'];
+                    $district = $_POST['district'];
+                    $height = $_POST['height'];
+                    $weight = $_POST['weight'];
+                    $living_status = $_POST['living_status'];
+
+                    // Establish a connection to the Oracle database
+                    $conn = oci_connect('UMS', '12345', 'localhost/XE');
+                    if (!$conn) {
+                        $e = oci_error();
+                        echo "Failed to connect to Oracle: " . $e['message'];
+                    } else {
+                        // Prepare the INSERT statement
+                        $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
+                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
+                        $stmt = oci_parse($conn, $query);
+
+                        // Bind the parameters
+                        oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+                        oci_bind_by_name($stmt, ':name', $name);
+                        oci_bind_by_name($stmt, ':rank', $rank);
+                        oci_bind_by_name($stmt, ':trade', $trade);
+                        oci_bind_by_name($stmt, ':company', $company);
+                        oci_bind_by_name($stmt, ':gender', $gender);
+                        oci_bind_by_name($stmt, ':religion', $religion);
+                        oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
+                        oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
+                        oci_bind_by_name($stmt, ':blood_group', $blood_group);
+                        oci_bind_by_name($stmt, ':marital_status', $marital_status);
+                        oci_bind_by_name($stmt, ':village', $village);
+                        oci_bind_by_name($stmt, ':thana', $thana);
+                        oci_bind_by_name($stmt, ':district', $district);
+                        oci_bind_by_name($stmt, ':height', $height);
+                        oci_bind_by_name($stmt, ':weight', $weight);
+                        oci_bind_by_name($stmt, ':living_status', $living_status);
+
+                        // Execute the INSERT statement
+                        $result = oci_execute($stmt);
+                        if ($result) {
+                            echo '<div class="alert alert-success" role="alert">
+                                                          Soldier data updated successfully.
+                                                      </div>';
+                        } else {
+                            $e = oci_error($stmt);
+                            echo '<div class="alert alert-danger" role="alert">
+                                                          Failed to update soldier data: ' . $e['message'] . '
+                                                      </div>';
+                        }
+
+                        oci_free_statement($stmt);
+                        oci_close($conn);
+                    }
+                }
+                ?>
             </div>
             <section class="content">
                 <div class="container-fluid">
@@ -122,7 +192,20 @@ oci_close($conn);
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="date_of_joining">Date of Joining:</label>
+                                                    <input type="date" name="date_of_joining" id="date_of_joining"
+                                                        class="form-control" required>
+                                                </div>
 
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="date_of_birth">Date of Birth:</label>
+                                                    <input type="date" name="date_of_birth" id="date_of_birth"
+                                                        class="form-control" required>
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="gender">Gender:</label>
                                                     <select name="gender" id="gender" class="form-control" required>
@@ -141,18 +224,8 @@ oci_close($conn);
                                                         <option value="Other">Other</option>
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="date_of_birth">Date of Birth:</label>
-                                                    <input type="date" name="date_of_birth" id="date_of_birth"
-                                                        class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="date_of_joining">Date of Joining:</label>
-                                                    <input type="date" name="date_of_joining" id="date_of_joining"
-                                                        class="form-control" required>
-                                                </div>
+
+
                                                 <div class="form-group">
                                                     <label for="blood_group">Blood Group:</label>
                                                     <select name="blood_group" id="blood_group" class="form-control"
@@ -177,17 +250,6 @@ oci_close($conn);
                                                         <option value="Unmarried">Unmarried</option>
                                                     </select>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <label for="height">Height:</label>
-                                                    <input type="text" name="height" id="height" class="form-control"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="weight">Weight:</label>
-                                                    <input type="text" name="weight" id="weight" class="form-control"
-                                                        required>
-                                                </div>
                                                 <div class="form-group">
                                                     <label for="living_status">Living Status:</label>
                                                     <select name="living_status" id="living_status" class="form-control"
@@ -198,12 +260,25 @@ oci_close($conn);
                                                         <option value="Barak">Barak</option>
                                                     </select>
                                                 </div>
+
                                                 
+                                                
+
                                             </div>
 
 
                                             <div class="col-md-3">
                                             <div class="form-group">
+                                                    <label for="height">Height (cm):</label>
+                                                    <input type="text" name="height" id="height" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="weight">Weight (lbs):</label>
+                                                    <input type="text" name="weight" id="weight" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="village">Village:</label>
                                                     <input type="text" name="village" id="village" class="form-control"
                                                         required>
@@ -219,89 +294,16 @@ oci_close($conn);
                                                     <input type="text" name="district" id="district"
                                                         class="form-control" required>
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                             <!-- Add others here  form -->
                                         </div>
-
-
-
-
-
-
-
-
 
                                         <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                                     </form>
 
-                                    <?php
-                                    // Check if the form is submitted
-                                    if (isset($_POST['submit'])) {
-                                        // Get the form data
-                                        $soldier_id = $_POST['soldier_id'];
-                                        $name = $_POST['name'];
-                                        $rank = $_POST['rank_id'];
-                                        $trade = $_POST['trade_id'];
-                                        $company = $_POST['company_id'];
-                                        $gender = $_POST['gender'];
-                                        $religion = $_POST['religion'];
-                                        $date_of_birth = $_POST['date_of_birth'];
-                                        $date_of_joining = $_POST['date_of_joining'];
-                                        $blood_group = $_POST['blood_group'];
-                                        $marital_status = $_POST['marital_status'];
-                                        $village = $_POST['village'];
-                                        $thana = $_POST['thana'];
-                                        $district = $_POST['district'];
-                                        $height = $_POST['height'];
-                                        $weight = $_POST['weight'];
-                                        $living_status = $_POST['living_status'];
 
-                                        // Establish a connection to the Oracle database
-                                        $conn = oci_connect('UMS', '12345', 'localhost/XE');
-                                        if (!$conn) {
-                                            $e = oci_error();
-                                            echo "Failed to connect to Oracle: " . $e['message'];
-                                        } else {
-                                            // Prepare the INSERT statement
-                                            $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
-                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
-                                            $stmt = oci_parse($conn, $query);
-
-                                            // Bind the parameters
-                                            oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-                                            oci_bind_by_name($stmt, ':name', $name);
-                                            oci_bind_by_name($stmt, ':rank', $rank);
-                                            oci_bind_by_name($stmt, ':trade', $trade);
-                                            oci_bind_by_name($stmt, ':company', $company);
-                                            oci_bind_by_name($stmt, ':gender', $gender);
-                                            oci_bind_by_name($stmt, ':religion', $religion);
-                                            oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
-                                            oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
-                                            oci_bind_by_name($stmt, ':blood_group', $blood_group);
-                                            oci_bind_by_name($stmt, ':marital_status', $marital_status);
-                                            oci_bind_by_name($stmt, ':village', $village);
-                                            oci_bind_by_name($stmt, ':thana', $thana);
-                                            oci_bind_by_name($stmt, ':district', $district);
-                                            oci_bind_by_name($stmt, ':height', $height);
-                                            oci_bind_by_name($stmt, ':weight', $weight);
-                                            oci_bind_by_name($stmt, ':living_status', $living_status);
-
-                                            // Execute the INSERT statement
-                                            $result = oci_execute($stmt);
-                                            if ($result) {
-                                                echo "<h3>Soldier data inserted successfully.</h3>";
-                                            } else {
-                                                $e = oci_error($stmt);
-                                                echo "Failed to insert soldier data: " . $e['message'];
-                                            }
-
-                                            oci_free_statement($stmt);
-                                            oci_close($conn);
-                                        }
-                                    }
-                                    ?>
 
                                 </div>
 
