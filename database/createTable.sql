@@ -1,20 +1,3 @@
--- Drop dependent tables
-DROP TABLE SoldierTeam;
-DROP TABLE SoldierAppointment;
-DROP TABLE SoldierBasicTraining;
-DROP TABLE AdvanceTraining;
-DROP TABLE LeaveModule;
-DROP TABLE Appointments;
-DROP TABLE Ranks;
-DROP TABLE MedicalInfo;
-DROP TABLE Company;
-DROP TABLE Authorization;
-DROP TABLE Trade;
-DROP TABLE ContactNumber;
-DROP TABLE Team;
-DROP TABLE Punishment;
-DROP TABLE Soldier;
-
 -- Create updated tables
 CREATE TABLE Soldier (
   SOLDIERID NUMBER(7) PRIMARY KEY,
