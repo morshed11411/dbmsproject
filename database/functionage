@@ -109,3 +109,116 @@ ALTER TABLE Soldier DROP COLUMN ISPRESENT;
 
 ALTER TABLE Soldier ADD ISPRESENT GENERATED ALWAYS AS (CalculateIsPresent(SoldierID)) VIRTUAL;
 
+CREATE OR REPLACE VIEW AbsentSoldiersView AS
+SELECT s.SoldierID, s.Name, r.Rank, c.CompanyName, 'ERE' AS Reason 
+FROM Soldier s
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Company c ON s.CompanyID = c.CompanyID
+WHERE s.ERE = 'Yes'
+UNION
+SELECT s.SoldierID, s.Name, r.Rank, c.CompanyName, 'Temporary Command' AS Reason 
+FROM Soldier s
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Company c ON s.CompanyID = c.CompanyID
+WHERE s.TemporaryCommand = 'Yes'
+UNION
+SELECT s.SoldierID, s.Name, r.Rank, c.CompanyName, 'AWOL' AS Reason 
+FROM Soldier s
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Company c ON s.CompanyID = c.CompanyID
+WHERE s.ServingStatus = 'AWOL'
+UNION
+SELECT tl.SoldierID, s.Name, r.Rank, c.CompanyName, tl.LeaveType AS Reason
+FROM Todays_Leave_View tl
+JOIN Soldier s ON tl.SoldierID = s.SoldierID
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Company c ON s.CompanyID = c.CompanyID
+UNION
+SELECT m.SoldierID, s.Name, r.Rank, c.CompanyName, m.DisposalType AS Reason
+FROM TODAYS_DISPOSAL_HOLDER m
+JOIN Soldier s ON m.SoldierID = s.SoldierID
+JOIN Ranks r ON s.RankID = r.RankID
+JOIN Company c ON s.CompanyID = c.CompanyID;
+
+CREATE OR REPLACE VIEW parade_state_view AS
+SELECT
+  c.COMPANYNAME,
+  a.MANPOWER AS "Auth",
+  COUNT(s.SOLDIERID) AS "Granted",
+  COUNT(l.SOLDIERID) AS "Leave",
+  COUNT(CASE WHEN s.ISPRESENT = 0 THEN 1 END) AS "Absent",
+  COUNT(s.SOLDIERID) - COUNT(CASE WHEN s.ISPRESENT = 0 THEN 1 END) AS "Present",
+  COUNT(d.SOLDIERID) AS "MedicalDisposal"
+FROM
+  COMPANY c
+LEFT JOIN
+  AUTHORIZATION a ON c.COMPANYID = a.COMPANYID
+LEFT JOIN
+  SOLDIER s ON c.COMPANYID = s.COMPANYID
+LEFT JOIN
+  TODAYS_LEAVE_VIEW l ON s.SOLDIERID = l.SOLDIERID
+LEFT JOIN
+  TODAYS_DISPOSAL_HOLDER d ON s.SOLDIERID = d.SOLDIERID
+GROUP BY
+  c.COMPANYNAME, a.MANPOWER;
+
+
+
+
+CREATE OR REPLACE FUNCTION CalculateIsPresent(p_soldier_id IN NUMBER)
+  RETURN NUMBER
+DETERMINISTIC
+IS
+  l_leave_count NUMBER;
+  l_temp_command VARCHAR2(3);
+  l_ere VARCHAR2(3);
+  l_serving_status VARCHAR2(10);
+  l_disposal_count NUMBER;
+BEGIN
+  -- Check if the soldier is on leave
+  SELECT COUNT(*) INTO l_leave_count
+  FROM TODAYS_LEAVE_VIEW
+  WHERE SoldierID = p_soldier_id;
+
+  -- Check the soldier's temporary command, ere, and serving status
+  SELECT TemporaryCommand, ERE, ServingStatus
+  INTO l_temp_command, l_ere, l_serving_status
+  FROM Soldier
+  WHERE SoldierID = p_soldier_id;
+  
+  -- Check if the soldier has a disposal today
+  SELECT COUNT(*) INTO l_disposal_count
+  FROM MedicalInfo
+  WHERE SOLDIERID = p_soldier_id
+    AND TRUNC(STARTDATE) <= TRUNC(SYSDATE)
+    AND TRUNC(ENDDATE) >= TRUNC(SYSDATE);
+
+  -- Return 0 if soldier is on leave, has a disposal today, or meets additional conditions, 1 otherwise
+  RETURN CASE
+    WHEN l_leave_count > 0 THEN 0
+    WHEN l_temp_command = 'Yes' OR l_ere = 'Yes' OR l_serving_status <> 'Serving' OR l_disposal_count > 0 THEN 0
+    ELSE 1
+  END;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER check_medical_disposal_trigger
+BEFORE INSERT ON MedicalInfo
+FOR EACH ROW
+DECLARE
+    disposal_count NUMBER;
+BEGIN
+    -- Check if there are any overlapping disposal dates for the soldier
+    SELECT COUNT(*) INTO disposal_count
+    FROM MedicalInfo
+    WHERE SoldierID = :NEW.SoldierID
+        AND ((:NEW.StartDate >= StartDate AND :NEW.StartDate <= EndDate)
+            OR (:NEW.EndDate >= StartDate AND :NEW.EndDate <= EndDate));
+            
+    -- If there are overlapping disposal dates, raise an exception
+    IF disposal_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Medical disposal dates overlap for the soldier');
+    END IF;
+END;
+/

@@ -1,16 +1,8 @@
 <!DOCTYPE html>
-<?php
-include 'conn.php';
-include 'views/auth.php';
-?>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absent Soldiers</title>
-    <link rel="stylesheet" href="style.css"> <!-- Replace "style.css" with your actual CSS file name and path -->
-    <?php include 'views/head.php'; ?>
-</head>
+<?php include 'views/head.php'; ?>
+<?php include 'views/auth.php'; ?>
+
 <body>
     <div class="wrapper">
         <?php include 'views/navbar.php'; ?>
@@ -18,7 +10,7 @@ include 'views/auth.php';
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
-                    <h1>Absent Soldiers</h1>
+                    <h1>Medical Disposal Today</h1>
                 </div>
             </div>
             <section class="content">
@@ -27,22 +19,26 @@ include 'views/auth.php';
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
+                                    <h3>Medical Disposal Holders Today</h3>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Soldier ID</th>
                                                 <th>Name</th>
                                                 <th>Rank</th>
-                                                <th>Company</th>
-                                                <th>Reason</th>
+                                                <th>Trade</th>
+                                                <th>Company Name</th>
+                                                <th>Disposal Type</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            include 'conn.php'; // Include the conn.php file for database connection
-                                            
-                                            $query = "SELECT * FROM AbsentSoldiersView";
+                                            include 'conn.php';
 
+                                            $query = "SELECT SOLDIERID, NAME, RANK, TRADE, COMPANYNAME, DISPOSALTYPE, STARTDATE, ENDDATE
+                                                      FROM todays_disposal_holder";
                                             $stmt = oci_parse($conn, $query);
                                             oci_execute($stmt);
 
@@ -51,15 +47,16 @@ include 'views/auth.php';
                                                 echo "<td>" . $row['SOLDIERID'] . "</td>";
                                                 echo "<td>" . $row['NAME'] . "</td>";
                                                 echo "<td>" . $row['RANK'] . "</td>";
+                                                echo "<td>" . $row['TRADE'] . "</td>";
                                                 echo "<td>" . $row['COMPANYNAME'] . "</td>";
-                                                echo "<td>" . $row['REASON'] . "</td>";
+                                                echo "<td>" . $row['DISPOSALTYPE'] . "</td>";
+                                                echo "<td>" . $row['STARTDATE'] . "</td>";
+                                                echo "<td>" . $row['ENDDATE'] . "</td>";
                                                 echo "</tr>";
                                             }
-
                                             oci_free_statement($stmt);
                                             oci_close($conn);
                                             ?>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -69,7 +66,11 @@ include 'views/auth.php';
                 </div>
             </section>
         </div>
+
         <?php include 'views/footer.php'; ?>
+
     </div>
+
 </body>
+
 </html>

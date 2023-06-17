@@ -194,9 +194,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="archive_parade_state.php" class="nav-link">
+              <a href="absent_soldier.php" class="nav-link">
                 <i class="fas fa-archive nav-icon"></i>
-                <p>Archive</p>
+                <p>Absent Soldiers</p>
               </a>
             </li>
           </ul>

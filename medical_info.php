@@ -112,7 +112,7 @@ include 'views/auth.php';
 
                                     <!-- Add/Update Medical Information Form -->
                                     <form method="post" action="">
-         
+
 
                                         <div class="form-group">
                                             <label for="soldier_id">Soldier ID:</label>
@@ -122,9 +122,15 @@ include 'views/auth.php';
 
                                         <div class="form-group">
                                             <label for="disposal_type">Disposal Type:</label>
-                                            <input type="text" name="disposal_type" id="disposal_type"
-                                                class="form-control" required>
+                                            <select name="disposal_type" id="disposal_type" class="form-control"
+                                                required>
+                                                <option value="PPG">PPG</option>
+                                                <option value="PPGF">PPGF</option>
+                                                <option value="SIQ">SIQ</option>
+                                                <option value="CMH">CMH</option>
+                                            </select>
                                         </div>
+
 
                                         <div class="form-group">
                                             <label for="start_date">Start Date:</label>

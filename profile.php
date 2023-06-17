@@ -75,7 +75,7 @@ oci_close($conn);
                                                 aria-labelledby="basicInfoTab">
                                                 <h5 class="mb-4">Basic Info</h5> <!-- Updated code -->
                                                 <div class="row">
-                                                   
+
                                                     <div class="col-md-6">
                                                         <table class="table">
                                                             <tr>
@@ -205,8 +205,58 @@ oci_close($conn);
                                             <!-- Career Plan Info Tab -->
                                             <div class="tab-pane fade" id="careerPlanInfo" role="tabpanel"
                                                 aria-labelledby="careerPlanInfoTab">
-                                                <h5>Career Plan Info</h5>
-                                                <!-- Add career plan info content here -->
+                                               
+
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Career Plan Info</h5>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Soldier ID</th>
+                                                                    <th>First Cycle</th>
+                                                                    <th>Second Cycle</th>
+                                                                    <th>Third Cycle</th>
+                                                                    <th>Fourth Cycle</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                // Replace 'SOLDIERID' with the actual column name for soldier ID in the table
+                                                               
+
+                                                                // Fetch career plan info for the specified soldier
+                                                                $query = "SELECT SOLDIERID, FIRSTCYCLE, SECONDCYCLE, THIRDCYCLE, FOURTHCYCLE
+                                                                            FROM CarrierPlan
+                                                                            WHERE SOLDIERID = :soldierID";
+                                                                $stmt = oci_parse($conn, $query);
+                                                                oci_bind_by_name($stmt, ':soldierId', $soldierId);
+                                                                oci_execute($stmt);
+
+                                                                while ($row = oci_fetch_assoc($stmt)) {
+                                                                    $soldierID = $row['SOLDIERID'];
+                                                                    $firstCycle = $row['FIRSTCYCLE'];
+                                                                    $secondCycle = $row['SECONDCYCLE'];
+                                                                    $thirdCycle = $row['THIRDCYCLE'];
+                                                                    $fourthCycle = $row['FOURTHCYCLE'];
+
+                                                                    echo "<tr>";
+                                                                    echo "<td>$soldierID</td>";
+                                                                    echo "<td>$firstCycle</td>";
+                                                                    echo "<td>$secondCycle</td>";
+                                                                    echo "<td>$thirdCycle</td>";
+                                                                    echo "<td>$fourthCycle</td>";
+                                                                    echo "</tr>";
+                                                                }
+
+                                                                oci_free_statement($stmt);
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
 
                                             <!-- Leave History Tab -->

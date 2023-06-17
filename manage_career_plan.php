@@ -20,10 +20,10 @@ if (isset($_GET['company'])) {
     $selectedCompanyName = $row['COMPANYNAME'];
     oci_free_statement($stmtCompany);
 
-    $querySoldiers = "SELECT s.SOLDIERID, s.NAME, r.RANK, cp.*
+    $querySoldiers = "SELECT s.SOLDIERID AS ID, s.NAME, r.RANK, cp.*
     FROM SOLDIER s
     JOIN RANKS r ON s.RANKID = r.RANKID
-    LEFT JOIN CarrierPlan cp ON s.SOLDIERID = cp.PLANID
+    LEFT JOIN CarrierPlan cp ON s.SOLDIERID = cp.SOLDIERID
     WHERE s.COMPANYID = :companyID
     AND r.RANK IN ('SNK', 'LCPL', 'CPL', 'SGT', 'WO', 'SWO')";
 
@@ -74,7 +74,7 @@ oci_execute($stmtCompanies);
                                             <tbody>
                                                 <?php
                                                 while ($soldier = oci_fetch_assoc($stmtSoldiers)) {
-                                                    $soldierID = $soldier['SOLDIERID'];
+                                                    $soldierID = $soldier['ID'];
                                                     $name = $soldier['NAME'];
                                                     $rank = $soldier['RANK'];
                                                     $firstCycle = $soldier['FIRSTCYCLE'];
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])) {
         $fourthCycle = $_POST['fourthCycle'][$soldierID];
 
         // Check if career plan already exists for the soldier
-        $queryCheckPlan = "SELECT COUNT(*) FROM CarrierPlan WHERE PLANID = :soldierID";
+        $queryCheckPlan = "SELECT COUNT(*) FROM CarrierPlan WHERE SOLDIERID = :soldierID";
         $stmtCheckPlan = oci_parse($conn, $queryCheckPlan);
         oci_bind_by_name($stmtCheckPlan, ':soldierID', $soldierID);
         oci_execute($stmtCheckPlan);
@@ -157,7 +157,7 @@ if (isset($_POST['submit'])) {
                                     SECONDCYCLE = :secondCycle,
                                     THIRDCYCLE = :thirdCycle,
                                     FOURTHCYCLE = :fourthCycle
-                                WHERE PLANID = :soldierID";
+                                WHERE SOLDIERID = :soldierID";
 
             $stmtUpdatePlan = oci_parse($conn, $queryUpdatePlan);
             oci_bind_by_name($stmtUpdatePlan, ':firstCycle', $firstCycle);
@@ -168,7 +168,7 @@ if (isset($_POST['submit'])) {
             oci_execute($stmtUpdatePlan);
         } else {
             // Perform insert operation
-            $queryInsertPlan = "INSERT INTO CarrierPlan (PLANID, FIRSTCYCLE, SECONDCYCLE, THIRDCYCLE, FOURTHCYCLE)
+            $queryInsertPlan = "INSERT INTO CarrierPlan (SOLDIERID, FIRSTCYCLE, SECONDCYCLE, THIRDCYCLE, FOURTHCYCLE)
                                 VALUES (:soldierID, :firstCycle, :secondCycle, :thirdCycle, :fourthCycle)";
 
             $stmtInsertPlan = oci_parse($conn, $queryInsertPlan);

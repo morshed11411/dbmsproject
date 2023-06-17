@@ -50,10 +50,6 @@ include 'views/auth.php';
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="authorization_id">Authorization ID:</label>
-                                    <input type="text" name="authorization_id" id="authorization_id" class="form-control" required>
-                                </div>
-                                <div class="form-group">
                                     <label for="manpower">Manpower:</label>
                                     <input type="number" name="manpower" id="manpower" class="form-control" required>
                                 </div>
@@ -101,7 +97,6 @@ include 'views/auth.php';
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_authorization'])) {
                         $companyID = $_POST['company'];
-                        $authorizationID = $_POST['authorization_id'];
                         $manpower = $_POST['manpower'];
 
                         // Check if the authorization already exists for the company
@@ -113,9 +108,8 @@ include 'views/auth.php';
 
                         if ($rowCheck) {
                             // Authorization already exists, update the existing record
-                            $queryUpdate = "UPDATE AUTHORIZATION SET AUTHORIZATIONID = :AUTHORIZATIONID, MANPOWER = :MANPOWER WHERE COMPANYID = :COMPANYID";
+                            $queryUpdate = "UPDATE AUTHORIZATION SET MANPOWER = :MANPOWER WHERE COMPANYID = :COMPANYID";
                             $stmtUpdate = oci_parse($conn, $queryUpdate);
-                            oci_bind_by_name($stmtUpdate, ':AUTHORIZATIONID', $authorizationID);
                             oci_bind_by_name($stmtUpdate, ':MANPOWER', $manpower);
                             oci_bind_by_name($stmtUpdate, ':COMPANYID', $companyID);
                             $resultUpdate = oci_execute($stmtUpdate);
@@ -129,9 +123,8 @@ include 'views/auth.php';
                             oci_free_statement($stmtUpdate);
                         } else {
                             // Authorization doesn't exist, insert a new record
-                            $queryInsert = "INSERT INTO AUTHORIZATION (AUTHORIZATIONID, MANPOWER, COMPANYID) VALUES (:AUTHORIZATIONID, :MANPOWER, :COMPANYID)";
+                            $queryInsert = "INSERT INTO AUTHORIZATION (MANPOWER, COMPANYID) VALUES (:MANPOWER, :COMPANYID)";
                             $stmtInsert = oci_parse($conn, $queryInsert);
-                            oci_bind_by_name($stmtInsert, ':AUTHORIZATIONID', $authorizationID);
                             oci_bind_by_name($stmtInsert, ':MANPOWER', $manpower);
                             oci_bind_by_name($stmtInsert, ':COMPANYID', $companyID);
                             $resultInsert = oci_execute($stmtInsert);
