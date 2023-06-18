@@ -222,16 +222,17 @@ oci_close($conn);
                                                             </thead>
                                                             <tbody>
                                                                 <?php
+                                                                 include 'conn.php'; 
                                                                 // Replace 'SOLDIERID' with the actual column name for soldier ID in the table
                                                                
 
                                                                 // Fetch career plan info for the specified soldier
                                                                 $query = "SELECT SOLDIERID, FIRSTCYCLE, SECONDCYCLE, THIRDCYCLE, FOURTHCYCLE
-                                                                            FROM CarrierPlan
-                                                                            WHERE SOLDIERID = :soldierID";
-                                                                $stmt = oci_parse($conn, $query);
-                                                                oci_bind_by_name($stmt, ':soldierId', $soldierId);
-                                                                oci_execute($stmt);
+                                                                FROM CarrierPlan
+                                                                WHERE SoldierID = :soldierId";
+                                                $stmt = oci_parse($conn, $query);
+                                                oci_bind_by_name($stmt, ':soldierId', $soldierId);
+                                                oci_execute($stmt);
 
                                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                                     $soldierID = $row['SOLDIERID'];
