@@ -46,7 +46,7 @@ include 'views/auth.php';
                                         $result = oci_execute($stmt);
                                         if ($result) {
                                             $medicalID = oci_fetch_row(oci_parse($conn, 'SELECT MedicalIDSeq.CURRVAL FROM dual'))[0];
-                                            echo "Medical information added successfully. Medical ID: " . $medicalID;
+                                            echo "Medical information added successfully. ";
                                         } else {
                                             $e = oci_error($stmt);
                                             echo "Failed to add medical information: " . $e['message'];

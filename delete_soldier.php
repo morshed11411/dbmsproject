@@ -20,7 +20,7 @@ if (isset($_GET['soldierId'])) {
         $result = oci_execute($stmt);
         if ($result) {
             echo "Soldier deleted successfully.";
-            header("Location: dashboard.php"); // Redirect back to the soldiers.php page
+            header("Location: manage_soldier.php"); // Redirect back to the soldiers.php page
         } else {
             $e = oci_error($stmt);
             echo "Failed to delete soldier: " . $e['message'];

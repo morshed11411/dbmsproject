@@ -17,16 +17,19 @@ include 'views/auth.php';
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
-                <button type="button" class="btn btn-warning float-right" onclick="window.print()">Print Parade State</button>
+                    <button type="button" class="btn btn-warning float-right" onclick="window.print()">
+                        <h5>Print Parade State</h5>
+                    </button>
 
                     <h1>Parade State</h1>
                 </div>
 
             </div>
             <section class="content">
-                
+
                 <div class="container-fluid">
                     <div class="card">
+
 
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
@@ -42,80 +45,76 @@ include 'views/auth.php';
                                 </div>
                             </div>
 
-                            <!-- Rest of the code -->
-                        </div>
+                            <table class="table table-bordered" id="paradeState">
+                                <thead>
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>Auth</th>
+                                        <th>Granted</th>
+                                        <th>Leave</th>
+                                        <th>Disposal</th>
+                                        <th>Absent</th>
+                                        <th>Present</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Fetch the parade state data from the view
+                                    $queryParadeState = "SELECT * FROM parade_state_view";
+                                    $stmtParadeState = oci_parse($conn, $queryParadeState);
+                                    oci_execute($stmtParadeState);
 
+                                    $totalAuth = 0;
+                                    $totalGranted = 0;
+                                    $totalLeave = 0;
+                                    $totalMedicalDisposal = 0;
+                                    $totalAbsent = 0;
+                                    $totalPresent = 0;
 
-                        
-                        <table class="table" id="paradeState">
-                            <thead>
-                                <tr>
-                                    <th>Company Name</th>
-                                    <th>Auth</th>
-                                    <th>Granted</th>
-                                    <th>Leave</th>
-                                    <th>Disposal</th>
-                                    <th>Absent</th>
-                                    <th>Present</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Fetch the parade state data from the view
-                                $queryParadeState = "SELECT * FROM parade_state_view";
-                                $stmtParadeState = oci_parse($conn, $queryParadeState);
-                                oci_execute($stmtParadeState);
+                                    while ($row = oci_fetch_assoc($stmtParadeState)) {
+                                        $companyName = $row['COMPANYNAME'];
+                                        $auth = $row['Auth'];
+                                        $granted = $row['Granted'];
+                                        $leave = $row['Leave'];
+                                        $medicalDisposal = $row['MedicalDisposal'];
+                                        $absent = $row['Absent'];
+                                        $present = $row['Present'];
 
-                                $totalAuth = 0;
-                                $totalGranted = 0;
-                                $totalLeave = 0;
-                                $totalMedicalDisposal = 0;
-                                $totalAbsent = 0;
-                                $totalPresent = 0;
+                                        echo "<tr>";
+                                        echo "<td>$companyName</td>";
+                                        echo "<td>$auth</td>";
+                                        echo "<td>$granted</td>";
+                                        echo "<td>$leave</td>";
+                                        echo "<td>$medicalDisposal</td>";
+                                        echo "<td>$absent</td>";
+                                        echo "<td>$present</td>";
+                                        echo "</tr>";
 
-                                while ($row = oci_fetch_assoc($stmtParadeState)) {
-                                    $companyName = $row['COMPANYNAME'];
-                                    $auth = $row['Auth'];
-                                    $granted = $row['Granted'];
-                                    $leave = $row['Leave'];
-                                    $medicalDisposal = $row['MedicalDisposal'];
-                                    $absent = $row['Absent'];
-                                    $present = $row['Present'];
+                                        // Calculate the total values
+                                        $totalAuth += $auth;
+                                        $totalGranted += $granted;
+                                        $totalLeave += $leave;
+                                        $totalMedicalDisposal += $medicalDisposal;
+                                        $totalAbsent += $absent;
+                                        $totalPresent += $present;
+                                    }
 
-                                    echo "<tr>";
-                                    echo "<td>$companyName</td>";
-                                    echo "<td>$auth</td>";
-                                    echo "<td>$granted</td>";
-                                    echo "<td>$leave</td>";
-                                    echo "<td>$medicalDisposal</td>";
-                                    echo "<td>$absent</td>";
-                                    echo "<td>$present</td>";
+                                    oci_free_statement($stmtParadeState);
+
+                                    // Output the total row
+                                    echo "<tr class='total-row'>";
+                                    echo "<td>Total</td>";
+                                    echo "<td>$totalAuth</td>";
+                                    echo "<td>$totalGranted</td>";
+                                    echo "<td>$totalLeave</td>";
+                                    echo "<td>$totalMedicalDisposal</td>";
+                                    echo "<td>$totalAbsent</td>";
+                                    echo "<td>$totalPresent</td>";
                                     echo "</tr>";
-
-                                    // Calculate the total values
-                                    $totalAuth += $auth;
-                                    $totalGranted += $granted;
-                                    $totalLeave += $leave;
-                                    $totalMedicalDisposal += $medicalDisposal;
-                                    $totalAbsent += $absent;
-                                    $totalPresent += $present;
-                                }
-
-                                oci_free_statement($stmtParadeState);
-
-                                // Output the total row
-                                echo "<tr class='total-row'>";
-                                echo "<td>Total</td>";
-                                echo "<td>$totalAuth</td>";
-                                echo "<td>$totalGranted</td>";
-                                echo "<td>$totalLeave</td>";
-                                echo "<td>$totalMedicalDisposal</td>";
-                                echo "<td>$totalAbsent</td>";
-                                echo "<td>$totalPresent</td>";
-                                echo "</tr>";
-                                ?>
-                            </tbody>
-                        </table>
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
 
 
                     </div>

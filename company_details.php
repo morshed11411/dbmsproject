@@ -13,7 +13,7 @@ if (isset($_GET['company_id'])) {
               LEFT JOIN SoldierAppointment ON Soldier.SOLDIERID = SoldierAppointment.SOLDIERID
               LEFT JOIN Appointments ON SoldierAppointment.APPOINTMENTID = Appointments.APPOINTMENTID
               WHERE Soldier.COMPANYID = :company_id
-              GROUP BY Soldier.SOLDIERID, Ranks.RANK, Trade.TRADE, Soldier.NAME";
+              GROUP BY Soldier.SOLDIERID, Ranks.RANK, Trade.TRADE, Soldier.NAME ORDER BY Soldier.SOLDIERID";
 
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':company_id', $company_id);

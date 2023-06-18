@@ -118,7 +118,7 @@ oci_close($conn);
                         oci_bind_by_name($stmt, ':height', $height);
                         oci_bind_by_name($stmt, ':weight', $weight);
                         oci_bind_by_name($stmt, ':living_status', $living_status);
-
+                        //oci_bind_by_name($stmt, ':user_id', $userid);
                         // Execute the INSERT statement
                         $result = oci_execute($stmt);
                         if ($result) {
