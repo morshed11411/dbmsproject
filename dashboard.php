@@ -72,6 +72,33 @@ oci_free_statement($stmt);
 
             <section class="content">
                 <div class="container-fluid">
+                    <?php
+                    // Fetch soldier information for the dashboard
+                    $query = "SELECT SOLDIERID,  RANK||' '||NAME AS RNAME, SERVINGSTATUS FROM SOLDIER_VIEW";
+                    $stmt = oci_parse($conn, $query);
+                    oci_execute($stmt);
+
+                    $awolSoldiers = []; // Array to store AWOL soldier names
+                    
+                    while ($row = oci_fetch_assoc($stmt)) {
+                        // Check if soldier is AWOL
+                        if ($row['SERVINGSTATUS'] === 'AWOL') {
+                            $awolSoldiers[] = $row['RNAME']; // Add AWOL soldier name to the array
+                        }
+                    }
+
+                    oci_free_statement($stmt);
+
+                    // Display the warning message for AWOL soldiers
+                    if (!empty($awolSoldiers)) {
+                        echo "<div class='alert alert-danger' role='alert'>";
+                        echo "The following soldiers are AWOL: ";
+                        echo implode(', ', $awolSoldiers); // Display the AWOL soldier names separated by commas
+                        echo "</div>";
+                    }
+                    ?>
+
+
 
                     <div class="row">
                         <div class="col-md-3">
@@ -274,7 +301,7 @@ oci_free_statement($stmt);
 
                     </div>
 
-                    
+
 
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>

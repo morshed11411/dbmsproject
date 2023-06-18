@@ -222,3 +222,100 @@ BEGIN
     END IF;
 END;
 /
+
+
+CREATE SEQUENCE LOG_ID_SEQUENCE START WITH 1 INCREMENT BY 1;
+CREATE TABLE LOGGING_TABLE (
+  log_id NUMBER PRIMARY KEY,
+  soldier_id NUMBER,
+  operation VARCHAR2(10),
+  table_name VARCHAR2(100),
+  timestamp TIMESTAMP
+);
+CREATE OR REPLACE TRIGGER log_changes_trigger
+AFTER INSERT OR UPDATE OR DELETE ON SCHEMA
+FOR EACH ROW
+DECLARE
+    -- Declare variables to store the necessary logging information
+    log_id NUMBER;
+    soldier_id NUMBER;
+    operation VARCHAR2(10);
+    table_name VARCHAR2(100);
+    timestamp TIMESTAMP;
+BEGIN
+    -- Get the soldier ID from the affected row
+    soldier_id := :NEW.SOLDIERID; -- Assuming the soldier ID column is named SOLDIERID
+
+    -- Get the current timestamp
+    timestamp := CURRENT_TIMESTAMP;
+
+    -- Determine the DML operation (insert, update, or delete)
+    IF INSERTING THEN
+        operation := 'INSERT';
+    ELSIF UPDATING THEN
+        operation := 'UPDATE';
+    ELSIF DELETING THEN
+        operation := 'DELETE';
+    END IF;
+
+    -- Get the table name of the affected table
+    table_name := ora_dict_obj_name;
+
+    -- Generate a unique log ID using the sequence
+    SELECT LOG_ID_SEQUENCE.NEXTVAL INTO log_id FROM DUAL;
+
+    -- Insert the log entry into the logging table
+    INSERT INTO LOGGING_TABLE (log_id, soldier_id, operation, table_name, timestamp)
+    VALUES (log_id, soldier_id, operation, table_name, timestamp);
+END;
+/
+CREATE OR REPLACE TRIGGER log_soldier_table
+AFTER INSERT OR UPDATE OR DELETE ON SOLDIER
+FOR EACH ROW
+DECLARE
+  v_operation VARCHAR2(10);
+BEGIN
+  -- Get the logged-in soldier's ID from the session
+  -- Replace 'SESSION_SOLDIER_ID' with the appropriate session attribute that holds the soldier ID
+  -- For example, if you store the soldier ID in the 'SESSION_SOLDIER_ID' attribute, use SYS_CONTEXT('USERENV', 'SESSION_SOLDIER_ID')
+  -- Alternatively, you can use a package or other mechanism to retrieve the soldier ID
+  -- Ensure that the session attribute is set correctly when the user logs in
+  -- The example assumes that the session attribute is a number type
+  v_soldier_id := SYS_CONTEXT('USERENV', 'userid');
+  
+  IF INSERTING THEN
+    v_operation := 'INSERT';
+  ELSIF UPDATING THEN
+    v_operation := 'UPDATE';
+  ELSIF DELETING THEN
+    v_operation := 'DELETE';
+  END IF;
+  
+  INSERT INTO LOGGING_TABLE (log_id, soldier_id, operation, table_name, timestamp)
+  VALUES (LOG_ID_SEQUENCE.NEXTVAL, v_soldier_id, v_operation, 'SOLDIER_TABLE', SYSTIMESTAMP);
+END;
+/
+
+CREATE OR REPLACE TRIGGER check_temp_ere_trigger
+BEFORE INSERT OR UPDATE ON Soldier
+FOR EACH ROW
+BEGIN
+    IF :NEW.TemporaryCommand = 'Yes' AND :NEW.ERE = 'Yes' THEN
+        RAISE_APPLICATION_ERROR(-20001, 'A soldier cannot be in Temporary Command and ERE simultaneously.');
+    END IF;
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER awol_notification_trigger
+BEFORE INSERT OR UPDATE ON Soldier
+FOR EACH ROW
+DECLARE
+    v_soldier_name Soldier.NAME%TYPE;
+BEGIN
+    IF :NEW.SERVINGSTATUS = 'AWOL' THEN
+        SELECT NAME INTO v_soldier_name FROM Soldier WHERE SOLDIERID = :NEW.SOLDIERID;
+        RAISE_APPLICATION_ERROR(-20001, 'Notification: Soldier ' || v_soldier_name || ' is AWOL.');
+    END IF;
+END;
+/

@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         oci_commit($conn); // Commit the transaction
         oci_free_statement($stmt);
         oci_close($conn);
-        header("Location: company.php"); // Redirect back to company.php
+        header("Location: add_company.php"); // Redirect back to company.php
         exit;
     } else {
         $e = oci_error($stmt);
