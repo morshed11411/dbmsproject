@@ -50,7 +50,7 @@ include 'views/auth.php';
                                     <tr>
                                         <th>Company Name</th>
                                         <th>Auth</th>
-                                        <th>Granted</th>
+                                        <th>Held</th>
                                         <th>Leave</th>
                                         <th>Disposal</th>
                                         <th>Absent</th>

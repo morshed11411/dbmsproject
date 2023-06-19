@@ -25,11 +25,6 @@ include 'conn.php';
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="">
-                                        <div class="form-group">
-                                            <label for="team_id">Team ID:</label>
-                                            <input type="text" name="team_id" id="team_id" class="form-control"
-                                                required>
-                                        </div>
 
                                         <div class="form-group">
                                             <label for="team_name">Team Name:</label>
@@ -64,7 +59,7 @@ include 'conn.php';
                                         $start_date = $_POST['start_date'];
                                         $team_oic = $_POST['team_oic'];
 
-                                        $query = "INSERT INTO Team (TeamID, TeamName, StartDate, TeamOIC) VALUES (:team_id, :team_name, TO_DATE(:start_date, 'YYYY-MM-DD'), :team_oic)";
+                                        $query = "INSERT INTO Team (TeamID, TeamName, StartDate, TeamOIC) VALUES (TEAMIDSEQ.NEXTVAL, :team_name, TO_DATE(:start_date, 'YYYY-MM-DD'), :team_oic)";
                                         $stmt = oci_parse($conn, $query);
 
                                         oci_bind_by_name($stmt, ':team_id', $team_id);

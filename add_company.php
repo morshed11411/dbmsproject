@@ -94,9 +94,8 @@
                                                 echo "<td>" . $row['COMPANYID'] . "</td>";
                                                 echo "<td>" . $row['COMPANYNAME'] . "</td>";
                                                 echo "<td>";
-                                                echo "<a href='company_details.php?company_id=" . $row['COMPANYID'] . "'>View Details</a> | ";
-                                                echo "<a href='edit_company.php?company_id=" . $row['COMPANYID'] . "'>Edit</a> | ";
-                                                echo "<a href='delete_company.php?company_id=" . $row['COMPANYID'] . "'>Delete</a>";
+                                                echo "<a href='company_details.php?company_id=" . $row['COMPANYID'] . "' class='btn btn-primary'>View Details</a> ";
+                                                echo "<a href='edit_company.php?company_id=" . $row['COMPANYID'] . "' class='btn btn-secondary'>Edit</a>  ";
                                                 echo "</td>";
                                                 echo "</tr>";
                                             }

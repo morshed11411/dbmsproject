@@ -58,7 +58,6 @@ if (isset($_GET['soldier_id'])) {
 
     oci_free_statement($stmt);
 
-
     // Fetch soldier data for the given soldier ID
     $query = "SELECT s.SOLDIERID, s.NAME, s.RANKID, s.TRADEID, s.COMPANYID, s.GENDER, s.RELIGION, 
     TO_CHAR(s.DATEOFBIRTH, 'YYYY-MM-DD') AS DATEOFBIRTH, TO_CHAR(s.DATEOFENROLL, 'YYYY-MM-DD') AS DATEOFENROLL, 
@@ -106,90 +105,90 @@ if (isset($_GET['soldier_id'])) {
                     <h2>Edit Soldier Data</h2>
                 </div>
                 <?php
-                                    // Check if the form is submitted
-                                    if (isset($_POST['submit'])) {
-                                        // Get the form data
-                                        $name = $_POST['name'];
-                                        $rank = $_POST['rank_id'];
-                                        $trade = $_POST['trade_id'];
-                                        $company = $_POST['company_id'];
-                                        $gender = $_POST['gender'];
-                                        $religion = $_POST['religion'];
-                                        $date_of_birth = $_POST['date_of_birth'];
-                                        $date_of_joining = $_POST['date_of_joining'];
-                                        $blood_group = $_POST['blood_group'];
-                                        $marital_status = $_POST['marital_status'];
-                                        $village = $_POST['village'];
-                                        $thana = $_POST['thana'];
-                                        $district = $_POST['district'];
-                                        $height = $_POST['height'];
-                                        $weight = $_POST['weight'];
-                                        $living_status = $_POST['living_status'];
+                // Check if the form is submitted
+                if (isset($_POST['submit'])) {
+                    // Get the form data
+                    $name = $_POST['name'];
+                    $rank = $_POST['rank_id'];
+                    $trade = $_POST['trade_id'];
+                    $company = $_POST['company_id'];
+                    $gender = $_POST['gender'];
+                    $religion = $_POST['religion'];
+                    $date_of_birth = $_POST['date_of_birth'];
+                    $date_of_joining = $_POST['date_of_joining'];
+                    $blood_group = $_POST['blood_group'];
+                    $marital_status = $_POST['marital_status'];
+                    $village = $_POST['village'];
+                    $thana = $_POST['thana'];
+                    $district = $_POST['district'];
+                    $height = $_POST['height'];
+                    $weight = $_POST['weight'];
+                    $living_status = $_POST['living_status'];
 
-                                        // Establish a connection to the Oracle database
-                                        $conn = oci_connect('UMS', '12345', 'localhost/XE');
-                                        if (!$conn) {
-                                            $e = oci_error();
-                                            echo "Failed to connect to Oracle: " . $e['message'];
-                                        } else {
-                                            // Prepare the UPDATE statement
-                                            $query = "UPDATE Soldier SET 
-                                                  NAME = :name, 
-                                                  RANKID = :rank, 
-                                                  TRADEID = :trade, 
-                                                  COMPANYID = :company, 
-                                                  GENDER = :gender, 
-                                                  RELIGION = :religion, 
-                                                  DATEOFBIRTH = TO_DATE(:date_of_birth, 'YYYY-MM-DD'), 
-                                                  DATEOFENROLL = TO_DATE(:date_of_joining, 'YYYY-MM-DD'), 
-                                                  BLOODGROUP = :blood_group, 
-                                                  MARITALSTATUS = :marital_status, 
-                                                  VILLAGE = :village, 
-                                                  THANA = :thana, 
-                                                  DISTRICT = :district, 
-                                                  HEIGHT = :height, 
-                                                  WEIGHT = :weight, 
-                                                  LIVINGSTATUS = :living_status
-                                                  WHERE SOLDIERID = :soldier_id";
-                                            $stmt = oci_parse($conn, $query);
+                    // Establish a connection to the Oracle database
+                    $conn = oci_connect('UMS', '12345', 'localhost/XE');
+                    if (!$conn) {
+                        $e = oci_error();
+                        echo "Failed to connect to Oracle: " . $e['message'];
+                    } else {
+                        // Prepare the UPDATE statement
+                        $query = "UPDATE Soldier SET 
+                                      NAME = :name, 
+                                      RANKID = :rank, 
+                                      TRADEID = :trade, 
+                                      COMPANYID = :company, 
+                                      GENDER = :gender, 
+                                      RELIGION = :religion, 
+                                      DATEOFBIRTH = TO_DATE(:date_of_birth, 'YYYY-MM-DD'), 
+                                      DATEOFENROLL = TO_DATE(:date_of_joining, 'YYYY-MM-DD'), 
+                                      BLOODGROUP = :blood_group, 
+                                      MARITALSTATUS = :marital_status, 
+                                      VILLAGE = :village, 
+                                      THANA = :thana, 
+                                      DISTRICT = :district, 
+                                      HEIGHT = :height, 
+                                      WEIGHT = :weight, 
+                                      LIVINGSTATUS = :living_status
+                                      WHERE SOLDIERID = :soldier_id";
+                        $stmt = oci_parse($conn, $query);
 
-                                            // Bind the parameters
-                                            oci_bind_by_name($stmt, ':name', $name);
-                                            oci_bind_by_name($stmt, ':rank', $rank);
-                                            oci_bind_by_name($stmt, ':trade', $trade);
-                                            oci_bind_by_name($stmt, ':company', $company);
-                                            oci_bind_by_name($stmt, ':gender', $gender);
-                                            oci_bind_by_name($stmt, ':religion', $religion);
-                                            oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
-                                            oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
-                                            oci_bind_by_name($stmt, ':blood_group', $blood_group);
-                                            oci_bind_by_name($stmt, ':marital_status', $marital_status);
-                                            oci_bind_by_name($stmt, ':village', $village);
-                                            oci_bind_by_name($stmt, ':thana', $thana);
-                                            oci_bind_by_name($stmt, ':district', $district);
-                                            oci_bind_by_name($stmt, ':height', $height);
-                                            oci_bind_by_name($stmt, ':weight', $weight);
-                                            oci_bind_by_name($stmt, ':living_status', $living_status);
-                                            oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+                        // Bind the parameters
+                        oci_bind_by_name($stmt, ':name', $name);
+                        oci_bind_by_name($stmt, ':rank', $rank);
+                        oci_bind_by_name($stmt, ':trade', $trade);
+                        oci_bind_by_name($stmt, ':company', $company);
+                        oci_bind_by_name($stmt, ':gender', $gender);
+                        oci_bind_by_name($stmt, ':religion', $religion);
+                        oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
+                        oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
+                        oci_bind_by_name($stmt, ':blood_group', $blood_group);
+                        oci_bind_by_name($stmt, ':marital_status', $marital_status);
+                        oci_bind_by_name($stmt, ':village', $village);
+                        oci_bind_by_name($stmt, ':thana', $thana);
+                        oci_bind_by_name($stmt, ':district', $district);
+                        oci_bind_by_name($stmt, ':height', $height);
+                        oci_bind_by_name($stmt, ':weight', $weight);
+                        oci_bind_by_name($stmt, ':living_status', $living_status);
+                        oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
 
-                                            // Execute the UPDATE statement
-                                            $result = oci_execute($stmt);
-                                            if ($result) {
-                                                echo '<div class="alert alert-success" role="alert">
-                                                          Soldier data updated successfully.
-                                                      </div>';
-                                            } else {
-                                                $e = oci_error($stmt);
-                                                echo '<div class="alert alert-danger" role="alert">
-                                                          Failed to update soldier data: ' . $e['message'] . '
-                                                      </div>';
-                                            }
+                        // Execute the UPDATE statement
+                        $result = oci_execute($stmt);
+                        if ($result) {
+                            echo '<div class="alert alert-success" role="alert">
+                                      Soldier data updated successfully.
+                                  </div>';
+                        } else {
+                            $e = oci_error($stmt);
+                            echo '<div class="alert alert-danger" role="alert">
+                                      Failed to update soldier data: ' . $e['message'] . '
+                                  </div>';
+                        }
 
-                                            oci_free_statement($stmt);
-                                            oci_close($conn);
-                                        }
-                                    }
-                                    ?>
+                        oci_free_statement($stmt);
+                        oci_close($conn);
+                    }
+                }
+                ?>
             </div>
             <section class="content">
                 <div class="container-fluid">
@@ -203,8 +202,8 @@ if (isset($_GET['soldier_id'])) {
                                                 <div class="form-group">
                                                     <label for="soldier_id">Soldier ID:</label>
                                                     <input type="text" name="soldier_id" id="soldier_id"
-                                                        class="form-control" value="<?php echo $soldier['SOLDIERID']; ?>"
-                                                        required readonly>
+                                                        class="form-control"
+                                                        value="<?php echo $soldier['SOLDIERID']; ?>" required readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name">Name:</label>
@@ -268,14 +267,14 @@ if (isset($_GET['soldier_id'])) {
                                                 <div class="form-group">
                                                     <label for="date_of_birth">Date of Birth:</label>
                                                     <input type="date" name="date_of_birth" id="date_of_birth"
-                                                        class="form-control" value="<?php echo $soldier['DATEOFBIRTH']; ?>"
-                                                        required>
+                                                        class="form-control"
+                                                        value="<?php echo $soldier['DATEOFBIRTH']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="date_of_joining">Date of Joining:</label>
                                                     <input type="date" name="date_of_joining" id="date_of_joining"
-                                                        class="form-control" value="<?php echo $soldier['DATEOFENROLL']; ?>"
-                                                        required>
+                                                        class="form-control"
+                                                        value="<?php echo $soldier['DATEOFENROLL']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="blood_group">Blood Group:</label>
@@ -316,8 +315,8 @@ if (isset($_GET['soldier_id'])) {
                                                 <div class="form-group">
                                                     <label for="district">District:</label>
                                                     <input type="text" name="district" id="district"
-                                                        class="form-control" value="<?php echo $soldier['DISTRICT']; ?>"
-                                                        required>
+                                                        class="form-control"
+                                                        value="<?php echo $soldier['DISTRICT']; ?>" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="height">Height (cm):</label>
@@ -331,8 +330,8 @@ if (isset($_GET['soldier_id'])) {
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="living_status">Living Status:</label>
-                                                    <select name="living_status" id="living_status" class="form-control"
-                                                        required>
+                                                    <select name="living_status" id="living_status"
+                                                        class="form-control" required>
                                                         <option value="">Select Living Status</option>
                                                         <option value="Inliving" <?php if ($soldier['LIVINGSTATUS'] == 'Inliving') echo 'selected'; ?>>Inliving</option>
                                                         <option value="Outliving" <?php if ($soldier['LIVINGSTATUS'] == 'Outliving') echo 'selected'; ?>>Outliving</option>
@@ -341,14 +340,21 @@ if (isset($_GET['soldier_id'])) {
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                
+                                                <div class="form-group">
+                                                    <label for="contact_number1">Personal Number:</label>
+                                                    <input type="text" name="contact_number1" id="contact_number1" class="form-control" value="<?php echo isset($existingContactNumbers[0]) ? $existingContactNumbers[0] : ''; ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact_number2">Wife's Number:</label>
+                                                    <input type="text" name="contact_number2" id="contact_number2" class="form-control" value="<?php echo isset($existingContactNumbers[1]) ? $existingContactNumbers[1] : ''; ?>">
+                                                </div>
                                             </div>
                                         </div>
 
                                         <input type="submit" name="submit" value="Update" class="btn btn-primary">
                                     </form>
 
-                                   
+
                                 </div>
                             </div>
                         </div>

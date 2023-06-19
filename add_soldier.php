@@ -88,6 +88,8 @@ oci_close($conn);
                     $height = $_POST['height'];
                     $weight = $_POST['weight'];
                     $living_status = $_POST['living_status'];
+                    $contact_number1 = $_POST['contact_number1'];
+                    $contact_number2 = $_POST['contact_number2'];
 
                     // Establish a connection to the Oracle database
                     $conn = oci_connect('UMS', '12345', 'localhost/XE');
@@ -95,48 +97,74 @@ oci_close($conn);
                         $e = oci_error();
                         echo "Failed to connect to Oracle: " . $e['message'];
                     } else {
-                        // Prepare the INSERT statement
-                        $query = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
-                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
-                        $stmt = oci_parse($conn, $query);
+                        // Prepare the INSERT statement for Soldier table
+                        $querySoldier = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
+                                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
+                        $stmtSoldier = oci_parse($conn, $querySoldier);
 
-                        // Bind the parameters
-                        oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-                        oci_bind_by_name($stmt, ':name', $name);
-                        oci_bind_by_name($stmt, ':rank', $rank);
-                        oci_bind_by_name($stmt, ':trade', $trade);
-                        oci_bind_by_name($stmt, ':company', $company);
-                        oci_bind_by_name($stmt, ':gender', $gender);
-                        oci_bind_by_name($stmt, ':religion', $religion);
-                        oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
-                        oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
-                        oci_bind_by_name($stmt, ':blood_group', $blood_group);
-                        oci_bind_by_name($stmt, ':marital_status', $marital_status);
-                        oci_bind_by_name($stmt, ':village', $village);
-                        oci_bind_by_name($stmt, ':thana', $thana);
-                        oci_bind_by_name($stmt, ':district', $district);
-                        oci_bind_by_name($stmt, ':height', $height);
-                        oci_bind_by_name($stmt, ':weight', $weight);
-                        oci_bind_by_name($stmt, ':living_status', $living_status);
-                        //oci_bind_by_name($stmt, ':user_id', $userid);
-                        // Execute the INSERT statement
-                        $result = oci_execute($stmt);
-                        if ($result) {
-                            echo '<div class="alert alert-success" role="alert">
-                                                          Soldier data updated successfully.
-                                                      </div>';
-                        } else {
-                            $e = oci_error($stmt);
-                            echo '<div class="alert alert-danger" role="alert">
-                                                          Failed to update soldier data: ' . $e['message'] . '
-                                                      </div>';
+                        // Bind the parameters for Soldier table
+                        oci_bind_by_name($stmtSoldier, ':soldier_id', $soldier_id);
+                        oci_bind_by_name($stmtSoldier, ':name', $name);
+                        oci_bind_by_name($stmtSoldier, ':rank', $rank);
+                        oci_bind_by_name($stmtSoldier, ':trade', $trade);
+                        oci_bind_by_name($stmtSoldier, ':company', $company);
+                        oci_bind_by_name($stmtSoldier, ':gender', $gender);
+                        oci_bind_by_name($stmtSoldier, ':religion', $religion);
+                        oci_bind_by_name($stmtSoldier, ':date_of_birth', $date_of_birth);
+                        oci_bind_by_name($stmtSoldier, ':date_of_joining', $date_of_joining);
+                        oci_bind_by_name($stmtSoldier, ':blood_group', $blood_group);
+                        oci_bind_by_name($stmtSoldier, ':marital_status', $marital_status);
+                        oci_bind_by_name($stmtSoldier, ':village', $village);
+                        oci_bind_by_name($stmtSoldier, ':thana', $thana);
+                        oci_bind_by_name($stmtSoldier, ':district', $district);
+                        oci_bind_by_name($stmtSoldier, ':height', $height);
+                        oci_bind_by_name($stmtSoldier, ':weight', $weight);
+                        oci_bind_by_name($stmtSoldier, ':living_status', $living_status);
+
+                        // Execute the INSERT statement for Soldier table
+                        $resultSoldier = oci_execute($stmtSoldier);
+
+                        // Prepare the INSERT statement for ContactNumber table
+                        $queryContactNumber = "INSERT INTO ContactNumber (SoldierID, ContactNumber) VALUES (:soldier_id, :contact_number)";
+                        $stmtContactNumber = oci_parse($conn, $queryContactNumber);
+
+                        // Bind the parameters for ContactNumber table (contact number 1)
+                        oci_bind_by_name($stmtContactNumber, ':soldier_id', $soldier_id);
+                        oci_bind_by_name($stmtContactNumber, ':contact_number', $contact_number1);
+
+                        // Execute the INSERT statement for ContactNumber table (contact number 1)
+                        if ($contact_number1 != null) {
+                            $resultContactNumber1 = oci_execute($stmtContactNumber);
                         }
 
-                        oci_free_statement($stmt);
+                        // Bind the parameters for ContactNumber table (contact number 2)
+                        oci_bind_by_name($stmtContactNumber, ':contact_number', $contact_number2);
+
+                        // Execute the INSERT statement for ContactNumber table (contact number 2)
+                        if ($contact_number2 != null) {
+                            $resultContactNumber2 = oci_execute($stmtContactNumber);
+                        }
+
+
+                        if ($resultSoldier && ($resultContactNumber1 || $resultContactNumber2)) {
+                            echo '<div class="alert alert-success" role="alert">
+                                  Soldier data  inserted successfully.
+                              </div>';
+                        } else {
+                            $e = oci_error($stmtSoldier);
+                            echo '<div class="alert alert-danger" role="alert">
+                                  Failed to insert soldier data: ' . $e['message'] . '
+                              </div>';
+                        }
+
+                        oci_free_statement($stmtSoldier);
+                        oci_free_statement($stmtContactNumber);
                         oci_close($conn);
                     }
                 }
                 ?>
+
+
             </div>
             <section class="content">
                 <div class="container-fluid">
@@ -257,18 +285,19 @@ oci_close($conn);
                                                         <option value="">Select Living Status</option>
                                                         <option value="Inliving">Inliving</option>
                                                         <option value="Outliving">Outliving</option>
-                                                        <option value="Barak">Barak</option>
+                                                        <option value="Barak">Offrs Mess</option>
+                                                        <option value="Barak">Snk Mess</option>
                                                     </select>
                                                 </div>
 
-                                                
-                                                
+
+
 
                                             </div>
 
 
                                             <div class="col-md-3">
-                                            <div class="form-group">
+                                                <div class="form-group">
                                                     <label for="height">Height (cm):</label>
                                                     <input type="text" name="height" id="height" class="form-control"
                                                         required>
@@ -296,8 +325,19 @@ oci_close($conn);
                                                 </div>
 
                                             </div>
+                                            <div class="col-md-3">
 
-                                            <!-- Add others here  form -->
+                                                <div class="form-group">
+                                                    <label for="contact_number1">Personal Number :</label>
+                                                    <input type="text" name="contact_number1" id="contact_number1"
+                                                        class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact_number2">Emergency Number :</label>
+                                                    <input type="text" name="contact_number2" id="contact_number2"
+                                                        class="form-control" >
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <input type="submit" name="submit" value="Submit" class="btn btn-primary">
