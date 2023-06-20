@@ -12,11 +12,15 @@ if (!$conn) {
         if (isset($_POST['submit'])) {
             $newCadreID = $_POST['new_cadreid'];
             $newSoldierID = $_POST['new_soldierid'];
+            $newCadreName = $_POST['new_cadrename'];
+            $newRemark = $_POST['new_remark'];
 
-            $queryUpdate = "UPDATE SOLDIERADVANCEDTRAINING SET CADREID = :newCadreID, SOLDIERID = :newSoldierID WHERE CADREID = :cadreID AND SOLDIERID = :soldierID";
+            $queryUpdate = "UPDATE SOLDIERADVANCEDTRAINING SET CADREID = :newCadreID, SOLDIERID = :newSoldierID, CADRENAME = :newCadreName, REMARK = :newRemark WHERE CADREID = :cadreID AND SOLDIERID = :soldierID";
             $stmtUpdate = oci_parse($conn, $queryUpdate);
             oci_bind_by_name($stmtUpdate, ':newCadreID', $newCadreID);
             oci_bind_by_name($stmtUpdate, ':newSoldierID', $newSoldierID);
+            oci_bind_by_name($stmtUpdate, ':newCadreName', $newCadreName);
+            oci_bind_by_name($stmtUpdate, ':newRemark', $newRemark);
             oci_bind_by_name($stmtUpdate, ':cadreID', $cadreID);
             oci_bind_by_name($stmtUpdate, ':soldierID', $soldierID);
 
@@ -77,6 +81,16 @@ if (!$conn) {
                                         <div class="form-group">
                                             <label for="new_soldierid">Soldier ID:</label>
                                             <input type="text" name="new_soldierid" id="new_soldierid" class="form-control" value="<?php echo $row['SOLDIERID']; ?>" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="new_cadrename">Cadre Name:</label>
+                                            <input type="text" name="new_cadrename" id="new_cadrename" class="form-control" value="<?php echo $row['CADRENAME']; ?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="new_remark">Remark:</label>
+                                            <textarea name="new_remark" id="new_remark" class="form-control"><?php echo $row['REMARK']; ?></textarea>
                                         </div>
 
                                         <button type="submit" name="submit" class="btn btn-primary">Update</button>

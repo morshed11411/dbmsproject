@@ -25,7 +25,7 @@ if (isset($_GET['company'])) {
     JOIN RANKS r ON s.RANKID = r.RANKID
     LEFT JOIN CarrierPlan cp ON s.SOLDIERID = cp.SOLDIERID
     WHERE s.COMPANYID = :companyID
-    AND r.RANK IN ('SNK', 'LCPL', 'CPL', 'SGT', 'WO', 'SWO')";
+    AND r.RANK IN ('Snk', 'Lcpl', 'Cpl', 'Sgt', 'WO', 'SWO')";
 
     $stmtSoldiers = oci_parse($conn, $querySoldiers);
     oci_bind_by_name($stmtSoldiers, ':companyID', $companyID);

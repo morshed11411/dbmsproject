@@ -149,9 +149,14 @@
                                             $stmt = oci_parse($conn, $query);
                                             oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
                                             oci_bind_by_name($stmt, ':appointment_id', $appointment_id);
-                                            oci_execute($stmt);
 
-                                            echo "Appointment assigned successfully to the soldier.";
+                                            if (oci_execute($stmt)) {
+                                                echo '<br><div class="alert alert-success">Appointment assigned successfully to the soldier.</div>';
+                                            } else {
+                                                $error = oci_error($stmt);
+                                                echo '<br><div class="alert alert-danger">Error assigning appointment : Soldier is Absent</div>'; //' . $error['message'] . '</div>';
+                                            }
+
 
                                             oci_free_statement($stmt);
                                             oci_close($conn);

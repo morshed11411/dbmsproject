@@ -59,3 +59,25 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20001, 'A soldier cannot be in Temporary Command and ERE simultaneously.');
     END IF;
 END;
+
+
+CREATE OR REPLACE TRIGGER appointmentAbsent
+BEFORE INSERT OR UPDATE ON SOLDIERAPPOINTMENT
+FOR EACH ROW
+DECLARE
+    isPresent NUMBER;
+BEGIN
+    -- Check if the soldier's is present
+    SELECT ISPRESENT INTO isPresent
+    FROM SOLDIER
+    WHERE SoldierID = :NEW.SoldierID;
+
+    -- If the soldier is absent, raise an exception
+    IF isPresent = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Soldier is absent');
+    END IF;
+END;
+/
+
+
+/

@@ -11,7 +11,7 @@
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
-                    <h1>Add Advanced Training</h1>
+                    <h1>Soldier Advanced Training</h1>
                 </div>
             </div>
             <section class="content">
@@ -24,6 +24,11 @@
                                         <div class="form-group">
                                             <label for="cadreid">Cadre ID:</label>
                                             <input type="text" name="cadreid" id="cadreid" class="form-control" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="cadrename">Cadre Name:</label>
+                                            <input type="text" name="cadrename" id="cadrename" class="form-control" required>
                                         </div>
 
                                         <div class="form-group">
@@ -45,6 +50,7 @@
                                     <?php
                                     if (isset($_POST['submit'])) {
                                         $cadreID = $_POST['cadreid'];
+                                        $cadreName = $_POST['cadrename'];
                                         $soldierID = $_POST['soldierid'];
                                         $remark = $_POST['remark'];
 
@@ -53,10 +59,11 @@
                                             $e = oci_error();
                                             echo "Failed to connect to Oracle: " . $e['message'];
                                         } else {
-                                            $query = "INSERT INTO SOLDIERADVANCEDTRAINING (CADREID, SOLDIERID, REMARK) VALUES (:cadreID, :soldierID, :remark)";
+                                            $query = "INSERT INTO SOLDIERADVANCEDTRAINING (CADREID, CADRENAME, SOLDIERID, REMARK) VALUES (:cadreID, :cadreName, :soldierID, :remark)";
                                             $stmt = oci_parse($conn, $query);
 
                                             oci_bind_by_name($stmt, ':cadreID', $cadreID);
+                                            oci_bind_by_name($stmt, ':cadreName', $cadreName);
                                             oci_bind_by_name($stmt, ':soldierID', $soldierID);
                                             oci_bind_by_name($stmt, ':remark', $remark);
 
@@ -88,6 +95,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Cadre ID</th>
+                                                <th>Cadre Name</th>
                                                 <th>Soldier ID</th>
                                                 <th>Remark</th>
                                                 <th>Action</th>
@@ -107,6 +115,7 @@
                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                     echo "<tr>";
                                                     echo "<td>" . $row['CADREID'] . "</td>";
+                                                    echo "<td>" . $row['CADRENAME'] . "</td>";
                                                     echo "<td>" . $row['SOLDIERID'] . "</td>";
                                                     echo "<td>" . $row['REMARK'] . "</td>";
                                                     echo "<td>";

@@ -1,20 +1,3 @@
-drop table 	ADVANCETRAINING	cascade constraints;
-drop table 	APPOINTMENTS	cascade constraints;
-drop table 	AUTHORIZATION	cascade constraints;
-drop table 	BASICTRAINING	cascade constraints;
-drop table 	CARRIERPLAN	cascade constraints;
-drop table 	COMPANY	cascade constraints;
-drop table 	CONTACTNUMBER	cascade constraints;
-drop table 	LEAVEMODULE	cascade constraints;
-drop table 	MEDICALINFO	cascade constraints;
-drop table 	PUNISHMENT	cascade constraints;
-drop table 	RANKS	cascade constraints;
-drop table 	SOLDIER	cascade constraints;
-drop table 	SOLDIERAPPOINTMENT	cascade constraints;
-drop table 	SOLDIERBASICTRAINING	cascade constraints;
-drop table 	SOLDIERTEAM	cascade constraints;
-drop table 	TEAM	cascade constraints;
-drop table 	TRADE	cascade constraints;
 
 
 -- CREATE  TABLES
@@ -135,7 +118,7 @@ CREATE TABLE ADVANCETRAINING (
   TRAININGSTARTDATE DATE,
   TRAININGENDDATE DATE,
   TRAININGOIC VARCHAR2(255),
-  INSTRUCTOR VARCHAR2(255),
+  INSTRUCTOR VARCHAR2(255)
 );
 
 CREATE TABLE BASICTRAINING (
@@ -153,12 +136,11 @@ CREATE TABLE SOLDIERBASICTRAINING (
   FOREIGN KEY (SOLDIERID) REFERENCES SOLDIER(SOLDIERID)
 );
 
-drop table SOLDIERADVANCEDTRAINING;
 CREATE TABLE SOLDIERADVANCEDTRAINING (
   CADREID NUMBER,
   SOLDIERID NUMBER,
   REMARK VARCHAR2(255),
-  FOREIGN KEY (CADREID) REFERENCES ADVANCETRAINING(TRAININGID),
+  FOREIGN KEY (CADREID) REFERENCES ADVANCETRAINING(CADREID),
   FOREIGN KEY (SOLDIERID) REFERENCES SOLDIER(SOLDIERID)
 );
 
@@ -450,11 +432,11 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20001, 'A SOLDIER CANNOT BE IN TEMPORARY COMMAND AND ERE SIMULTANEOUSLY.');
     END IF; 
 END;
-
+/
 -- CREATE FUNCTIONS
-
 INSERT INTO SOLDIER (SOLDIERID, PASSWORD, NAME)
 VALUES ('12345', '12345', 'ADMIN');
+
 
 INSERT INTO Trade (TradeID, Trade) VALUES (1, 'N/A');
 INSERT INTO Trade (TradeID, Trade) VALUES (2, 'Op');
@@ -464,16 +446,16 @@ INSERT INTO Trade (TradeID, Trade) VALUES (5, 'WS');
 INSERT INTO Trade (TradeID, Trade) VALUES (6, 'E&BR');
 INSERT INTO Trade (TradeID, Trade) VALUES (7, 'Ck');
 INSERT INTO Trade (TradeID, Trade) VALUES (8, 'Crypto');
-INSERT INTO Trade (TradeID, Trade) VALUES (9, 'NCE');
+INSERT INTO Trade (TradeID, Trade) VALUES (7, 'Clk');
 
-
-INSERT INTO Company (CompanyID, CompanyName) VALUES (1, 'BHQ PL');
-INSERT INTO Company (CompanyID, CompanyName) VALUES (2, 'BN HQ');
-INSERT INTO Company (CompanyID, CompanyName) VALUES (3, 'RD');
-INSERT INTO Company (CompanyID, CompanyName) VALUES (4, 'OP');
-INSERT INTO Company (CompanyID, CompanyName) VALUES (5, 'RR & LINE');
-INSERT INTO Company (CompanyID, CompanyName) VALUES (6, '124 BSC');
-
+INSERT INTO Company (CompanyID, CompanyName) VALUES (1, 'RADIO');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (2, 'RR');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (3, 'OP');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (4, 'BN HQ');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (5, 'ARTY ABSC');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (6, '101 ABSC');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (7, '102 ABSC');
+INSERT INTO Company (CompanyID, CompanyName) VALUES (8, '109 ABSC');
 
 INSERT INTO Ranks (RankID, Rank) VALUES (1, 'LT COL');
 INSERT INTO Ranks (RankID, Rank) VALUES (2, 'MAJOR');
@@ -503,9 +485,6 @@ INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (11, 'MT NCO');
 INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (12, 'STOREMAN');
 INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (13, 'HD CLK');
 INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (14, 'ORS');
-INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (15, 'Duty Officer');
-INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (16, 'Duty JCO');
-INSERT INTO Appointments (AppointmentID, AppointmentName) VALUES (17, 'Duty NCO');
 
 
 

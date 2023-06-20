@@ -1,4 +1,3 @@
-
 <?php include 'views/auth.php'; ?>
 
 <!DOCTYPE html>
@@ -12,13 +11,13 @@
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
-                    <h1>Soldiers Advance Training</h1>
+                    <h1>Advanced Training</h1>
                 </div>
             </div>
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="">
@@ -42,20 +41,14 @@
                                             <input type="date" name="training_enddate" id="training_enddate" class="form-control" required>
                                         </div>
 
-
                                         <div class="form-group">
-                                            <label for="">Training OIC</label>
+                                            <label for="training_oic">Training OIC:</label>
                                             <input type="text" name="training_oic" id="training_oic" class="form-control">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="">Instructor</label>
+                                            <label for="instructor">Instructor:</label>
                                             <input type="text" name="instructor" id="instructor" class="form-control">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Result</label>
-                                            <input type="text" name="result" id="result" class="form-control">
                                         </div>
 
                                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -69,14 +62,13 @@
                                         $trainingenddate = $_POST['training_enddate'];
                                         $trainingoic = $_POST['training_oic'];
                                         $instructor = $_POST['instructor'];
-                                        $result = $_POST['result'];
 
                                         $conn = oci_connect('UMS', '12345', 'localhost/XE');
                                         if (!$conn) {
                                             $e = oci_error();
                                             echo "Failed to connect to Oracle: " . $e['message'];
                                         } else {
-                                            $query = "INSERT INTO ADVANCETRAINING (CADREID, NAME, TRAININGSTARTDATE, TRAININGENDDATE,TRAININGOIC,INSTRUCTOR, RESULT) VALUES (:cadreid,:name, TO_DATE(:trainingstartdate, 'YYYY-MM-DD'),TO_DATE(:trainingenddate, 'YYYY-MM-DD'), :trainingoic,:instructor,:result)";
+                                            $query = "INSERT INTO ADVANCETRAINING (CADREID, NAME, TRAININGSTARTDATE, TRAININGENDDATE, TRAININGOIC, INSTRUCTOR) VALUES (:cadreid, :name, TO_DATE(:trainingstartdate, 'YYYY-MM-DD'), TO_DATE(:trainingenddate, 'YYYY-MM-DD'), :trainingoic, :instructor)";
                                             $stmt = oci_parse($conn, $query);
 
                                             oci_bind_by_name($stmt, ':cadreid', $cadreid);
@@ -85,14 +77,13 @@
                                             oci_bind_by_name($stmt, ':trainingenddate', $trainingenddate);
                                             oci_bind_by_name($stmt, ':trainingoic', $trainingoic);
                                             oci_bind_by_name($stmt, ':instructor', $instructor);
-                                            oci_bind_by_name($stmt, ':result', $result);
 
                                             $result = oci_execute($stmt);
                                             if ($result) {
-                                                echo "Soldier's basic training data inserted successfully.";
+                                                echo "Soldier's advanced training data inserted successfully.";
                                             } else {
                                                 $e = oci_error($stmt);
-                                                echo "Failed to insert soldier's basic training data: " . $e['message'];
+                                                echo "Failed to insert soldier's advanced training data: " . $e['message'];
                                             }
 
                                             oci_free_statement($stmt);
@@ -103,10 +94,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h3>View All</h3>
@@ -119,7 +107,7 @@
                                                 <th>Training End Date</th>
                                                 <th>Training OIC</th>
                                                 <th>Instructor</th>
-                                                <th>Result</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -141,7 +129,10 @@
                                                     echo "<td>" . $row['TRAININGENDDATE'] . "</td>";
                                                     echo "<td>" . $row['TRAININGOIC'] . "</td>";
                                                     echo "<td>" . $row['INSTRUCTOR'] . "</td>";
-                                                    echo "<td>" . $row['RESULT'] . "</td>";
+                                                    echo "<td>";
+                                                    echo "<a href='edit_cadre.php?cadreid=" . $row['CADREID'] . "' class='btn btn-primary btn-sm'>Edit</a>";
+                                                    echo "<a href='delete_cadre.php?cadreid=" . $row['CADREID'] . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                                    echo "</td>";
                                                     echo "</tr>";
                                                 }
 

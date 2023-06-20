@@ -115,10 +115,17 @@
             <li class="nav-item">
               <a href="advanced_training.php" class="nav-link">
                 <i class="fas fa-book-reader nav-icon"></i>
+                <p>Manage Training</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="soldier_advanced_training.php" class="nav-link">
+                <i class="fas fa-book-reader nav-icon"></i>
                 <p>Advanced Training</p>
               </a>
             </li>
           </ul>
+          
         </li>
 
         <li class="nav-item has-treeview">
@@ -130,7 +137,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-           <li class="nav-item">
+            <li class="nav-item">
               <a href="manage_plan.php" class="nav-link">
                 <i class="fas fa-edit nav-icon"></i>
                 <p>Manage Plan</p>
@@ -148,7 +155,7 @@
 
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-          <i class="fas fa-user-clock nav-icon"> </i>            
+            <i class="fas fa-user-clock nav-icon"> </i>
             <p>
               Leave Management
               <i class="fas fa-angle-left right"></i>
@@ -273,7 +280,7 @@
           </ul>
         </li>
 
-        
+
 
         <li class="nav-header">User Options</li>
         <li class="nav-item">
