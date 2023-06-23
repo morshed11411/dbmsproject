@@ -59,12 +59,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="soldier_option.php" class="nav-link">
-                <i class="fas fa-users nav-icon"></i>
-                <p>Soldier Options</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="punishment.php" class="nav-link">
                 <i class="fas fa-gavel nav-icon"></i>
                 <p>Punishment</p>
@@ -143,12 +137,6 @@
                 <p>Manage Plan</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="view_plan.php" class="nav-link">
-                <i class="fas fa-eye nav-icon"></i>
-                <p>View Plan</p>
-              </a>
-            </li>
           </ul>
         </li>
 
@@ -203,7 +191,7 @@
             <li class="nav-item">
               <a href="absent_soldier.php" class="nav-link">
                 <i class="fas fa-archive nav-icon"></i>
-                <p>Absent Soldiers</p>
+                <p>Soldiers Absent Today</p>
               </a>
             </li>
           </ul>
@@ -227,7 +215,7 @@
             <li class="nav-item">
               <a href="archive_medical_info.php" class="nav-link">
                 <i class="fas fa-archive nav-icon"></i>
-                <p>Archive</p>
+                <p>Todays Disposal</p>
               </a>
             </li>
           </ul>
@@ -279,8 +267,6 @@
             </li>
           </ul>
         </li>
-
-
 
         <li class="nav-header">User Options</li>
         <li class="nav-item">

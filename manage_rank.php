@@ -15,6 +15,9 @@
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
+                <button type="button" class="btn btn-warning float-right" onclick="window.print()">
+                        <h5>Print</h5>
+                    </button>
                     <h1>Ranks and Soldiers</h1>
                 </div>
             </div>

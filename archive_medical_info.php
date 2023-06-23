@@ -24,11 +24,12 @@
                                         <thead>
                                             <tr>
                                                 <th>Soldier ID</th>
-                                                <th>Name</th>
                                                 <th>Rank</th>
                                                 <th>Trade</th>
+                                                <th>Name</th>
                                                 <th>Company Name</th>
                                                 <th>Disposal Type</th>
+                                                <th>Reason</th>                                            
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                             </tr>
@@ -37,7 +38,7 @@
                                             <?php
                                             include 'conn.php';
 
-                                            $query = "SELECT SOLDIERID, NAME, RANK, TRADE, COMPANYNAME, DISPOSALTYPE, STARTDATE, ENDDATE
+                                            $query = "SELECT SOLDIERID, NAME, RANK, TRADE, COMPANYNAME, DISPOSALTYPE, STARTDATE, ENDDATE, REASON
                                                       FROM todays_disposal_holder";
                                             $stmt = oci_parse($conn, $query);
                                             oci_execute($stmt);
@@ -45,11 +46,12 @@
                                             while ($row = oci_fetch_assoc($stmt)) {
                                                 echo "<tr>";
                                                 echo "<td>" . $row['SOLDIERID'] . "</td>";
-                                                echo "<td>" . $row['NAME'] . "</td>";
                                                 echo "<td>" . $row['RANK'] . "</td>";
                                                 echo "<td>" . $row['TRADE'] . "</td>";
+                                                echo "<td>" . $row['NAME'] . "</td>";
                                                 echo "<td>" . $row['COMPANYNAME'] . "</td>";
                                                 echo "<td>" . $row['DISPOSALTYPE'] . "</td>";
+                                                echo "<td>" . $row['REASON'] . "</td>";
                                                 echo "<td>" . $row['STARTDATE'] . "</td>";
                                                 echo "<td>" . $row['ENDDATE'] . "</td>";
                                                 echo "</tr>";

@@ -58,6 +58,7 @@ include 'views/auth.php';
 
                                     // Delete Medical Information
                                     if (isset($_GET['delete'])) {
+
                                         $medicalID = $_GET['delete'];
 
                                         $query = "DELETE FROM MedicalInfo WHERE MedicalID = :medical_id";

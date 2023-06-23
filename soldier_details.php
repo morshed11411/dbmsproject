@@ -176,6 +176,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Soldier ID</th>
+                                                <th>Rank</th>
                                                 <th>Name</th>
                                                 <th>Company</th>
                                                 <th>Action</th>
@@ -188,11 +189,11 @@
                                                 $e = oci_error();
                                                 echo "Failed to connect to Oracle: " . $e['message'];
                                             } else {
-                                                $query = "SELECT Soldier.SOLDIERID, Soldier.NAME, Company.CompanyName 
-                                                          FROM Soldier 
+                                                $query = "SELECT Soldier.SOLDIERID,RANKS.RANK, Soldier.NAME, Company.CompanyName 
+                                                          FROM Soldier JOIN RANKS ON Soldier.RANKID=Ranks.RANKID
                                                           JOIN Company ON Soldier.CompanyID = Company.CompanyID 
                                                           JOIN SoldierAppointment ON Soldier.SoldierID = SoldierAppointment.SoldierID 
-                                                          WHERE SoldierAppointment.AppointmentID = :appointment_id";
+                                                          WHERE SoldierAppointment.AppointmentID = :appointment_id  ";
                                                 $stmt = oci_parse($conn, $query);
                                                 oci_bind_by_name($stmt, ':appointment_id', $appointment_id);
                                                 oci_execute($stmt);
@@ -200,6 +201,7 @@
                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                     echo "<tr>";
                                                     echo "<td>" . $row['SOLDIERID'] . "</td>";
+                                                    echo "<td>" . $row['RANK'] . "</td>";
                                                     echo "<td>" . $row['NAME'] . "</td>";
                                                     echo "<td>" . $row['COMPANYNAME'] . "</td>";
                                                     echo "<td>";

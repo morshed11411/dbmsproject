@@ -46,8 +46,16 @@
 
                                         <div class="form-group">
                                             <label for="punishment">Punishment:</label>
-                                            <input type="text" name="punishment" id="punishment" class="form-control"
-                                                required>
+                                            <select name="punishment" id="punishment" class="form-control" required>
+                                                <option value="28 Days RI">28 Days RI</option>
+                                                <option value="14 Days RI">14 Days RI</option>
+                                                <option value="Warning">Warning</option>
+                                                <option value="CL">CL</option>
+                                                <option value="Reprimand">Reprimand</option>
+                                                <option value="Severe Reprimand">Severe Reprimand</option>
+                                                <option value="Good conduct Badge Pay">Good conduct Badge Pay</option>
+                                                <option value="Extra Duty">Extra Duty</option>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">

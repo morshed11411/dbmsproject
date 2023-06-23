@@ -4,6 +4,7 @@ include 'conn.php';
 include 'views/auth.php';
 ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@ include 'views/auth.php';
     <link rel="stylesheet" href="style.css"> <!-- Replace "style.css" with your actual CSS file name and path -->
     <?php include 'views/head.php'; ?>
 </head>
+
 <body>
     <div class="wrapper">
         <?php include 'views/navbar.php'; ?>
@@ -18,6 +20,9 @@ include 'views/auth.php';
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
+                    <button type="button" class="btn btn-warning float-right" onclick="window.print()">
+                        <h5>Print Details</h5>
+                    </button>
                     <h1>Absent Soldiers</h1>
                 </div>
             </div>
@@ -72,4 +77,5 @@ include 'views/auth.php';
         <?php include 'views/footer.php'; ?>
     </div>
 </body>
+
 </html>

@@ -7,6 +7,7 @@ include 'views/auth.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Present Soldiers</title>
     <link rel="stylesheet" href="style.css"> <!-- Replace "style.css" with your actual CSS file name and path -->
     <?php include 'views/head.php'; ?>

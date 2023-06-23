@@ -80,7 +80,9 @@ include 'views/auth.php';
                                         <div class="form-group">
                                             <label for="leave_start_date">Leave Start Date:</label>
                                             <input type="date" name="leave_start_date" id="leave_start_date"
-                                                class="form-control" required>
+                                                class="form-control" required readonly
+                                                value="<?php echo date('Y-m-d'); ?>">
+
                                         </div>
 
                                         <div class="form-group">
@@ -97,8 +99,15 @@ include 'views/auth.php';
                         </div>
                     </div>
 
-
-
+                    <?php
+                    if (isset($_SESSION['success'])) {
+                        echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+                        unset($_SESSION['success']);
+                    } else if (isset($_SESSION['error'])) {
+                        echo "<div class='alert alert-warning'>" . $_SESSION['error'] . "</div>";
+                        unset($_SESSION['error']);
+                    }
+                    ?>
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-bordered">
@@ -133,7 +142,11 @@ include 'views/auth.php';
                                         $duration = round(($endDate - $startDate) / (60 * 60 * 24)); // Duration in days
                                     
                                         echo "<td>" . $duration . " days</td>";
-                                        echo "<td><a href='?delete=" . $row['LEAVEID'] . "' class='btn btn-danger btn-sm'>Delete</a></td>";
+                                        echo "<td>
+                                        <a href='editleave.php?leave_id=" . $row['LEAVEID'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                                        <a href='?delete=" . $row['LEAVEID'] . "' class='btn btn-danger btn-sm'>Delete</a>
+                                        </td>";
+
                                         echo "</tr>";
                                     }
                                     oci_free_statement($stmt);

@@ -1,6 +1,13 @@
 <?php
 include 'conn.php';
 include 'views/auth.php';
+$soldierId = $_SESSION['userid'];
+
+if ($_SESSION['role'] === 'Soldier') {
+    header("Location: profile.php?soldierId=$soldierId");
+    exit();
+}
+
 
 // Count total number of soldiers
 $query = "SELECT COUNT(*) AS total_soldiers FROM Soldier";
@@ -57,7 +64,7 @@ oci_free_statement($stmt);
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div class="text-left">
-                        <h3>Unit Test best Dashboard</h3>
+                        <h3>Unit Dashboard</h3>
                     </div>
                     <div class="text-right">
                         <?php

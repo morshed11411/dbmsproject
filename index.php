@@ -49,6 +49,7 @@
                         // User is authenticated
                         $_SESSION['username'] = $row['NAME']; // Ensure the column name is correct
                         $_SESSION['userid'] = $row['SOLDIERID'];
+                        $_SESSION['role'] = $row['ACCESSROLE'];
                         // You can store other relevant data as needed
                   
                         // Redirect to the dashboard or desired page

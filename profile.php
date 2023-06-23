@@ -51,7 +51,7 @@ oci_close($conn);
                                             <li class="nav-item">
                                                 <a class="nav-link" id="trainingInfoTab" data-toggle="pill"
                                                     href="#trainingInfo" role="tab" aria-controls="trainingInfo"
-                                                    aria-selected="false">Training Info</a>
+                                                    aria-selected="false">Punishment History</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="medicalInfoTab" data-toggle="pill"
@@ -180,7 +180,47 @@ oci_close($conn);
                                             <!-- Team history Tab -->
                                             <div class="tab-pane fade" id="trainingInfo" role="tabpanel"
                                                 aria-labelledby="trainingInfoTab">
-                                                <h5>Assigned Teams</h5>
+
+
+                                                
+                                                                <h3>Punishment History:</h3>
+                                                                <table class="table table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Soldier ID</th>
+                                                                            <th>Name</th>
+                                                                            <th>Punishment</th>
+                                                                            <th>Reason</th>
+                                                                            <th>Punishment Date</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+                                                                        include 'conn.php';
+
+                                                                        $query = "SELECT SOLDIER.SOLDIERID, SOLDIER.NAME, PUNISHMENT.PUNISHMENT, PUNISHMENT.REASON, PUNISHMENT.PUNISHMENTDATE
+                                                                        FROM SOLDIER JOIN PUNISHMENT ON SOLDIER.SOLDIERID = PUNISHMENT.SOLDIERID  WHERE SOLDIER.SOLDIERID =:SOLDIERID";
+                                                                        oci_bind_by_name($stmt, ':soldierId', $soldierId);
+
+                                                                        $stmt = oci_parse($conn, $query);
+                                                                        oci_execute($stmt);
+
+                                                                        while ($row = oci_fetch_assoc($stmt)) {
+                                                                            echo "<tr>";
+                                                                            echo "<td>" . $row['SOLDIERID'] . "</td>";
+                                                                            echo "<td>" . $row['NAME'] . "</td>";
+                                                                            echo "<td>" . $row['PUNISHMENT'] . "</td>";
+                                                                            echo "<td>" . $row['REASON'] . "</td>";
+                                                                            echo "<td>" . $row['PUNISHMENTDATE'] . "</td>";
+                                                                            echo "</tr>";
+                                                                        }
+
+                                                                        oci_free_statement($stmt);
+                                                                        oci_close($conn);
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                        
 
 
 
@@ -191,7 +231,7 @@ oci_close($conn);
                                             <!-- Training Info Tab -->
                                             <div class="tab-pane fade" id="trainingInfo" role="tabpanel"
                                                 aria-labelledby="trainingInfoTab">
-                                                <h5>Training Info</h5>
+                                                <h5>Punishment History</h5>
                                                 <!-- Add training info content here -->
                                             </div>
 
@@ -205,7 +245,7 @@ oci_close($conn);
                                             <!-- Career Plan Info Tab -->
                                             <div class="tab-pane fade" id="careerPlanInfo" role="tabpanel"
                                                 aria-labelledby="careerPlanInfoTab">
-                                               
+
 
                                                 <div class="card-body">
                                                     <h5 class="card-title">Career Plan Info</h5>
@@ -222,17 +262,17 @@ oci_close($conn);
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                 include 'conn.php'; 
+                                                                include 'conn.php';
                                                                 // Replace 'SOLDIERID' with the actual column name for soldier ID in the table
-                                                               
+                                                            
 
                                                                 // Fetch career plan info for the specified soldier
                                                                 $query = "SELECT SOLDIERID, FIRSTCYCLE, SECONDCYCLE, THIRDCYCLE, FOURTHCYCLE
                                                                 FROM CarrierPlan
                                                                 WHERE SoldierID = :soldierId";
-                                                $stmt = oci_parse($conn, $query);
-                                                oci_bind_by_name($stmt, ':soldierId', $soldierId);
-                                                oci_execute($stmt);
+                                                                $stmt = oci_parse($conn, $query);
+                                                                oci_bind_by_name($stmt, ':soldierId', $soldierId);
+                                                                oci_execute($stmt);
 
                                                                 while ($row = oci_fetch_assoc($stmt)) {
                                                                     $soldierID = $row['SOLDIERID'];
@@ -269,7 +309,7 @@ oci_close($conn);
                                                 include 'conn.php'; // Include the database connection file
                                             
                                                 // Write the SQL query to fetch the leave history for the specified soldier
-                                                $query = "SELECT lm.LeaveStartDate, lm.LeaveType, (lm.LeaveEndDate - lm.LeaveStartDate + 1) AS LeaveDuration
+                                                $query = "SELECT lm.LeaveStartDate,lm.LeaveendDate, lm.LeaveType, (lm.LeaveEndDate - lm.LeaveStartDate + 1) AS LeaveDuration
                                                 FROM LeaveModule lm
                                                 WHERE lm.SoldierID = :soldierId";
                                                 $stmt = oci_parse($conn, $query);
@@ -284,6 +324,7 @@ oci_close($conn);
                                                             <thead>
                                                                 <tr>
                                                                     <th>Leave Date</th>
+                                                                    <th>Joining Date</th>
                                                                     <th>Leave Type</th>
                                                                     <th>Duration</th>
                                                                 </tr>
@@ -293,11 +334,13 @@ oci_close($conn);
                                                     // Iterate over the result set and display each leave history record
                                                     do {
                                                         $leaveDate = oci_result($stmt, 'LEAVESTARTDATE');
+                                                        $endDate = oci_result($stmt, 'LEAVEENDDATE');
                                                         $leaveType = oci_result($stmt, 'LEAVETYPE');
                                                         $duration = oci_result($stmt, 'LEAVEDURATION');
 
                                                         echo "<tr>
                                                                 <td>$leaveDate</td>
+                                                                <td>$endDate</td>
                                                                 <td>$leaveType</td>
                                                                 <td>$duration</td>
                                                             </tr>";

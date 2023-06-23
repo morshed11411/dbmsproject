@@ -18,7 +18,9 @@ if (!$team) {
 }
 
 // Get All Soldiers
-$query = "SELECT * FROM Soldier";
+$query = "SELECT s.SOLDIERID, RANKS.RANK||' '||s.NAME AS NAME, c.CompanyName
+FROM Soldier s NATURAL JOIN RANKS
+JOIN Company c ON s.CompanyID = c.CompanyID";
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 
@@ -28,12 +30,12 @@ while ($soldier = oci_fetch_assoc($stmt)) {
 }
 
 // Get Soldiers Assigned to the Team
-$query = "SELECT s.*, c.CompanyName, t.TeamName
-          FROM Soldier s
-          JOIN Company c ON s.CompanyID = c.CompanyID
-          LEFT JOIN SoldierTeam st ON s.SoldierID = st.SoldierID
-          LEFT JOIN Team t ON st.TeamID = t.TeamID
-          WHERE st.TeamID = :team_id";
+$query = "SELECT s.SOLDIERID, RANKS.RANK||' '||s.NAME AS NAME, c.CompanyName, t.TeamName
+FROM Soldier s NATURAL JOIN RANKS
+JOIN Company c ON s.CompanyID = c.CompanyID
+LEFT JOIN SoldierTeam st ON s.SoldierID = st.SoldierID
+LEFT JOIN Team t ON st.TeamID = t.TeamID
+WHERE st.TeamID = :team_id";
 
 $stmt = oci_parse($conn, $query);
 oci_bind_by_name($stmt, ':team_id', $team_id);
@@ -100,39 +102,42 @@ if (isset($_POST['submit'])) {
                                 <div class="card-body">
                                     <h5 class="card-title">Available Soldiers</h5>
                                     <form method="post" action="">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Soldier ID</th>
-                                                    <th>Name</th>
-                                                    <th>Company</th>
-                                                    <th>Select</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($allSoldiers as $soldier): ?>
+                                        <div class="table-responsive">
+                                            <table id="soldierTable" class="table table-bordered">
+                                                <thead class="thead-light sticky-top">
                                                     <tr>
-                                                        <td>
-                                                            <?php echo $soldier['SOLDIERID']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $soldier['NAME']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $soldier['COMPANYNAME']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="soldiers[]"
-                                                                    value="<?php echo $soldier['SOLDIERID']; ?>" <?php if (in_array($soldier['SOLDIERID'], array_column($assignedSoldiers, 'SOLDIERID')))
-                                                                           echo 'checked'; ?>>
-                                                            </div>
-                                                        </td>
+                                                        <th>Soldier ID</th>
+                                                        <th>Name</th>
+                                                        <th>Company</th>
+                                                        <th>Select</th>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($allSoldiers as $soldier): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $soldier['SOLDIERID']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $soldier['NAME']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $soldier['COMPANYNAME']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="soldiers[]"
+                                                                        value="<?php echo $soldier['SOLDIERID']; ?>" <?php if (in_array($soldier['SOLDIERID'], array_column($assignedSoldiers, 'SOLDIERID')))
+                                                                               echo 'checked'; ?>>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
 
                                         <br>
                                         <input type="submit" name="submit" value="Update Team" class="btn btn-primary">
@@ -147,30 +152,32 @@ if (isset($_POST['submit'])) {
                                 <div class="card-body">
                                     <h5 class="card-title">Assigned Soldiers</h5>
                                     <?php if (count($assignedSoldiers) > 0): ?>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Soldier ID</th>
-                                                    <th>Name</th>
-                                                    <th>Team Name</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($assignedSoldiers as $soldier): ?>
+                                        <div class="table-responsive">
+                                            <table id="soldierTable" class="table table-bordered">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <?php echo $soldier['SOLDIERID']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $soldier['NAME']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $soldier['TEAMNAME']; ?>
-                                                        </td>
+                                                        <th>Soldier ID</th>
+                                                        <th>Name</th>
+                                                        <th>Team Name</th>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($assignedSoldiers as $soldier): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $soldier['SOLDIERID']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $soldier['NAME']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $soldier['TEAMNAME']; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     <?php else: ?>
                                         <br>
                                         <p>No soldiers assigned to this team.</p>
@@ -185,5 +192,21 @@ if (isset($_POST['submit'])) {
         <?php include 'views/footer.php'; ?>
     </div>
 </body>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#soldierTable').DataTable();
+    });
+</script>
+
 
 </html>
