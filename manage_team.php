@@ -164,7 +164,7 @@ include 'conn.php';
                                                 if ($row['ENDDATE'] === null) {
                                                     echo "<button type='submit' name='end_team' class='btn btn-danger'>End Team</button> ";
                                                 } else {
-                                                    echo "Team Ended ";
+                                                    echo "<button type='submit' name='end_team' class='btn btn-secondary'>Team Ended</button> ";
                                                 }
                                                 echo "<button type='submit' name='delete_team' class='btn btn-danger'>Delete</button>";
                                                 echo "</form>";

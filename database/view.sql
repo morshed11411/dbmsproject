@@ -26,7 +26,7 @@ WHERE l.LeaveStartDate <= TRUNC(SYSDATE)
 AND l.LeaveEndDate >= TRUNC(SYSDATE);
 
 
-
+--Absent Soldier View
 CREATE OR REPLACE VIEW AbsentSoldiersView AS
 SELECT s.SoldierID, s.Name, r.Rank, c.CompanyName, 'ERE' AS Reason 
 FROM Soldier s
@@ -60,12 +60,12 @@ JOIN Company c ON s.CompanyID = c.CompanyID;
 
 
 
-
-CREATE OR REPLACE VIEW parade_state_view AS
+--Parade State View
+CREATE OR REPLACE VIEW parade_state_view AS 
 SELECT
   c.COMPANYNAME,
   a.MANPOWER AS "Auth",
-  COUNT(s.SOLDIERID) AS "Granted",
+  COUNT(s.SOLDIERID) AS "Held",
   COUNT(l.SOLDIERID) AS "Leave",
   COUNT(CASE WHEN s.ISPRESENT = 0 THEN 1 END) AS "Absent",
   COUNT(s.SOLDIERID) - COUNT(CASE WHEN s.ISPRESENT = 0 THEN 1 END) AS "Present",

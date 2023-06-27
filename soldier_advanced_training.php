@@ -23,19 +23,33 @@
                                     <form method="post" action="">
                                         <div class="form-group">
                                             <label for="cadreid">Cadre ID:</label>
-                                            <input type="text" name="cadreid" id="cadreid" class="form-control" required>
-                                        </div>
+                                            <select name="cadreid" id="cadreid" class="form-control" required>
+                                                <?php
+                                                $conn = oci_connect('UMS', '12345', 'localhost/XE');
+                                                if (!$conn) {
+                                                    $e = oci_error();
+                                                    echo "Failed to connect to Oracle: " . $e['message'];
+                                                } else {
+                                                    $query = "SELECT CADREID, NAME FROM ADVANCETRAINING";
+                                                    $stmt = oci_parse($conn, $query);
+                                                    oci_execute($stmt);
 
-                                        <div class="form-group">
-                                            <label for="cadrename">Cadre Name:</label>
-                                            <input type="text" name="cadrename" id="cadrename" class="form-control" required>
+                                                    while ($row = oci_fetch_assoc($stmt)) {
+                                                        echo "<option value='" . $row['CADREID'] . "'>" . $row['CADREID'] . " - " . $row['NAME'] . "</option>";
+                                                    }
+
+                                                    oci_free_statement($stmt);
+                                                    oci_close($conn);
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="soldierid">Soldier ID:</label>
                                             <input type="text" name="soldierid" id="soldierid" class="form-control" required>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label for="remark">Remark:</label>
                                             <select name="remark" id="remark" class="form-control" required>
@@ -50,7 +64,6 @@
                                     <?php
                                     if (isset($_POST['submit'])) {
                                         $cadreID = $_POST['cadreid'];
-                                        $cadreName = $_POST['cadrename'];
                                         $soldierID = $_POST['soldierid'];
                                         $remark = $_POST['remark'];
 
@@ -59,11 +72,10 @@
                                             $e = oci_error();
                                             echo "Failed to connect to Oracle: " . $e['message'];
                                         } else {
-                                            $query = "INSERT INTO SOLDIERADVANCEDTRAINING (CADREID, CADRENAME, SOLDIERID, REMARK) VALUES (:cadreID, :cadreName, :soldierID, :remark)";
+                                            $query = "INSERT INTO SOLDIERADVANCEDTRAINING (CADREID, SOLDIERID, REMARK) VALUES (:cadreID, :soldierID, :remark)";
                                             $stmt = oci_parse($conn, $query);
 
                                             oci_bind_by_name($stmt, ':cadreID', $cadreID);
-                                            oci_bind_by_name($stmt, ':cadreName', $cadreName);
                                             oci_bind_by_name($stmt, ':soldierID', $soldierID);
                                             oci_bind_by_name($stmt, ':remark', $remark);
 
@@ -108,7 +120,10 @@
                                                 $e = oci_error();
                                                 echo "Failed to connect to Oracle: " . $e['message'];
                                             } else {
-                                                $query = "SELECT * FROM SOLDIERADVANCEDTRAINING ORDER BY CADREID, SOLDIERID";
+                                                $query = "SELECT s.CADREID, a.NAME AS CADRENAME, s.SOLDIERID, s.REMARK 
+                                                          FROM SOLDIERADVANCEDTRAINING s
+                                                          INNER JOIN ADVANCETRAINING a ON s.CADREID = a.CADREID
+                                                          ORDER BY s.CADREID, s.SOLDIERID";
                                                 $stmt = oci_parse($conn, $query);
                                                 oci_execute($stmt);
 

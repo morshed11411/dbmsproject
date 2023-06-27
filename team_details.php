@@ -102,8 +102,8 @@ if (isset($_POST['submit'])) {
                                 <div class="card-body">
                                     <h5 class="card-title">Available Soldiers</h5>
                                     <form method="post" action="">
-                                        <div class="table-responsive">
-                                            <table id="soldierTable" class="table table-bordered">
+                                    <div class="card-body table-responsive p-0" style="height: 600px;">
+                                    <table class="table table-head-fixed text-nowrap">
                                                 <thead class="thead-light sticky-top">
                                                     <tr>
                                                         <th>Soldier ID</th>

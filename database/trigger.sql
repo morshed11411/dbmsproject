@@ -81,3 +81,21 @@ END;
 
 
 /
+
+
+-- Create a trigger to set the password as soldier ID for soldiers with the access role 'Soldier'
+CREATE OR REPLACE TRIGGER set_soldier_password
+BEFORE INSERT ON Soldier
+FOR EACH ROW
+BEGIN
+  IF :new.AccessRole = 'Soldier' THEN
+    :new.PASSWORD := :new.SOLDIERID;
+  END IF;
+END;
+/
+
+
+UPDATE Soldier
+SET PASSWORD = SOLDIERID
+WHERE AccessRole = 'Soldier';
+

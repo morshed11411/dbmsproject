@@ -26,17 +26,18 @@ include 'views/auth.php';
                                     
                                     // Add Medical Information
                                     if (isset($_POST['add'])) {
+                                        $medicalID = $_POST['medical_id'];
                                         $soldierID = $_POST['soldier_id'];
                                         $disposalType = $_POST['disposal_type'];
                                         $startDate = $_POST['start_date'];
                                         $endDate = $_POST['end_date'];
                                         $reason = $_POST['reason'];
 
-                                        // Generate the Medical ID automatically as an integer
                                         $query = "INSERT INTO MedicalInfo (SoldierID, DisposalType, StartDate, EndDate, Reason)
-              VALUES (:soldier_id, :disposal_type, TO_DATE(:start_date, 'YYYY-MM-DD'), TO_DATE(:end_date, 'YYYY-MM-DD'), :reason)";
+                                        VALUES (:soldier_id, :disposal_type, TO_DATE(:start_date, 'YYYY-MM-DD'), TO_DATE(:end_date, 'YYYY-MM-DD'), :reason)";
                                         $stmt = oci_parse($conn, $query);
 
+                                        oci_bind_by_name($stmt, ':medical_id', $medicalID);
                                         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
                                         oci_bind_by_name($stmt, ':disposal_type', $disposalType);
                                         oci_bind_by_name($stmt, ':start_date', $startDate);
@@ -45,8 +46,7 @@ include 'views/auth.php';
 
                                         $result = oci_execute($stmt);
                                         if ($result) {
-                                            $medicalID = oci_fetch_row(oci_parse($conn, 'SELECT MedicalIDSeq.CURRVAL FROM dual'))[0];
-                                            echo "Medical information added successfully. ";
+                                            echo "Medical information added successfully.";
                                         } else {
                                             $e = oci_error($stmt);
                                             echo "Failed to add medical information: " . $e['message'];
@@ -55,10 +55,8 @@ include 'views/auth.php';
                                         oci_free_statement($stmt);
                                     }
 
-
                                     // Delete Medical Information
                                     if (isset($_GET['delete'])) {
-
                                         $medicalID = $_GET['delete'];
 
                                         $query = "DELETE FROM MedicalInfo WHERE MedicalID = :medical_id";
@@ -113,7 +111,10 @@ include 'views/auth.php';
 
                                     <!-- Add/Update Medical Information Form -->
                                     <form method="post" action="">
-
+                                        <div class="form-group">
+                                            <label for="medical_id">Medical ID:</label>
+                                            <input type="text" name="medical_id" id="medical_id" class="form-control">
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="soldier_id">Soldier ID:</label>
@@ -131,7 +132,6 @@ include 'views/auth.php';
                                                 <option value="CMH">CMH</option>
                                             </select>
                                         </div>
-
 
                                         <div class="form-group">
                                             <label for="start_date">Start Date:</label>
