@@ -1,0 +1,29 @@
+Updates plan on version2
+1> Change the database to oracle 19c
+2> delet unnecc plugins and make it light 
+3> use mvc structure (try)
+4> database work
+    a> create all id auto genarate
+    b> use sepearte table for access control and give access to the appoinment holders
+    c> create a table to save the parade state with the date and time 
+    d> create a view for offr, jco, others
+    e> make sepearte add soldier and add offier 
+    f> 
+5> Add passport picture, nid, combo id and other image files for the soldier.
+
+Front end
+
+1> use modals to update and delete 
+2> manage delete, edit request from single page
+3> 
+
+Operating proceedure of application
+
+-- Appts will get access
+
+1> CO, 2IC, Adjt, QM gets the same privilalge
+2> Coy Comd gets only the coys manpower access
+3> BSM, Daily will get access only to add soldier. 
+4> CSM can see only coys soldier information. request leave for any soldier of the company
+        
+
