@@ -10,9 +10,10 @@
   <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../css/buttons.bootstrap4.min.css">
+  <link rel="shortcut icon" href="../assets/favicon.png" />
   <style>
-    .nav-treeview .sublink {
-      padding-left: 20px;
+    .sublink {
+      padding-left: 40px;
     }
   </style>
 </head>

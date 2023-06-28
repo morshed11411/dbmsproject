@@ -53,19 +53,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="add_soldier.php" class="nav-link">
+                <a href="add_soldier.php" class="nav-link sublink">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Soldier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_soldier.php" class="nav-link">
+                <a href="manage_soldier.php" class="nav-link sublink">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Manage Soldier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="punishment.php" class="nav-link">
+                <a href="punishment.php" class="nav-link sublink">
                   <i class="fas fa-gavel nav-icon"></i>
                   <p>Punishment</p>
                 </a>
@@ -83,13 +83,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="add_company.php" class="nav-link">
+                <a href="add_company.php" class="nav-link sublink">
                   <i class="fas fa-plus-circle nav-icon"></i>
                   <p>Add Company</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_company.php" class="nav-link">
+                <a href="manage_company.php" class="nav-link sublink">
                   <i class="fas fa-cogs nav-icon"></i>
                   <p>Manage Company</p>
                 </a>
@@ -107,19 +107,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="basic_training.php" class="nav-link">
+                <a href="basic_training.php" class="nav-link sublink">
                   <i class="fas fa-chalkboard nav-icon"></i>
                   <p>Basic Training</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="advanced_training.php" class="nav-link">
+                <a href="advanced_training.php" class="nav-link sublink">
                   <i class="fas fa-book-reader nav-icon"></i>
                   <p>Manage Training</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="soldier_advanced_training.php" class="nav-link">
+                <a href="soldier_advanced_training.php" class="nav-link sublink">
                   <i class="fas fa-book-reader nav-icon"></i>
                   <p>Advanced Training</p>
                 </a>
@@ -138,7 +138,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="manage_plan.php" class="nav-link">
+                <a href="manage_plan.php" class="nav-link sublink">
                   <i class="fas fa-edit nav-icon"></i>
                   <p>Manage Plan</p>
                 </a>
@@ -157,20 +157,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="approve_leave.php" class="nav-link">
+                <a href="approve_leave.php" class="nav-link sublink">
                   <i class="fas fa-check-circle nav-icon"></i>
                   <p>Approve Leave</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="leave_percentage.php" class="nav-link">
+                <a href="leave_percentage.php" class="nav-link sublink">
                   <i class="fas fa-percentage nav-icon"></i>
                   <p>Leave Percentage</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="leave_details.php" class="nav-link">
+                <a href="leave_details.php" class="nav-link sublink">
                   <i class="fas fa-calendar-alt nav-icon"></i>
                   <p>Todays Leave</p>
                 </a>
@@ -189,13 +189,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="generate_parade_state.php" class="nav-link">
+                <a href="generate_parade_state.php" class="nav-link sublink">
                   <i class="fas fa-file-alt nav-icon"></i>
                   <p>Generate Parade State</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="absent_soldier.php" class="nav-link">
+                <a href="absent_soldier.php" class="nav-link sublink">
                   <i class="fas fa-archive nav-icon"></i>
                   <p>Soldiers Absent Today</p>
                 </a>
@@ -213,13 +213,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="medical_info.php" class="nav-link">
+                <a href="medical_info.php" class="nav-link sublink">
                   <i class="fas fa-notes-medical nav-icon"></i>
                   <p>Add Medical Info</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="archive_medical_info.php" class="nav-link">
+                <a href="archive_medical_info.php" class="nav-link sublink">
                   <i class="fas fa-archive nav-icon"></i>
                   <p>Todays Disposal</p>
                 </a>
@@ -227,7 +227,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="manage_team.php" class="nav-link">
+            <a href="manage_team.php" class="nav-link sublink">
               <i class="fas fa-users nav-icon"></i>
               <p>Manage Team</p>
             </a>
@@ -242,31 +242,31 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="manage_trade.php" class="nav-link">
+                <a href="manage_trade.php" class="nav-link sublink">
                   <i class="fas fa-tools nav-icon"></i>
                   <p>Manage Trade</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_rank.php" class="nav-link">
+                <a href="manage_rank.php" class="nav-link sublink">
                   <i class="fas fa-user-tag nav-icon"></i>
                   <p>Manage Rank</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_appointment.php" class="nav-link">
+                <a href="manage_appointment.php" class="nav-link sublink">
                   <i class="fas fa-briefcase nav-icon"></i>
                   <p>Manage Appointment</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_authorization.php" class="nav-link">
+                <a href="manage_authorization.php" class="nav-link sublink">
                   <i class="fas fa-user-lock nav-icon"></i>
                   <p>Manage Authorization</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_access.php" class="nav-link">
+                <a href="manage_access.php" class="nav-link sublink">
                   <i class="fas fa-key nav-icon"></i>
                   <p>Manage Access</p>
                 </a>
