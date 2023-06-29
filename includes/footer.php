@@ -1,9 +1,10 @@
 </div>
-    <!-- Main Footer -->
-    <footer class="main-footer">
-      <strong>Unit Management System &copy; 2023</strong>
-    </footer>
-
+</div>
+</div>
+<footer class="main-footer">
+  <strong>Unit Management System &copy; 2023</strong>
+</footer>
+</div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
@@ -21,7 +22,6 @@
 <script src="../js/adminlte.min.js"></script>
 <script src="../js/chart.js"></script>
 
-</div>
 </body>
 
 </html>

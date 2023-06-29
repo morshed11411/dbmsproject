@@ -36,6 +36,10 @@ $userid = $_SESSION['userid'];
 
 
 <body>
+<?php include 'navbar.php'; ?>
   <div class="wrapper">
-    <?php include 'navbar.php'; ?>
+    <br>
+    <!-- Content Wrapper -->
     <div class="content-wrapper">
+      <div class="content">
+        <div class="container-fluid">

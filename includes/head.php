@@ -13,7 +13,28 @@
   <link rel="shortcut icon" href="../assets/favicon.png" />
   <style>
     .sublink {
-      padding-left: 40px;
+      padding-left: 25px;
+    }
+
+    .sidebar {
+      overflow-y: auto;
+      max-height: calc(100vh - 120px);
+      /* Adjust the max-height to fit your needs */
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-image {
+      width: 40px;
+      /* Adjust the width as per your desired size */
+      height: 40px;
+      /* Adjust the height as per your desired size */
+      object-fit: contain;
+      margin-right: 50px;
+      /* Adjust the margin as needed */
     }
   </style>
 </head>

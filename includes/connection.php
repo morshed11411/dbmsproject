@@ -1,6 +1,6 @@
 <?php
 //connecting to database 
-$db_user = 'ums';
+$db_user = 'umsv2';
 $db_password = '12345';
 $db_host = 'localhost/XEPDB1';
 

@@ -1,14 +1,20 @@
 Updates plan on version2
-1> Change the database to oracle 19c
-2> delet unnecc plugins and make it light 
-3> use mvc structure (try)
+1> Change the database to oracle 19c -done
+2> delet unnecc plugins and make it light -done
+3> use mvc structure (try) -done 
 4> database work
-    a> create all id auto genarate
+    a> create all id auto genarate -done
     b> use sepearte table for access control and give access to the appoinment holders
     c> create a table to save the parade state with the date and time 
     d> create a view for offr, jco, others
     e> make sepearte add soldier and add offier 
     f> 
+
+5> Create ERE and Temporary Command List 
+    soldiers option will be modified by a modal
+6> create a parade state table 
+7> try to create universal soldier view table 
+
 5> Add passport picture, nid, combo id and other image files for the soldier.
 
 Front end
@@ -26,4 +32,15 @@ Operating proceedure of application
 3> BSM, Daily will get access only to add soldier. 
 4> CSM can see only coys soldier information. request leave for any soldier of the company
         
+
+pages
+1> Soldier -> Add soldier -> edit-> punishment -> trg -> lve
+2> Company -> 
+3> Trg-> 
+4> Leave-> Joining option 
+5> ParadeState -> Clicking on each field it will take to the details page , Save a paradestate
+6> Career Plan->
+7> Disposal->
+8> Team->
+9> 
 
