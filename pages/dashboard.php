@@ -23,7 +23,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Total Soldiers</span>
                         <span class="info-box-number">
-                            <?php //echo $totalSoldiers; ?>
+                            <?php echo $totalSoldiers; ?>
                         </span>
                     </div>
                 </div>

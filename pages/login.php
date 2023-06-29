@@ -1,7 +1,7 @@
 <?php
+
 include '../includes/head.php';
 include '../includes/connection.php';
-session_start();
 if (isset($_SESSION['username'])) {
    header('Location: dashboard.php');
    exit();
@@ -9,7 +9,7 @@ if (isset($_SESSION['username'])) {
 if (isset($_POST['login'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
-   $query = "SELECT s.NAME, l.ROLE
+   $query = "SELECT s.SOLDIERID, s.NAME, l.ROLE
              FROM LOGIN l
              JOIN SOLDIER s ON l.SOLDIERID = s.SOLDIERID
              WHERE l.SOLDIERID = :username AND l.PASSWORD = :password";
@@ -22,6 +22,7 @@ if (isset($_POST['login'])) {
       if ($row = oci_fetch_assoc($stmt)) {
          // User is authenticated
          $_SESSION['username'] = $row['NAME']; // Store NAME from SOLDIER table in the session
+         $_SESSION['userid'] = $row['SOLDIERID'];
          $_SESSION['role'] = $row['ROLE'];
          $_SESSION['success'] = 'Logged in successfully.';
          $_SESSION['error'] = '';
@@ -53,9 +54,11 @@ if (isset($_POST['login'])) {
          </div>
          <div class="card-body">
             <?php
-            if (isset($_SESSION['success'])) {
-               echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+            if (isset($_SESSION['logout'])) {
+               echo '<div class="alert alert-success">' . $_SESSION['logout'] . '</div>';
                unset($_SESSION['success']);
+               session_unset();
+               session_destroy();
             }
             if (isset($_SESSION['error'])) {
                echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';

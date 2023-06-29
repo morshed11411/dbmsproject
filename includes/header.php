@@ -1,9 +1,9 @@
 <?php
-session_start();
+include 'connection.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-  header("Location: login.php");
+  header("Location: ../index.php");
   exit();
 }
 
@@ -14,7 +14,7 @@ if (isset($_POST['logout'])) {
   session_destroy();
   session_start();
 
-  $_SESSION['success'] = 'Logged out successfully.';
+  $_SESSION['logout'] = 'Logged out successfully.';
 
   // Redirect to the login page
   header("Location: ../index.php");
@@ -25,20 +25,15 @@ if (isset($_POST['logout'])) {
 $username = $_SESSION['username'];
 $userid = $_SESSION['userid'];
 
-  include 'connection.php'
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <?php include 'head.php'; ?>
-
-
 <body>
 <?php include 'navbar.php'; ?>
   <div class="wrapper">
-    <br>
+    <br>    <br>
+
     <!-- Content Wrapper -->
     <div class="content-wrapper">
       <div class="content">
