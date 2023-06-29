@@ -3,57 +3,57 @@ session_start();
 
 include '../includes/connection.php';
 
-if (isset($_POST['add_ere_submit'])) {
-    $ere_name = $_POST['ere_name'];
+if (isset($_POST['add_tempcomd_submit'])) {
+    $tempcomd_name = $_POST['tempcomd_name'];
 
-    $query = "INSERT INTO ERE (ERENAME) VALUES (:ere_name)";
+    $query = "INSERT INTO TEMPORARYCOMMAND (COMDNAME) VALUES (:tempcomd_name)";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_name', $ere_name);
+    oci_bind_by_name($stmt, ':tempcomd_name', $tempcomd_name);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE added successfully.";
+        $_SESSION['success'] = "Temporary Command added successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to add ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to add Temporary Command: " . $error['message'];
     }
 
     oci_free_statement($stmt);
 }
 
-if (isset($_POST['edit_ere_submit'])) {
-    $ere_id = $_POST['edit_ere_id'];
-    $ere_name = $_POST['edit_ere_name'];
+if (isset($_POST['edit_tempcomd_submit'])) {
+    $tempcomd_id = $_POST['edit_tempcomd_id'];
+    $tempcomd_name = $_POST['edit_tempcomd_name'];
 
-    $query = "UPDATE ERE SET ERENAME = :ere_name WHERE EREID = :ere_id";
+    $query = "UPDATE TEMPORARYCOMMAND SET COMDNAME = :tempcomd_name WHERE COMDID = :tempcomd_id";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_name', $ere_name);
-    oci_bind_by_name($stmt, ':ere_id', $ere_id);
+    oci_bind_by_name($stmt, ':tempcomd_name', $tempcomd_name);
+    oci_bind_by_name($stmt, ':tempcomd_id', $tempcomd_id);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE updated successfully.";
+        $_SESSION['success'] = "Temporary Command updated successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to update ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to update Temporary Command: " . $error['message'];
     }
 
     oci_free_statement($stmt);
 }
 
-if (isset($_POST['delete_ere_submit'])) {
-    $ere_id = $_POST['delete_ere_id'];
+if (isset($_POST['delete_tempcomd_submit'])) {
+    $tempcomd_id = $_POST['delete_tempcomd_id'];
 
-    $query = "DELETE FROM ERE WHERE EREID = :ere_id";
+    $query = "DELETE FROM TEMPORARYCOMMAND WHERE COMDID = :tempcomd_id";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_id', $ere_id);
+    oci_bind_by_name($stmt, ':tempcomd_id', $tempcomd_id);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE deleted successfully.";
+        $_SESSION['success'] = "Temporary Command deleted successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to delete ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to delete Temporary Command: " . $error['message'];
     }
 
     oci_free_statement($stmt);
@@ -67,10 +67,10 @@ include '../includes/header.php';
 <div class="card-body">
     <div class="d-flex justify-content-between">
         <div class="text-left">
-            <h3>ERE List Management</h3>
+            <h3>Temporary Command Management</h3>
         </div>
         <div class="text-right">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addEREModal">Add ERE</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addTempcomdModal">Add Temporary Command</button>
         </div>
     </div>
 </div>
@@ -95,70 +95,70 @@ if (isset($_SESSION['error'])) {
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ERE ID</th>
-                                    <th>ERE Name</th>
+                                    <th>Temporary Command ID</th>
+                                    <th>Temporary Command Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $query = "SELECT * FROM ERE ORDER BY EREID";
+                                $query = "SELECT * FROM TEMPORARYCOMMAND ORDER BY COMDID";
                                 $stmt = oci_parse($conn, $query);
                                 oci_execute($stmt);
 
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['EREID'] . "</td>";
-                                    echo "<td>" . $row['ERENAME'] . "</td>";
+                                    echo "<td>" . $row['COMDID'] . "</td>";
+                                    echo "<td>" . $row['COMDNAME'] . "</td>";
                                     echo "<td>";
-                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEREModal-' . $row['EREID'] . '">
+                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTempcomdModal-' . $row['COMDID'] . '">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>';
-                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEREModal-' . $row['EREID'] . '">
+                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteTempcomdModal-' . $row['COMDID'] . '">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>';
                                     echo "</td>";
                                     echo "</tr>";
 
-                                    // Edit ERE Modal
-                                    echo '<div class="modal fade" id="editEREModal-' . $row['EREID'] . '" tabindex="-1" role="dialog" aria-labelledby="editEREModalLabel" aria-hidden="true">
+                                    // Edit Temporary Command Modal
+                                    echo '<div class="modal fade" id="editTempcomdModal-' . $row['COMDID'] . '" tabindex="-1" role="dialog" aria-labelledby="editTempcomdModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editEREModalLabel">Edit ERE</h5>
+                                                    <h5 class="modal-title" id="editTempcomdModalLabel">Edit Temporary Command</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="edit_ere_id" value="' . $row['EREID'] . '">
+                                                        <input type="hidden" name="edit_tempcomd_id" value="' . $row['COMDID'] . '">
                                                         <div class="form-group">
-                                                            <label for="edit_ere_name">ERE Name:</label>
-                                                            <input type="text" name="edit_ere_name" id="edit_ere_name" class="form-control" value="' . $row['ERENAME'] . '" required>
+                                                            <label for="edit_tempcomd_name">Temporary Command Name:</label>
+                                                            <input type="text" name="edit_tempcomd_name" id="edit_tempcomd_name" class="form-control" value="' . $row['COMDNAME'] . '" required>
                                                         </div>
-                                                        <button type="submit" name="edit_ere_submit" class="btn btn-primary">Save Changes</button>
+                                                        <button type="submit" name="edit_tempcomd_submit" class="btn btn-primary">Save Changes</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
 
-                                    // Delete ERE Modal
-                                    echo '<div class="modal fade" id="deleteEREModal-' . $row['EREID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteEREModalLabel" aria-hidden="true">
+                                    // Delete Temporary Command Modal
+                                    echo '<div class="modal fade" id="deleteTempcomdModal-' . $row['COMDID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteTempcomdModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteEREModalLabel">Delete ERE</h5>
+                                                    <h5 class="modal-title" id="deleteTempcomdModalLabel">Delete Temporary Command</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Are you sure you want to delete this ERE?</p>
+                                                    <p>Are you sure you want to delete this Temporary Command?</p>
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="delete_ere_id" value="' . $row['EREID'] . '">
-                                                        <button type="submit" name="delete_ere_submit" class="btn btn-danger">Delete</button>
+                                                        <input type="hidden" name="delete_tempcomd_id" value="' . $row['COMDID'] . '">
+                                                        <button type="submit" name="delete_tempcomd_submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -178,12 +178,12 @@ if (isset($_SESSION['error'])) {
     </div>
 </section>
 
-<!-- Add ERE Modal -->
-<div class="modal fade" id="addEREModal" tabindex="-1" role="dialog" aria-labelledby="addEREModalLabel" aria-hidden="true">
+<!-- Add Temporary Command Modal -->
+<div class="modal fade" id="addTempcomdModal" tabindex="-1" role="dialog" aria-labelledby="addTempcomdModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addEREModalLabel">Add ERE</h5>
+                <h5 class="modal-title" id="addTempcomdModalLabel">Add Temporary Command</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -191,10 +191,10 @@ if (isset($_SESSION['error'])) {
             <div class="modal-body">
                 <form method="post" action="">
                     <div class="form-group">
-                        <label for="ere_name">ERE Name:</label>
-                        <input type="text" name="ere_name" id="ere_name" class="form-control" required>
+                        <label for="tempcomd_name">Temporary Command Name:</label>
+                        <input type="text" name="tempcomd_name" id="tempcomd_name" class="form-control" required>
                     </div>
-                    <input type="submit" name="add_ere_submit" value="Add ERE" class="btn btn-primary">
+                    <input type="submit" name="add_tempcomd_submit" value="Add Temporary Command" class="btn btn-primary">
                 </form>
             </div>
         </div>

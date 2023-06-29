@@ -3,57 +3,57 @@ session_start();
 
 include '../includes/connection.php';
 
-if (isset($_POST['add_ere_submit'])) {
-    $ere_name = $_POST['ere_name'];
+if (isset($_POST['add_serving_submit'])) {
+    $serving_type = $_POST['serving_type'];
 
-    $query = "INSERT INTO ERE (ERENAME) VALUES (:ere_name)";
+    $query = "INSERT INTO SERVINGSTATUS (SERVINGTYPE) VALUES (:serving_type)";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_name', $ere_name);
+    oci_bind_by_name($stmt, ':serving_type', $serving_type);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE added successfully.";
+        $_SESSION['success'] = "Serving Status added successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to add ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to add Serving Status: " . $error['message'];
     }
 
     oci_free_statement($stmt);
 }
 
-if (isset($_POST['edit_ere_submit'])) {
-    $ere_id = $_POST['edit_ere_id'];
-    $ere_name = $_POST['edit_ere_name'];
+if (isset($_POST['edit_serving_submit'])) {
+    $serving_id = $_POST['edit_serving_id'];
+    $serving_type = $_POST['edit_serving_type'];
 
-    $query = "UPDATE ERE SET ERENAME = :ere_name WHERE EREID = :ere_id";
+    $query = "UPDATE SERVINGSTATUS SET SERVINGTYPE = :serving_type WHERE STATUSID = :serving_id";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_name', $ere_name);
-    oci_bind_by_name($stmt, ':ere_id', $ere_id);
+    oci_bind_by_name($stmt, ':serving_type', $serving_type);
+    oci_bind_by_name($stmt, ':serving_id', $serving_id);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE updated successfully.";
+        $_SESSION['success'] = "Serving Status updated successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to update ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to update Serving Status: " . $error['message'];
     }
 
     oci_free_statement($stmt);
 }
 
-if (isset($_POST['delete_ere_submit'])) {
-    $ere_id = $_POST['delete_ere_id'];
+if (isset($_POST['delete_serving_submit'])) {
+    $serving_id = $_POST['delete_serving_id'];
 
-    $query = "DELETE FROM ERE WHERE EREID = :ere_id";
+    $query = "DELETE FROM SERVINGSTATUS WHERE STATUSID = :serving_id";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':ere_id', $ere_id);
+    oci_bind_by_name($stmt, ':serving_id', $serving_id);
 
     $result = oci_execute($stmt);
     if ($result) {
-        $_SESSION['success'] = "ERE deleted successfully.";
+        $_SESSION['success'] = "Serving Status deleted successfully.";
     } else {
         $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to delete ERE: " . $error['message'];
+        $_SESSION['error'] = "Failed to delete Serving Status: " . $error['message'];
     }
 
     oci_free_statement($stmt);
@@ -67,10 +67,10 @@ include '../includes/header.php';
 <div class="card-body">
     <div class="d-flex justify-content-between">
         <div class="text-left">
-            <h3>ERE List Management</h3>
+            <h3>Serving Status Management</h3>
         </div>
         <div class="text-right">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addEREModal">Add ERE</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addServingModal">Add Serving Status</button>
         </div>
     </div>
 </div>
@@ -95,70 +95,70 @@ if (isset($_SESSION['error'])) {
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ERE ID</th>
-                                    <th>ERE Name</th>
+                                    <th>Serving Status ID</th>
+                                    <th>Serving Type</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $query = "SELECT * FROM ERE ORDER BY EREID";
+                                $query = "SELECT * FROM SERVINGSTATUS ORDER BY STATUSID";
                                 $stmt = oci_parse($conn, $query);
                                 oci_execute($stmt);
 
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['EREID'] . "</td>";
-                                    echo "<td>" . $row['ERENAME'] . "</td>";
+                                    echo "<td>" . $row['STATUSID'] . "</td>";
+                                    echo "<td>" . $row['SERVINGTYPE'] . "</td>";
                                     echo "<td>";
-                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEREModal-' . $row['EREID'] . '">
+                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editServingModal-' . $row['STATUSID'] . '">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>';
-                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEREModal-' . $row['EREID'] . '">
+                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteServingModal-' . $row['STATUSID'] . '">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>';
                                     echo "</td>";
                                     echo "</tr>";
 
-                                    // Edit ERE Modal
-                                    echo '<div class="modal fade" id="editEREModal-' . $row['EREID'] . '" tabindex="-1" role="dialog" aria-labelledby="editEREModalLabel" aria-hidden="true">
+                                    // Edit Serving Status Modal
+                                    echo '<div class="modal fade" id="editServingModal-' . $row['STATUSID'] . '" tabindex="-1" role="dialog" aria-labelledby="editServingModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editEREModalLabel">Edit ERE</h5>
+                                                    <h5 class="modal-title" id="editServingModalLabel">Edit Serving Status</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="edit_ere_id" value="' . $row['EREID'] . '">
+                                                        <input type="hidden" name="edit_serving_id" value="' . $row['STATUSID'] . '">
                                                         <div class="form-group">
-                                                            <label for="edit_ere_name">ERE Name:</label>
-                                                            <input type="text" name="edit_ere_name" id="edit_ere_name" class="form-control" value="' . $row['ERENAME'] . '" required>
+                                                            <label for="edit_serving_type">Serving Type:</label>
+                                                            <input type="text" name="edit_serving_type" id="edit_serving_type" class="form-control" value="' . $row['SERVINGTYPE'] . '" required>
                                                         </div>
-                                                        <button type="submit" name="edit_ere_submit" class="btn btn-primary">Save Changes</button>
+                                                        <button type="submit" name="edit_serving_submit" class="btn btn-primary">Save Changes</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
 
-                                    // Delete ERE Modal
-                                    echo '<div class="modal fade" id="deleteEREModal-' . $row['EREID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteEREModalLabel" aria-hidden="true">
+                                    // Delete Serving Status Modal
+                                    echo '<div class="modal fade" id="deleteServingModal-' . $row['STATUSID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteServingModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteEREModalLabel">Delete ERE</h5>
+                                                    <h5 class="modal-title" id="deleteServingModalLabel">Delete Serving Status</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Are you sure you want to delete this ERE?</p>
+                                                    <p>Are you sure you want to delete this Serving Status?</p>
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="delete_ere_id" value="' . $row['EREID'] . '">
-                                                        <button type="submit" name="delete_ere_submit" class="btn btn-danger">Delete</button>
+                                                        <input type="hidden" name="delete_serving_id" value="' . $row['STATUSID'] . '">
+                                                        <button type="submit" name="delete_serving_submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -178,12 +178,12 @@ if (isset($_SESSION['error'])) {
     </div>
 </section>
 
-<!-- Add ERE Modal -->
-<div class="modal fade" id="addEREModal" tabindex="-1" role="dialog" aria-labelledby="addEREModalLabel" aria-hidden="true">
+<!-- Add Serving Status Modal -->
+<div class="modal fade" id="addServingModal" tabindex="-1" role="dialog" aria-labelledby="addServingModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addEREModalLabel">Add ERE</h5>
+                <h5 class="modal-title" id="addServingModalLabel">Add Serving Status</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -191,10 +191,10 @@ if (isset($_SESSION['error'])) {
             <div class="modal-body">
                 <form method="post" action="">
                     <div class="form-group">
-                        <label for="ere_name">ERE Name:</label>
-                        <input type="text" name="ere_name" id="ere_name" class="form-control" required>
+                        <label for="serving_type">Serving Type:</label>
+                        <input type="text" name="serving_type" id="serving_type" class="form-control" required>
                     </div>
-                    <input type="submit" name="add_ere_submit" value="Add ERE" class="btn btn-primary">
+                    <input type="submit" name="add_serving_submit" value="Add Serving Status" class="btn btn-primary">
                 </form>
             </div>
         </div>
