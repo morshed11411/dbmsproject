@@ -85,22 +85,27 @@ include '../includes/header.php';
 ?>
 
 <div class="card-body">
+<h3>Assign Team</h3>
+
     <div class="d-flex justify-content-between">
-        <div class="text-left">
-            <h3>Assign Team</h3>
+    <div class="text-left">
+
             <p><strong>Team ID:</strong>
                 <?php echo $team['TEAMID']; ?>
             </p>
             <p><strong>Team Name:</strong>
                 <?php echo $team['TEAMNAME']; ?>
             </p>
+            </div>
+            <div class="text-right">
+
             <p><strong>OIC Name:</strong>
                 <?php echo $team['TEAMOIC']; ?>
             </p>
             <p><strong>Total Assigned Soldiers:</strong>
                 <?php echo $team['TOTAL_SOLDIERS']; ?>
             </p>
-        </div>
+            </div>
     </div>
 </div>
 
@@ -113,6 +118,7 @@ if (isset($_SESSION['success'])) {
 
 <section class="content">
     <div class="container-fluid">
+           <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -120,8 +126,8 @@ if (isset($_SESSION['success'])) {
                         <h5>Available Soldiers</h5>
 
                         <form method="POST" action="">
-                            <table id="available-soldiers-table" class="table table-bordered table-responsive" 
-                                style="height: 300px; overflow-y: auto scroll;">
+                        <div class="table-responsive" style="max-height: 450px; overflow: hidden scroll;">
+                                <table id="available-soldiers-table" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Soldier ID</th>
@@ -147,7 +153,7 @@ if (isset($_SESSION['success'])) {
                                             <td>
                                                 <?php echo $soldier['NAME']; ?>
                                             </td>
-                                            
+
                                             <td>
                                                 <?php echo $soldier['COMPANYNAME']; ?>
                                             </td>
@@ -162,6 +168,7 @@ if (isset($_SESSION['success'])) {
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+                                    </div>
                             <button type="submit" name="submit" class="btn btn-primary">Update Team</button>
                         </form>
 
@@ -174,39 +181,30 @@ if (isset($_SESSION['success'])) {
                     <div class="card-body">
                         <h5>Assigned Soldiers</h5>
                         <?php if (count($assignedSoldiers) > 0): ?>
-                            <table id="assigned-soldiers-table" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Soldier ID</th>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Trade</th>
-                                        <th>Company</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($assignedSoldiers as $soldier): ?>
+                            <div class="table-responsive" style="max-height: 450px; overflow: hidden scroll;">
+                                <table id="assigned-soldiers-table" class="table table-bordered ">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <?php echo $soldier['SOLDIERID']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['RANK']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['NAME']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['TRADE']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['COMPANYNAME']; ?>
-                                            </td>
+                                            <th>Soldier ID</th>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Trade</th>
+                                            <th>Company</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($assignedSoldiers as $soldier): ?>
+                                            <tr>
+                                                <td><?php echo $soldier['SOLDIERID']; ?></td>
+                                                <td><?php echo $soldier['RANK']; ?></td>
+                                                <td><?php echo $soldier['NAME']; ?></td>
+                                                <td><?php echo $soldier['TRADE']; ?></td>
+                                                <td><?php echo $soldier['COMPANYNAME']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         <?php else: ?>
                             <p>No soldiers assigned to this team.</p>
                         <?php endif; ?>
@@ -223,12 +221,16 @@ if (isset($_SESSION['success'])) {
     $(document).ready(function () {
         // Initialize DataTables
         $('#available-soldiers-table').DataTable({
+            "responsive": true,
+
             "paging": false,
             "searching": true,
             "info": false
         });
 
         $('#assigned-soldiers-table').DataTable({
+            "responsive": true,
+
             "paging": false,
             "searching": true,
             "info": false

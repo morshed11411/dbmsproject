@@ -36,5 +36,20 @@
       margin-right: 50px;
       /* Adjust the margin as needed */
     }
+
+    .leave-color {
+      background-color: #f05454;
+      /* Red */
+    }
+
+    .training-color {
+      background-color: #5cb85c;
+      /* Green */
+    }
+    
+    .admin-color {
+      background-color: #428bca;
+      /* Blue */
+    }
   </style>
 </head>

@@ -1,5 +1,4 @@
 <?php include '../includes/header.php'; ?>
-
 <div class="card-body">
     <div class="d-flex justify-content-between">
         <div class="text-left">
@@ -13,6 +12,7 @@
         </div>
     </div>
 </div>
+<?php include '../includes/alert.php'; ?>
 
 <section class="content">
     <div class="row">

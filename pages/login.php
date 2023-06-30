@@ -25,8 +25,7 @@ if (isset($_POST['login'])) {
          $_SESSION['userid'] = $row['SOLDIERID'];
          $_SESSION['role'] = $row['ROLE'];
          $_SESSION['success'] = 'Logged in successfully.';
-         $_SESSION['error'] = '';
-         header('Location: blankpage.php');
+         header('Location: dashboard.php');
          exit();
       } else {
          $_SESSION['error'] = 'Invalid username or password.';

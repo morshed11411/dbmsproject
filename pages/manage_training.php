@@ -164,18 +164,10 @@ include '../includes/header.php';
         </div>
     </div>
 </div>
-<?php
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']);
-}
-?>
+
 <section class="content">
     <div class="container-fluid">
+           <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
