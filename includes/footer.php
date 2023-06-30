@@ -2,7 +2,7 @@
 </div>
 </div>
 <footer class="main-footer">
-  <strong>Unit Management System &copy; 2023</strong>
+  <strong>Unit Management System v2.0 &copy; 2023</strong>
 </footer>
 </div>
 <script src="../js/jquery.min.js"></script>

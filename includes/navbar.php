@@ -79,12 +79,12 @@
               <li class="nav-item">
                 <a href="company.php" class="nav-link sublink">
                   <i class="fas fa-plus-circle nav-icon"></i>
-                  <p>Company</p>
+                  <p>View Company</p>
                 </a>
               </li>
               </li>
             </ul>
-          </li>
+          </li> e
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
