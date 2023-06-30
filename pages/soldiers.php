@@ -134,12 +134,17 @@ if (isset($_SESSION['error'])) {
                                                     Options
                                                 </button>
                                                 <div class="dropdown-menu">
+                                                    
                                                     <a class="dropdown-item" href="send_leave.php?soldier=<?php echo $soldier->SoldierID; ?>">Send Leave</a>
                                                     <a class="dropdown-item" href="add_disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Add Disposal</a>
                                                     <a class="dropdown-item" href="manage_training.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage Training</a>
                                                     <a class="dropdown-item" href="give_punishment.php?soldier=<?php echo $soldier->SoldierID; ?>">Give Punishment</a>
                                                     <a class="dropdown-item" href="assign_appointment.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign Appointment</a>
                                                     <a class="dropdown-item" href="assign_team.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign Team</a>
+                                                    <a class="dropdown-item" href="add_ere.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage ERE</a>
+                                                    <a class="dropdown-item" href="add_comd.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage Comd</a>
+                                                    <a class="dropdown-item" href="uploadimage.php?soldier=<?php echo $soldier->SoldierID; ?>">Upload Image</a>
+
                                                 </div>
                                             </div>
                                             <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>" class="btn btn-warning">Edit</a>

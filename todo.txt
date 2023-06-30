@@ -4,18 +4,18 @@ Updates plan on version2
 3> use mvc structure (try) -done 
 4> database work
     a> create all id auto genarate -done
-    b> use sepearte table for access control and give access to the appoinment holders
+    b> use sepearte table for access control and give access to the appoinment holders ->done
     c> create a table to save the parade state with the date and time 
-    d> create a view for offr, jco, others
-    e> make sepearte add soldier and add offier 
+    d> create a view for offr, jco, others -->done
+    e> make sepearte add soldier and add offier -not done
     f> 
 
-5> Create ERE and Temporary Command List 
+5> Create ERE and Temporary Command List - 
     soldiers option will be modified by a modal
 6> create a parade state table 
 7> try to create universal soldier view table 
 
-5> Add passport picture, nid, combo id and other image files for the soldier.
+5> Add passport picture, nid, combo id and other image files for the soldier. done
 
 Front end
 
@@ -44,3 +44,16 @@ pages
 8> Team->
 9> 
 
+
+
+Today
+1> fix the ere page
+2> fix the comd page and modify the table as comd and add column name comd type [ temp/ perm]
+3> Fix the career plan page
+4> create a view for soldier profile to create profile of the soldier 
+5> manage appointment page
+6> manage team page
+7> edit the navbar 
+    create report to generate various preset reports 
+
+add more info like ,med-category, msn, no of children, date of retirement in the soldier table 

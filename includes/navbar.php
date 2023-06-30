@@ -59,21 +59,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="add_soldier.php" class="nav-link sublink">
-                  <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Add Soldier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="manage_soldier.php" class="nav-link sublink">
+                <a href="soldiers.php" class="nav-link sublink">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Manage Soldier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="punishment.php" class="nav-link sublink">
-                  <i class="fas fa-gavel nav-icon"></i>
-                  <p>Punishment</p>
                 </a>
               </li>
             </ul>
@@ -89,16 +77,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="add_company.php" class="nav-link sublink">
+                <a href="company.php" class="nav-link sublink">
                   <i class="fas fa-plus-circle nav-icon"></i>
-                  <p>Add Company</p>
+                  <p>Company</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="manage_company.php" class="nav-link sublink">
-                  <i class="fas fa-cogs nav-icon"></i>
-                  <p>Manage Company</p>
-                </a>
               </li>
             </ul>
           </li>
@@ -146,7 +129,13 @@
               <li class="nav-item">
                 <a href="manage_plan.php" class="nav-link sublink">
                   <i class="fas fa-edit nav-icon"></i>
-                  <p>Manage Plan</p>
+                  <p>Update Plan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="manage_plan.php" class="nav-link sublink">
+                  <i class="fas fa-edit nav-icon"></i>
+                  <p>View Plan</p>
                 </a>
               </li>
             </ul>
@@ -197,13 +186,13 @@
               <li class="nav-item">
                 <a href="generate_parade_state.php" class="nav-link sublink">
                   <i class="fas fa-file-alt nav-icon"></i>
-                  <p>Generate Parade State</p>
+                  <p>Create Parade State</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="absent_soldier.php" class="nav-link sublink">
                   <i class="fas fa-archive nav-icon"></i>
-                  <p>Soldiers Absent Today</p>
+                  <p>Archive</p>
                 </a>
               </li>
             </ul>
@@ -267,6 +256,24 @@
                 <a href="ranks.php" class="nav-link sublink">
                   <i class="fas fa-user-tag nav-icon"></i>
                   <p>Manage Rank</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ere.php" class="nav-link sublink">
+                  <i class="fas fa-user-tag nav-icon"></i>
+                  <p>Manage ERE</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="tempcomd.php" class="nav-link sublink">
+                  <i class="fas fa-user-tag nav-icon"></i>
+                  <p>Temporary Comd</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="servingstatus.php" class="nav-link sublink">
+                  <i class="fas fa-user-tag nav-icon"></i>
+                  <p>Serving Status</p>
                 </a>
               </li>
               <li class="nav-item">

@@ -1,57 +1,6 @@
 <?php
 include '../includes/connection.php';
 
-// Fetch data for the trade table
-$queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
-$stmtTrade = oci_parse($conn, $queryTrade);
-oci_execute($stmtTrade);
-
-$tradeList = array();
-while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
-    $trade = new stdClass();
-    $trade->TradeID = $rowTrade['TRADEID'];
-    $trade->Trade = $rowTrade['TRADE'];
-    $tradeList[] = $trade;
-}
-
-oci_free_statement($stmtTrade);
-
-// Fetch data for the rank table
-$queryRank = "SELECT RANKID, RANK FROM Ranks";
-$stmtRank = oci_parse($conn, $queryRank);
-oci_execute($stmtRank);
-
-$rankList = array();
-while ($rowRank = oci_fetch_assoc($stmtRank)) {
-    $rank = new stdClass();
-    $rank->RankID = $rowRank['RANKID'];
-    $rank->Rank = $rowRank['RANK'];
-    $rankList[] = $rank;
-}
-
-oci_free_statement($stmtRank);
-
-$query = "SELECT COMPANYID, COMPANYNAME FROM Company";
-$stmt = oci_parse($conn, $query);
-oci_execute($stmt);
-
-$companyList = array();
-
-while ($row = oci_fetch_assoc($stmt)) {
-    $company = new stdClass();
-    $company->COMPANYID = $row['COMPANYID'];
-    $company->COMPANYNAME = $row['COMPANYNAME'];
-    $companyList[] = $company;
-}
-
-oci_free_statement($stmt);
-
-oci_close($conn);
-include '../includes/header.php';
-?>
-
-
-<?php
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Get the form data
@@ -126,7 +75,9 @@ if (isset($_POST['submit'])) {
     }
 
     if ($resultSoldier && ($resultContactNumber1 || $resultContactNumber2)) {
-        $_SESSION['success'] = "Soldier data inserted successfully.";
+        $_SESSION['success'] = "Soldier data inserted successfully. Please upload images. ";
+        header("Location: uploadimage.php?soldier=$soldier_id");
+
     } else {
         $e = oci_error($stmtSoldier);
         $_SESSION['error'] = "Failed to insert soldier data: " . $e['message'];
@@ -136,7 +87,56 @@ if (isset($_POST['submit'])) {
     oci_free_statement($stmtContactNumber);
     oci_close($conn);
 }
+
+// Fetch data for the trade table
+$queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
+$stmtTrade = oci_parse($conn, $queryTrade);
+oci_execute($stmtTrade);
+
+$tradeList = array();
+while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
+    $trade = new stdClass();
+    $trade->TradeID = $rowTrade['TRADEID'];
+    $trade->Trade = $rowTrade['TRADE'];
+    $tradeList[] = $trade;
+}
+
+oci_free_statement($stmtTrade);
+
+// Fetch data for the rank table
+$queryRank = "SELECT RANKID, RANK FROM Ranks";
+$stmtRank = oci_parse($conn, $queryRank);
+oci_execute($stmtRank);
+
+$rankList = array();
+while ($rowRank = oci_fetch_assoc($stmtRank)) {
+    $rank = new stdClass();
+    $rank->RankID = $rowRank['RANKID'];
+    $rank->Rank = $rowRank['RANK'];
+    $rankList[] = $rank;
+}
+
+oci_free_statement($stmtRank);
+
+$query = "SELECT COMPANYID, COMPANYNAME FROM Company";
+$stmt = oci_parse($conn, $query);
+oci_execute($stmt);
+
+$companyList = array();
+
+while ($row = oci_fetch_assoc($stmt)) {
+    $company = new stdClass();
+    $company->COMPANYID = $row['COMPANYID'];
+    $company->COMPANYNAME = $row['COMPANYNAME'];
+    $companyList[] = $company;
+}
+
+oci_free_statement($stmt);
+
+oci_close($conn);
+include '../includes/header.php';
 ?>
+
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
@@ -145,10 +145,11 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </div>
+
 <?php
 if (isset($_SESSION['success'])) {
     echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
+
 }
 if (isset($_SESSION['error'])) {
     echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';

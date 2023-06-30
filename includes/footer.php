@@ -21,7 +21,20 @@
 <script src="../js/buttons.colVis.min.js"></script>
 <script src="../js/adminlte.min.js"></script>
 <script src="../js/chart.js"></script>
-
+<script>
+  /*
+  document.addEventListener("keydown", function (event){
+    if (event.ctrlKey){
+       event.preventDefault();
+    }
+    if(event.keyCode == 123){
+       event.preventDefault();
+    }
+});
+document.addEventListener('contextmenu', 
+     event => event.preventDefault()
+);*/
+</script>
 </body>
 
 </html>
