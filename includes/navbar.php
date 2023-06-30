@@ -252,31 +252,37 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="manage_trade.php" class="nav-link sublink">
+                <a href="company.php" class="nav-link sublink">
+                  <i class="fas fa-tools nav-icon"></i>
+                  <p>Manage Company</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="trade.php" class="nav-link sublink">
                   <i class="fas fa-tools nav-icon"></i>
                   <p>Manage Trade</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_rank.php" class="nav-link sublink">
+                <a href="ranks.php" class="nav-link sublink">
                   <i class="fas fa-user-tag nav-icon"></i>
                   <p>Manage Rank</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_appointment.php" class="nav-link sublink">
+                <a href="appointment.php" class="nav-link sublink">
                   <i class="fas fa-briefcase nav-icon"></i>
                   <p>Manage Appointment</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_authorization.php" class="nav-link sublink">
+                <a href="authorization.php" class="nav-link sublink">
                   <i class="fas fa-user-lock nav-icon"></i>
                   <p>Manage Authorization</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_access.php" class="nav-link sublink">
+                <a href="access.php" class="nav-link sublink">
                   <i class="fas fa-key nav-icon"></i>
                   <p>Manage Access</p>
                 </a>
