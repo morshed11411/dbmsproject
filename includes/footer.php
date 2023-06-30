@@ -36,6 +36,35 @@ document.addEventListener('contextmenu',
      event => event.preventDefault()
 );*/
 </script>
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('#tablex').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": [
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(.no-export)'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':not(.no-export)'
+                    }
+                },
+                'colvis'
+            ]
+        });
+
+        table.buttons().container().appendTo('#soldierTable_wrapper .col-md-6:eq(0)');
+    });
+
+</script>
 </body>
 
 </html>

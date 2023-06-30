@@ -126,7 +126,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="manage_plan.php" class="nav-link sublink">
+                <a href="plan_view.php" class="nav-link sublink">
                   <i class="fas fa-edit nav-icon"></i>
                   <p>Update Plan</p>
                 </a>

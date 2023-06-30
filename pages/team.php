@@ -138,7 +138,7 @@ include '../includes/header.php';
 
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['TEAMID'] . "</td>";
+                                    echo '<td><a href="assign_team.php?teamid=' . $row['TEAMID'] . '">' . $row['TEAMNAME'] . '</a></td>';
                                     echo "<td>" . $row['TEAMNAME'] . "</td>";
                                     echo "<td>" . $row['STARTDATE'] . "</td>";
                                     echo "<td>" . $row['OIC'] . "</td>";
@@ -209,7 +209,7 @@ include '../includes/header.php';
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
                                     echo "<td>" . $row['TEAMID'] . "</td>";
-                                    echo "<td>" . $row['TEAMNAME'] . "</td>";
+                                    echo '<td><a href="assign_team.php?teamid=' . $row['TEAMID'] . '">' . $row['TEAMNAME'] . '</a></td>';
                                     echo "<td>" . $row['STARTDATE'] . "</td>";
                                     echo "<td>" . ($row['ENDDATE'] ? $row['ENDDATE'] : 'Running') . "</td>";
                                     echo "<td>" . $row['OIC'] . "</td>";
