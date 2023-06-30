@@ -82,9 +82,8 @@
                   <p>View Company</p>
                 </a>
               </li>
-              </li>
             </ul>
-          </li> e
+          </li> 
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -223,7 +222,7 @@
             </ul>
 
           <li class="nav-item has-treeview">
-            <a href="manage_team.php" class="nav-link">
+            <a href="team.php" class="nav-link">
               <i class="fas fa-users nav-icon"></i>
               <p>Manage Team</p>
             </a>
