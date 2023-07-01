@@ -104,44 +104,45 @@ include '../includes/header.php';
 
 <section class="content">
     <div class="container-fluid">
-           <?php include '../includes/alert.php'; ?>
-    <?php
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-?>
+        <?php include '../includes/alert.php'; ?>
+        <?php
+        if (isset($_SESSION['success'])) {
+            echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+            unset($_SESSION['success']);
+        }
+        ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
 
                         <form action="" method="POST">
+                            <div class="table-responsive">
 
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Soldier ID</th>
-                                        <th>Name</th>
-                                        <th>Rank</th>
-                                        <th>First Cycle</th>
-                                        <th>Second Cycle</th>
-                                        <th>Third Cycle</th>
-                                        <th>Fourth Cycle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($soldier = oci_fetch_assoc($stmtSoldiers)) {
-                                        $soldierID = $soldier['ID'];
-                                        $name = $soldier['NAME'];
-                                        $rank = $soldier['RANK'];
-                                        $firstCycle = $soldier['FIRSTCYCLE'];
-                                        $secondCycle = $soldier['SECONDCYCLE'];
-                                        $thirdCycle = $soldier['THIRDCYCLE'];
-                                        $fourthCycle = $soldier['FOURTHCYCLE'];
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Soldier ID</th>
+                                            <th>Name</th>
+                                            <th>Rank</th>
+                                            <th>First Cycle</th>
+                                            <th>Second Cycle</th>
+                                            <th>Third Cycle</th>
+                                            <th>Fourth Cycle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($soldier = oci_fetch_assoc($stmtSoldiers)) {
+                                            $soldierID = $soldier['ID'];
+                                            $name = $soldier['NAME'];
+                                            $rank = $soldier['RANK'];
+                                            $firstCycle = $soldier['FIRSTCYCLE'];
+                                            $secondCycle = $soldier['SECONDCYCLE'];
+                                            $thirdCycle = $soldier['THIRDCYCLE'];
+                                            $fourthCycle = $soldier['FOURTHCYCLE'];
 
-                                        echo "<tr>
+                                            echo "<tr>
                                                             <td>$soldierID</td>
                                                             <td>$name</td>
                                                             <td>$rank</td>
@@ -174,11 +175,12 @@ if (isset($_SESSION['success'])) {
                                                                 </select>
                                                             </td>
                                                         </tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                            <button type="submit" name="submit" class="btn btn-primary">Update Career Plan</button>
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                                <button type="submit" name="submit" class="btn btn-primary">Update Career Plan</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -187,37 +189,37 @@ if (isset($_SESSION['success'])) {
     </div>
 </section>
 <script>
-  // Add event listener to each select element
-  var selectElements = document.querySelectorAll('select[name^="firstCycle"], select[name^="secondCycle"], select[name^="thirdCycle"], select[name^="fourthCycle"]');
-  selectElements.forEach(function(selectElement) {
-    selectElement.addEventListener('change', function() {
-      applyColor(this);
+    // Add event listener to each select element
+    var selectElements = document.querySelectorAll('select[name^="firstCycle"], select[name^="secondCycle"], select[name^="thirdCycle"], select[name^="fourthCycle"]');
+    selectElements.forEach(function (selectElement) {
+        selectElement.addEventListener('change', function () {
+            applyColor(this);
+        });
+        // Apply initial color on page load
+        applyColor(selectElement);
     });
-    // Apply initial color on page load
-    applyColor(selectElement);
-  });
-  
-  // Apply color based on the selected option
-  function applyColor(selectElement) {
-    var selectedOption = selectElement.options[selectElement.selectedIndex].value;
-    var colorClass = getColorClass(selectedOption);
-    selectElement.classList = '';
-    selectElement.classList.add('form-control', colorClass);
-  }
-  
-  // Get the color class based on the selected option
-  function getColorClass(option) {
-    switch (option) {
-      case 'Admin':
-        return 'admin-color';
-      case 'Training':
-        return 'training-color';
-      case 'Leave':
-        return 'leave-color';
-      default:
-        return '';
+
+    // Apply color based on the selected option
+    function applyColor(selectElement) {
+        var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+        var colorClass = getColorClass(selectedOption);
+        selectElement.classList = '';
+        selectElement.classList.add('form-control', colorClass);
     }
-  }
+
+    // Get the color class based on the selected option
+    function getColorClass(option) {
+        switch (option) {
+            case 'Admin':
+                return 'admin-color';
+            case 'Training':
+                return 'training-color';
+            case 'Leave':
+                return 'leave-color';
+            default:
+                return '';
+        }
+    }
 </script>
 
 <?php

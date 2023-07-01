@@ -62,47 +62,52 @@ if (isset($_SESSION['success'])) {
 
 <section class="content">
     <div class="container-fluid">
-           <?php include '../includes/alert.php'; ?>
-    <div class="alert alert-info alert-dismissible text-center">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Running: <b><?php echo $currentCycle; ?></b></h4>
-    </div>
+        <?php include '../includes/alert.php'; ?>
+        <div class="alert alert-info alert-dismissible text-center">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>Running: <b>
+                    <?php echo $currentCycle; ?>
+                </b></h4>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h3>First Cycle</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Total Soldiers</th>
-                                    <th>Admin</th>
-                                    <th>Leave</th>
-                                    <th>Training</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                while ($company = oci_fetch_assoc($stmtCompanies)) {
-                                    $companyID = $company['COMPANYID'];
-                                    $companyName = $company['COMPANYNAME'];
-                                    $totalSoldiers = $company['TOTAL_SOLDIERS'];
-                                    $firstCycleAdmin = $company['FIRST_CYCLE_ADMIN'];
-                                    $firstCyclePLeave = $company['FIRST_CYCLE_PLEAVE'];
-                                    $firstCycleTraining = $company['FIRST_CYCLE_TRAINING'];
+                        <div class="table-responsive">
 
-                                    echo "<tr>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Total Soldiers</th>
+                                        <th>Admin</th>
+                                        <th>Leave</th>
+                                        <th>Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($company = oci_fetch_assoc($stmtCompanies)) {
+                                        $companyID = $company['COMPANYID'];
+                                        $companyName = $company['COMPANYNAME'];
+                                        $totalSoldiers = $company['TOTAL_SOLDIERS'];
+                                        $firstCycleAdmin = $company['FIRST_CYCLE_ADMIN'];
+                                        $firstCyclePLeave = $company['FIRST_CYCLE_PLEAVE'];
+                                        $firstCycleTraining = $company['FIRST_CYCLE_TRAINING'];
+
+                                        echo "<tr>
                                                         <td><a href='update_plan.php?company=$companyID'>$companyName</a></td>
                                                         <td>$totalSoldiers</td>
                                                         <td>$firstCycleAdmin</td>
                                                         <td>$firstCyclePLeave</td>
                                                         <td>$firstCycleTraining</td>
                                                     </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,38 +115,41 @@ if (isset($_SESSION['success'])) {
                 <div class="card">
                     <div class="card-body">
                         <h3>Second Cycle</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Total Soldiers</th>
-                                    <th>Admin</th>
-                                    <th>Leave</th>
-                                    <th>Training</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
-                                while ($company = oci_fetch_assoc($stmtCompanies)) {
-                                    $companyID = $company['COMPANYID'];
-                                    $companyName = $company['COMPANYNAME'];
-                                    $totalSoldiers = $company['TOTAL_SOLDIERS'];
-                                    $secondCycleAdmin = $company['SECOND_CYCLE_ADMIN'];
-                                    $secondCyclePLeave = $company['SECOND_CYCLE_PLEAVE'];
-                                    $secondCycleTraining = $company['SECOND_CYCLE_TRAINING'];
+                        <div class="table-responsive">
 
-                                    echo "<tr>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Total Soldiers</th>
+                                        <th>Admin</th>
+                                        <th>Leave</th>
+                                        <th>Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
+                                    while ($company = oci_fetch_assoc($stmtCompanies)) {
+                                        $companyID = $company['COMPANYID'];
+                                        $companyName = $company['COMPANYNAME'];
+                                        $totalSoldiers = $company['TOTAL_SOLDIERS'];
+                                        $secondCycleAdmin = $company['SECOND_CYCLE_ADMIN'];
+                                        $secondCyclePLeave = $company['SECOND_CYCLE_PLEAVE'];
+                                        $secondCycleTraining = $company['SECOND_CYCLE_TRAINING'];
+
+                                        echo "<tr>
                                                         <td><a href='update_plan.php?company=$companyID'>$companyName</a></td>
                                                         <td>$totalSoldiers</td>
                                                         <td>$secondCycleAdmin</td>
                                                         <td>$secondCyclePLeave</td>
                                                         <td>$secondCycleTraining</td>
                                                     </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,38 +157,42 @@ if (isset($_SESSION['success'])) {
                 <div class="card">
                     <div class="card-body">
                         <h3>Third Cycle</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Total Soldiers</th>
-                                    <th>Admin</th>
-                                    <th>Leave</th>
-                                    <th>Training</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
-                                while ($company = oci_fetch_assoc($stmtCompanies)) {
-                                    $companyID = $company['COMPANYID'];
-                                    $companyName = $company['COMPANYNAME'];
-                                    $totalSoldiers = $company['TOTAL_SOLDIERS'];
-                                    $thirdCycleAdmin = $company['THIRD_CYCLE_ADMIN'];
-                                    $thirdCyclePLeave = $company['THIRD_CYCLE_PLEAVE'];
-                                    $thirdCycleTraining = $company['THIRD_CYCLE_TRAINING'];
+                        <div class="table-responsive">
 
-                                    echo "<tr>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Total Soldiers</th>
+                                        <th>Admin</th>
+                                        <th>Leave</th>
+                                        <th>Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
+                                    while ($company = oci_fetch_assoc($stmtCompanies)) {
+                                        $companyID = $company['COMPANYID'];
+                                        $companyName = $company['COMPANYNAME'];
+                                        $totalSoldiers = $company['TOTAL_SOLDIERS'];
+                                        $thirdCycleAdmin = $company['THIRD_CYCLE_ADMIN'];
+                                        $thirdCyclePLeave = $company['THIRD_CYCLE_PLEAVE'];
+                                        $thirdCycleTraining = $company['THIRD_CYCLE_TRAINING'];
+
+                                        echo "<tr>
                                                         <td><a href='update_plan.php?company=$companyID'>$companyName</a></td>
                                                         <td>$totalSoldiers</td>
                                                         <td>$thirdCycleAdmin</td>
                                                         <td>$thirdCyclePLeave</td>
                                                         <td>$thirdCycleTraining</td>
                                                     </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -188,38 +200,40 @@ if (isset($_SESSION['success'])) {
                 <div class="card">
                     <div class="card-body">
                         <h3>Fourth Cycle</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Total Soldiers</th>
-                                    <th>Admin</th>
-                                    <th>Leave</th>
-                                    <th>Training</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
-                                while ($company = oci_fetch_assoc($stmtCompanies)) {
-                                    $companyID = $company['COMPANYID'];
-                                    $companyName = $company['COMPANYNAME'];
-                                    $totalSoldiers = $company['TOTAL_SOLDIERS'];
-                                    $fourthCycleAdmin = $company['FOURTH_CYCLE_ADMIN'];
-                                    $fourthCyclePLeave = $company['FOURTH_CYCLE_PLEAVE'];
-                                    $fourthCycleTraining = $company['FOURTH_CYCLE_TRAINING'];
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Total Soldiers</th>
+                                        <th>Admin</th>
+                                        <th>Leave</th>
+                                        <th>Training</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    oci_execute($stmtCompanies); // Re-execute the query to start from the beginning
+                                    while ($company = oci_fetch_assoc($stmtCompanies)) {
+                                        $companyID = $company['COMPANYID'];
+                                        $companyName = $company['COMPANYNAME'];
+                                        $totalSoldiers = $company['TOTAL_SOLDIERS'];
+                                        $fourthCycleAdmin = $company['FOURTH_CYCLE_ADMIN'];
+                                        $fourthCyclePLeave = $company['FOURTH_CYCLE_PLEAVE'];
+                                        $fourthCycleTraining = $company['FOURTH_CYCLE_TRAINING'];
 
-                                    echo "<tr>
+                                        echo "<tr>
                                                         <td><a href='update_plan.php?company=$companyID'>$companyName</a></td>
                                                         <td>$totalSoldiers</td>
                                                         <td>$fourthCycleAdmin</td>
                                                         <td>$fourthCyclePLeave</td>
                                                         <td>$fourthCycleTraining</td>
                                                     </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

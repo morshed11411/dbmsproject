@@ -68,22 +68,13 @@
             </a>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="company.php" class="nav-link">
               <i class="fas fa-building nav-icon"></i>
               <p>
                 Company
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="company.php" class="nav-link sublink">
-                  <i class="fas fa-plus-circle nav-icon"></i>
-                  <p>View Company</p>
-                </a>
-              </li>
-            </ul>
           </li> 
 
           <li class="nav-item has-treeview">
@@ -296,26 +287,11 @@
               </li>
             </ul>
           </li>
-
-
-          <li class="nav-header">User Options</li>
           <?php
     }
 
     if (($_SESSION['role'] == 'admin') || ($_SESSION['role'] == 'Soldier')) {
       ?>
-          <li class="nav-item">
-            <a href="profile.php?soldierId=<?php echo $userid; ?>" class="nav-link">
-              <i class="fas fa-user-circle nav-icon"></i>
-              <p class="text">Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="edit_password.php" class="nav-link">
-              <i class="fas fa-key nav-icon"></i>
-              <p class="text">Change Password</p>
-            </a>
-          </li>
           <?php
     }
     ?>
