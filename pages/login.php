@@ -52,18 +52,7 @@ if (isset($_POST['login'])) {
             <a href="index.php" class="h3"><b>UNIT MANAGEMENT SYSTEM</b></a>
          </div>
          <div class="card-body">
-            <?php
-            if (isset($_SESSION['logout'])) {
-               echo '<div class="alert alert-success">' . $_SESSION['logout'] . '</div>';
-               unset($_SESSION['success']);
-               session_unset();
-               session_destroy();
-            }
-            if (isset($_SESSION['error'])) {
-               echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
-               unset($_SESSION['error']);
-            }
-            ?>
+         <?php include '../includes/alert.php'; ?>
             <form method="post">
                <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Personal No" id="username" name="username">

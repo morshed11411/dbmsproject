@@ -156,8 +156,11 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <td>
                                     <?php
                                     $lastLeave = $soldier['LASTLEAVE'];
-                                    if ($lastLeave > 30) {
-                                        $lastLeave = round($lastLeave / 30) . ' months';
+                                    if ($lastLeave < 1 ) {
+                                        $lastLeave = $lastLeave * 30 . ' days';
+                                    }
+                                    else{
+                                        $lastLeave = $lastLeave . ' months';
                                     }
                                     echo $lastLeave;
                                     ?>
@@ -467,7 +470,6 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     ?>
 
                                 </div>
-
                                 <!-- Leave History Tab -->
                                 <div class="tab-pane fade" id="leaveHistory" role="tabpanel"
                                     aria-labelledby="leaveHistoryTab">
@@ -520,6 +522,5 @@ if ($row = oci_fetch_assoc($stmt)) {
 
 oci_free_statement($stmt);
 oci_close($conn);
-
 include '../includes/footer.php';
 ?>

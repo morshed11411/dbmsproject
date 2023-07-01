@@ -20,7 +20,9 @@ if (isset($_POST['submit'])) {
     $village = $_POST['village'];
     $thana = $_POST['thana'];
     $district = $_POST['district'];
-    $height = $_POST['height'];
+    $height_ft = $_POST['height_ft'];
+    $height_in = $_POST['height_in'];
+    $height = ($height_ft * 12) + $height_in;
     $weight = $_POST['weight'];
     $living_status = $_POST['living_status'];
     $parent_unit = $_POST['parent_unit'];
@@ -252,9 +254,26 @@ include '../includes/header.php';
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="height">Height (cm):</label>
-                                        <input type="text" name="height" id="height" class="form-control" required>
+                                        <label for="height">Height (ft/in):</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <select name="height_ft" id="height_ft" class="form-control">
+                                                    <option value="5">5 ft</option>
+                                                    <option value="6">6 ft</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select name="height_in" id="height_in" class="form-control">
+                                                    <?php
+                                                    for ($i = 0; $i <= 11; $i++) {
+                                                        echo "<option value=\"$i\">$i in</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="weight">Weight (lbs):</label>
                                         <input type="text" name="weight" id="weight" class="form-control" required>

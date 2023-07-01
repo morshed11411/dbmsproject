@@ -32,21 +32,26 @@ if (isset($_POST['send_leave_submit'])) {
     $leaveType = $_POST['leave_type'];
     $leaveStartDate = date('Y-m-d'); // System date
     $leaveEndDate = $_POST['leave_end_date'];
-
-    // Insert leave request into the database
-    $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'))";
-    $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':soldier_id', $soldierID);
-    oci_bind_by_name($stmt, ':leave_type', $leaveType);
-    oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
-    oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
-
-    $result = oci_execute($stmt);
-    if ($result) {
-        $_SESSION['success'] = "Leave request sent successfully.";
+    if ($leaveEndDate < $leaveStartDate) {
+        // Display error message
+        $_SESSION['error'] = "Error: Leave end date cannot be in the past.";
     } else {
-        $error = oci_error($stmt);
-        $_SESSION['error'] = "Failed to send leave request: " . $error['message'];
+
+        // Insert leave request into the database
+        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'))";
+        $stmt = oci_parse($conn, $query);
+        oci_bind_by_name($stmt, ':soldier_id', $soldierID);
+        oci_bind_by_name($stmt, ':leave_type', $leaveType);
+        oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
+        oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
+
+        $result = oci_execute($stmt);
+        if ($result) {
+            $_SESSION['success'] = "Leave request sent successfully.";
+        } else {
+            $error = oci_error($stmt);
+            $_SESSION['error'] = "Failed to send leave request: " . $error['message'];
+        }
     }
 
     oci_free_statement($stmt);
@@ -87,7 +92,7 @@ include '../includes/header.php';
 
 <section class="content">
     <div class="container-fluid">
-           <?php include '../includes/alert.php'; ?>
+        <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -97,15 +102,21 @@ include '../includes/header.php';
                             <tbody>
                                 <tr>
                                     <th>Soldier ID</th>
-                                    <td><?php echo $soldier['SOLDIERID']; ?></td>
+                                    <td>
+                                        <?php echo $soldier['SOLDIERID']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Name</th>
-                                    <td><?php echo $soldier['NAME']; ?></td>
+                                    <td>
+                                        <?php echo $soldier['NAME']; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Company</th>
-                                    <td><?php echo $soldier['COMPANYNAME']; ?></td>
+                                    <td>
+                                        <?php echo $soldier['COMPANYNAME']; ?>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -133,9 +144,11 @@ include '../includes/header.php';
                             </div>
                             <div class="form-group">
                                 <label for="leave_end_date">Leave End Date:</label>
-                                <input type="date" name="leave_end_date" id="leave_end_date" class="form-control" required>
+                                <input type="date" name="leave_end_date" id="leave_end_date" class="form-control"
+                                    required>
                             </div>
-                            <button type="submit" name="send_leave_submit" class="btn btn-primary">Send Leave Request</button>
+                            <button type="submit" name="send_leave_submit" class="btn btn-primary">Send Leave
+                                Request</button>
                         </form>
                     </div>
                 </div>
@@ -160,10 +173,18 @@ include '../includes/header.php';
                                 <tbody>
                                     <?php foreach ($leaveHistory as $leave): ?>
                                         <tr>
-                                            <td><?php echo $leave->LeaveID; ?></td>
-                                            <td><?php echo $leave->LeaveType; ?></td>
-                                            <td><?php echo $leave->LeaveStartDate; ?></td>
-                                            <td><?php echo $leave->LeaveEndDate; ?></td>
+                                            <td>
+                                                <?php echo $leave->LeaveID; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $leave->LeaveType; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $leave->LeaveStartDate; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $leave->LeaveEndDate; ?>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

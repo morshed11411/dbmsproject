@@ -45,6 +45,30 @@ while ($row = oci_fetch_assoc($stmt)) {
 }
 
 oci_free_statement($stmt);
+
+if (isset($_POST['delete_soldier_submit'])) {
+    // Get the soldier ID from the form
+    $soldierId = $_POST['delete_soldier_id'];
+
+    // Perform the delete operation
+    $query = "DELETE FROM SOLDIER WHERE SOLDIERID = :soldierId";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':soldierId', $soldierId);
+
+    if (oci_execute($stmt)) {
+        $_SESSION['success'] = 'Soldier deleted successfully.';
+    } else {
+        $e = oci_error($stmt);
+        $_SESSION['error'] = "Failed to delete soldier: " . $e['message'];
+    }
+
+    oci_free_statement($stmt);
+    oci_close($conn);
+
+    // Redirect to the appropriate page after deletion
+    header('Location: soldiers.php');
+    exit;
+}
 oci_close($conn);
 
 include '../includes/header.php';
@@ -164,8 +188,45 @@ include '../includes/header.php';
                                             </div>
                                             <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
                                                 class="btn btn-warning">Edit</a>
-                                            <a href="delete_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
-                                                class="btn btn-danger">Delete</a>
+                                            <!-- Delete Button -->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#deleteSoldierModal-<?php echo $soldier->SoldierID; ?>">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                            <!-- Delete Soldier Modal -->
+                                            <div class="modal fade"
+                                                id="deleteSoldierModal-<?php echo $soldier->SoldierID; ?>" tabindex="-1"
+                                                role="dialog"
+                                                aria-labelledby="deleteSoldierModalLabel-<?php echo $soldier->SoldierID; ?>"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="deleteSoldierModalLabel-<?php echo $soldier->SoldierID; ?>">
+                                                                Delete Soldier
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to delete this soldier?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="POST" action="soldiers.php">
+                                                                <input type="hidden" name="delete_soldier_id"
+                                                                    value="<?php echo $soldier->SoldierID; ?>">
+                                                                <button type="submit" name="delete_soldier_submit"
+                                                                    class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </td>
                                         <td class="no-print d-none">
                                             <!-- Remarks -->
@@ -181,6 +242,7 @@ include '../includes/header.php';
         </div>
     </div>
 </section>
+
 
 <?php include '../includes/footer.php'; ?>
 

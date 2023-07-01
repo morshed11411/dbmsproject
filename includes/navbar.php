@@ -10,12 +10,21 @@
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <form method="post">
-        <button type="submit" name="logout" class="btn btn-danger small"><i class="fas fa-sign-out-alt"></i> Logout</button>
-      </form>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="profile.php">View Profile</a>
+            <a class="dropdown-item" href="change_password.php">Change Password</a>
+            <div class="dropdown-divider"></div>
+            <form method="post">
+                <button type="submit" name="logout" class="dropdown-item" onclick="return confirm('Are you sure you want to logout?')">Logout</button>
+            </form>
+        </div>
     </li>
-  </ul>
+</ul>
+
 </nav>
 <!-- /.navbar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
@@ -48,23 +57,15 @@
               <p>Dashboard</p>
             </a>
           </li>
+          
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="soldiers.php" class="nav-link">
               <i class="fas fa-users nav-icon"></i>
               <p>
                 Soldier
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="soldiers.php" class="nav-link sublink">
-                  <i class="fas fa-users nav-icon"></i>
-                  <p>Manage Soldier</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item has-treeview">
