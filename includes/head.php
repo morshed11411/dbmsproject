@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="../css/buttons.bootstrap4.min.css">
   <link rel="shortcut icon" href="../assets/favicon.png" />
   <style>
+
+    
     .sublink {
       padding-left: 25px;
     }
@@ -46,10 +48,20 @@
       background-color: #5cb85c;
       /* Green */
     }
-    
+
     .admin-color {
       background-color: #428bca;
       /* Blue */
+    }
+
+    /* Add your dark mode styles here */
+    .dark-mode .navbar-brand,
+    .dark-mode .navbar-nav .nav-link {
+      color: #fff;
+    }
+
+    .dark-mode .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
   </style>
 </head>

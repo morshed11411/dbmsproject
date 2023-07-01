@@ -7,23 +7,34 @@
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
   </ul>
+  <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <div class="custom-control custom-switch d-flex align-items-center">
+      <input type="checkbox" class="custom-control-input" id="darkModeToggle">
+      <label class="custom-control-label" for="darkModeToggle">Dark Mode</label>
+    </div>
+  </li>
+  <!-- Rest of the navbar code -->
+</ul>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Profile
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="profile.php">View Profile</a>
-            <a class="dropdown-item" href="change_password.php">Change Password</a>
-            <div class="dropdown-divider"></div>
-            <form method="post">
-                <button type="submit" name="logout" class="dropdown-item" onclick="return confirm('Are you sure you want to logout?')">Logout</button>
-            </form>
-        </div>
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Profile
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="profile.php">View Profile</a>
+        <a class="dropdown-item" href="change_password.php">Change Password</a>
+        <div class="dropdown-divider"></div>
+        <form method="post">
+          <button type="submit" name="logout" class="dropdown-item"
+            onclick="return confirm('Are you sure you want to logout?')">Logout</button>
+        </form>
+      </div>
     </li>
-</ul>
+  </ul>
 
 </nav>
 <!-- /.navbar -->
@@ -36,7 +47,7 @@
   <a href="dashboard.php" class="brand-link">
     <span class="brand-text font-weight-light">Unit Management System</span>
   </a>
-  <a href="#" class="brand-link" style="padding-left: 30px;">
+  <a href="profile.php" class="brand-link" style="padding-left: 30px;">
     <span class="brand-text font-weight-light">Welcome,
       <?php echo $username; ?>
     </span>
@@ -57,7 +68,7 @@
               <p>Dashboard</p>
             </a>
           </li>
-          
+
 
           <li class="nav-item">
             <a href="soldiers.php" class="nav-link">
@@ -75,7 +86,7 @@
                 Company
               </p>
             </a>
-          </li> 
+          </li>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
