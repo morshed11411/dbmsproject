@@ -132,7 +132,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="manage_plan.php" class="nav-link sublink">
+                <a href="plan.php" class="nav-link sublink">
                   <i class="fas fa-edit nav-icon"></i>
                   <p>View Plan</p>
                 </a>

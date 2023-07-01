@@ -46,7 +46,7 @@ include '../includes/header.php';
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="selectModalLabel">Select Company and Cycle</h5>
+                <h5 class="modal-title" id="selectModalLabel">Select Company</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -77,8 +77,7 @@ include '../includes/header.php';
             </h3>
         </div>
         <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal">
-                Select Company and Cycle
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal"> <h5>Select Company</h5>
             </button>
         </div>
     </div>

@@ -38,6 +38,7 @@ document.addEventListener('contextmenu',
 </script>
 
 
+
 <script>
     $(document).ready(function () {
         var table = $('#tablex').DataTable({
@@ -61,7 +62,7 @@ document.addEventListener('contextmenu',
             ]
         });
 
-        table.buttons().container().appendTo('#soldierTable_wrapper .col-md-6:eq(0)');
+        table.buttons().container().appendTo('#tablex_wrapper .col-md-6:eq(0)');
     });
 
 </script>

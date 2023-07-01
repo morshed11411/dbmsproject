@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include '../includes/connection.php';
 
 // Check if the form is submitted
@@ -21,71 +23,59 @@ if (isset($_POST['submit'])) {
     $height = $_POST['height'];
     $weight = $_POST['weight'];
     $living_status = $_POST['living_status'];
-    $contact_number1 = $_POST['contact_number1'];
-    $contact_number2 = $_POST['contact_number2'];
-
+    $parent_unit = $_POST['parent_unit'];
+    $mission = $_POST['mission'];
+    $med_category = $_POST['med_category'];
+    $no_of_children = $_POST['no_of_children'];
+    $date_retirement = $_POST['date_retirement'];
+    $personal_contact = $_POST['personal_contact'];
+    $emergency_contact = $_POST['emergency_contact'];
     // Establish a connection to the Oracle database
 
     // Prepare the INSERT statement for Soldier table
-    $querySoldier = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus) 
-                                  VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status)";
-    $stmtSoldier = oci_parse($conn, $querySoldier);
+    $querySoldier = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus, ParentUnit, Mission, MedCategory, NoOfChildren, DateRetirement, PersonalContact, EmergencyContact) 
+                 VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status, :parent_unit, :mission, :med_category, :no_of_children, TO_DATE(:date_retirement, 'YYYY-MM-DD'), :personal_contact, :emergency_contact)";
+    $stmt = oci_parse($conn, $querySoldier);
 
     // Bind the parameters for Soldier table
-    oci_bind_by_name($stmtSoldier, ':soldier_id', $soldier_id);
-    oci_bind_by_name($stmtSoldier, ':name', $name);
-    oci_bind_by_name($stmtSoldier, ':rank', $rank);
-    oci_bind_by_name($stmtSoldier, ':trade', $trade);
-    oci_bind_by_name($stmtSoldier, ':company', $company);
-    oci_bind_by_name($stmtSoldier, ':gender', $gender);
-    oci_bind_by_name($stmtSoldier, ':religion', $religion);
-    oci_bind_by_name($stmtSoldier, ':date_of_birth', $date_of_birth);
-    oci_bind_by_name($stmtSoldier, ':date_of_joining', $date_of_joining);
-    oci_bind_by_name($stmtSoldier, ':blood_group', $blood_group);
-    oci_bind_by_name($stmtSoldier, ':marital_status', $marital_status);
-    oci_bind_by_name($stmtSoldier, ':village', $village);
-    oci_bind_by_name($stmtSoldier, ':thana', $thana);
-    oci_bind_by_name($stmtSoldier, ':district', $district);
-    oci_bind_by_name($stmtSoldier, ':height', $height);
-    oci_bind_by_name($stmtSoldier, ':weight', $weight);
-    oci_bind_by_name($stmtSoldier, ':living_status', $living_status);
+    oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+    oci_bind_by_name($stmt, ':name', $name);
+    oci_bind_by_name($stmt, ':rank', $rank);
+    oci_bind_by_name($stmt, ':trade', $trade);
+    oci_bind_by_name($stmt, ':company', $company);
+    oci_bind_by_name($stmt, ':gender', $gender);
+    oci_bind_by_name($stmt, ':religion', $religion);
+    oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
+    oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
+    oci_bind_by_name($stmt, ':blood_group', $blood_group);
+    oci_bind_by_name($stmt, ':marital_status', $marital_status);
+    oci_bind_by_name($stmt, ':village', $village);
+    oci_bind_by_name($stmt, ':thana', $thana);
+    oci_bind_by_name($stmt, ':district', $district);
+    oci_bind_by_name($stmt, ':height', $height);
+    oci_bind_by_name($stmt, ':weight', $weight);
+    oci_bind_by_name($stmt, ':living_status', $living_status);
+    oci_bind_by_name($stmt, ':parent_unit', $parent_unit);
+    oci_bind_by_name($stmt, ':mission', $mission);
+    oci_bind_by_name($stmt, ':med_category', $med_category);
+    oci_bind_by_name($stmt, ':no_of_children', $no_of_children);
+    oci_bind_by_name($stmt, ':date_retirement', $date_retirement);
+    oci_bind_by_name($stmt, ':personal_contact', $personal_contact);
+    oci_bind_by_name($stmt, ':emergency_contact', $emergency_contact);
 
     // Execute the INSERT statement for Soldier table
-    $resultSoldier = oci_execute($stmtSoldier);
-
-    // Prepare the INSERT statement for ContactNumber table
-    $queryContactNumber = "INSERT INTO ContactNumber (SoldierID, ContactNumber) VALUES (:soldier_id, :contact_number)";
-    $stmtContactNumber = oci_parse($conn, $queryContactNumber);
-
-    // Bind the parameters for ContactNumber table (contact number 1)
-    oci_bind_by_name($stmtContactNumber, ':soldier_id', $soldier_id);
-    oci_bind_by_name($stmtContactNumber, ':contact_number', $contact_number1);
-
-    // Execute the INSERT statement for ContactNumber table (contact number 1)
-    if ($contact_number1 != null) {
-        $resultContactNumber1 = oci_execute($stmtContactNumber);
-    }
-
-    // Bind the parameters for ContactNumber table (contact number 2)
-    oci_bind_by_name($stmtContactNumber, ':contact_number', $contact_number2);
-
-    // Execute the INSERT statement for ContactNumber table (contact number 2)
-    if ($contact_number2 != null) {
-        $resultContactNumber2 = oci_execute($stmtContactNumber);
-    }
-
-    if ($resultSoldier && ($resultContactNumber1 || $resultContactNumber2)) {
-        $_SESSION['success'] = "Soldier data inserted successfully. Please upload images. ";
-        header("Location: uploadimage.php?soldier=$soldier_id");
-
+    $result = oci_execute($stmt);
+    if ($result !== false) {
+        $_SESSION['success'] = "Soldier updated successfully.";
+        header("Location: profile.php?soldierid=$soldier_id");
+        exit();
     } else {
-        $e = oci_error($stmtSoldier);
-        $_SESSION['error'] = "Failed to insert soldier data: " . $e['message'];
+        $e = oci_error($stmt);
+        $_SESSION['error'] = "Failed to update soldier: " . $e['message'];
+        header("Location: edit_soldier.php?soldier=$soldier_id");
+        exit();
     }
-
-    oci_free_statement($stmtSoldier);
-    oci_free_statement($stmtContactNumber);
-    oci_close($conn);
+    oci_free_statement($stmt);
 }
 
 // Fetch data for the trade table
@@ -133,10 +123,8 @@ while ($row = oci_fetch_assoc($stmt)) {
 
 oci_free_statement($stmt);
 
-oci_close($conn);
 include '../includes/header.php';
 ?>
-
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
@@ -146,20 +134,9 @@ include '../includes/header.php';
     </div>
 </div>
 
-<?php
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-
-}
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']);
-}
-?>
-
 <section class="content">
     <div class="container-fluid">
-           <?php include '../includes/alert.php'; ?>
+        <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -169,8 +146,8 @@ if (isset($_SESSION['error'])) {
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="soldier_id">Soldier ID:</label>
-                                        <input type="text" name="soldier_id" id="soldier_id" class="form-control"
-                                            required>
+                                        <input type="number" name="soldier_id" id="soldier_id" class="form-control"
+                                            minlength="4" maxlength="7" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Name:</label>
@@ -294,18 +271,65 @@ if (isset($_SESSION['error'])) {
                                         <label for="district">District:</label>
                                         <input type="text" name="district" id="district" class="form-control" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="date_retirement">Date of Retirement:</label>
+                                        <input type="date" name="date_retirement" id="date_retirement"
+                                            class="form-control" required>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="contact_number1">Personal Number:</label>
-                                        <input type="text" name="contact_number1" id="contact_number1"
+                                        <label for="personal_contact">Personal Contact:</label>
+                                        <input type="text" name="personal_contact" id="personal_contact"
                                             class="form-control" required>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="contact_number2">Emergency Number:</label>
-                                        <input type="text" name="contact_number2" id="contact_number2"
-                                            class="form-control">
+                                        <label for="emergency_contact">Emergency Contact:</label>
+                                        <input type="text" name="emergency_contact" id="emergency_contact"
+                                            class="form-control" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="parent_unit">Parent Unit:</label>
+                                        <input type="text" name="parent_unit" id="parent_unit" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mission">Mission:</label>
+                                        <select name="mission" id="mission" class="form-control" required>
+                                            <option value="">Select Mission</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Not Completed">Not Completed</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="med_category">Medical Category:</label>
+                                        <select name="med_category" id="med_category" class="form-control" required>
+                                            <option value="">Select Medical Category</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="no_of_children">Number of Children:</label>
+                                        <select name="no_of_children" id="no_of_children" class="form-control" required>
+                                            <option value="">Select</option>
+                                            <option value="">N/A</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3">
+
                                 </div>
                             </div>
                             <input type="submit" name="submit" value="Submit" class="btn btn-primary">

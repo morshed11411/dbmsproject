@@ -9,7 +9,7 @@ if (isset($_SESSION['username'])) {
 if (isset($_POST['login'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
-   $query = "SELECT s.NAME, l.ROLE
+   $query = "SELECT s.SOLDIERID, s.NAME, l.ROLE
              FROM LOGIN l
              JOIN SOLDIER s ON l.SOLDIERID = s.SOLDIERID
              WHERE l.SOLDIERID = :username AND l.PASSWORD = :password";
@@ -21,6 +21,7 @@ if (isset($_POST['login'])) {
       // Check if a matching user is found
       if ($row = oci_fetch_assoc($stmt)) {
          // User is authenticated
+         $_SESSION['userid'] = $row['SOLDIERID'];
          $_SESSION['username'] = $row['NAME']; // Store NAME from SOLDIER table in the session
          $_SESSION['role'] = $row['ROLE'];
          $_SESSION['success'] = 'Logged in successfully.';

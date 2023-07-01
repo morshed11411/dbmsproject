@@ -68,19 +68,10 @@ include '../includes/header.php';
         </div>
     </div>
 </div>
-<?php 
-if (isset($_SESSION['success'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
-    unset($_SESSION['error']);
-}
-?>
+
 <section class="content">
     <div class="container-fluid">
-           <?php include '../includes/alert.php'; ?>
+        <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -114,7 +105,9 @@ if (isset($_SESSION['error'])) {
                                             <?php echo $soldier->Trade; ?>
                                         </td>
                                         <td>
-                                            <?php echo $soldier->Name; ?>
+                                            <a href="profile.php?soldierid=<?php echo $soldier->SoldierID; ?>">
+                                                <?php echo $soldier->Name; ?>
+                                            </a>
                                         </td>
                                         <td>
                                             <?php echo $soldier->Company; ?>
@@ -135,21 +128,44 @@ if (isset($_SESSION['error'])) {
                                                     Options
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    
-                                                    <a class="dropdown-item" href="send_leave.php?soldier=<?php echo $soldier->SoldierID; ?>">Send Leave</a>
-                                                    <a class="dropdown-item" href="add_disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Add Disposal</a>
-                                                    <a class="dropdown-item" href="manage_training.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage Training</a>
-                                                    <a class="dropdown-item" href="give_punishment.php?soldier=<?php echo $soldier->SoldierID; ?>">Give Punishment</a>
-                                                    <a class="dropdown-item" href="assign_appointment.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign Appointment</a>
-                                                    <a class="dropdown-item" href="assign_team.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign Team</a>
-                                                    <a class="dropdown-item" href="add_ere.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage ERE</a>
-                                                    <a class="dropdown-item" href="add_comd.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage Comd</a>
-                                                    <a class="dropdown-item" href="uploadimage.php?soldier=<?php echo $soldier->SoldierID; ?>">Upload Image</a>
+
+                                                    <a class="dropdown-item"
+                                                        href="send_leave.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
+                                                        Leave</a>
+                                                    <a class="dropdown-item"
+                                                        href="add_disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Add
+                                                        Disposal</a>
+                                                    <a class="dropdown-item"
+                                                        href="manage_training.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
+                                                        Training</a>
+                                                    <a class="dropdown-item"
+                                                        href="give_punishment.php?soldier=<?php echo $soldier->SoldierID; ?>">Give
+                                                        Punishment</a>
+                                                    <a class="dropdown-item"
+                                                        href="assign_appointment.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign
+                                                        Appointment</a>
+                                                    <a class="dropdown-item"
+                                                        href="assign_team.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign
+                                                        Team</a>
+                                                    <a class="dropdown-item"
+                                                        href="add_ere.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
+                                                        ERE</a>
+                                                    <a class="dropdown-item"
+                                                        href="add_comd.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
+                                                        Comd</a>
+                                                    <a class="dropdown-item"
+                                                        href="update_status.php?soldier=<?php echo $soldier->SoldierID; ?>">Update
+                                                        State</a>
+                                                    <a class="dropdown-item"
+                                                        href="uploadimage.php?soldier=<?php echo $soldier->SoldierID; ?>">Upload
+                                                        Image</a>
 
                                                 </div>
                                             </div>
-                                            <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>" class="btn btn-warning">Edit</a>
-                                            <a href="delete_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>" class="btn btn-danger">Delete</a>
+                                            <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="delete_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
+                                                class="btn btn-danger">Delete</a>
                                         </td>
                                         <td class="no-print d-none">
                                             <!-- Remarks -->
