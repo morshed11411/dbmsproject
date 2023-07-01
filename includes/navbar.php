@@ -14,7 +14,6 @@
       <label class="custom-control-label" for="darkModeToggle">Dark Mode</label>
     </div>
   </li>
-  <!-- Rest of the navbar code -->
 </ul>
 
   <!-- Right navbar links -->

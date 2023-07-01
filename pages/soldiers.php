@@ -157,8 +157,9 @@ include '../includes/header.php';
                                                         href="send_leave.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
                                                         Leave</a>
                                                     <a class="dropdown-item"
-                                                        href="add_disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Add
-                                                        Disposal</a>
+                                                        href="disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
+                                                        Report Sick
+                                                    </a>
                                                     <a class="dropdown-item"
                                                         href="manage_training.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
                                                         Training</a>

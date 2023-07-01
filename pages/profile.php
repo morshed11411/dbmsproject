@@ -124,7 +124,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <?php
                             } else {
                                 ?>
-                                <img src="../images/default_profile_picture.jpg" alt="Profile Picture" class="img-thumbnail"
+                                <img src="../images/default_profile_picture.png" alt="Profile Picture" class="img-thumbnail"
                                     style="max-height: 370px; width: auto;">
                                 <?php
                             }
