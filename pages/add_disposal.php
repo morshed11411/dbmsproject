@@ -251,7 +251,7 @@ include '../includes/header.php';
                 <div class="card">
                     <div class="card-body">
                         <h5>Disposal History</h5>
-                        <table class="table table-bordered">
+                        <table id="tablex" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Disposal ID</th>

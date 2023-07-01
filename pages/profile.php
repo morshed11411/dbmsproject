@@ -328,10 +328,10 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Punishment ID</th>
+                                                <th>ID</th>
                                                 <th>Punishment</th>
                                                 <th>Reason</th>
-                                                <th>Punishment Date</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -361,7 +361,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Disposal ID</th>
+                                                <th>ID</th>
                                                 <th>Disposal Type</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
@@ -475,7 +475,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Leave ID</th>
+                                                    <th>ID</th>
                                                     <th>Leave Type</th>
                                                     <th>Leave Start Date</th>
                                                     <th>Leave End Date</th>
