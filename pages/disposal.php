@@ -116,7 +116,7 @@ if (isset($_POST['delete_disposal_submit'])) {
 // Process the form submission to return from R/S
 if (isset($_POST['return_from_rs_submit'])) {
     $selectedDisposal = $_POST['selected_disposal'];
-    $days = $_POST['days'] - 2;
+    $days = $_POST['days'] - 1;
 
     // Update the disposal information for return from R/S
     $query = "UPDATE MEDICALINFO SET DISPOSALTYPE = :disposal_type, ENDDATE = TRUNC(SYSDATE) + :days WHERE SOLDIERID = :soldier_id AND ENDDATE IS NULL";
@@ -143,7 +143,7 @@ if (isset($_POST['return_from_rs_submit'])) {
 // Process the form submission to admit in CMH
 if (isset($_POST['admitted_in_cmh_submit'])) {
     // Update the disposal information for admitted in CMH
-    $query = "UPDATE MEDICALINFO SET DISPOSALTYPE = 'CMH' WHERE SOLDIERID = :soldier_id";
+    $query = "UPDATE MEDICALINFO SET DISPOSALTYPE = 'CMH' WHERE SOLDIERID = :soldier_id AND ENDDATE IS NULL";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':soldier_id', $soldierID);
 

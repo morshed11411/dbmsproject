@@ -102,6 +102,8 @@ if ($row = oci_fetch_assoc($stmt)) {
                 <h3>Soldier Profile </h3>
             </div>
             <div class="text-right">
+                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Image</a>
+
                 <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
@@ -156,10 +158,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <td>
                                     <?php
                                     $lastLeave = $soldier['LASTLEAVE'];
-                                    if ($lastLeave < 1 ) {
+                                    if ($lastLeave < 1) {
                                         $lastLeave = $lastLeave * 30 . ' days';
-                                    }
-                                    else{
+                                    } else {
                                         $lastLeave = $lastLeave . ' months';
                                     }
                                     echo $lastLeave;
@@ -415,7 +416,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                                 <div class="card-body">
                                                                     <h6>First Cycle</h6>
                                                                     <p>
-                                                                        <h4><?php echo $soldier['FIRSTCYCLE']; ?></h4>
+                                                                    <h4>
+                                                                        <?php echo $soldier['FIRSTCYCLE']; ?>
+                                                                    </h4>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -425,7 +428,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                                 <div class="card-body">
                                                                     <h6>Second Cycle</h6>
                                                                     <p>
-                                                                    <h4><?php echo $soldier['SECONDCYCLE']; ?></h4>
+                                                                    <h4>
+                                                                        <?php echo $soldier['SECONDCYCLE']; ?>
+                                                                    </h4>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -435,7 +440,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                                 <div class="card-body">
                                                                     <h6>Third Cycle</h6>
                                                                     <p>
-                                                                    <h4><?php echo $soldier['THIRDCYCLE']; ?></h4>
+                                                                    <h4>
+                                                                        <?php echo $soldier['THIRDCYCLE']; ?>
+                                                                    </h4>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -445,7 +452,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                                 <div class="card-body">
                                                                     <h6>Fourth Cycle</h6>
                                                                     <p>
-                                                                    <h4><?php echo $soldier['FOURTHCYCLE']; ?></h4>
+                                                                    <h4>
+                                                                        <?php echo $soldier['FOURTHCYCLE']; ?>
+                                                                    </h4>
                                                                     </p>
                                                                 </div>
                                                             </div>

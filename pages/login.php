@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
             <a href="index.php" class="h3"><b>UNIT MANAGEMENT SYSTEM</b></a>
          </div>
          <div class="card-body">
-         <?php include '../includes/alert.php'; ?>
+            <?php include '../includes/alert.php'; ?>
             <form method="post">
                <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Personal No" id="username" name="username">
