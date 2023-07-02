@@ -158,10 +158,10 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <td>
                                     <?php
                                     $lastLeave = $soldier['LASTLEAVE'];
-                                    if ($lastLeave < 1) {
-                                        $lastLeave = $lastLeave * 30 . ' days';
+                                    if ($lastLeave < 30) {
+                                        $lastLeave = $lastLeave . ' days';
                                     } else {
-                                        $lastLeave = $lastLeave . ' months';
+                                        $lastLeave = round($lastLeave / 30) . ' month, ' . $lastLeave % 30 . ' days';
                                     }
                                     echo $lastLeave;
                                     ?>
@@ -219,11 +219,12 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Parent Unit:</th>
+                                                    <th>Gender:</th>
                                                     <td>
-                                                        <?php echo $soldier['PARENTUNIT']; ?>
+                                                        <?php echo $soldier['GENDER']; ?>
                                                     </td>
                                                 </tr>
+                                                
                                                 <tr>
                                                     <th>Age:</th>
                                                     <td>
@@ -262,16 +263,29 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                         <?php echo $soldier['MEDCATEGORY']; ?>
                                                     </td>
                                                 </tr>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <table class="table">
                                                 <tr>
                                                     <th>Company:</th>
                                                     <td>
                                                         <?php echo $soldier['COMPANYNAME']; ?>
                                                     </td>
                                                 </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Personal Contact:</th>
+                                                    <td>
+                                                        <?php echo $soldier['PERSONALCONTACT']; ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Emergency Contact:</th>
+                                                    <td>
+                                                        <?php echo $soldier['EMERGENCYCONTACT']; ?>
+                                                    </td>
+                                                </tr>
+
                                                 <tr>
                                                     <th>Blood Group:</th>
                                                     <td>
@@ -291,12 +305,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                     </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <th>Gender:</th>
-                                                    <td>
-                                                        <?php echo $soldier['GENDER']; ?>
-                                                    </td>
-                                                </tr>
+
                                                 <tr>
                                                     <th>District:</th>
                                                     <td>
@@ -319,6 +328,12 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                     <th>Mission Status:</th>
                                                     <td>
                                                         <?php echo $soldier['MISSION']; ?>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Parent Unit:</th>
+                                                    <td>
+                                                        <?php echo $soldier['PARENTUNIT']; ?>
                                                     </td>
                                                 </tr>
 
