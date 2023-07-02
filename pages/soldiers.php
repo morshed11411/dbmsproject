@@ -8,7 +8,7 @@ $companyID = $_GET['company'] ?? null;
 $statusID = $_GET['status'] ?? null;
 
 // Build the SQL query based on the provided parameters
-$query = "SELECT S.SOLDIERID, R.RANK, T.TRADE, S.NAME, S.BLOODGROUP, C.COMPANYNAME, S.DISTRICT, ROUND((SYSDATE - S.DATEOFBIRTH)/365) AS AGE, ROUND((SYSDATE - S.DATEOFENROLL)/365) AS SERVICEAGE
+$query = "SELECT S.SOLDIERID, R.RANK, T.TRADE, S.NAME, S.MARITALSTATUS, S.BLOODGROUP, C.COMPANYNAME, S.DISTRICT, ROUND((SYSDATE - S.DATEOFBIRTH)/365) AS AGE, ROUND((SYSDATE - S.DATEOFENROLL)/365) AS SERVICEAGE
 FROM SOLDIER S
 LEFT JOIN RANKS R ON S.RANKID = R.RANKID
 LEFT JOIN TRADE T ON S.TRADEID = T.TRADEID
@@ -42,6 +42,7 @@ while ($row = oci_fetch_assoc($stmt)) {
     $soldier->District = $row['DISTRICT'];
     $soldier->Age = $row['AGE'];
     $soldier->ServiceAge = $row['SERVICEAGE'];
+    $soldier->MaritalStatus = $row['MARITALSTATUS'];
     $soldierList[] = $soldier;
 }
 
@@ -112,7 +113,8 @@ include '../includes/header.php';
                                     <th>Company</th>
                                     <th class="no-export">Blood Gp</th>
                                     <th class="no-export">District</th>
-                                    <th class="no-export">Age</th>
+                                    <th class="no-export ">Age</th>
+                                    <th class="no-export d-none">Marital Status</th>
                                     <th class="no-export">Action</th>
                                     <th class="no-print d-none">Remarks</th>
                                 </tr>
@@ -146,7 +148,9 @@ include '../includes/header.php';
                                         <td>
                                             <?php echo $soldier->Age; ?>
                                         </td>
-
+                                        <td class="d-none">
+                                            <?php echo $soldier->MaritalStatus; ?>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"
