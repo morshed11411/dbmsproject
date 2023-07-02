@@ -8,7 +8,7 @@ $companyID = $_GET['company'] ?? null;
 $statusID = $_GET['status'] ?? null;
 
 // Build the SQL query based on the provided parameters
-$query = "SELECT S.SOLDIERID, R.RANK, T.TRADE, S.NAME, C.COMPANYNAME, S.DISTRICT, ROUND((SYSDATE - S.DATEOFBIRTH)/365) AS AGE, ROUND((SYSDATE - S.DATEOFENROLL)/365) AS SERVICEAGE
+$query = "SELECT S.SOLDIERID, R.RANK, T.TRADE, S.NAME, S.BLOODGROUP, C.COMPANYNAME, S.DISTRICT, ROUND((SYSDATE - S.DATEOFBIRTH)/365) AS AGE, ROUND((SYSDATE - S.DATEOFENROLL)/365) AS SERVICEAGE
 FROM SOLDIER S
 LEFT JOIN RANKS R ON S.RANKID = R.RANKID
 LEFT JOIN TRADE T ON S.TRADEID = T.TRADEID
@@ -38,6 +38,7 @@ while ($row = oci_fetch_assoc($stmt)) {
     $soldier->Trade = $row['TRADE'];
     $soldier->Name = $row['NAME'];
     $soldier->Company = $row['COMPANYNAME'];
+    $soldier->BloodGroup = $row['BLOODGROUP'];
     $soldier->District = $row['DISTRICT'];
     $soldier->Age = $row['AGE'];
     $soldier->ServiceAge = $row['SERVICEAGE'];
@@ -104,14 +105,14 @@ include '../includes/header.php';
                         <table id="soldierTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Soldier ID</th>
+                                    <th>Pers No</th>
                                     <th>Rank</th>
                                     <th>Trade</th>
                                     <th>Name</th>
                                     <th>Company</th>
-                                    <th>District</th>
+                                    <th class="no-export">Blood Gp</th>
+                                    <th class="no-export">District</th>
                                     <th class="no-export">Age</th>
-                                    <th class="no-export">Service Age</th>
                                     <th class="no-export">Action</th>
                                     <th class="no-print d-none">Remarks</th>
                                 </tr>
@@ -137,14 +138,15 @@ include '../includes/header.php';
                                             <?php echo $soldier->Company; ?>
                                         </td>
                                         <td>
+                                            <?php echo $soldier->BloodGroup; ?>
+                                        </td>
+                                        <td>
                                             <?php echo $soldier->District; ?>
                                         </td>
                                         <td>
                                             <?php echo $soldier->Age; ?>
                                         </td>
-                                        <td>
-                                            <?php echo $soldier->ServiceAge; ?>
-                                        </td>
+
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"

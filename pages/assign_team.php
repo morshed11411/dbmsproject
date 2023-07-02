@@ -103,7 +103,7 @@ include '../includes/header.php';
             <p><strong>OIC Name:</strong>
                 <?php echo $team['TEAMOIC']; ?>
             </p>
-            <p><strong>Total Assigned Soldiers:</strong>
+            <p><strong>Total Member:</strong>
                 <?php echo $team['TOTAL_SOLDIERS']; ?>
             </p>
         </div>
@@ -112,7 +112,7 @@ include '../includes/header.php';
 
 <?php
 include '../includes/alert.php'
-?>
+    ?>
 
 <section class="content">
     <div class="container-fluid">
@@ -130,7 +130,6 @@ include '../includes/alert.php'
                                         <tr>
                                             <th>Soldier ID</th>
                                             <th>Rank</th>
-                                            <th>Trade</th>
                                             <th>Name</th>
                                             <th>Company</th>
                                             <th>Select</th>
@@ -144,9 +143,6 @@ include '../includes/alert.php'
                                                 </td>
                                                 <td>
                                                     <?php echo $soldier['RANK']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $soldier['TRADE']; ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $soldier['NAME']; ?>
