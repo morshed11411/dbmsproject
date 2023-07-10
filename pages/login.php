@@ -1,6 +1,5 @@
 <?php
 
-include '../includes/head.php';
 include '../includes/connection.php';
 if (isset($_SESSION['username'])) {
    header('Location: dashboard.php');

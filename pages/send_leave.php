@@ -46,18 +46,23 @@ if (isset($_POST['send_leave_submit'])) {
         oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
 
         $result = oci_execute($stmt);
+        // After successfully sending the leave request
         if ($result) {
             $_SESSION['success'] = "Leave request sent successfully.";
+
+            // Open leave certificate in a popup window
+            header("Location: leavecard.php?soldier_id=$soldierID");
+
         } else {
             $error = oci_error($stmt);
             $_SESSION['error'] = "Failed to send leave request: " . $error['message'];
         }
+
     }
 
     oci_free_statement($stmt);
     oci_close($conn);
 
-    header("Location: soldiers.php");
     exit();
 }
 

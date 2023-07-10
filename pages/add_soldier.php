@@ -255,7 +255,9 @@ include '../includes/header.php';
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height (ft/in):</label>
+
                                         <div class="row">
+
                                             <div class="col">
                                                 <select name="height_ft" id="height_ft" class="form-control">
                                                     <option value="5">5 ft</option>
@@ -287,8 +289,28 @@ include '../includes/header.php';
                                         <input type="text" name="thana" id="thana" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="district">District:</label>
-                                        <input type="text" name="district" id="district" class="form-control" required>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="divisionSelect">Division</label>
+                                                <select id="divisionSelect" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Barisal">Barisal</option>
+                                                    <option value="Chittagong">Chittagong</option>
+                                                    <option value="Dhaka">Dhaka</option>
+                                                    <option value="Khulna">Khulna</option>
+                                                    <option value="Mymensingh">Mymensingh</option>
+                                                    <option value="Rajshahi">Rajshahi</option>
+                                                    <option value="Rangpur">Rangpur</option>
+                                                    <option value="Sylhet">Sylhet</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="district">District</label>
+                                                <select id="district" class="form-control" disabled>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="date_retirement">Date of Retirement:</label>
@@ -360,5 +382,67 @@ include '../includes/header.php';
     </div>
 </section>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        var districtsByDivision = {
+            "Barisal": [
+                "Barguna", "Barisal", "Bhola", "Jhalokati",
+                "Patuakhali", "Pirojpur"
+            ],
+            "Chittagong": [
+                "Bandarban", "Brahmanbaria", "Chandpur", "Chittagong",
+                "Comilla", "Cox's Bazar", "Feni", "Khagrachhari",
+                "Lakshmipur", "Noakhali", "Rangamati"
+            ],
+            "Dhaka": [
+                "Dhaka", "Faridpur", "Gazipur", "Gopalganj",
+                "Kishoreganj", "Madaripur", "Manikganj", "Munshiganj",
+                "Narayanganj", "Narsingdi", "Rajbari", "Shariatpur",
+                "Tangail"
+            ],
+            "Khulna": [
+                "Bagerhat", "Chuadanga", "Jessore", "Jhenaidah",
+                "Khulna", "Kushtia", "Magura", "Meherpur",
+                "Narail", "Satkhira"
+            ],
+            "Mymensingh": [
+                "Jamalpur", "Mymensingh", "Netrokona", "Sherpur"
+            ],
+            "Rajshahi": [
+                "Bogra", "Joypurhat", "Naogaon", "Natore",
+                "Nawabganj", "Pabna", "Rajshahi", "Sirajganj"
+            ],
+            "Rangpur": [
+                "Dinajpur", "Gaibandha", "Kurigram", "Lalmonirhat",
+                "Nilphamari", "Panchagarh", "Rangpur", "Thakurgaon"
+            ],
+            "Sylhet": [
+                "Habiganj", "Moulvibazar", "Sunamganj", "Sylhet"
+            ]
+        };
+
+        $("#divisionSelect").change(function () {
+            var divisionId = $(this).val();
+            var districts = districtsByDivision[divisionId];
+            var districtSelect = $("#district");
+
+            districtSelect.empty();
+
+            if (districts) {
+                districtSelect.prop("disabled", false);
+                $.each(districts, function (index, district) {
+                    districtSelect.append($('<option></option>').attr('value', district).text(district));
+                });
+            } else {
+                districtSelect.prop("disabled", true);
+                districtSelect.append($('<option></option>').attr('value', '').text('Select District'));
+            }
+        });
+    });
+</script>
 <!-- Page content -->
 <?php include '../includes/footer.php'; ?>

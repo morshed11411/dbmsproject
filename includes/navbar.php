@@ -56,8 +56,8 @@
   <a href="dashboard.php" class="brand-link">
     <span class="brand-text font-weight-light">Unit Management System</span>
   </a>
-  <a href="profile.php" class="brand-link" style="padding-left: 30px;">
-    <span class="brand-text font-weight-light">Welcome,
+  <a href="profile.php" class="brand-link" style="padding-left: 10px;">
+    <span class="brand-text font-weight-light">
       <?php echo $username; ?>
     </span>
   </a>
