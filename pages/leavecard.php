@@ -181,7 +181,8 @@ $base64Image = base64_encode($imageData);
                             <p style="margin-top: 0px; margin-bottom: 0px;">_____________________________</p>
 
                             <p>
-                                <?php echo $_SESSION['username']; ?>
+                                <?php echo $_SESSION['username']; ?> <br> 
+                                Date: <?php echo date('d M Y'); ?>
                             </p>
                         </div>
                     </div>
