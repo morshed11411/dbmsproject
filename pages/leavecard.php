@@ -69,13 +69,14 @@ $base64Image = base64_encode($imageData);
 
 ?>
 <html>
+
 <head>
     <title>Leave Certificate</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin-top: auto;
-            
+
             padding-top: 30px;
         }
 
@@ -89,7 +90,7 @@ $base64Image = base64_encode($imageData);
         }
 
         .sign-block {
-            margin-top: 50px;
+            margin-top: 30px;
             text-align: right;
         }
 
@@ -106,6 +107,7 @@ $base64Image = base64_encode($imageData);
         }
 
         @media print {
+
             /* Hide print button on print view */
             .print-button {
                 display: none;
@@ -119,20 +121,20 @@ $base64Image = base64_encode($imageData);
         <table id="table" class="table">
             <tr>
                 <td colspan="2">
+                    <h6 style="text-align: center;">RESTRICTED</h6>
+                    <br>
                     <u>
+
                         <h3 style="text-align: center;">E-Leave Certificate</h3>
                     </u>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode"
-                        style="max-width: 100px;">
-                </td>
-                <td>
+
+                <td colspan="2">
                     <div class="leave-info">
                         <p>
-                            This is to certify that Soldier ID:
+                            This is to certify that No:
                             <strong>
                                 <?php echo $soldier['SOLDIERID']; ?>
                             </strong>,
@@ -165,7 +167,11 @@ $base64Image = base64_encode($imageData);
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: right;">
+                <td>
+                    <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode"
+                        style="max-width: 140px;">
+                </td>
+                <td style="text-align: right;">
                     <div class="sign-block" style="text-align: right;">
                         <div style="display: inline-block; text-align: center;">
                             <?php if ($uploadedImages && $uploadedImages['SIGNATURE_PATH']): ?>
@@ -179,6 +185,13 @@ $base64Image = base64_encode($imageData);
                             </p>
                         </div>
                     </div>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h6 style="text-align: center;">RESTRICTED</h6>
                 </td>
             </tr>
         </table>
