@@ -117,12 +117,12 @@ $base64Image = base64_encode($imageData);
 </head>
 
 <body>
+    <?php for ($i = 1; $i <= 3; $i++) {?>
     <div class="container">
         <table id="table" class="table">
             <tr>
                 <td colspan="2">
                     <h6 style="text-align: center;">RESTRICTED</h6>
-                    <br>
                     <u>
 
                         <h3 style="text-align: center;">E-Leave Certificate</h3>
@@ -205,6 +205,10 @@ $base64Image = base64_encode($imageData);
             window.print();
         };
     </script>
+                        <hr>
+
+        <?php }?>
+
 </body>
 
 </html>
