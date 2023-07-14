@@ -148,7 +148,7 @@ if ($nextMonth === 13) {
                 <tbody>
                     <?php
                     // Initialize the day counter
-                    $dayCounter = 1;
+                    $dayCounter = 0;
 
                     // Loop through each row
                     for ($row = 1; $row <= $totalRows; $row++) {
