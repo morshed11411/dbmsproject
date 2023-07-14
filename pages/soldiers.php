@@ -193,13 +193,28 @@ include '../includes/header.php';
 
                                                 </div>
                                             </div>
-                                            <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
-                                                class="btn btn-warning">Edit</a>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-warning dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    More
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
+                                                        class="dropdown-item text-warning"><i class="fas fa-pen"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Edit</a>
+                                                        <div class="dropdown-divider"></div>
+
+                                                    <button type="button" class="dropdown-item text-danger"
+                                                        data-toggle="modal"
+                                                        data-target="#deleteSoldierModal-<?php echo $soldier->SoldierID; ?>">
+                                                        <i class="fas fa-trash"></i> &nbsp;&nbsp;&nbsp;&nbsp; Delete
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
                                             <!-- Delete Button -->
-                                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#deleteSoldierModal-<?php echo $soldier->SoldierID; ?>">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </button>
+
                                             <!-- Delete Soldier Modal -->
                                             <div class="modal fade"
                                                 id="deleteSoldierModal-<?php echo $soldier->SoldierID; ?>" tabindex="-1"
@@ -254,6 +269,7 @@ include '../includes/header.php';
 <?php include '../includes/footer.php'; ?>
 
 <script>
+
     $(document).ready(function () {
         var table = $('#soldierTable').DataTable({
             "responsive": true,

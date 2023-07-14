@@ -84,7 +84,7 @@ include '../includes/header.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Company ID</th>
@@ -97,20 +97,25 @@ include '../includes/header.php';
                                 $query = "SELECT * FROM COMPANY ORDER BY COMPANYID";
                                 $stmt = oci_parse($conn, $query);
                                 oci_execute($stmt);
-
+                                $i=1;
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['COMPANYID'] . "</td>";
-                                    echo "<td>" . $row['COMPANYNAME'] . "</td>";
+                                    echo '<td>' . $i . '</td>';
+                                    echo '<td><a href="soldiers.php?company=' . $row['COMPANYID'] . '">';
+                                    echo '<div style="height:100%;width:100%">';
+                                    echo $row['COMPANYNAME'];
+                                    echo '</div>';
+                                    echo '</a></td>';
                                     echo "<td>";
                                     echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editCompanyModal-' . $row['COMPANYID'] . '">
                                             <i class="fas fa-edit"></i> Edit
-                                        </button>';
+                                          </button>';
                                     echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCompanyModal-' . $row['COMPANYID'] . '">
                                             <i class="fas fa-trash"></i> Delete
-                                        </button>';
+                                          </button>';
                                     echo "</td>";
                                     echo "</tr>";
+                                    
 
                                     // Edit Company Modal
                                     echo '<div class="modal fade" id="editCompanyModal-' . $row['COMPANYID'] . '" tabindex="-1" role="dialog" aria-labelledby="editCompanyModalLabel" aria-hidden="true">
@@ -156,6 +161,7 @@ include '../includes/header.php';
                                             </div>
                                         </div>
                                     </div>';
+                                    $i++;
                                 }
 
                                 oci_free_statement($stmt);

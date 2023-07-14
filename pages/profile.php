@@ -102,9 +102,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                 <h3>Soldier Profile </h3>
             </div>
             <div class="text-right">
-                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Image</a>
-
-                <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
+            <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
+                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>" class="btn btn-success">Image</a>
+                <a href="uploadsignature.php?soldier=<?php echo $soldierId; ?>" class="btn btn-warning">Signature</a>
             </div>
         </div>
     </div>
@@ -117,6 +117,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body text-center">
+                        <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>">
                             <?php
                             $profilePicture = $soldier['PROFILEPICTURE'];
                             if (!empty($profilePicture)) {
@@ -131,6 +132,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <?php
                             }
                             ?>
+                            </a>
                         </div>
                         <table class="table">
                             <tr>
