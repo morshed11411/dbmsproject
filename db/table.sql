@@ -222,3 +222,13 @@ CREATE TABLE SOLDIERTEAM (
 
 ALTER TABLE UPLOADED_IMAGES ADD (SIGNATURE_PATH VARCHAR2(255));
 
+CREATE TABLE events (
+  event_id NUMBER GENERATED ALWAYS AS IDENTITY,
+  event_date DATE,
+  event_name VARCHAR2(100),
+  event_time VARCHAR2(20),
+  event_location VARCHAR2(100),
+  attendees_responsibility VARCHAR2(100),
+  remarks VARCHAR2(200),
+  CONSTRAINT events_pk PRIMARY KEY (event_id)
+);
