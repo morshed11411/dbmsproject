@@ -29,10 +29,10 @@ $userid = $_SESSION['userid'];
 <!DOCTYPE html>
 <html lang="en">
 <?php include 'head.php'; ?>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <?php include 'navbar.php'; ?>
   <div class="wrapper">
-    <br><br>
+
     <!-- Content Wrapper -->
     <div class="content-wrapper">
       <div class="content">

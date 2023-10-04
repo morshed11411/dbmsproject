@@ -1,7 +1,0 @@
-{
-    "name": "ums",
-    "description": "University Management System",
-    "require": {
-        "picqer/php-barcode-generator": "^2.0"
-    }
-  }

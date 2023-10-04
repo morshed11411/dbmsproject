@@ -11,13 +11,9 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-    <li class="nav-item">
-      <button id="fullscreenButton" class="btn">
-        <i class="fas fa-expand"></i>
-      </button>
-    </li>
+
   </ul>
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-1">
     <li class="nav-item">
       <div class="custom-control custom-switch d-flex align-items-center">
         <input type="checkbox" class="custom-control-input" id="darkModeToggle">
@@ -32,11 +28,11 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-
+    <a href="profile.php"><img src="../images/default_profile_picture.png" alt="Logo" class="brand-image mr-1"></a>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Profile
+        <?php echo $username; ?>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="profile.php">View Profile</a>
@@ -52,25 +48,28 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
 
 </nav>
 <!-- /.navbar -->
+
+
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
 
-  <a href="dashboard.php" class="brand-link d-flex align-items-center">
-    <img src="../assets/favicon1.png" alt="Logo" class="brand-image" style="opacity: .8; width: 160px; height: 160px;">
+  <a href="dashboard.php" class="brand-link logo-switch d-flex align-items-center">
+    <img src="../assets/logo-s.png" alt="AdminLTE Docs Logo Small" class="brand-image-xl logo-xs">
+
+    <img src="../assets/logo-l.png" alt="AdminLTE Docs Logo Large" class="brand-image-xs logo-xl " style="left: 60px">
   </a>
 
   <!-- 
-
+  <a href="dashboard.php" class="brand-link d-flex align-items-center">
+    <img src="../assets/favicon1.png" alt="Logo" class="brand-image" style="opacity: .8; width: 160px; height: 160px;">
+  </a>
     <a href="dashboard.php" class="brand-link d-flex align-items-center">
         <img src="../assets/logo.png" alt="Profile Picture" class="brand-image"
             style="opacity: .8; width: 160px; height: 160px; margin: 0; padding: 0;">
     </a>
 
 -->
-  <a href="profile.php" class="brand-link mt-3">
-    <span class="brand-text font-weight-light">
-      <?php echo $username; ?>
-    </span>
-  </a>
+
 
 
   <!-- Sidebar -->
@@ -89,8 +88,6 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
             </a>
           </li>
 
-
-
           <li class="nav-item <?php echo strpos($currentPage, 'soldiers.php') !== false ? 'active' : ''; ?>">
             <a class="nav-link" href="soldiers.php">
               <i class="fas fa-users nav-icon"></i>
@@ -106,7 +103,6 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
               </p>
             </a>
           </li>
-<!--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-chalkboard-teacher nav-icon"></i>
@@ -315,9 +311,15 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
                   <p>Manage Access</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="access.php" class="nav-link sublink">
+                  <i class="fas fa-cog nav-icon"></i>
+                  <p>Application Settings</p>
+                </a>
+              </li>
             </ul>
           </li>
-    -->
+
           <?php
     }
 

@@ -152,7 +152,7 @@ include '../includes/header.php';
                                             <?php echo $soldier->MaritalStatus; ?>
                                         </td>
                                         <td>
-                                            
+                                            <!--
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,7 +194,7 @@ include '../includes/header.php';
 
                                                 </div>
                                             </div>
-                                
+                                -->
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-warning dropdown-toggle"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
