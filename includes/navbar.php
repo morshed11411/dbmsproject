@@ -1,8 +1,31 @@
 <?php
-// Get the current page name from the URL
-$currentUrl = $_SERVER['REQUEST_URI'];
-$currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
+include '../includes/connection.php';
+
+// Check if the soldier ID is present in the session or URL parameter
+if (isset($_SESSION['userid'])) {
+    $soldierId = $_SESSION['userid'];
+
+    // Build the SQL query to retrieve the profile picture
+    $query = "SELECT PROFILEPICTURE FROM soldier_view WHERE SOLDIERID = :soldierId";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':soldierId', $soldierId);
+    oci_execute($stmt);
+
+    // Fetch the result row
+    $row = oci_fetch_assoc($stmt);
+
+    // Check if a profile picture is found
+    if ($row && !empty($row['PROFILEPICTURE'])) {
+        $profilePicture = $row['PROFILEPICTURE'];
+    } else {
+        $profilePicture = '../images/default_profile_picture.png';
+    }
+} else {
+    // Set a default profile picture path if the soldier ID is not present in the session
+    $profilePicture = '../images/default_profile_picture.png';
+}
 ?>
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
   <!-- Navbar content -->
 
@@ -11,30 +34,30 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-
   </ul>
+
+  <!-- Display "Dark Mode" on mobile devices -->
   <ul class="navbar-nav ml-1">
     <li class="nav-item">
       <div class="custom-control custom-switch d-flex align-items-center">
         <input type="checkbox" class="custom-control-input" id="darkModeToggle">
-        <label class="custom-control-label" for="darkModeToggle">Dark Mode</label>
+        <label class="custom-control-label d-none d-md-block" for="darkModeToggle">Dark Mode</label>
+        <label class="custom-control-label d-md-none" for="darkModeToggle">Profile</label>
       </div>
-
-
     </li>
-
-
   </ul>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <a href="profile.php"><img src="../images/default_profile_picture.png" alt="Logo" class="brand-image mr-1"></a>
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <?php echo $username; ?>
+        <div class="profile-info mr-3">
+          <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-image">
+          <?php echo $username; ?>
+        </div>
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <div class="dropdown-menu ml-5" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="profile.php">View Profile</a>
         <a class="dropdown-item" href="change_password.php">Change Password</a>
         <div class="dropdown-divider"></div>
@@ -45,7 +68,6 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
       </div>
     </li>
   </ul>
-
 </nav>
 <!-- /.navbar -->
 
@@ -54,23 +76,9 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
 <aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
 
   <a href="dashboard.php" class="brand-link logo-switch d-flex align-items-center">
-    <img src="../assets/logo-s.png" alt="AdminLTE Docs Logo Small" class="brand-image-xl logo-xs">
-
-    <img src="../assets/logo-l.png" alt="AdminLTE Docs Logo Large" class="brand-image-xs logo-xl " style="left: 60px">
+    <img src="../assets/logo-s.png" alt="logo" class="brand-image-xl logo-xs">
+    <img src="../assets/logo-l.png" alt="logo" class="brand-image-xs logo-xl " style="left: 60px">
   </a>
-
-  <!-- 
-  <a href="dashboard.php" class="brand-link d-flex align-items-center">
-    <img src="../assets/favicon1.png" alt="Logo" class="brand-image" style="opacity: .8; width: 160px; height: 160px;">
-  </a>
-    <a href="dashboard.php" class="brand-link d-flex align-items-center">
-        <img src="../assets/logo.png" alt="Profile Picture" class="brand-image"
-            style="opacity: .8; width: 160px; height: 160px; margin: 0; padding: 0;">
-    </a>
-
--->
-
-
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -323,11 +331,45 @@ $currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
           <?php
     }
 
-    if (($_SESSION['role'] == 'admin') || ($_SESSION['role'] == 'Soldier')) {
+    if ( $_SESSION['role'] == 'user'){
       ?>
+       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+          <li class="nav-item <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
+            <a href="dashboard.php" class="nav-link">
+              <i class="fas fa-tachometer-alt nav-icon"></i>
+              <p> ড্যাশবোর্ড</p>
+            </a>
+          </li>
+
+          <li class="nav-item <?php echo strpos($currentPage, 'soldiers.php') !== false ? 'active' : ''; ?>">
+            <a class="nav-link" href="soldiers.php">
+              <i class="fas fa-users nav-icon"></i>
+              <p>জনবল</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="company.php" class="nav-link">
+              <i class="fas fa-building nav-icon"></i>
+              <p>
+                কোম্পানি
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="company.php" class="nav-link">
+              <i class="fas fa-building nav-icon"></i>
+              <p>
+                প্রশিক্ষণ
+              </p>
+            </a>
+          </li>
+
           <?php
     }
     ?>
+     
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

@@ -60,3 +60,22 @@
         width: 100px; /* Adjust the width as needed */
         height: 100px; /* Adjust the height as needed */
      }
+
+
+     .profile-info {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .profile-image {
+      width: 30px; /* Adjust the size of the profile picture as needed */
+      height: 30px; /* Adjust the size of the profile picture as needed */
+      border-radius: 50%; /* Create a round frame for the picture */
+      margin-right: 8px; /* Add some spacing between the picture and the name */
+    }
+    
+    .profile-info:hover {
+      color: rgb(90, 90, 90); /* Add underline effect on hover to indicate clickability */
+    }
+    

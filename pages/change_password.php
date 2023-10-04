@@ -19,7 +19,10 @@ if (isset($_POST['submit'])) {
 
     if ($stored_password === $current_password) {
         // Current password is correct, proceed with changing the password
-        if ($new_password === $confirm_password) {
+        if ($new_password === $current_password) {
+            // New password is the same as the current password
+            $error_message = "New password cannot be the same as the current password.";
+        } elseif ($new_password === $confirm_password) {
             // New password and confirm password match
             $update_query = "UPDATE LOGIN SET PASSWORD = :new_password WHERE SOLDIERID = :soldier_id";
             $update_stmt = oci_parse($conn, $update_query);
@@ -32,9 +35,9 @@ if (isset($_POST['submit'])) {
                 session_unset();
                 session_destroy();
                 session_start();
-
-                $_SESSION['message'] = "Password changed successfully. Please login again.";
-
+    
+                $_SESSION['success'] = "Password changed successfully.\nPlease login again.";
+    
                 header("location:../index.php");
                 exit();
             } else {
@@ -46,6 +49,7 @@ if (isset($_POST['submit'])) {
     } else {
         $error_message = "Invalid current password. Please try again.";
     }
+    
 }
 
 include '../includes/header.php';

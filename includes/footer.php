@@ -4,9 +4,9 @@
 </div>
 
 <footer class="main-footer">
-    <strong>Unit Personnel Coodination System v1.0 &copy; 2023</strong>
+    <strong>Unit Management System v2.0 &copy; 2023</strong>
 </footer>
-<?php oci_close($conn); ?>
+
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
@@ -23,7 +23,7 @@
 <script src="../js/buttons.colVis.min.js"></script>
 <script src="../js/adminlte.min.js"></script>
 <script src="../js/chart.js"></script>
-<script src="../js/script.js"></script>
+<script src="../js/scripts.js"></script>
 
 
 </body>

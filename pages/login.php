@@ -44,11 +44,11 @@ if (isset($_POST['login'])) {
 <html>
 <?php include '../includes/head.php'; ?>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);">
    <div class="login-box">
       <div class="card card-outline card-primary">
          <div class="card-header text-center">
-         <div class="logo-container">
+            <div class="logo-container">
                <img src="../assets/logo.png" alt="Logo" class="logo img-circle img-responsive">
             </div>
             <a href="#" class="h3"><b>UNIT PERSONNEL COORDINATION SYSTEM</b></a>
@@ -67,20 +67,45 @@ if (isset($_POST['login'])) {
                <div class="input-group mb-3">
                   <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                   <div class="input-group-append">
-                     <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                     </div>
+                     <span class="input-group-text">
+                        <i class="fas fa-eye-slash" id="togglePassword"></i>
+                     </span>
                   </div>
                </div>
+
+
+
                <div class="row">
-                  <div class="col-5 ">
-                     <input class="btn btn-primary btn-block " type="submit" name="login" value="Log in">
+                  <div class="col-12 text-center"> <!-- Center the button -->
+                     <input class="btn btn-primary btn-block w-100" type="submit" name="login" value="Log in">
                   </div>
                </div>
             </form>
          </div>
       </div>
    </div>
+
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         const passwordInput = document.getElementById("password");
+         const togglePasswordIcon = document.getElementById("togglePassword");
+
+         togglePasswordIcon.addEventListener("click", function () {
+            if (passwordInput.type === "password") {
+               passwordInput.type = "text";
+               togglePasswordIcon.classList.remove("fa-eye-slash");
+               togglePasswordIcon.classList.add("fa-eye");
+            } else {
+               passwordInput.type = "password";
+               togglePasswordIcon.classList.remove("fa-eye");
+               togglePasswordIcon.classList.add("fa-eye-slash");
+            }
+         });
+      });
+   </script>
+
+
 </body>
+
 
 </html>

@@ -98,10 +98,66 @@ include '../includes/header.php';
 <section class="content">
     <div class="container-fluid">
         <?php include '../includes/alert.php'; ?>
+        <?php
+        // ... (Your existing code above) ...
+        
+        // Add a function to get the rank-wise soldier count
+        function getRankWiseSoldierCount($conn)
+        {
+            $rankCounts = array();
+            $query = "SELECT R.RANK, COUNT(S.SOLDIERID) AS COUNT
+              FROM RANKS R
+              LEFT JOIN SOLDIER S ON S.RANKID = R.RANKID
+              GROUP BY R.RANK";
+            $stmt = oci_parse($conn, $query);
+            oci_execute($stmt);
+
+            while ($row = oci_fetch_assoc($stmt)) {
+                $rankCounts[$row['RANK']] = $row['COUNT'];
+            }
+
+            oci_free_statement($stmt);
+
+            return $rankCounts;
+        }
+
+        // Get rank-wise soldier count
+        $rankCounts = getRankWiseSoldierCount($conn);
+        ?>
+
+        <!-- Add a new table to display rank-wise soldier count -->
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <?php foreach ($rankCounts as $rank => $count): ?>
+                                        <th>
+                                            <a href="soldiers.php?rank=<?php echo urlencode($rank); ?>">
+                                                <?php echo $rank; ?>
+                                            </a>
+                                        </th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <?php foreach ($rankCounts as $count): ?>
+                                        <td>
+                                            <?php echo $count; ?>
+                                        </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
                         <table id="soldierTable" class="table table-bordered table-striped">
                             <thead>
@@ -152,7 +208,7 @@ include '../includes/header.php';
                                             <?php echo $soldier->MaritalStatus; ?>
                                         </td>
                                         <td>
-                                            
+
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,7 +250,7 @@ include '../includes/header.php';
 
                                                 </div>
                                             </div>
-                                
+
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-warning dropdown-toggle"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -202,9 +258,10 @@ include '../includes/header.php';
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a href="edit_soldier.php?soldier=<?php echo $soldier->SoldierID; ?>"
-                                                        class="dropdown-item text-warning"><i class="fas fa-pen"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        class="dropdown-item text-warning"><i
+                                                            class="fas fa-pen"></i>&nbsp;&nbsp;&nbsp;&nbsp;
                                                         Edit</a>
-                                                        <div class="dropdown-divider"></div>
+                                                    <div class="dropdown-divider"></div>
 
                                                     <button type="button" class="dropdown-item text-danger"
                                                         data-toggle="modal"
