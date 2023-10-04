@@ -1,3 +1,8 @@
+<?php
+// Get the current page name from the URL
+$currentUrl = $_SERVER['REQUEST_URI'];
+$currentPage = substr($currentUrl, strrpos($currentUrl, '/') + 1);
+?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
   <!-- Navbar content -->
 
@@ -27,7 +32,7 @@
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    
+
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -49,18 +54,24 @@
 <!-- /.navbar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 position-fixed">
 
-  <!--   <a href="#" class="navbar-brand">
-    <img src="../assets/favicon1.png" alt="Logo" class="brand-image">
-  </a> -->
-
-  <a href="dashboard.php" class="brand-link">
-    <span class="brand-text font-weight-light">Unit Management System</span>
+  <a href="dashboard.php" class="brand-link d-flex align-items-center">
+    <img src="../assets/favicon1.png" alt="Logo" class="brand-image" style="opacity: .8; width: 160px; height: 160px;">
   </a>
-  <a href="profile.php" class="brand-link" style="padding-left: 10px;">
+
+  <!-- 
+
+    <a href="dashboard.php" class="brand-link d-flex align-items-center">
+        <img src="../assets/logo.png" alt="Profile Picture" class="brand-image"
+            style="opacity: .8; width: 160px; height: 160px; margin: 0; padding: 0;">
+    </a>
+
+-->
+  <a href="profile.php" class="brand-link mt-3">
     <span class="brand-text font-weight-light">
       <?php echo $username; ?>
     </span>
   </a>
+
 
   <!-- Sidebar -->
   <div class="sidebar">
@@ -71,20 +82,19 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-          <li class="nav-item">
-            <a href="dashboard.php" class="nav-link active">
+          <li class="nav-item <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
+            <a href="dashboard.php" class="nav-link">
               <i class="fas fa-tachometer-alt nav-icon"></i>
               <p>Dashboard</p>
             </a>
           </li>
 
 
-          <li class="nav-item">
-            <a href="soldiers.php" class="nav-link">
+
+          <li class="nav-item <?php echo strpos($currentPage, 'soldiers.php') !== false ? 'active' : ''; ?>">
+            <a class="nav-link" href="soldiers.php">
               <i class="fas fa-users nav-icon"></i>
-              <p>
-                Soldier
-              </p>
+              <p>Soldiers</p>
             </a>
           </li>
 
@@ -96,7 +106,7 @@
               </p>
             </a>
           </li>
-
+<!--
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-chalkboard-teacher nav-icon"></i>
@@ -307,6 +317,7 @@
               </li>
             </ul>
           </li>
+    -->
           <?php
     }
 

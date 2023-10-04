@@ -4,10 +4,22 @@ Project starts again
 
 Task today
 ----------
-1. Change Name
+1. Change Namemp
 2. Update a few pages 
 3. Create a list of detail feeatures of the project 
 4. Create a ms project for the UPCS
 
 
 Offically the name has been updated to UNIT PERSONNEL COORDINATION SYSTEM (UPCS)
+
+
+Quick Fix
+-----------
+1. Fix the phone number from NUMBER to VARCHAR2
+2. In edit page the height is in CM -> Fix to ft inch
+3. Fix the district in the add soldier page
+
+
+Major Fix
+---------
+1. Dark Mode keeps on flashing (?) -> attempt to update the scripting?

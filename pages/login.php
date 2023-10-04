@@ -48,7 +48,10 @@ if (isset($_POST['login'])) {
    <div class="login-box">
       <div class="card card-outline card-primary">
          <div class="card-header text-center">
-            <a href="index.php" class="h3"><b>UNIT MANAGEMENT SYSTEM</b></a>
+         <div class="logo-container">
+               <img src="../assets/logo.png" alt="Logo" class="logo img-circle img-responsive">
+            </div>
+            <a href="#" class="h3"><b>UNIT PERSONNEL COORDINATION SYSTEM</b></a>
          </div>
          <div class="card-body">
             <?php include '../includes/alert.php'; ?>
@@ -70,8 +73,8 @@ if (isset($_POST['login'])) {
                   </div>
                </div>
                <div class="row">
-                  <div class="col-5">
-                     <input class="btn btn-primary btn-block" type="submit" name="login" value="Log in">
+                  <div class="col-5 ">
+                     <input class="btn btn-primary btn-block " type="submit" name="login" value="Log in">
                   </div>
                </div>
             </form>
