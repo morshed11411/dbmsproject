@@ -23,3 +23,21 @@ Quick Fix
 Major Fix
 ---------
 1. Dark Mode keeps on flashing (?) -> attempt to update the scripting?
+
+
+12/10/2023
+----------
+
+
+lets set the role based access
+------------------------------
+1. Admin can do everything
+2. Manager can manage soldiers, projects and documents
+3. Soldier can only view his own profile
+
+1. Today I will fix the leave management module page
+2. Leave has following funtionality
+3. CSM can request leave for a soldier it will be handled by leave_request.php
+    a. At the top of the page it will show the  
+    The page will have all soldiers and their last leave date and duration 
+4. 
