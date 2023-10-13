@@ -15,59 +15,86 @@ if (isset($_GET['soldier'])) {
 
     $soldier = oci_fetch_assoc($stmt);
 
-    // Redirect if soldier not found
-    if (!$soldier) {
-        header("Location: soldiers.php");
-        exit();
-    }
-
     oci_free_statement($stmt);
-} else {
-    header("Location: soldiers.php");
-    exit();
 }
 
 // Process the form submission to send a leave request
 if (isset($_POST['send_leave_submit'])) {
     $leaveType = $_POST['leave_type'];
-    $leaveStartDate = date('Y-m-d'); // System date
+    $leaveStartDate = $_POST['leave_start_date'];
     $leaveEndDate = $_POST['leave_end_date'];
-    if ($leaveEndDate < $leaveStartDate) {
-        // Display error message
-        $_SESSION['error'] = "Error: Leave end date cannot be in the past.";
-    } else {
+    $leaveRequestDate = date('Y-m-d'); // System date
+    $status = 'Pending';
 
+    if ($leaveStartDate < date('Y-m-d')) {
+        // Display error message
+        $_SESSION['error'] = "Error: Leave start date cannot be in the past.";
+        header("Location: send_leave.php?soldier=$soldierID");
+        exit();
+    } elseif ($leaveEndDate < $leaveStartDate) {
+        // Display error message
+        $_SESSION['error'] = "Error: Leave end date cannot be before the start date.";
+        header("Location: send_leave.php?soldier=$soldierID");
+        exit();
+    } else {
         // Insert leave request into the database
-        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'))";
+        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status)";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
         oci_bind_by_name($stmt, ':leave_type', $leaveType);
         oci_bind_by_name($stmt, ':leave_start_date', $leaveStartDate);
         oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
+        oci_bind_by_name($stmt, ':leave_request_date', $leaveRequestDate);
+        oci_bind_by_name($stmt, ':status', $status);
 
         $result = oci_execute($stmt);
-        // After successfully sending the leave request
+        
         if ($result) {
             $_SESSION['success'] = "Leave request sent successfully.";
 
             // Open leave certificate in a popup window
-            header("Location: leavecard.php?soldier_id=$soldierID");
-
+            header("Location: send_leave.php?soldier=$soldierID");
+            exit();
         } else {
             $error = oci_error($stmt);
             $_SESSION['error'] = "Failed to send leave request: " . $error['message'];
+            header("Location: send_leave.php?soldier=$soldierID");
+            exit();
         }
+    }
 
+    oci_free_statement($stmt);
+    oci_close($conn);
+}
+
+// Handle cancel leave request or delete leave request
+if (isset($_GET['leave_id'])) {
+    $leaveIDToCancel = $_GET['leave_id'];
+
+    // Delete the leave record
+    $query = "DELETE FROM LEAVEMODULE WHERE LEAVEID = :leave_id";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':leave_id', $leaveIDToCancel);
+
+    $result = oci_execute($stmt);
+
+    if ($result) {
+        $_SESSION['success'] = "Leave request has been canceled and deleted.";
+    } else {
+        $error = oci_error($stmt);
+        $_SESSION['error'] = "Failed to cancel and delete leave request: " . $error['message'];
     }
 
     oci_free_statement($stmt);
     oci_close($conn);
 
+    // Redirect back to the same page
+    header("Location: send_leave.php?soldier=$soldierID");
     exit();
 }
 
 // Fetch leave history of the soldier
-$query = "SELECT * FROM LEAVEMODULE WHERE SOLDIERID = :soldier_id ORDER BY LEAVESTARTDATE DESC";
+$query = "SELECT LEAVEID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS FROM LEAVEMODULE WHERE SOLDIERID = :soldier_id ORDER BY LEAVEID DESC";
 $stmt = oci_parse($conn, $query);
 oci_bind_by_name($stmt, ':soldier_id', $soldierID);
 oci_execute($stmt);
@@ -79,6 +106,8 @@ while ($row = oci_fetch_assoc($stmt)) {
     $leave->LeaveType = $row['LEAVETYPE'];
     $leave->LeaveStartDate = $row['LEAVESTARTDATE'];
     $leave->LeaveEndDate = $row['LEAVEENDDATE'];
+    $leave->RequestDate = $row['REQUESTDATE'];
+    $leave->Status = $row['STATUS'];
     $leaveHistory[] = $leave;
 }
 
@@ -148,6 +177,11 @@ include '../includes/header.php';
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="leave_start_date">Leave Start Date:</label>
+                                <input type="date" name="leave_start_date" id="leave_start_date" class="form-control"
+                                    required>
+                            </div>
+                            <div class="form-group">
                                 <label for="leave_end_date">Leave End Date:</label>
                                 <input type="date" name="leave_end_date" id="leave_end_date" class="form-control"
                                     required>
@@ -160,6 +194,7 @@ include '../includes/header.php';
             </div>
         </div>
 
+        <!-- Leave History Card -->
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="card">
@@ -173,13 +208,17 @@ include '../includes/header.php';
                                         <th>Leave Type</th>
                                         <th>Leave Start Date</th>
                                         <th>Leave End Date</th>
+                                        <th>Total Days</th>
+                                        <th>Request Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($leaveHistory as $leave): ?>
+                                    <?php $id=1; foreach ($leaveHistory as $leave):  ?>
                                         <tr>
                                             <td>
-                                                <?php echo $leave->LeaveID; ?>
+                                                <?php echo $id; $id++; ?>
                                             </td>
                                             <td>
                                                 <?php echo $leave->LeaveType; ?>
@@ -190,6 +229,35 @@ include '../includes/header.php';
                                             <td>
                                                 <?php echo $leave->LeaveEndDate; ?>
                                             </td>
+                                            <!-- Calculate and display total days -->
+                                            <td>
+                                                <?php echo date_diff(date_create($leave->LeaveStartDate), date_create($leave->LeaveEndDate))->format('%a')+1; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $leave->RequestDate; ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $status = $leave->Status;
+                                                if ($status === 'Pending') {
+                                                    echo '<span class="btn btn-warning">' . $status . '</span>';
+                                                } elseif ($status === 'Approved') {
+                                                    echo '<span class="btn btn-success">' . $status . '</span>';
+                                                } elseif ($status === 'Rejected') {
+                                                    echo '<span class="btn btn-danger">' . $status . '</span>';
+                                                }
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                if ($status === 'Pending') {
+                                                    echo '<a href="send_leave.php?soldier=' . $soldierID . '&leave_id=' . $leave->LeaveID . '" class="btn btn-danger">Cancel</a>';
+                                                } elseif ($status === 'Approved') {
+                                                    echo '<a href="leavecard.php?leaveid=' . $leave->LeaveID . '" class="btn btn-primary" target="_blank">Leave Card</a>';
+                                                }
+                                                ?>
+                                                <!-- Additional actions if needed -->
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -199,6 +267,8 @@ include '../includes/header.php';
                 </div>
             </div>
         </div>
+
+
     </div>
 </section>
 

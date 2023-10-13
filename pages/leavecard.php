@@ -28,8 +28,9 @@ if (isset($_GET['soldier_id'])) {
 } elseif (isset($_GET['leaveid'])) {
     $leaveId = $_GET['leaveid'];
     // Fetch soldier details by leaveid from the database
-    $query = "SELECT s.SOLDIERID, s.NAME, r.RANK, lm.LEAVEID, lm.LEAVETYPE, lm.LEAVESTARTDATE, lm.LEAVEENDDATE 
+    $query = "SELECT s.SOLDIERID, c.COMPANYNAME, s.PERSONALCONTACT, s.EMERGENCYCONTACT, s.NAME, r.RANK, lm.LEAVEID, lm.LEAVETYPE, lm.LEAVESTARTDATE, lm.LEAVEENDDATE, lm.AUTHBY
     FROM SOLDIER s
+    JOIN COMPANY c ON c.COMPANYID = s.COMPANYID
     JOIN RANKS r ON s.RANKID = r.RANKID
     JOIN LEAVEMODULE lm ON s.SOLDIERID = lm.SOLDIERID
     WHERE lm.LEAVEID = :leave_id";
@@ -50,13 +51,39 @@ if (isset($_GET['soldier_id'])) {
     exit;
 }
 
+
+$authid = $soldier['AUTHBY'];
+
+// Prepare and execute the SQL query
+$query = "SELECT S.NAME AS AUTHNAME, R.RANK
+          FROM SOLDIER S
+          JOIN RANKS R ON S.RANKID = R.RANKID
+          WHERE S.SOLDIERID = :authid";
+
+$stmt = oci_parse($conn, $query);
+oci_bind_by_name($stmt, ':authid', $authid);
+oci_execute($stmt);
+
+// Fetch the result
+if ($row = oci_fetch_assoc($stmt)) {
+    $authname = $row['AUTHNAME'];
+    $rank = $row['RANK'];
+
+}
+
+// Close the database connection
+oci_free_statement($stmt);
+
+
 // Fetch uploaded image paths for the officer
 $query = "SELECT SIGNATURE_PATH FROM UPLOADED_IMAGES WHERE SOLDIER_ID = :soldier_id";
 $stmt = oci_parse($conn, $query);
-oci_bind_by_name($stmt, ':soldier_id', $_SESSION['userid']);
+oci_bind_by_name($stmt, ':soldier_id', $soldier['AUTHBY']);
 oci_execute($stmt);
 
 $uploadedImages = oci_fetch_assoc($stmt);
+
+
 
 oci_free_statement($stmt);
 oci_close($conn);
@@ -68,20 +95,30 @@ ob_end_clean();
 $base64Image = base64_encode($imageData);
 
 ?>
+<!DOCTYPE html>
 <html>
 
 <head>
     <title>Leave Certificate</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin-top: auto;
-
             padding-top: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         h1 {
             text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            text-decoration: underline;
         }
 
         .leave-info {
@@ -89,21 +126,32 @@ $base64Image = base64_encode($imageData);
             font-size: 14pt;
         }
 
+        .contact-info {
+            margin-top: 10px;
+        }
+
+        .contact-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .contact-info ul li {
+            margin-bottom: 5px;
+        }
+
         .sign-block {
             margin-top: 30px;
+            margin-right: -120px;
             text-align: right;
         }
 
-        /* Remove table border */
-        #table {
-            border-collapse: collapse;
-            border: none;
+        .sign-block img {
+            max-width: 100px;
         }
 
-        /* Remove table cell borders */
-        #table td,
-        #table th {
-            border: none;
+        .signature-line {
+            margin-top: -10px;
+            margin-bottom: 0;
         }
 
         @media print {
@@ -117,23 +165,18 @@ $base64Image = base64_encode($imageData);
 </head>
 
 <body>
-    <?php for ($i = 1; $i <= 3; $i++) {?>
     <div class="container">
-        <table id="table" class="table">
+        <table id="table" style="border-collapse: collapse;">
             <tr>
                 <td colspan="2">
                     <h6 style="text-align: center;">RESTRICTED</h6>
-                    <u>
-
-                        <h3 style="text-align: center;">E-Leave Certificate</h3>
-                    </u>
+                    <h3>E-Leave Certificate</h3>
                 </td>
             </tr>
             <tr>
-
                 <td colspan="2">
                     <div class="leave-info">
-                        <p>
+                        <p style="text-align: justify;">
                             This is to certify that No:
                             <strong>
                                 <?php echo $soldier['SOLDIERID']; ?>
@@ -145,6 +188,10 @@ $base64Image = base64_encode($imageData);
                             Name:
                             <strong>
                                 <?php echo $soldier['NAME']; ?>
+                            </strong>,
+                            Company:
+                            <strong>
+                                <?php echo $soldier['COMPANYNAME']; ?>
                             </strong>,
                             has been granted
                             <strong>
@@ -163,51 +210,72 @@ $base64Image = base64_encode($imageData);
                                 <?php echo $soldier['LEAVEENDDATE']; ?>
                             </strong>.
                         </p>
+                        <div class="contact-info">
+                            <p>Contact:</p>
+                            <ul>
+                                <li>
+                                    <?php echo '0' . $soldier['PERSONALCONTACT'] . ' (Personal)'; ?>
+                                </li>
+                                <li>
+                                    <?php echo '0' . $soldier['EMERGENCYCONTACT'] . ' (Emergency)'; ?>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>
-                    <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode"
-                        style="max-width: 140px;">
+                <td style="vertical-align: middle; text-align: center;">
+                    <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode">
                 </td>
-                <td style="text-align: right;">
-                    <div class="sign-block" style="text-align: right;">
-                        <div style="display: inline-block; text-align: center;">
+                <td style="vertical-align: middle; text-align: right;">
+                    <div class="sign-block">
+                        <p class="signature-line" style="text-align: center;">
                             <?php if ($uploadedImages && $uploadedImages['SIGNATURE_PATH']): ?>
-                                <img src="<?php echo $uploadedImages['SIGNATURE_PATH']; ?>" alt="Signature"
-                                    style="max-width: 100px;">
+                                <img src="<?php echo $uploadedImages['SIGNATURE_PATH']; ?>" alt="Signature">
                             <?php endif; ?>
-                            <p style="margin-top: 0px; margin-bottom: 0px;">_____________________________</p>
 
-                            <p>
-                                <?php echo $_SESSION['username']; ?> <br> 
-                                Date: <?php echo date('d M Y'); ?>
-                            </p>
-                        </div>
+                        </p>
+
+
+                        <p class="signature-line" style="text-align: center;">_____________________________</p>
+                        <p style="text-align: center;">
+                            <?php echo $rank . ' ' . $authname; ?>
+                        </p>
+                        <p style="text-align: center;">Date:
+                            <?php echo date('d M Y'); ?>
+                        </p>
                     </div>
-
                 </td>
+            </tr>
 
+            <tr>
+                <td colspan="2">
+                    <h6 style="text-align: left;">
+                        <ul>
+                            <li>This leave certificate is auto-generated.</li>
+                            <li>This signature is a digital signature and verified by the company commander.</li>
+                            <li>Printed at: <?php echo date('Y-m-d H:i:s'); ?></li>
+                        </ul>
+
+
+                    </h6>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <h6 style="text-align: center;">RESTRICTED</h6>
+
                 </td>
             </tr>
         </table>
     </div>
-
-
     <script>
         // Automatically turn on print
         window.onload = function () {
             window.print();
         };
     </script>
-                        <hr>
-
-        <?php }?>
 
 </body>
 
