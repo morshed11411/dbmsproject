@@ -14,7 +14,7 @@ if (isset($_POST['mark_out_for_leave'])) {
     if ($row = oci_fetch_assoc($stmt)) {
         // Soldier ID matches a leave record, mark the soldier as "out for leave"
         $leaveIDToMarkOut = $row['LEAVEID'];
-        $query = "UPDATE LEAVEMODULE SET OUTTIME = CURRENT_TIMESTAMP, ONLEAVE = 1 WHERE LEAVEID = :leave_id";
+        $query = "UPDATE LEAVEMODULE SET OUTTIME = CURRENT_TIMESTAMP, ONLEAVE = 1, STATUS='On Leave' WHERE LEAVEID = :leave_id";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':leave_id', $leaveIDToMarkOut);
         $result = oci_execute($stmt);

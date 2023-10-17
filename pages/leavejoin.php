@@ -7,7 +7,7 @@ if (isset($_POST['mark_in_for_leave'])) {
     $searchSoldierID = $_POST['soldier_id'];
 
     // Check if the soldier ID matches any leave record
-    $query = "SELECT LEAVEID FROM LEAVEMODULE WHERE STATUS = 'Approved' AND ONLEAVE = 1 AND SOLDIERID = :search_soldier";
+    $query = "SELECT LEAVEID FROM LEAVEMODULE WHERE STATUS = 'On Leave' AND ONLEAVE = 1 AND SOLDIERID = :search_soldier";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':search_soldier', $searchSoldierID);
     oci_execute($stmt);
@@ -39,7 +39,7 @@ if (isset($_POST['mark_in_for_leave'])) {
 $query = "SELECT LEAVEID, SOLDIER.SOLDIERID, SOLDIER.NAME AS SOLDIER_NAME, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE
           FROM LEAVEMODULE
           JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID
-          WHERE STATUS = 'Approved' AND ONLEAVE = 1
+          WHERE STATUS = 'On Leave' AND ONLEAVE = 1
           ORDER BY LEAVEID";
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);

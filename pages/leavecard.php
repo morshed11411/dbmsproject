@@ -199,7 +199,7 @@ $base64Image = base64_encode($imageData);
                             </strong>
                             for
                             <strong>
-                                <?php echo date_diff(date_create($soldier['LEAVESTARTDATE']), date_create($soldier['LEAVEENDDATE']))->format('%a'); ?>
+                                <?php echo date_diff(date_create($soldier['LEAVESTARTDATE']), date_create($soldier['LEAVEENDDATE']))->format('%a')+1; ?>
                             </strong>
                             days,
                             starting from

@@ -197,16 +197,16 @@ if (isset($_SESSION['userid'])) {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="leave_percentage.php" class="nav-link sublink">
+                <a href="leavejoin.php" class="nav-link sublink">
                   <i class="fas fa-percentage nav-icon"></i>
-                  <p>Leave Percentage</p>
+                  <p>Leave In</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="leave_details.php" class="nav-link sublink">
+                <a href="leaveout.php" class="nav-link sublink">
                   <i class="fas fa-calendar-alt nav-icon"></i>
-                  <p>Todays Leave</p>
+                  <p>Leave Out</p>
                 </a>
               </li>
 

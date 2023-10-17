@@ -1,0 +1,79 @@
+graph TB
+  subgraph Login Process
+    A[Start]
+    B[Check if user is already logged in]
+    C[Redirect to dashboard]
+    D[Check if login form is submitted]
+    E[Query database for user]
+    F[Check if account is disabled]
+    G[Password verification]
+    H[Successful login actions]
+    I[Failed login actions]
+    J[End]
+    
+    A --> B
+    B -->|Yes| C
+    B -->|No| D
+    D -->|Yes| E
+    E --> F
+    F -->|Yes| J
+    F -->|No| G
+    G -->|Correct| H
+    G -->|Incorrect| I
+    H --> C
+    I --> J
+  end
+
+  subgraph Post-Login Actions
+    C --> K[Check user role]
+    K -->|Admin| L[Go to Battalion Dashboard]
+    K -->|Manager| M[Go to Company Dashboard]
+    K -->|User| N[Go to Profile Only]
+    L --> O[Admin Profile]
+    M --> P[Manager Profile]
+    N --> Q[User Profile]
+    O --> Q
+    P --> Q
+    Q --> Y[User Info]
+    Q --> R[Change Password]
+    Y --> S[Basic Info]
+    Y --> T[Punishment History]
+    Y --> U[Medical Info]
+    Y --> V[Career Plan Info]
+    Y --> W[Leave History]
+  end
+
+  subgraph Admin Dashboard
+    L --> NB[Navbar]
+    NB --> DS[Soldiers]
+    NB --> DC[Company]
+    NB --> DT[Training]
+    DT --> DTB[Basic Training]
+    DT --> DTM[Manage Training]
+    DT --> DTA[Advanced Training]
+    NB --> DCP[Career Plan]
+    DCP --> DCPUP[Update Plan]
+    DCP --> DCPVP[View Plan]
+    NB --> DL[Leave Management]
+    DL --> DLA[Approve Leave]
+    DL --> DLP[Leave Percentage]
+    DL --> DLT[Todays Leave]
+    NB --> DPAR[Parade State]
+    DPAR --> DPARC[Create Parade State]
+    DPAR --> DPARA[Archive]
+    NB --> DM[Medical Disposal]
+    DM --> DMA[Add Medical Info]
+    DM --> DMT[Todays Disposal]
+    NB --> DMTM[Manage Team]
+    NB --> DS[Settings]
+    DS --> DSC[Manage Unit]
+    DS --> DSAC[Manage Access]
+    DS --> DSAS[Application Settings]
+  end
+
+  subgraph Manager Dashboard
+    R --> NBM[Navbar]
+    NBM --> MS[Soldiers]
+    NBM --> MC[Company]
+    NBM --> MT[Training]
+  end

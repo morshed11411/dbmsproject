@@ -243,8 +243,12 @@ include '../includes/header.php';
                                                     echo '<span class="btn btn-warning">' . $status . '</span>';
                                                 } elseif ($status === 'Approved') {
                                                     echo '<span class="btn btn-success">' . $status . '</span>';
+                                                } elseif ($status === 'Expired') {
+                                                    echo '<span class="btn btn-secondary">' . $status . '</span>';
                                                 } elseif ($status === 'Rejected') {
                                                     echo '<span class="btn btn-danger">' . $status . '</span>';
+                                                } elseif ($status === 'On Leave') {
+                                                    echo '<span class="btn btn-info">' . $status . '</span>';
                                                 }
                                                 ?>
                                             </td>
@@ -254,7 +258,10 @@ include '../includes/header.php';
                                                     echo '<a href="send_leave.php?soldier=' . $soldierID . '&leave_id=' . $leave->LeaveID . '" class="btn btn-danger">Cancel</a>';
                                                 } elseif ($status === 'Approved') {
                                                     echo '<a href="leavecard.php?leaveid=' . $leave->LeaveID . '" class="btn btn-primary" target="_blank">Leave Card</a>';
+                                                } elseif (($status === 'Expired')||($status === 'On Leave')) {
+                                                    echo '<a href="leavecard.php?leaveid=' . $leave->LeaveID . '" class="btn btn-light" target="_blank">Leave Card</a>';
                                                 }
+                                                
                                                 ?>
                                                 <!-- Additional actions if needed -->
                                             </td>

@@ -95,7 +95,7 @@ if (isset($_POST['quick_leave'])) {
     $leaveStartDate = $_POST['leave_start_date'];
     $leaveEndDate = $_POST['leave_end_date'];
     $leaveRequestDate = date('Y-m-d'); // System date
-    $status = 'Pending'; // Set the status to "Approved"
+    $status = 'Approved'; // Set the status to "Approved"
 
     // Get the soldier ID from the input field
     $soldierID = $_POST['soldier_id'];
@@ -110,7 +110,7 @@ if (isset($_POST['quick_leave'])) {
 
     } else {
         // Insert leave request into the database
-        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status)";
+        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS, AUTHBY) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status, :authid)";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
         oci_bind_by_name($stmt, ':leave_type', $leaveType);
@@ -118,11 +118,13 @@ if (isset($_POST['quick_leave'])) {
         oci_bind_by_name($stmt, ':leave_end_date', $leaveEndDate);
         oci_bind_by_name($stmt, ':leave_request_date', $leaveRequestDate);
         oci_bind_by_name($stmt, ':status', $status);
+        oci_bind_by_name($stmt, ':authid', $_SESSION['userid']);
+
 
         $result = oci_execute($stmt);
 
         if ($result) {
-            $_SESSION['success'] = "Leave request sent successfully.";
+            $_SESSION['success'] = "Leave approved successfully.";
 
             // Open leave certificate in a popup window
 
