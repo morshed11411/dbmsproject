@@ -41,3 +41,84 @@ lets set the role based access
     a. At the top of the page it will show the  
     The page will have all soldiers and their last leave date and duration 
 4. 
+
+
+
+
+7/11/2023
+----------
+1. Make the training pages 
+    Create a ER Diagram
+    Create database 
+    Create Training Class
+
+    Interface for the training page.
+2. Make the inventory pages
+
+
+
+Task: Implement the "Leave Out Page" functionality for marking soldiers as "Out for Leave."
+
+Database Structure:
+- You have a database with the following table:
+  Table Name: LEAVEMODULE
+  Columns:
+    - LEAVEID (NUMBER)
+    - SOLDIERID (NUMBER)
+    - STATUS (VARCHAR2)
+    - ONLEAVE (NUMBER) - 0 for not on leave, 1 for on leave
+    - OUTTIME (TIMESTAMP) - Timestamp when marked as "Out for Leave"
+    - LEAVETYPE (VARCHAR2)
+    - LEAVESTARTDATE (DATE)
+    - LEAVEENDDATE (DATE)
+
+Sample Page Layout (HTML Structure):
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leave Out Page</title>
+    <!-- Include CSS and JavaScript resources if necessary -->
+</head>
+<body>
+    <div class="container">
+        <h1>Mark Soldiers Out for Leave</h1>
+        <!-- Input field for soldier ID -->
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="soldier_id">Enter Soldier ID:</label>
+                <input type="text" name="soldier_id" id="soldier_id" class="form-control" required>
+            </div>
+            <button type="submit" name="mark_out_for_leave" class="btn btn-success">Mark Out for Leave</button>
+        </form>
+
+        <!-- Display list of approved leave records in a table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Leave ID</th>
+                    <th>Soldier ID</th>
+                    <th>Soldier Name</th>
+                    <th>Leave Type</th>
+                    <th>Leave Start Date</th>
+                    <th>Leave End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Leave records will be populated here dynamically -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+Functionality:
+1. When the page loads, the cursor should be automatically focused on the soldier ID search box.
+
+2. Display a list of approved leave records from the database in the provided table.
+
+3. For each leave record in the list, provide a button labeled "Mark Out for Leave." Clicking on this button should trigger the specified functionality.
+
+4. ...
+
+Please follow these instructions to create the "Leave Out Page" with the specified functionality, database structure, and HTML structure. If you have any questions or need further clarification, feel free to ask.
