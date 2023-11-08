@@ -181,10 +181,12 @@ CREATE TABLE ADVANCETRAINING (
 );
 
 CREATE TABLE BASICTRAINING (
-  TRAININGID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  TRAININGCODE VARCHAR2(255),
-  TRAININGNAME VARCHAR2(255)
+  TRGID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  TRGNAME VARCHAR2(255) NOT NULL
+  -- Add other relevant columns for basic training information
 );
+
+
 
 CREATE TABLE SOLDIERBASICTRAINING (
   TRAININGID NUMBER,
@@ -249,4 +251,17 @@ CREATE TABLE events (
   attendees_responsibility VARCHAR2(100),
   remarks VARCHAR2(200),
   CONSTRAINT events_pk PRIMARY KEY (event_id)
+);
+
+
+
+--for password reset
+
+CREATE TABLE pwd_reset_req (
+    req_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR2(255) NOT NULL,
+    req_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reset_code VARCHAR2(6),
+    is_approved NUMBER(1) DEFAULT 0, -- 0 for not approved, 1 for approved
+    PRIMARY KEY (req_id)
 );
