@@ -19,7 +19,7 @@ if (isset($_SESSION['userid'])) {
   if ($row && !empty($row['PROFILEPICTURE'])) {
     $profilePicture = $row['PROFILEPICTURE'];
   } else {
-    $profilePicture = '../images/default_profile_picture.png';
+    $profilePicture = 'zimages/default_profile_picture.png';
   }
 } else {
   // Set a default profile picture path if the soldier ID is not present in the session

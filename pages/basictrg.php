@@ -5,12 +5,10 @@ include '../includes/connection.php';
 
 // Process the form submission to add a basic training
 if (isset($_POST['add_training_submit'])) {
-    $trainingCode = $_POST['training_code'];
     $trainingName = $_POST['training_name'];
 
-    $query = "INSERT INTO BASICTRAINING (TRAININGCODE, TRAININGNAME) VALUES (:training_code, :training_name)";
+    $query = "INSERT INTO BASICTRAINING (TRGNAME) VALUES (:training_name)";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':training_code', $trainingCode);
     oci_bind_by_name($stmt, ':training_name', $trainingName);
 
     $result = oci_execute($stmt);
@@ -31,12 +29,10 @@ if (isset($_POST['add_training_submit'])) {
 // Process the form submission to edit a basic training
 if (isset($_POST['edit_training_submit'])) {
     $trainingID = $_POST['edit_training_id'];
-    $trainingCode = $_POST['edit_training_code'];
     $trainingName = $_POST['edit_training_name'];
 
-    $query = "UPDATE BASICTRAINING SET TRAININGCODE = :training_code, TRAININGNAME = :training_name WHERE TRAININGID = :training_id";
+    $query = "UPDATE BASICTRAINING SET TRGNAME = :training_name WHERE TRGID = :training_id";
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':training_code', $trainingCode);
     oci_bind_by_name($stmt, ':training_name', $trainingName);
     oci_bind_by_name($stmt, ':training_id', $trainingID);
 
@@ -59,7 +55,7 @@ if (isset($_POST['edit_training_submit'])) {
 if (isset($_POST['delete_training_submit'])) {
     $trainingID = $_POST['delete_training_id'];
 
-    $query = "DELETE FROM BASICTRAINING WHERE TRAININGID = :training_id";
+    $query = "DELETE FROM BASICTRAINING WHERE TRGID = :training_id";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':training_id', $trainingID);
 
@@ -79,16 +75,15 @@ if (isset($_POST['delete_training_submit'])) {
 }
 
 // Fetch data from the basictraining table
-$query = "SELECT * FROM BASICTRAINING ORDER BY TRAININGID";
+$query = "SELECT * FROM BASICTRAINING ORDER BY TRGID";
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 
 $basicTrainingList = array();
 while ($row = oci_fetch_assoc($stmt)) {
     $basicTraining = new stdClass();
-    $basicTraining->TrainingID = $row['TRAININGID'];
-    $basicTraining->TrainingCode = $row['TRAININGCODE'];
-    $basicTraining->TrainingName = $row['TRAININGNAME'];
+    $basicTraining->TrainingID = $row['TRGID'];
+    $basicTraining->TrainingName = $row['TRGNAME'];
     $basicTrainingList[] = $basicTraining;
 }
 
@@ -129,7 +124,6 @@ if (isset($_SESSION['error'])) {
                             <thead>
                                 <tr>
                                     <th>Training ID</th>
-                                    <th>Training Code</th>
                                     <th>Training Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -138,7 +132,6 @@ if (isset($_SESSION['error'])) {
                                 <?php foreach ($basicTrainingList as $basicTraining): ?>
                                     <tr>
                                         <td><?php echo $basicTraining->TrainingID; ?></td>
-                                        <td><?php echo $basicTraining->TrainingCode; ?></td>
                                         <td><?php echo $basicTraining->TrainingName; ?></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editBasicTrainingModal-<?php echo $basicTraining->TrainingID; ?>">
@@ -162,10 +155,6 @@ if (isset($_SESSION['error'])) {
                                                 <div class="modal-body">
                                                     <form method="POST" action="">
                                                         <input type="hidden" name="edit_training_id" value="<?php echo $basicTraining->TrainingID; ?>">
-                                                        <div class="form-group">
-                                                            <label for="edit_training_code">Training Code:</label>
-                                                            <input type="text" name="edit_training_code" id="edit_training_code" class="form-control" value="<?php echo $basicTraining->TrainingCode; ?>" required>
-                                                        </div>
                                                         <div class="form-group">
                                                             <label for="edit_training_name">Training Name:</label>
                                                             <input type="text" name="edit_training_name" id="edit_training_name" class="form-control" value="<?php echo $basicTraining->TrainingName; ?>" required>
@@ -218,10 +207,6 @@ if (isset($_SESSION['error'])) {
             </div>
             <div class="modal-body">
                 <form method="post" action="">
-                    <div class="form-group">
-                        <label for="training_code">Training Code:</label>
-                        <input type="text" name="training_code" id="training_code" class="form-control" required>
-                    </div>
                     <div class="form-group">
                         <label for="training_name">Training Name:</label>
                         <input type="text" name="training_name" id="training_name" class="form-control" required>

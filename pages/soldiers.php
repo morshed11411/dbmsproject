@@ -91,6 +91,8 @@ include '../includes/header.php';
         </div>
         <div class="text-right">
             <a href="add_soldier.php" class="btn btn-primary">Add New Soldier</a>
+            <a href="import.php" class="btn btn-secondary">CSV Import</a>
+
         </div>
     </div>
 </div>

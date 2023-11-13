@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include '../includes/connection.php';
+require_once('../includes/connection.php'); // No need for ../includes/init.php
 
 // Check if the form is submitted
 if (isset($_POST['submit'])) {

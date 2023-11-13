@@ -34,7 +34,32 @@
     });
 
     table.buttons().container().appendTo('#tablex_wrapper .col-md-6:eq(0)');
+
+
+    var table = $('#tabley').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": [
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':not(.no-export)'
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':not(.no-export)'
+                }
+            },
+            'colvis'
+        ]
+    });
+
+    table.buttons().container().appendTo('#tabley_wrapper .col-md-6:eq(0)');
 });
+
 
 $(document).ready(function () {
     // Check if dark mode is enabled
@@ -92,3 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
        }
     });
  });
+
+
+ 

@@ -1,4 +1,5 @@
-<?php include '../includes/header.php'; ?>
+<?php 
+include '../includes/header.php'; ?>
 <div class="card-body">
     <div class="d-flex justify-content-between">
         <div class="text-left">
