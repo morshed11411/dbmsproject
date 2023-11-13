@@ -57,3 +57,10 @@ Today
     create report to generate various preset reports 
 
 add more info like parent unit,mission option (complete, NA) , med-category (A or B or C or D or E), no of children, date of retirement in the soldier table 
+
+
+
+8. Clerk 
+    1. Trg Event Name submission
+    2. Deadline 
+    3. 

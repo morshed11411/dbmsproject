@@ -17,4 +17,6 @@ if (!$conn) {
     echo "Failed to connect to Oracle: " . $e['message'];
     exit;
 }
+
+
 ?>

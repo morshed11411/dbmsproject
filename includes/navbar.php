@@ -1,5 +1,7 @@
 <?php
 include '../includes/connection.php';
+include '../includes/notifications.php';
+
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 // Check if the soldier ID is present in the session or URL parameter
@@ -19,7 +21,7 @@ if (isset($_SESSION['userid'])) {
   if ($row && !empty($row['PROFILEPICTURE'])) {
     $profilePicture = $row['PROFILEPICTURE'];
   } else {
-    $profilePicture = 'zimages/default_profile_picture.png';
+    $profilePicture = '../images/default_profile_picture.png';
   }
 } else {
   // Set a default profile picture path if the soldier ID is not present in the session
@@ -55,6 +57,15 @@ if (isset($_SESSION['userid'])) {
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
+    <!-- Trigger Notification Modal -->
+    <button onclick="showNotificationModal()" class="btn btn-light">
+      <i class="fas fa-bell"></i> Notifications
+      <span class="badge badge-danger">
+      <?php echo $unreadCount; ?>
+      </span>
+    </button>
+
+
     <li class="nav-item dropdown">
       <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
@@ -394,7 +405,7 @@ if (isset($_SESSION['userid'])) {
   var currentPageURL = window.location.href;
   var navLinks = document.querySelectorAll('.nav-link');
 
-  navLinks.forEach(function(link) {
+  navLinks.forEach(function (link) {
     var linkHref = link.getAttribute('href');
 
     if (currentPageURL.indexOf(linkHref) !== -1) {
