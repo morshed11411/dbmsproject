@@ -1,6 +1,5 @@
 <?php
 include '../includes/connection.php';
-include '../includes/notifications.php';
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 

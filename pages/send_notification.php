@@ -1,5 +1,7 @@
 <?php
 include '../includes/connection.php';
+require_once '../includes/create_notification.php';
+
 include '../includes/header.php'; // Include header after setting session variables
 
 // Check if the form is submitted

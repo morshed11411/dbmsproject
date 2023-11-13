@@ -2,6 +2,7 @@
 session_start();
 
 include '../includes/connection.php';
+require_once '../includes/create_notification.php';
 
 // Define an array to store training types
 $trainingTypes = array();
@@ -102,6 +103,12 @@ if (isset($_POST['add_event_submit'])) {
     );
 
     executeQuery($query, $bindings, "Training event added successfully.", "Failed to add training event");
+    $notifiedGroup = 'all'; // Assuming 'all' represents all users
+    $message = "A new training event ('$event_name') has been added.";
+    $notifierSoldierId = $_SESSION['userid'];
+    // Call the createNotification function
+    $result=createNotification(null, $notifierSoldierId, $notifiedGroup, $message);
+
 
 }
 // Process the edit training event action

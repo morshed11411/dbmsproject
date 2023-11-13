@@ -1,5 +1,6 @@
 <?php
 include 'connection.php';
+require_once '../includes/notifications.php';
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
