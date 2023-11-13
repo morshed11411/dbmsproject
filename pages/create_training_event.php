@@ -114,16 +114,18 @@ if (isset($_POST['add_event_submit'])) {
 // Process the edit training event action
 if (isset($_POST['edit_event_submit'])) {
     $event_id = $_POST['edit_event_id'];
+    $event_name = $_POST['edit_event_name'];
     $training_type = $_POST['edit_training_type'];
     $event_date = $_POST['edit_event_date'];
     $board_president = $_POST['edit_board_president'];
     $authority_letter_no = $_POST['edit_authority_letter_no'];
     $board_no = $_POST['edit_board_no'];
 
-    $query = "UPDATE TRAININGEVENT SET TRGID = :training_type, EVENTDATE = TO_DATE(:event_date, 'YYYY-MM-DD'), BOARDPRESIDENTID = :board_president, AUTHORITYLETTERNO = :authority_letter_no, BOARDNO = :board_no WHERE EVENTID = :event_id";
+    $query = "UPDATE TRAININGEVENT SET TRGID = :training_type, EVENTNAME= :event_name, EVENTDATE = TO_DATE(:event_date, 'YYYY-MM-DD'), BOARDPRESIDENTID = :board_president, AUTHORITYLETTERNO = :authority_letter_no, BOARDNO = :board_no WHERE EVENTID = :event_id";
     $bindings = array(
         ':training_type' => $training_type,
         ':event_date' => $event_date,
+        ':event_name' => $event_name,
         ':board_president' => $board_president,
         ':authority_letter_no' => $authority_letter_no,
         ':board_no' => $board_no,
@@ -383,7 +385,7 @@ include '../includes/header.php';
                             </button>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -415,14 +417,10 @@ include '../includes/header.php';
                                     echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEventModal-' . $row['EVENTID'] . '">
                                                 <i class="fas fa-edit"></i> Edit
                                                 </button>';
-                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal-' . $row['EVENTID'] . '">
-                                                <i class="fas fa-trash"></i> Delete
-                                                </button>';
                                     echo "</td>";
                                     echo "</tr>";
                                     displayTerminateEventModal($row['EVENTID']);
                                     generateEditEventModal($row, $trainingTypes, $officerNames);
-                                    generateDeleteEventModal($row);
                                 }
 
                                 ?>
@@ -475,6 +473,7 @@ include '../includes/header.php';
                                 <tr>
                                     <th>ID</th>
                                     <th>Event Name</th>
+                                    <th>Training Type</th>
                                     <th>Event Date</th>
                                     <th>Board President</th>
                                     <th>Authority Letter No</th>

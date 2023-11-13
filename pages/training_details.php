@@ -101,6 +101,39 @@ if (isset($_POST['update_status'])) {
     exit();
 }
 
+
+
+
+// Process the form submission for updating status in bulk
+if (isset($_POST['update_status_bulk'])) {
+    $updateResults = $_POST['result'];
+
+    // Loop through each soldier's result and update the status
+    foreach ($updateResults as $soldierID => $newStatus) {
+        // Update the status in the database
+        $query = "UPDATE SOLDIERTRAINING SET STATUS = :new_status WHERE SOLDIERID = :soldier_id AND EVENTID = :event_id";
+        $stmt = oci_parse($conn, $query);
+        oci_bind_by_name($stmt, ':new_status', $newStatus);
+        oci_bind_by_name($stmt, ':soldier_id', $soldierID);
+        oci_bind_by_name($stmt, ':event_id', $event_id);
+
+        if (oci_execute($stmt) === false) {
+            // Handle the error (you can customize this based on your needs)
+            $_SESSION['error'] = "Error updating status for soldier with ID $soldierID";
+            header("Location: training_details.php?event_id=$event_id");
+            exit();
+        }
+    }
+
+    // Redirect back to the page
+    $_SESSION['success'] = "Status updated for selected soldiers.";
+    header("Location: training_details.php?event_id=$event_id");
+    exit();
+}
+
+// ... (Rest of your existing code)
+
+
 function getStatusClass($status)
 {
     switch ($status) {
@@ -130,7 +163,6 @@ include '../includes/header.php';
 
 
 
-
 <div class="card-body">
 
     <div class="d-flex justify-content-between">
@@ -148,188 +180,189 @@ include '../includes/header.php';
     </div>
 </div>
 
-<?php include '../includes/alert.php'; ?>
+<!-- Button to trigger modal -->
+
+
+<!-- Modal for Available Soldiers -->
+<div class="modal fade" id="availableSoldiersModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Available Soldiers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Available soldiers table -->
+                <div class="card-body table-responsive p-0" style="height: 400px; overflow: auto;">
+                    <!-- Added "overflow: auto;" -->
+                    <form method="POST" action="">
+
+                        <table id="availableSoldiersTable" class="table table-bordered table-head-fixed text-nowrap">
+
+                            <thead>
+                                <tr>
+                                    <th>Soldier ID</th>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Select</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($allSoldiers as $soldier): ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $soldier['SOLDIERID']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $soldier['RANK']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $soldier['NAME']; ?>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="soldiers[]"
+                                                    value="<?php echo $soldier['SOLDIERID']; ?>" <?php if (in_array($soldier['SOLDIERID'], array_column($assignedSoldiers, 'SOLDIERID')))
+                                                           echo 'checked'; ?>>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- Button to submit the form inside the modal -->
+                <button type="submit" name="submit" class="btn btn-primary">Assign
+                    Soldiers</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <section class="content">
     <div class="container-fluid">
+        <?php include '../includes/alert.php'; ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
+                    <div class="card-header">
+                        Assigned Soldiers (
+                        <?= count($assignedSoldiers) ?>)
 
-                    <!-- Button to trigger modal -->
+                    </div>
 
-
-                    <!-- Modal for Available Soldiers -->
-                    <div class="modal fade" id="availableSoldiersModal" tabindex="-1" role="dialog"
-                        aria-labelledby="modalTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalTitle">Available Soldiers</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                    <div class="card-body">
+                        <?php if (count($assignedSoldiers) > 0): ?>
+                            <form method="POST" action="">
+                                <div class="card-body  table-responsive p-0" style="height: 400px;">
+                                    <table id="tablem" class="table table-bordered table-head-fixed text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 80px;">Soldier ID</th>
+                                                <th style="width: 80px;">Rank</th>
+                                                <th style="width: 120px;">Name</th>
+                                                <th style="width: 120px;">Trade</th>
+                                                <th style="width: 120px;">Result</th>
+                                                <th class="no-export" style="width:60px;">Pass</th>
+                                                <th class="no-export" style="width: 60px;">Fail</th>
+                                                <th class="no-export" style="width: 60px;">Incomplete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($assignedSoldiers as $soldier): ?>
+                                                <tr>
+                                                    <td>
+                                                        <?= $soldier['SOLDIERID']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $soldier['RANK']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $soldier['NAME']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $soldier['TRADE']; ?>
+                                                    </td>
+                                                    <td class="<?= getStatusClass($soldier['STATUS']); ?>">
+                                                        <?= $soldier['STATUS']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="radio"
+                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Pass"
+                                                                <?php echo ($soldier['STATUS'] === 'Pass') ? 'checked' : ''; ?>
+                                                                required>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="radio"
+                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Fail"
+                                                                <?php echo ($soldier['STATUS'] === 'Fail') ? 'checked' : ''; ?>
+                                                                required>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="radio"
+                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]"
+                                                                value="Incomplete" <?php echo ($soldier['STATUS'] === 'Incomplete') ? 'checked' : ''; ?>
+                                                                required>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="modal-body">
-                                    <!-- Available soldiers table -->
-                                    <div class="card-body table-responsive p-0" style="height: 400px; overflow: auto;">
-                                        <!-- Added "overflow: auto;" -->
-                                        <form method="POST" action="">
-
-                                            <table id="availableSoldiersTable"
-                                                class="table table-bordered table-head-fixed text-nowrap">
-
-                                                <thead>
-                                                    <tr>
-                                                        <th>Soldier ID</th>
-                                                        <th>Rank</th>
-                                                        <th>Name</th>
-                                                        <th>Select</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($allSoldiers as $soldier): ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $soldier['SOLDIERID']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $soldier['RANK']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $soldier['NAME']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        name="soldiers[]"
-                                                                        value="<?php echo $soldier['SOLDIERID']; ?>" <?php if (in_array($soldier['SOLDIERID'], array_column($assignedSoldiers, 'SOLDIERID')))
-                                                                               echo 'checked'; ?>>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <!-- Button to submit the form inside the modal -->
-                                        <button type="submit" name="submit" class="btn btn-primary">Assign
-                                            Soldiers</button>
-                                        </form>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <button type="submit" name="update_status_bulk" class="btn btn-primary">Update
+                                    Result</button>
+                            </form>
+                        <?php else: ?>
+                            <p>No soldiers assigned to this training event.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h5>Assigned Soldiers (
-                        <?= count($assignedSoldiers) ?>)
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <?php if (count($assignedSoldiers) > 0): ?>
-                        <div class="card-body table-responsive p-0" style="height: 400px; overflow: auto;">
-                            <!-- Added "overflow: auto;" -->
-                            <table id="tablex" class="table table-bordered table-head-fixed text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>Soldier ID</th>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Trade</th>
-                                        <th>Status</th>
-                                        <th>Action</th> <!-- Add a new column for action buttons -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($assignedSoldiers as $soldier): ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $soldier['SOLDIERID']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['RANK']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['NAME']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $soldier['TRADE']; ?>
-                                            </td>
-                                           
-
-                                            <td class="<?php echo getStatusClass($soldier['STATUS']); ?>">
-                                                <?php echo $soldier['STATUS']; ?>
-                                            </td>
-                                            
-                                            <td>
-                                                <!-- Add a button to trigger the modal for updating status -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#updateStatusModal<?php echo $soldier['SOLDIERID']; ?>">
-                                                    Update Result
-                                                </button>
-
-                                                <!-- Modal for updating status -->
-                                                <div class="modal fade"
-                                                    id="updateStatusModal<?php echo $soldier['SOLDIERID']; ?>" tabindex="-1"
-                                                    role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalTitle">Update Result
-                                                                </h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <!-- Form to update soldier status -->
-                                                                <form method="POST" action="">
-                                                                    <input type="hidden" name="soldier_id"
-                                                                        value="<?php echo $soldier['SOLDIERID']; ?>">
-                                                                    <div class="form-group">
-                                                                        <label for="status">Update Result:</label>
-                                                                        <select class="form-control" name="status">
-                                                                            <option value="Pass">Pass</option>
-                                                                            <option value="Fail">Fail</option>
-                                                                            <option value="Incomplete">Incomplete</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <button type="submit" name="update_status"
-                                                                        class="btn btn-primary">Update Status</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    <?php else: ?>
-                        <p>No soldiers assigned to this training event.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
 </section>
 
+
 <?php include '../includes/footer.php'; ?>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#tablem').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "paging": false,  // Add this line to disable paging
+            "buttons": [
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(.no-export)'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':not(.no-export)'
+                    }
+                },
+                'colvis'
+            ]
+        });
+
+        table.buttons().container().appendTo('#tablem_wrapper .col-md-6:eq(0)');
+    });
+</script>
