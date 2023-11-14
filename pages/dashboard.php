@@ -1,4 +1,6 @@
 <?php 
+$pageTitle = "Dashboard-UPCS";
+
 include '../includes/header.php'; ?>
 <div class="card-body">
     <div class="d-flex justify-content-between">

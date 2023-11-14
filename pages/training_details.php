@@ -7,7 +7,7 @@ if (isset($_GET['event_id'])) {
     $event_id = $_GET['event_id'];
 
     // Retrieve event details
-    $query = "SELECT TE.EVENTID, TE.EVENTNAME, TE.EVENTDATE, TE.STATUS, BT.TRGNAME
+    $query = "SELECT TE.EVENTID, TE.EVENTNAME,TE.BOARDPRESIDENTID, TE.EVENTDATE, TE.STATUS, BT.TRGNAME
               FROM TRAININGEVENT TE
               JOIN BASICTRAINING BT ON TE.TRGID = BT.TRGID
               WHERE TE.EVENTID = :event_id";
@@ -54,33 +54,48 @@ if (isset($_GET['event_id'])) {
         $assignedSoldiers[] = $soldier;
     }
 }
+$pageTitle = $event['EVENTNAME'];
+$userIsBoardPresident = ($_SESSION['userid'] === $event['BOARDPRESIDENTID']);
 
 // Process the form submission
 if (isset($_POST['submit'])) {
     $selectedSoldiers = $_POST['soldiers'];
 
-    // Clear existing assigned soldiers for the training event
-    $query = "DELETE FROM SOLDIERTRAINING WHERE EVENTID = :event_id";
-    $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':event_id', $event_id);
-    oci_execute($stmt);
+    // Check the status of the training event
+    $queryStatus = "SELECT STATUS FROM TRAININGEVENT WHERE EVENTID = :event_id";
+    $stmtStatus = oci_parse($conn, $queryStatus);
+    oci_bind_by_name($stmtStatus, ':event_id', $event_id);
+    oci_execute($stmtStatus);
 
-    // Assign selected soldiers to the training event
-    foreach ($selectedSoldiers as $soldierID) {
-        $query = "INSERT INTO SOLDIERTRAINING (SOLDIERID, EVENTID, STATUS) VALUES (:soldier_id, :event_id, 'Appeared')";
-        $stmt = oci_parse($conn, $query);
-        oci_bind_by_name($stmt, ':soldier_id', $soldierID);
-        oci_bind_by_name($stmt, ':event_id', $event_id);
-        oci_execute($stmt);
+    $eventStatus = oci_fetch_assoc($stmtStatus)['STATUS'];
+
+    // Check if the status is 'Unlocked'
+    if ($eventStatus === 'Unlocked') {
+        // Clear existing assigned soldiers for the training event
+        $queryClear = "DELETE FROM SOLDIERTRAINING WHERE EVENTID = :event_id";
+        $stmtClear = oci_parse($conn, $queryClear);
+        oci_bind_by_name($stmtClear, ':event_id', $event_id);
+        oci_execute($stmtClear);
+
+        // Assign selected soldiers to the training event
+        foreach ($selectedSoldiers as $soldierID) {
+            $queryAssign = "INSERT INTO SOLDIERTRAINING (SOLDIERID, EVENTID, STATUS) VALUES (:soldier_id, :event_id, 'Appeared')";
+            $stmtAssign = oci_parse($conn, $queryAssign);
+            oci_bind_by_name($stmtAssign, ':soldier_id', $soldierID);
+            oci_bind_by_name($stmtAssign, ':event_id', $event_id);
+            oci_execute($stmtAssign);
+        }
+
+        $_SESSION['success'] = "Soldiers assigned to the training event successfully.";
+    } else {
+        // Show an error if the status is not 'Unlocked'
+        $_SESSION['error'] = "Cannot assign soldiers. Training event is not in 'Unlocked' status.";
     }
 
-    $_SESSION['success'] = "Soldiers assigned to the training event successfully.";
-
-    // Redirect back to the assign_training_event.php page
+    // Redirect back to the training_details.php page
     header("Location: training_details.php?event_id=$event_id");
     exit();
 }
-
 
 
 // Process the form submission for updating status
@@ -103,6 +118,76 @@ if (isset($_POST['update_status'])) {
 
 
 
+
+// Process the form submission for locking and unlocking
+if (isset($_POST['lock_action'])) {
+    $lockAction = $_POST['lock_action'];
+
+    // Validate $lockAction to ensure it's a valid action
+    $validActions = ['Locked', 'Unlocked'];
+    if (!in_array($lockAction, $validActions)) {
+        $_SESSION['error'] = "Invalid lock action.";
+        header("Location: training_details.php?event_id=$event_id");
+        exit();
+    }
+
+
+
+    // Update the status in the database
+    $query = "UPDATE TRAININGEVENT SET STATUS = :lock_action WHERE EVENTID = :event_id";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':lock_action', $lockAction);
+    oci_bind_by_name($stmt, ':event_id', $event_id);
+
+    if (oci_execute($stmt) === false) {
+        $error = oci_error($stmt);
+        $_SESSION['error'] = "SQL Error: " . $error['message'];
+    } else {
+        $lockStatusMessage = ($lockAction === 'Locked') ? 'locked' : 'unlocked';
+        $actionVerb = ($lockAction === 'Locked') ? 'Lock' : 'Unlock';
+        $_SESSION['success'] = "Training event successfully $lockStatusMessage.";
+    }
+
+    // Redirect back to the page
+    header("Location: training_details.php?event_id=$event_id");
+    exit();
+}
+
+
+
+function updateStatusForwarded($conn, $event_id)
+{
+    $query = "UPDATE TRAININGEVENT SET STATUS = 'Forwarded' WHERE EVENTID = :event_id";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':event_id', $event_id);
+
+    if (oci_execute($stmt) === false) {
+        $error = oci_error($stmt);
+        $_SESSION['error'] = "SQL Error: " . $error['message'];
+        return false;
+    } else {
+        $_SESSION['success'] = "Training event successfully forwarded.";
+        return true;
+    }
+}
+// Process the form submission for forwarding the list
+if (isset($_POST['forward_list_action'])) {
+    $forwardListAction = $_POST['forward_list_action'];
+
+    if ($forwardListAction === 'forward') {
+        // Call the function to update status to Forwarded
+        if (updateStatusForwarded($conn, $event_id)) {
+            // Redirect back to the page
+            header("Location: training_details.php?event_id=$event_id");
+            exit();
+        } else {
+            // Handle the error (you can customize this based on your needs)
+            $_SESSION['error'] = "Error forwarding the list for the training event.";
+            header("Location: training_details.php?event_id=$event_id");
+            exit();
+        }
+    }
+}
 
 // Process the form submission for updating status in bulk
 if (isset($_POST['update_status_bulk'])) {
@@ -155,14 +240,6 @@ include '../includes/header.php';
 
 
 
-
-
-
-
-
-
-
-
 <div class="card-body">
 
     <div class="d-flex justify-content-between">
@@ -173,15 +250,45 @@ include '../includes/header.php';
 
         </div>
         <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availableSoldiersModal">
-                Assign Soldiers
-            </button>
+
+            <?php
+            $lockStatus = '';
+            $lockAction = '';
+            $iconClass = '';
+
+            if ($event['STATUS'] === 'Ongoing') {
+                $lockStatus = 'Unlock';
+                $lockAction = 'Unlocked';
+                $iconClass = 'fa-unlock';
+            } elseif ($event['STATUS'] === 'Unlocked') {
+                $lockStatus = 'Lock';
+                $lockAction = 'Locked';
+                $iconClass = 'fa-lock';
+            } elseif ($event['STATUS'] === 'Locked') {
+                $lockStatus = 'Unlock';
+                $lockAction = 'Unlocked';
+                $iconClass = 'fa-unlock';
+            }
+            ?>
+            <?php if ($event['STATUS'] != 'Forwarded'): ?>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availableSoldiersModal">
+                    Assign Soldiers
+                </button>
+
+                <form method="POST" action="" class="d-inline">
+                    <input type="hidden" name="lock_action" value="<?= $lockAction ?>">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas <?= $iconClass ?>"></i>
+                        <?= $lockStatus . ' Soldiers' ?>
+                    </button>
+                </form>
+
+            <?php endif; ?>
+
         </div>
+
     </div>
 </div>
-
-<!-- Button to trigger modal -->
-
 
 <!-- Modal for Available Soldiers -->
 <div class="modal fade" id="availableSoldiersModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
@@ -249,6 +356,53 @@ include '../includes/header.php';
 <section class="content">
     <div class="container-fluid">
         <?php include '../includes/alert.php'; ?>
+
+        <div class="card card-info">
+            <div class="card-header" data-toggle="collapse" href="#trainingSummaryCollapse">
+                Training Summary
+            </div>
+            <div class="collapse" id="trainingSummaryCollapse">
+                <div class="card-body">
+                    <?php
+                    $metrics = [
+                        'Total Soldiers' => count($allSoldiers),
+                        'Participated Soldiers' => count($assignedSoldiers),
+                        'Passed' => count(array_filter($assignedSoldiers, function ($soldier) {
+                            return $soldier['STATUS'] === 'Pass';
+                        })),
+                        'Failed' => count(array_filter($assignedSoldiers, function ($soldier) {
+                            return $soldier['STATUS'] === 'Fail';
+                        })),
+                        'Incomplete' => count(array_filter($assignedSoldiers, function ($soldier) {
+                            return $soldier['STATUS'] === 'Incomplete';
+                        }))
+                    ];
+                    ?>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <?php foreach ($metrics as $metric => $value): ?>
+                                    <th>
+                                        <?= $metric ?>
+                                    </th>
+                                <?php endforeach; ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <?php foreach ($metrics as $value): ?>
+                                    <td>
+                                        <?= $value ?>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
@@ -322,10 +476,30 @@ include '../includes/header.php';
                                         </tbody>
                                     </table>
                                 </div>
-                                <button type="submit" name="update_status_bulk" class="btn btn-primary">Update
-                                    Result</button>
+                                <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
+                                    <button type="submit" name="update_status_bulk" class="btn btn-primary">Update
+                                        Result</button>
+                                <?php endif; ?>
                             </form>
+                            <!-- Display the Forward List button if the status is 'Ongoing' and the user is the board president -->
+
+                            <?php if (!$userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
+                                <!-- Display a message if the status is 'Forwarded' -->
+                                <button type="" class="btn btn-warning">
+                                    List Forwarded
+                                </button>
+                            <?php elseif($event['STATUS'] != 'Forwarded'): ?>
+                                <!-- Display the default Forward List button if the status is neither 'Ongoing' nor 'Forwarded' -->
+                                <form method="POST" action="" class="d-inline">
+                                    <input type="hidden" name="forward_list_action" value="forward">
+                                    <button type="submit" class="btn btn-success">
+                                        Forward List
+                                    </button>
+                                </form>
+                            <?php endif; ?>
+
                         <?php else: ?>
+
                             <p>No soldiers assigned to this training event.</p>
                         <?php endif; ?>
                     </div>

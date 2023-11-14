@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include '../includes/connection.php';
 
 // Get the company ID or status ID from the query parameters
