@@ -1,8 +1,9 @@
 <?php
+session_start();
+
 include '../includes/connection.php';
 require_once '../includes/create_notification.php';
 
-include '../includes/header.php'; // Include header after setting session variables
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,10 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect back to the same page
     header("Location: " . $_SERVER['PHP_SELF']);    
+    
 }
-
+include '../includes/header.php'; // Include header after setting session variables
 
 ?>
+
+<!-- Add Bootstrap CSS and JS links here -->
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
@@ -39,28 +43,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
     <?php include '../includes/alert.php'; ?>
-    <form method="post" action="">
-        <div class="form-group">
-            <label for="notified_soldier_id">Notified Soldier ID:</label>
-            <input type="text" class="form-control" name="notified_soldier_id" >
-        </div>
+    <!-- Button to trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendNotificationModal">
+        Create Custom Notification
+    </button>
 
-        <div class="form-group">
-            <label for="message">Message:</label>
-            <textarea class="form-control" name="message" required></textarea>
-        </div>
+    <!-- Modal -->
+    <div class="modal fade" id="sendNotificationModal" tabindex="-1" role="dialog" aria-labelledby="sendNotificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendNotificationModalLabel">Create Custom Notification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        <!-- Your form fields go here -->
+                        <div class="form-group">
+                            <label for="notified_soldier_id">Notified Soldier ID:</label>
+                            <input type="text" class="form-control" name="notified_soldier_id">
+                        </div>
 
-        <div class="form-group">
-            <label for="notified_group">Notified Group:</label>
-            <select class="form-control" name="notified_group">
-                <option value="all">All</option>
-                <option value="appt_holder">Apointment Holder</option>
-                <option value="">None</option>
-            </select>
-        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea class="form-control" name="message" required></textarea>
+                        </div>
 
-        <button type="submit" class="btn btn-primary">Send Notification</button>
-    </form>
+                        <div class="form-group">
+                            <label for="notified_group">Notified Group:</label>
+                            <select class="form-control" name="notified_group">
+                                <option value="all">All</option>
+                                <option value="appt_holder">Appointment Holder</option>
+                                <option value="">None</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Send Notification</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>
