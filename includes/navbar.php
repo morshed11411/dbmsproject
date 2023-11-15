@@ -145,23 +145,18 @@ if (isset($_SESSION['userid'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="basic_training.php" class="nav-link sublink">
+                <a href="training_event.php" class="nav-link sublink">
                   <i class="fas fa-chalkboard nav-icon"></i>
-                  <p>Basic Training</p>
+                  <p>Training Management</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="advanced_training.php" class="nav-link sublink">
+                <a href="training_state.php" class="nav-link sublink">
                   <i class="fas fa-book-reader nav-icon"></i>
-                  <p>Manage Training</p>
+                  <p>Training State</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="soldier_advanced_training.php" class="nav-link sublink">
-                  <i class="fas fa-book-reader nav-icon"></i>
-                  <p>Advanced Training</p>
-                </a>
-              </li>
+
             </ul>
 
           </li>

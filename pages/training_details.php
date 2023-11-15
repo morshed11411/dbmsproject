@@ -270,6 +270,8 @@ include '../includes/header.php';
                 $iconClass = 'fa-unlock';
             }
             ?>
+                            <?php if ($event['STATUS'] != 'Terminated'): ?>
+
             <?php if ($event['STATUS'] != 'Forwarded'): ?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availableSoldiersModal">
                     Assign Soldiers
@@ -282,6 +284,7 @@ include '../includes/header.php';
                         <?= $lockStatus . ' Soldiers' ?>
                     </button>
                 </form>
+                <?php endif; ?>
 
             <?php endif; ?>
 
@@ -358,10 +361,10 @@ include '../includes/header.php';
         <?php include '../includes/alert.php'; ?>
 
         <div class="card card-info">
-            <div class="card-header" data-toggle="collapse" href="#trainingSummaryCollapse">
+            <div class="card-header" data-toggle="expanded" href="#trainingSummaryCollapse">
                 Training Summary
             </div>
-            <div class="collapse" id="trainingSummaryCollapse">
+            <div class="expanded" id="trainingSummaryCollapse">
                 <div class="card-body">
                     <?php
                     $metrics = [
@@ -424,9 +427,12 @@ include '../includes/header.php';
                                                 <th style="width: 120px;">Name</th>
                                                 <th style="width: 120px;">Trade</th>
                                                 <th style="width: 120px;">Result</th>
+                                                <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
+
                                                 <th class="no-export" style="width:60px;">Pass</th>
                                                 <th class="no-export" style="width: 60px;">Fail</th>
                                                 <th class="no-export" style="width: 60px;">Incomplete</th>
+                                                <?php endif; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -447,6 +453,7 @@ include '../includes/header.php';
                                                     <td class="<?= getStatusClass($soldier['STATUS']); ?>">
                                                         <?= $soldier['STATUS']; ?>
                                                     </td>
+                                                    <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
                                                     <td>
                                                         <div class="form-check">
                                                             <input type="radio"
@@ -471,6 +478,7 @@ include '../includes/header.php';
                                                                 required>
                                                         </div>
                                                     </td>
+                                                    <?php endif;?>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
