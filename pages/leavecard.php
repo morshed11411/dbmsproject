@@ -1,10 +1,12 @@
 <?php
-session_start();
+//session_start();
 
 include '../includes/connection.php';
 
 include '../includes/head.php';
 require_once('../assets/phpqrcode/qrlib.php'); // Include the QR Code library
+require_once('../assets/tcpdf/tcpdf.php'); // Include the QR Code library
+
 
 // Check if the soldier_id or leaveid parameter exists in the URL
 if (isset($_GET['soldier_id'])) {

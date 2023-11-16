@@ -1,38 +1,53 @@
 <?php
 include '../includes/connection.php';
-
-// Assuming $conn is your Oracle database connection
-
-function findDisposalHolders($conn, $currentDate = null, $disposalType = null) {
+function findDisposalHolders($conn, $coyId = null, $currentDate = null, $disposalType = null, $soldierId = null) {
     // If $currentDate is not provided, use the current date
     $currentDate = $currentDate ? $currentDate : date('Y-m-d');
 
     // Query to find disposal holders
-    $query = "SELECT S.SOLDIERID, S.NAME, T.TRADE, C.COMPANYNAME, 
+    $query = "SELECT DISTINCT S.SOLDIERID, S.NAME, T.TRADE, C.COMPANYNAME, 
               M.DISPOSALTYPE, M.STARTDATE, M.ENDDATE,
-              CASE 
-                  WHEN M.DISPOSALTYPE = 'R/S' THEN 'Rest/Sick Leave'
-                  WHEN M.DISPOSALTYPE = 'CMH' THEN 'Admitted in CMH'
-                  ELSE 'Unknown Disposal'
-              END AS REMARKS
+              REASON AS REMARKS
               FROM SOLDIER S
               JOIN MEDICALINFO M ON S.SOLDIERID = M.SOLDIERID
               JOIN TRADE T ON S.TRADEID = T.TRADEID
               JOIN COMPANY C ON S.COMPANYID = C.COMPANYID
-              WHERE M.DISPOSALTYPE IS NOT NULL
-              AND TRUNC(M.STARTDATE) <= TO_DATE(:current_date, 'YYYY-MM-DD')
-              AND (M.ENDDATE IS NULL OR TRUNC(M.ENDDATE) >= TO_DATE(:current_date, 'YYYY-MM-DD'))";
+              WHERE (M.DISPOSALTYPE IS NOT NULL)";
 
-    // Apply filters if provided
+    // Apply filters based on parameters
+    if ($coyId !== null) {
+        $query .= " AND C.COMPANYID = :coyId";
+    }
+
     if ($disposalType !== null) {
-        $query .= " AND M.DISPOSALTYPE = :disposal_type";
+        $query .= " AND M.DISPOSALTYPE = :disposalType";
+    }
+
+    if ($currentDate !== null) {
+        $query .= " AND TRUNC(M.STARTDATE) <= TO_DATE(:currentDate, 'YYYY-MM-DD') AND (M.ENDDATE IS NULL OR TRUNC(M.ENDDATE) >= TO_DATE(:currentDate, 'YYYY-MM-DD'))";
+    }
+
+    if ($soldierId !== null) {
+        $query .= " AND S.SOLDIERID = :soldierId";
     }
 
     $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':current_date', $currentDate);
-    
+
+    // Bind parameters
+    if ($coyId !== null) {
+        oci_bind_by_name($stmt, ':coyId', $coyId);
+    }
+
     if ($disposalType !== null) {
-        oci_bind_by_name($stmt, ':disposal_type', $disposalType);
+        oci_bind_by_name($stmt, ':disposalType', $disposalType);
+    }
+
+    if ($currentDate !== null) {
+        oci_bind_by_name($stmt, ':currentDate', $currentDate);
+    }
+
+    if ($soldierId !== null) {
+        oci_bind_by_name($stmt, ':soldierId', $soldierId);
     }
 
     oci_execute($stmt);
@@ -43,30 +58,15 @@ function findDisposalHolders($conn, $currentDate = null, $disposalType = null) {
     ];
 
     while ($disposalDetail = oci_fetch_assoc($stmt)) {
-        // Calculate duration
-        $startDate = new DateTime($disposalDetail['STARTDATE']);
-        $endDate = $disposalDetail['ENDDATE'] ? new DateTime($disposalDetail['ENDDATE']) : new DateTime($currentDate);
+        // Check if the soldier has more than one disposal, add a star (*) if true
+        $remarks = $disposalDetail['REMARKS'];
+        $soldierId = $disposalDetail['SOLDIERID'];
 
-        $duration = $endDate->diff($startDate)->format('%a days');
-
-        // Add details to the result
-        $disposalDetails['details'][] = [
-            'SOLDIERID' => $disposalDetail['SOLDIERID'],
-            'NAME' => $disposalDetail['NAME'],
-            'TRADE' => $disposalDetail['TRADE'],
-            'COMPANYNAME' => $disposalDetail['COMPANYNAME'],
-            'DISPOSALTYPE' => $disposalDetail['DISPOSALTYPE'],
-            'REMARKS' => $disposalDetail['REMARKS'],
-            'DURATION' => $duration,
-        ];
-
-        // Count each disposal type
-        $disposalTypeCount = $disposalDetail['DISPOSALTYPE'];
-        $disposalDetails['total']++;
-        if (!isset($disposalDetails[$disposalTypeCount])) {
-            $disposalDetails[$disposalTypeCount] = 1;
+        if (isset($disposalDetails['details'][$soldierId])) {
+            $disposalDetails['details'][$soldierId]['REMARKS'] .= ' *';
         } else {
-            $disposalDetails[$disposalTypeCount]++;
+            $disposalDetails['details'][$soldierId] = $disposalDetail;
+            $disposalDetails['total']++;
         }
     }
 
@@ -75,48 +75,32 @@ function findDisposalHolders($conn, $currentDate = null, $disposalType = null) {
     return $disposalDetails;
 }
 
-// Example usage:
 
-// Call the function to find all disposal holders for today
-$allDisposalHoldersToday = findDisposalHolders($conn);
+?>
 
-// Output the result
-if ($allDisposalHoldersToday['total'] > 0) {
-    echo "All Disposal holder(s) for today:\n";
-    foreach ($allDisposalHoldersToday['details'] as $detail) {
-        echo "SOLDIERID: {$detail['SOLDIERID']}, NAME: {$detail['NAME']}, TRADE: {$detail['TRADE']}, COMPANY: {$detail['COMPANYNAME']}, ";
-        echo "DISPOSAL TYPE: {$detail['DISPOSALTYPE']}, REMARKS: {$detail['REMARKS']}, DURATION: {$detail['DURATION']}\n";
-    }
+<?php
+//include '../includes/parade_controller.php';
+include '../includes/header.php';
 
-    echo "\nDisposal Type Counts:\n";
-    foreach ($allDisposalHoldersToday as $type => $count) {
-        if ($type !== 'total' && $count > 0) {
-            echo "{$type}: {$count}\n";
+// Example 1: Find all disposal holders for todayss
+$allDisposalHoldersToday = findDisposalHolders($conn,null,null,null,null);
+printDisposalDetails($allDisposalHoldersToday);
+
+// Function to print disposal details
+function printDisposalDetails($disposalDetails)
+{
+    if ($disposalDetails['total'] > 0) {
+        echo "Disposal holder(s):\n";
+        foreach ($disposalDetails['details'] as $detail) {
+            echo "SOLDIERID: {$detail['SOLDIERID']}, NAME: {$detail['NAME']}, TRADE: {$detail['TRADE']}, COMPANY: {$detail['COMPANYNAME']}, ";
+            echo "DISPOSAL TYPE: {$detail['DISPOSALTYPE']}, REMARKS: {$detail['REMARKS']}, START DATE: {$detail['STARTDATE']}, END DATE: {$detail['ENDDATE']}\n";
         }
+    } else {
+        echo "No disposal holders.\n";
     }
-} else {
-    echo "No disposal holder for today.\n";
+
+    echo "\n";
 }
 
-// Call the function to find disposal holders of a specific type for today
-$specificDisposalTypeHoldersToday = findDisposalHolders($conn, null, 'R/S');
-
-// Output the result
-if ($specificDisposalTypeHoldersToday['total'] > 0) {
-    echo "\nR/S Disposal holder(s) for today:\n";
-    foreach ($specificDisposalTypeHoldersToday['details'] as $detail) {
-        echo "SOLDIERID: {$detail['SOLDIERID']}, NAME: {$detail['NAME']}, TRADE: {$detail['TRADE']}, COMPANY: {$detail['COMPANYNAME']}, ";
-        echo "DISPOSAL TYPE: {$detail['DISPOSALTYPE']}, REMARKS: {$detail['REMARKS']}, DURATION: {$detail['DURATION']}\n";
-    }
-
-    echo "\nR/S Disposal Type Counts:\n";
-    foreach ($specificDisposalTypeHoldersToday as $type => $count) {
-        if ($type !== 'total' && $count > 0) {
-            echo "{$type}: {$count}\n";
-        }
-    }
-} else {
-    echo "No R/S disposal holder for today.\n";
-}
-
+include '../includes/footer.php';
 ?>

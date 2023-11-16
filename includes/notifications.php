@@ -1,5 +1,4 @@
 <?php
-session_start();
 $soldierId = $_SESSION['userid'];
 
 

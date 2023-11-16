@@ -1,10 +1,14 @@
 <?php
 
-error_reporting(0);
-ini_set('display_errors', 0);
-session_start();
+// error_reporting(0);
+// ini_set('display_errors', 0);
 
-$db_user = 'umsv2';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+$db_user = 'upcs';
 $db_password = '12345';
 $db_host = 'localhost/XEPDB1';
 

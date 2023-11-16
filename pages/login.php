@@ -78,6 +78,7 @@ function login($conn, $username, $password)
    return $row['FAILED_LOGIN_ATTEMPTS'];
 }
 
+global $loginAttempt;
 
 if (isset($_POST['login'])) {
    $username = $_POST['username'];
