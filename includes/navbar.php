@@ -58,10 +58,12 @@ if (isset($_SESSION['userid'])) {
   <ul class="navbar-nav ml-auto">
     <!-- Trigger Notification Modal -->
     <button onclick="showNotificationModal()" class="btn btn-light">
-      <i class="fas fa-bell"></i> Notifications
-      <span class="badge badge-danger">
-      <?php echo $unreadCount; ?>
-      </span>
+      <i class="fas fa-bell"></i>
+      <?php if ($unreadCount): ?>
+        <span class="badge badge-danger">
+          <?php echo $unreadCount; ?>
+        </span>
+      <?php endif; ?>
     </button>
 
 
@@ -252,15 +254,15 @@ if (isset($_SESSION['userid'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="medical_info.php" class="nav-link sublink">
+                <a href="medical_disposal.php" class="nav-link sublink">
                   <i class="fas fa-notes-medical nav-icon"></i>
-                  <p>Add Medical Info</p>
+                  <p>Medical Disposal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="archive_medical_info.php" class="nav-link sublink">
+                <a href="medical_disposal_state.php" class="nav-link sublink">
                   <i class="fas fa-archive nav-icon"></i>
-                  <p>Todays Disposal</p>
+                  <p>Disposal State</p>
                 </a>
               </li>
 

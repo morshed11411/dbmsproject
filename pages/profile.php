@@ -278,13 +278,13 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                 <tr>
                                                     <th>Personal Contact:</th>
                                                     <td>
-                                                        <?php echo $soldier['PERSONALCONTACT']; ?>
+                                                        <?php echo '+880'.$soldier['PERSONALCONTACT']; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Emergency Contact:</th>
                                                     <td>
-                                                        <?php echo $soldier['EMERGENCYCONTACT']; ?>
+                                                        <?php echo '+880'. $soldier['EMERGENCYCONTACT']; ?>
                                                     </td>
                                                 </tr>
 

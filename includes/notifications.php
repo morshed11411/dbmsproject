@@ -22,6 +22,9 @@ while ($notification = oci_fetch_assoc($stmt)) {
     $notifications[] = $notification;
 }
 
+$_SESSION['notification']=[];
+$_SESSION['notification'] = $notifications;
+
 
 // Function to count unread notifications
 function countUnreadNotifications($soldierId)
@@ -73,58 +76,76 @@ function markNotificationAsRead($notificationId)
                 <?php if (empty($notifications)): ?>
                     <p>No notifications available.</p>
                 <?php else: ?>
-                    <!-- Unread notifications -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h6 class="mb-0">Unread Notifications</h6>
-                        </div>
-                        <ul class="list-group list-group-flush" id="notificationListUnread">
-                            <?php foreach ($notifications as $notification): ?>
-                                <?php if ($notification['STATUS'] === 'Unread'): ?>
-                                    <li class="list-group-item font-weight-bold">
-                                        <div class="d-flex justify-content-between">
-                                            <span>
-                                                <?php echo $notification['MESSAGE']; ?>
-                                            </span>
-                                            <form method="post" action="">
-                                                <input type="hidden" name="notificationId" value="<?php echo $notification['ID']; ?>">
-                                                <button type="submit" name="mark_as_read" class="btn btn-sm btn-success">
-                                                    <i class="fas fa-check"></i> Mark as Read
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <?php 
-                                        // Display the time difference
-                                        displayTimeDifference($notification['CREATED_AT']);
-                                        ?>
-                                    </li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
+                    <ul class="nav nav-tabs" id="notificationTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="unread-tab" data-toggle="tab" href="#unread" role="tab"
+                                aria-controls="unread" aria-selected="true">Unread Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="read-tab" data-toggle="tab" href="#read" role="tab" aria-controls="read"
+                                aria-selected="false">Read Notifications</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-2">
+                        <!-- Unread notifications -->
+                        <div class="tab-pane fade show active" id="unread" role="tabpanel" aria-labelledby="unread-tab">
+                            <ul class="list-group list-group-flush" id="notificationListUnread">
 
-                    <!-- Read notifications (collapsed by default) -->
-                    <div class="card card-secondary mt-3">
-                        <div class="card-header" data-toggle="collapse" data-target="#notificationListRead">
-                            <h6 class="mb-0">Old Notifications</h6>
-                        </div>
-                        <ul class="list-group list-group-flush collapse" id="notificationListRead">
-                            <?php foreach ($notifications as $notification): ?>
-                                <?php if ($notification['STATUS'] === 'Read'): ?>
-                                    <li class="list-group-item">
-                                        <div class="d-flex justify-content-between">
-                                            <span>
-                                                <?php echo $notification['MESSAGE']; ?>
-                                            </span>
-                                        </div>
-                                        <?php 
-                                        // Display the time difference
-                                        displayTimeDifference($notification['CREATED_AT']);
-                                        ?>
-                                    </li>
+                                <?php $noNotification = true; // Assume no unread notifications initially ?>
+                                <?php foreach ($notifications as $notification): ?>
+                                    <?php if ($notification['STATUS'] === 'Unread') { ?>
+                                        <li class="list-group-item font-weight-bold">
+                                            <div class="d-flex justify-content-between">
+                                                <span>
+                                                    <?php echo $notification['MESSAGE']; ?>
+                                                </span>
+                                                <form method="post" action="">
+                                                    <input type="hidden" name="notificationId"
+                                                        value="<?php echo $notification['ID']; ?>">
+                                                    <button type="submit" name="mark_as_read" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-check"></i> Mark as Read
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <?php
+                                            // Display the time difference
+                                            displayTimeDifference($notification['CREATED_AT']);
+                                            ?>
+                                        </li>
+                                        <?php $noNotification = false; // Found an unread notification ?>
+                                    <?php } ?>
+                                <?php endforeach; ?>
+
+                                <?php if ($noNotification): ?>
+                                    <div class="text-center">
+                                        <p>No new notifications.</p>
+                                    </div>
                                 <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
+
+                            </ul>
+                        </div>
+
+
+                        <!-- Read notifications (collapsed by default) -->
+                        <div class="tab-pane fade" id="read" role="tabpanel" aria-labelledby="read-tab">
+                            <ul class="list-group list-group-flush" id="notificationListRead">
+                                <?php foreach ($notifications as $notification): ?>
+                                    <?php if ($notification['STATUS'] === 'Read'): ?>
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <span>
+                                                    <?php echo $notification['MESSAGE']; ?>
+                                                </span>
+                                            </div>
+                                            <?php
+                                            // Display the time difference
+                                            displayTimeDifference($notification['CREATED_AT']);
+                                            ?>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
                     </div>
                 <?php endif; ?>
             </div>
@@ -140,7 +161,8 @@ function markNotificationAsRead($notificationId)
 
 <?php
 // Function to display the time difference
-function displayTimeDifference($rawDate) {
+function displayTimeDifference($rawDate)
+{
     // Convert the raw date to a DateTime object
     $date = DateTime::createFromFormat('d-M-y h.i.s.u A', $rawDate, new DateTimeZone('UTC'));
 

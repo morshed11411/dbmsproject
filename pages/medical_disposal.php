@@ -149,21 +149,7 @@ include '../includes/header.php';
                             </select>
                         </div>
                     </div>
-                    <?php
-                // Check if the form is submitted
-                if (isset($_POST['filterBtn'])) {
-                    // Get form values
-                    $coyId = $_POST['coyId'] ?? null;
-                    $disposalType = $_POST['disposalType'] ?? null;
-                    $currentDate = $_POST['currentDate'] ?? null;
 
-                    // Call the findDisposalHolders function
-                    $disposalDetails = findDisposalHolders($conn, $coyId, $currentDate, $disposalType);
-
-                    // Print the disposal details
-                    printDisposalDetails($disposalDetails);
-                }
-                ?>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Disposal Type:</label>
                         <div class="col-sm-4">
@@ -185,7 +171,21 @@ include '../includes/header.php';
                     </div>
                 </form>
             </div>
+            <?php
+            // Check if the form is submitted
+            if (isset($_POST['filterBtn'])) {
+                // Get form values
+                $coyId = $_POST['coyId'] ?? null;
+                $disposalType = $_POST['disposalType'] ?? null;
+                $currentDate = $_POST['currentDate'] ?? null;
 
+                // Call the findDisposalHolders function
+                $disposalDetails = findDisposalHolders($conn, $coyId, $currentDate, $disposalType);
+
+                // Print the disposal details
+                printDisposalDetails($disposalDetails);
+            }
+            ?>
 
 
         </div>

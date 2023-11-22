@@ -1,11 +1,28 @@
-<?php 
+<?php
 $pageTitle = "Dashboard-UPCS";
+include '../includes/header.php';
+include '../includes/parade_controller.php';
 
-include '../includes/header.php'; ?>
+foreach ($company as $coy) {
+    $solderByCoy = getSoldiers($conn, null, null, null, false, $coy['ID'], null);
+
+    $byCoyCount[$coy['ID']] = count($solderByCoy);
+}
+
+foreach ($ranks as $rank) {
+    $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, null, null);
+
+    $byRankCount[$rank['ID']] = count($soldiersByRank);
+}
+
+
+
+
+?>
 <div class="card-body">
     <div class="d-flex justify-content-between">
         <div class="text-left">
-            <h3>Unit Dashboard</h3>
+            <h3>Welcome</h3>
         </div>
         <div class="text-right">
             <?php
@@ -16,70 +33,108 @@ include '../includes/header.php'; ?>
     </div>
 </div>
 <?php include '../includes/alert.php'; ?>
-
 <section class="content">
     <div class="row">
-        <div class="col-md-3">
-            <div class="info-box bg-primary">
-                <span class="info-box-icon"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Total Soldiers</span>
-                    <span class="info-box-number">100</span>
+        <div class="col-lg-3">
+            <!-- Total Soldiers Card -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white"><i class="fas fa-users"></i> Total Soldiers</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?php printSoldierList($postedTotal, 'allSoldier', 'Posted Soldiers') ?>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="info-box bg-success">
-                <span class="info-box-icon"><i class="fas fa-user-check"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Soldiers Present</span>
-                    <span class="info-box-number">75</span>
+
+        <div class="col-lg-3">
+            <!-- Soldiers Present Card -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white"><i class="fas fa-user-tie"></i> Total Officer</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?php printSoldierList($allOfficer, 'allOffr', 'All Officer') ?>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="info-box bg-info">
-                <span class="info-box-icon"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Total Teams</span>
-                    <span class="info-box-number">10</span>
+
+        <div class="col-lg-3">
+            <!-- Total Teams Card -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white"><i class="fas fa-user-secret"></i> Total JCO</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?php printSoldierList($allJCO, 'allJCO', 'Posted JCO') ?>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="info-box bg-warning">
-                <span class="info-box-icon"><i class="fas fa-user-clock"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Soldiers on Leave</span>
-                    <span class="info-box-number">25</span>
+
+        <div class="col-lg-3">
+            <!-- Soldiers on Leave Card -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white"><i class="fas fa-user"></i> Other Ranks</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <?php printSoldierList($allORS, 'allORS', 'All Other Ranks') ?>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+    <!-- /.row -->
+
+
+    <!-- Notice Board and Random Data Table -->
     <div class="row">
-        <div class="col-md-6">
-            <!-- Notice Board -->
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Notice Board</h3>
+        <div class="col-lg-6">
+            <!-- Notice Board Card -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h3 class="card-title text-white">Notice Board</h3>
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-bullhorn"></i> Important Announcement: ...</li>
-                        <li><i class="fas fa-bullhorn"></i> Reminder: ...</li>
-                        <li><i class="fas fa-bullhorn"></i> New Policy Update: ...</li>
-                        <li><i class="fas fa-bullhorn"></i> Event Tomorrow: ...</li>
-                        <!-- Add more notices here -->
+                        <?php if (empty($notifications)): ?>
+                            <p>No notifications available.</p>
+                        <?php else: ?>
+
+                            <?php $noNotification = true; // Assume no unread notifications initially ?>
+                            <?php foreach ($notifications as $notification): ?>
+                                <?php if ($notification['STATUS']) { ?>
+                                    <li>
+                                        <i class="fas fa-bullhorn"></i> <span>
+                                            <?php echo $notification['MESSAGE']; ?>
+                                        </span>
+                                        <?php
+                                        // Display the time difference
+                                        displayTimeDifference($notification['CREATED_AT']);
+                                        ?>
+                                    </li>
+                                    <?php $noNotification = false; // Found an unread notification ?>
+                                <?php } ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <!-- Random Data Table -->
-            <div class="card card-warning">
-                <div class="card-header">
-                    <h3 class="card-title">Random Data Table</h3>
+        <!-- Random Data Table -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h3 class="card-title text-white">Random Data Table</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -107,98 +162,113 @@ include '../includes/header.php'; ?>
                 </div>
             </div>
         </div>
-
     </div>
+    <!-- /.row -->
 
+    <!-- Charts -->
     <div class="row">
-        <div class="col-md-6">
-            <!-- Bar Chart -->
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Bar Chart</h3>
+        <!-- Left Column -->
+        <div class="col-lg-6">
+            <!-- Online Store Visitors Chart -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white"><i class="fas fa-chart-bar"></i> Soldiers by Company</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="barChart" style="height: 200px;"></canvas>
+                    <canvas id="soldiersByCompanyChart" height="200"></canvas>
                 </div>
             </div>
+            <!-- /.card -->
         </div>
 
-        <div class="col-md-6">
-            <!-- Pie Chart -->
-            <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Pie Chart</h3>
+        <!-- Right Column -->
+        <div class="col-lg-6">
+            <!-- Online Store Visitors Chart -->
+            <div class="card">
+                <div class="card-header bg-info">
+                    <h5 class="card-title text-white">Soldiers by Rank</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="pieChart" style="height: 200px;"></canvas>
+                    <!-- Create a canvas element for the bar chart -->
+                    <canvas id="soldiers-by-rank-chart" height="200"></canvas>
                 </div>
             </div>
+
+            <!-- /.card -->
         </div>
-
-
     </div>
+    <!-- /.row -->
+    <!-- /.container-fluid -->
 </section>
 
-<!-- Include necessary scripts for charts (Chart.js) here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 
-<!-- Initialize and configure your charts (pieChart and barChart) here -->
+<!-- Initialize and configure your charts (visitors-chart, sales-chart) here -->
 <script>
-    // Pie Chart
-    var pieData = {
-        datasets: [{
-            data: [30, 70], // Replace with your data
-            backgroundColor: ['green', 'blue'], // Replace with your colors
-        }],
-        labels: ['Label 1', 'Label 2'], // Replace with your labels
-    };
-
-    var pieOptions = {
-        responsive: true,
-        legend: {
-            display: true,
-        },
-    };
-
-    var pieChartCanvas = document.getElementById('pieChart').getContext('2d');
-    new Chart(pieChartCanvas, {
-        type: 'pie',
-        data: pieData,
-        options: pieOptions,
-    });
+    // Data for Soldiers by Company
+    var companies = <?php echo json_encode(array_column($company, 'NAME')); ?>;
+    var soldiersCount = <?php echo json_encode(array_values($byCoyCount)); ?>;
 
     // Bar Chart
-    var barData = {
-        labels: ['Label 1', 'Label 2', 'Label 3'], // Replace with your labels
-        datasets: [{
-            label: 'Dataset 1',
-            backgroundColor: 'blue', // Replace with your color
-            data: [50, 30, 70], // Replace with your data
-        }],
-    };
-
-    var barOptions = {
-        responsive: true,
-        scales: {
-            xAxes: [{
-                barPercentage: 0.5,
-                barThickness: 20,
-                maxBarThickness: 30,
-                minBarLength: 2,
-                gridLines: {
-                    offsetGridLines: true,
-                },
-            }],
+    var soldiersByCompanyChartCanvas = document.getElementById('soldiersByCompanyChart').getContext('2d');
+    new Chart(soldiersByCompanyChartCanvas, {
+        type: 'line',
+        data: {
+            labels: companies,
+            datasets: [{
+                label: 'Total',
+                data: soldiersCount,
+                backgroundColor: 'rgba(0, 123, 255, 0.2)', // Bootstrap primary color class
+                borderColor: 'rgba(0, 123, 255, 1)', // Bootstrap primary color class
+                borderWidth: 1
+            }]
         },
-    };
-
-    var barChartCanvas = document.getElementById('barChart').getContext('2d');
-    new Chart(barChartCanvas, {
-        type: 'bar',
-        data: barData,
-        options: barOptions,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     });
 </script>
 
+<script>
+    // Get the data for soldiers by rank
+    var ranks = <?php echo json_encode($ranks); ?>;
+    var byRankCount = <?php echo json_encode($byRankCount); ?>;
 
+    // Create arrays to store data for the chart
+    var rankLabels = [];
+    var rankData = [];
+
+    // Extract data from the PHP arrays
+    for (var i = 0; i < ranks.length; i++) {
+        rankLabels.push(ranks[i]['NAME']);
+        rankData.push(byRankCount[ranks[i]['ID']]);
+    }
+
+    // Create the soldiers by rank chart
+    var soldiersByRankChartCanvas = document.getElementById('soldiers-by-rank-chart').getContext('2d');
+    new Chart(soldiersByRankChartCanvas, {
+        type: 'bar',
+        data: {
+            labels: rankLabels,
+            datasets: [{
+                label: 'Soldiers by Rank',
+                data: rankData,
+                backgroundColor: 'rgba(0, 123, 255, 0.5)', // Bootstrap primary color with 50% opacity
+                borderColor: 'rgba(0, 123, 255, 1)', // Bootstrap primary color
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 <?php include '../includes/footer.php'; ?>
