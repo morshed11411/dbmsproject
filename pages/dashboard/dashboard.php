@@ -1,9 +1,10 @@
 <?php
 $pageTitle = "Dashboard-UPCS";
-define('BASE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/upcs/');
+define('BASE_URL', 'http://yourdomain.com/upcs/');
 
-require_once(BASE_DIR. 'includes/header.php');
-require_once(BASE_DIR. 'includes/parade_controller.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/upcs/includes/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/upcs/includes/parade_controller.php');
+
 
 foreach ($company as $coy) {
     $solderByCoy = getSoldiers($conn, null, null, null, false, $coy['ID'], null);
