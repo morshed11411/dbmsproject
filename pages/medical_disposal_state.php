@@ -1,5 +1,5 @@
 <?php
-include '../includes/parade_controller.php';
+//include '../includes/parade_controller.php';
 include '../includes/disposal_controller.php';
 
 // Get date to filter

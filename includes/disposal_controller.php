@@ -51,6 +51,8 @@ WHERE (D.DISPOSALTYPE IS NOT NULL)";
     if ($soldierId !== null) {
         $query .= " AND S.SOLDIERID = :soldierId";
     }
+    $query .= " ORDER BY M.MEDICALID DESC";
+
 
     $stmt = oci_parse($conn, $query);
 
@@ -158,6 +160,122 @@ function printSoldierList($soldiersArray, $id, $name = null)
     return $count;
 }
 
+
+function addDisposal($soldierID, $disposalType, $startDate, $endDate, $reason)
+{
+    global $conn;
+
+    // Fetch DISPOSALID based on DISPOSALTYPE
+    $query = "SELECT DISPOSALID FROM DISPOSALTYPE WHERE DISPOSALTYPE = :disposal_type";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':disposal_type', $disposalType);
+    oci_execute($stmt);
+
+    $disposalIdResult = oci_fetch_assoc($stmt);
+    $disposalId = $disposalIdResult['DISPOSALID'];
+
+    // Insert into MEDICALINFO
+    $insertQuery = "INSERT INTO MEDICALINFO (SOLDIERID, DISPOSALID, STARTDATE, ENDDATE, REASON) 
+              VALUES (:soldier_id, :disposal_id, TO_DATE(:start_date, 'YYYY-MM-DD'), 
+              TO_DATE(:end_date, 'YYYY-MM-DD'), :reason)";
+    $insertStmt = oci_parse($conn, $insertQuery);
+    oci_bind_by_name($insertStmt, ':soldier_id', $soldierID);
+    oci_bind_by_name($insertStmt, ':disposal_id', $disposalId); // Use the fetched DISPOSALID
+    oci_bind_by_name($insertStmt, ':start_date', $startDate);
+    oci_bind_by_name($insertStmt, ':end_date', $endDate);
+    oci_bind_by_name($insertStmt, ':reason', $reason);
+
+    $result = oci_execute($insertStmt);
+    oci_free_statement($stmt);
+    oci_free_statement($insertStmt);
+
+    if ($result) {
+        $_SESSION['success'] = "Report sick sent successfully.";
+    } else {
+        $editError = oci_error($insertStmt);
+        $_SESSION['error'] = "Failed to update disposal information: " . $editError['message'];
+    }
+}
+function updateDisposal($disposalID, $disposalType = null, $endDate = null, $reason = null)
+{
+    global $conn;
+
+    // Fetch DISPOSALID based on DISPOSALTYPE if it's provided
+    $disposalId = null;
+    if ($disposalType !== null) {
+        $query = "SELECT DISPOSALID FROM DISPOSALTYPE WHERE DISPOSALTYPE = :disposal_type";
+        $stmt = oci_parse($conn, $query);
+        oci_bind_by_name($stmt, ':disposal_type', $disposalType);
+        oci_execute($stmt);
+
+        $disposalIdResult = oci_fetch_assoc($stmt);
+        $disposalId = $disposalIdResult['DISPOSALID'];
+    }
+
+    $query = "UPDATE MEDICALINFO SET";
+
+    // Conditionally include DISPOSALID in the update if it's not null
+    if ($disposalId !== null) {
+        $query .= " DISPOSALID = :disposal_id,";
+    }
+
+    $query .= " ENDDATE = TO_DATE(:end_date, 'YYYY-MM-DD')";
+
+    // Conditionally include REASON in the update if it's not null
+    if ($reason !== null) {
+        $query .= ", REASON = :reason";
+    }
+
+    $query .= " WHERE MEDICALID = :medical_id";
+
+    $stmt = oci_parse($conn, $query);
+
+    // Bind DISPOSALID parameter only if it's not null
+    if ($disposalId !== null) {
+        oci_bind_by_name($stmt, ':disposal_id', $disposalId);
+    }
+
+    oci_bind_by_name($stmt, ':end_date', $endDate);
+
+    // Bind REASON parameter only if it's not null
+    if ($reason !== null) {
+        oci_bind_by_name($stmt, ':reason', $reason);
+    }
+
+    oci_bind_by_name($stmt, ':medical_id', $disposalID);
+
+    $result = oci_execute($stmt);
+    oci_free_statement($stmt);
+
+    if ($result) {
+        $_SESSION['success'] = "Disposal information updated successfully.";
+    } else {
+        $editError = oci_error($stmt);
+        $_SESSION['error'] = "Failed to update disposal information: " . $editError['message'];
+    }
+}
+
+
+function deleteDisposal($deleteDisposalID)
+{
+    global $conn;
+
+    $deleteQuery = "DELETE FROM MEDICALINFO WHERE MEDICALID = :disposal_id";
+    $deleteStmt = oci_parse($conn, $deleteQuery);
+
+    oci_bind_by_name($deleteStmt, ':disposal_id', $deleteDisposalID);
+
+    $deleteResult = oci_execute($deleteStmt);
+
+    if ($deleteResult) {
+        $_SESSION['success'] = "Disposal information deleted successfully.";
+    } else {
+        $deleteError = oci_error($deleteStmt);
+        $_SESSION['error'] = "Failed to delete disposal information: " . $deleteError['message'];
+    }
+
+    oci_free_statement($deleteStmt);
+}
 
 
 ?>

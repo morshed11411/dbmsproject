@@ -229,14 +229,14 @@ include '../includes/header.php';
                                                 href="send_leave.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
                                                 Leave</a>
                                             <a class="dropdown-item"
-                                                href="disposal.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
+                                                href="report_sick.php?soldier=<?php echo $soldier->SoldierID; ?>">Send
                                                 Report Sick
                                             </a>
                                             <a class="dropdown-item"
                                                 href="manage_training.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
                                                 Training</a>
                                             <a class="dropdown-item"
-                                                href="give_punishment.php?soldier=<?php echo $soldier->SoldierID; ?>">Give
+                                                href="give_punishment.php?soldier=<?php echo $soldier->SoldierID; ?>">Manage
                                                 Punishment</a>
                                             <a class="dropdown-item"
                                                 href="assign_appointment.php?soldier=<?php echo $soldier->SoldierID; ?>">Assign

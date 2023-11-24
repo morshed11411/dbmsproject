@@ -20,10 +20,8 @@ $disposalHolderList = [];
 // Loop through disposal types and companies to get counts
 foreach ($disposalTypes as $disposal) {
     $total[$disposal] = 0;
-
     foreach ($company as $coy) {
         $disposalHolder = medicalDisposal($conn, $coy['ID'], $currentDate, $disposal, null);
-
         $disposalHolderList[$disposal][$coy['ID']] = $disposalHolder;
     }
 }
