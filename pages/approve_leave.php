@@ -26,7 +26,7 @@ $leaveTypes = getLeaveTypes($conn);
 
 
 
-$query = "SELECT LM.LEAVEID,SOLDIER.NAME AS SOLDIER_NAME, LT.LEAVETYPE, LM.LEAVESTARTDATE, LM.LEAVEENDDATE, LM.REQUESTDATE, LM.STATUS 
+$query = "SELECT LM.LEAVEID,SOLDIER.SOLDIERID,SOLDIER.NAME AS SOLDIER_NAME, LT.LEAVETYPE, LM.LEAVESTARTDATE, LM.LEAVEENDDATE, LM.REQUESTDATE, LM.STATUS 
           FROM LEAVEMODULE LM 
           JOIN LEAVETYPE LT ON LM.LEAVETYPEID = LT.LEAVETYPEID
           JOIN SOLDIER ON LM.SOLDIERID = SOLDIER.SOLDIERID
@@ -210,7 +210,9 @@ include '../includes/header.php';
                                         </td>
                                     </tr>
                                 <?php else: ?>
-                                    <?php foreach ($leaveRequests as $leave): ?>
+                                    <?php foreach ($leaveRequests as $leave):
+                                        $soldierID=$leave['SOLDIERID'];
+                                        ?>
                                         <tr>
                                             <td>
                                                 <?php echo $leave['LEAVEID']; ?>
@@ -268,7 +270,7 @@ include '../includes/header.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <!-- Replace with your form fields for approving -->
+                                                    <?php include '../includes/soldier_info.php'; ?>
                                                         <form method="POST" action="">
                                                             <!-- Leave ID for reference -->
                                                             <input type="hidden" name="leave_id"

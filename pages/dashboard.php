@@ -2,8 +2,10 @@
 $pageTitle = "Dashboard-UPCS";
 define('BASE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/upcs/');
 
-require_once(BASE_DIR. 'includes/header.php');
-require_once(BASE_DIR. 'includes/parade_controller.php');
+require_once(BASE_DIR . 'includes/header.php');
+require_once(BASE_DIR . 'includes/parade_controller.php');
+require_once(BASE_DIR . 'includes/leave_controller.php');
+
 
 foreach ($company as $coy) {
     $solderByCoy = getSoldiers($conn, null, null, null, false, $coy['ID'], null);
@@ -16,6 +18,40 @@ foreach ($ranks as $rank) {
 
     $byRankCount[$rank['ID']] = count($soldiersByRank);
 }
+
+function getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate)
+{
+    $leaveCountsByDate = array();
+
+    // Loop through each date in the date range
+    $currentDate = new DateTime($startDate);
+    $endDateObj = new DateTime($endDate);
+
+    while ($currentDate <= $endDateObj) {
+        $date = $currentDate->format('Y-m-d');
+
+        // Loop through each company and get leave count for the current date
+        foreach ($companies as $company) {
+            $leaveCount = getLeaveInfo($conn, $company['ID'], $date, null, null);
+
+            // Store leave count in the 2D array
+            $leaveCountsByDate[$date][$company['ID']] = count($leaveCount);
+        }
+
+        // Move to the next date
+        $currentDate->modify('+1 day');
+    }
+
+    return $leaveCountsByDate;
+}
+
+// Example usage
+$companies = $company;
+$startDate = '2023-11-15'; // Replace with your start date
+$endDate = '2023-11-31';   // Replace with your end date
+
+$result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
+
 
 
 
@@ -98,7 +134,8 @@ foreach ($ranks as $rank) {
 
     <!-- Notice Board and Random Data Table -->
     <div class="row">
-        <div class="col-lg-6">
+
+        <div class="col-lg-4">
             <!-- Notice Board Card -->
             <div class="card">
                 <div class="card-header bg-info">
@@ -133,41 +170,19 @@ foreach ($ranks as $rank) {
         </div>
 
         <!-- Random Data Table -->
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header bg-info">
-                    <h3 class="card-title text-white">Random Data Table</h3>
+                    <h3 class="card-title text-white">Solder Leave State</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Item 1</td>
-                                <td>123</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Item 2</td>
-                                <td>456</td>
-                            </tr>
-                            <!-- Add more rows with random data here -->
-                        </tbody>
-                    </table>
+                    <canvas id="leave-counts-chart" width="400" height="200"></canvas>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- /.row -->
 
-    <!-- Charts -->
     <div class="row">
         <!-- Left Column -->
         <div class="col-lg-6">
@@ -204,7 +219,62 @@ foreach ($ranks as $rank) {
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script>
+    // Replace the PHP code with the actual data from your PHP script
+    var leaveCountsByDate = <?php echo json_encode($result); ?>;
+    var companies = <?php echo json_encode($companies); ?>;
 
+    // Extract data for the chart
+    var dates = Object.keys(leaveCountsByDate);
+
+    // Create arrays to store data for the chart
+    var labels = dates;
+    var datasets = [];
+
+    // Define colors for each company
+    var colors = ['rgba(255, 99, 132, 0.5)', 'rgba(255, 205, 86, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(75, 192, 192, 0.5)'];
+
+    // Loop through companies to create datasets
+    for (var i = 0; i < companies.length; i++) {
+        var companyId = companies[i]['ID'];
+        var companyName = companies[i]['NAME'];
+        var data = [];
+
+        // Extract leave counts for the current company
+        for (var j = 0; j < dates.length; j++) {
+            data.push(leaveCountsByDate[dates[j]][companyId] || 0);
+        }
+
+        // Add dataset for the current company
+        datasets.push({
+            label: companyName,
+            data: data,
+            backgroundColor: colors[i % colors.length], // Use modulus to loop through colors if more companies than colors
+            borderColor: colors[i % colors.length],
+            borderWidth: 1
+        });
+    }
+
+    // Create the leave counts by date and company chart
+    var leaveCountsChartCanvas = document.getElementById('leave-counts-chart').getContext('2d');
+    new Chart(leaveCountsChartCanvas, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 5, // Set the minimum value to 5
+
+                }
+                
+            }
+        }
+    });
+</script>
 <!-- Initialize and configure your charts (visitors-chart, sales-chart) here -->
 <script>
     // Data for Soldiers by Company
@@ -234,6 +304,8 @@ foreach ($ranks as $rank) {
         }
     });
 </script>
+
+
 
 <script>
     // Get the data for soldiers by rank

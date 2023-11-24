@@ -8,7 +8,7 @@ if (isset($_POST['filterBtn'])) {
     $currentDate = $_POST['currentDate'] ?? null;
     $formattedDate = date('j F, Y', strtotime($currentDate));
 
-    $_SESSION['success'] = 'Showing parade state for: '.$formattedDate;
+    $_SESSION['success'] = 'Showing parade state for: ' . $formattedDate;
 
 }
 
@@ -61,7 +61,7 @@ include '../includes/header.php';
                     <div class="col-auto">
                         <label class="sr-only" for="currentDate">Current Date</label>
                         <input type="date" class="form-control" id="currentDate" name="currentDate"
-                            value="<?=     $currentDate = $_POST['currentDate'] ?? date('Y-m-d'); ?>">
+                            value="<?= $currentDate = $_POST['currentDate'] ?? date('Y-m-d'); ?>">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary" name="filterBtn">Filter</button>
@@ -72,6 +72,7 @@ include '../includes/header.php';
         </div>
     </div>
 </div>
+
 <section class="content">
     <div class="container-fluid">
 
@@ -91,7 +92,7 @@ include '../includes/header.php';
 
             </div>
             <div class="card-body table-responsive">
-                <table id="" class="table  table-bordered">
+                <table id="" class="table  table-bordered" style="border: 1px solid black;">
                     <!-- Disposal Section -->
                     <tr>
                         <th style=" width: 150px;">
@@ -133,7 +134,6 @@ include '../includes/header.php';
                         </tr>
                     <?php endforeach; ?>
 
-                    <!-- Leave Section -->
                     <?php foreach ($leaveTypes as $leaveType): ?>
                         <tr>
                             <td>
@@ -198,5 +198,6 @@ include '../includes/header.php';
 
         </div>
     </div>
+</section>
 
-    <?php include '../includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

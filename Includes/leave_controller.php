@@ -4,7 +4,7 @@ function getLeaveTypes($conn)
 {
     $leaveTypes = [];
 
-    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE";
+    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE WHERE SHOW_LEAVE = 1";
     $leaveStmt = oci_parse($conn, $leaveQuery);
     oci_execute($leaveStmt);
 

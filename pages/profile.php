@@ -49,7 +49,7 @@ if ($row = oci_fetch_assoc($stmt)) {
     while ($row = oci_fetch_assoc($stmt)) {
         $disposal = new stdClass();
         $disposal->DisposalID = $row['MEDICALID'];
-        $disposal->DisposalType = $row['DISPOSALTYPE'];
+        $disposal->DisposalType = $row['DISPOSALID'];
         $disposal->StartDate = $row['STARTDATE'];
         $disposal->EndDate = $row['ENDDATE'];
         $disposal->Reason = $row['REASON'];
@@ -68,7 +68,7 @@ if ($row = oci_fetch_assoc($stmt)) {
     while ($row = oci_fetch_assoc($stmt)) {
         $leave = new stdClass();
         $leave->LeaveID = $row['LEAVEID'];
-        $leave->LeaveType = $row['LEAVETYPE'];
+        $leave->LeaveType = $row['LEAVETYPEID'];
         $leave->LeaveStartDate = $row['LEAVESTARTDATE'];
         $leave->LeaveEndDate = $row['LEAVEENDDATE'];
         $leaveHistory[] = $leave;
@@ -102,9 +102,8 @@ if ($row = oci_fetch_assoc($stmt)) {
                 <h3>Soldier Profile </h3>
             </div>
             <div class="text-right">
-            <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
-                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>" class="btn btn-success">Image</a>
-                <a href="uploadsignature.php?soldier=<?php echo $soldierId; ?>" class="btn btn-warning">Signature</a>
+                <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
+
             </div>
         </div>
     </div>
@@ -115,62 +114,57 @@ if ($row = oci_fetch_assoc($stmt)) {
 
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body text-center">
-                        <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>">
-                            <?php
-                            $profilePicture = $soldier['PROFILEPICTURE'];
-                            if (!empty($profilePicture)) {
-                                ?>
-                                <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="img-thumbnail"
-                                    style="max-height: 370px; width: auto;">
-                                <?php
-                            } else {
-                                ?>
-                                <img src="../images/default_profile_picture.png" alt="Profile Picture" class="img-thumbnail"
-                                    style="max-height: 370px; width: auto;">
-                                <?php
-                            }
-                            ?>
-                            </a>
-                        </div>
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    Soldier ID:
-                                </th>
-                                <td>
-                                    <h5>
-                                        <?php echo $soldier['SOLDIERID']; ?>
-                                    </h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Name:
-                                </th>
-                                <td>
-                                    <h5>
-                                        <?php echo $soldier['NAME']; ?>
-                                        <h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Last Leave:</th>
-                                <td>
-                                    <?php
-                                    $lastLeave = $soldier['LASTLEAVE'];
-                                    if ($lastLeave < 30) {
-                                        $lastLeave = $lastLeave . ' days';
-                                    } else {
-                                        $lastLeave = round($lastLeave / 30) . ' month, ' . $lastLeave % 30 . ' days';
-                                    }
-                                    echo $lastLeave;
-                                    ?>
-                                </td>
-                            </tr>
+                    <div class="card card-primary">
+                        <div class="card-body box-profile mt-2">
+                            <div class="text-center">
 
-                        </table>
+                                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>">
+                                    <?php
+                                    $profilePicture = $soldier['PROFILEPICTURE'];
+                                    if (!empty($profilePicture)) {
+                                        ?>
+                                        <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="img-thumbnail"
+                                            style="max-height: 370px; width: auto;">
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <img src="../images/default_profile_picture.png" alt="Profile Picture"
+                                            class="img-thumbnail" style="max-height: 370px; width: auto;">
+                                        <?php
+                                    }
+                                    ?>
+                                </a>
+                            </div>
+                            <h3 class="profile-username text-center">
+                                <?= $soldier['SOLDIERID'] ?>
+                            </h3>
+                            <h3 class="profile-username text-center">
+                                <?= $soldier['RANK'] . ' ' . $soldier['NAME'] ?>
+                            </h3>
+
+                            <p class="text-muted text-center">
+                                <?= $soldier['COMPANYNAME'] ?>
+                            </p>
+                            <p class="text-muted text-center">
+                                Joined from leave
+                                <?php
+                                $lastLeave = $soldier['LASTLEAVE'];
+                                if ($lastLeave < 30) {
+                                    $lastLeave = $lastLeave . ' days';
+                                } else {
+                                    $lastLeave = round($lastLeave / 30) . ' month , ' . $lastLeave % 30 . ' days ';
+                                }
+                                echo $lastLeave;
+                                ?> ago.
+                            </p>
+                            <div class="text-center"> <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>"
+                                    class="btn btn-success">Image</a>
+                                <a href="uploadsignature.php?soldier=<?php echo $soldierId; ?>"
+                                    class="btn btn-warning">Signature</a>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -226,7 +220,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                         <?php echo $soldier['GENDER']; ?>
                                                     </td>
                                                 </tr>
-                                                
+
                                                 <tr>
                                                     <th>Age:</th>
                                                     <td>
@@ -261,8 +255,8 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                 <tr>
                                                     <th>Medical Category:</th>
                                                     <td>
-                                                        Cat
-                                                        <?php echo $soldier['MEDCATEGORY']; ?>
+                                                        Cat A
+                                                        <!-- <?php echo $soldier['MEDCATEGORY']; ?> -->
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -278,13 +272,13 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                 <tr>
                                                     <th>Personal Contact:</th>
                                                     <td>
-                                                        <?php echo '+880'.$soldier['PERSONALCONTACT']; ?>
+                                                        <?php echo '+880' . $soldier['PERSONALCONTACT']; ?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Emergency Contact:</th>
                                                     <td>
-                                                        <?php echo '+880'. $soldier['EMERGENCYCONTACT']; ?>
+                                                        <?php echo '+880' . $soldier['EMERGENCYCONTACT']; ?>
                                                     </td>
                                                 </tr>
 

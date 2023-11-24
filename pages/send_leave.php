@@ -155,74 +155,54 @@ include '../includes/header.php';
     <div class="container-fluid">
         <?php include '../includes/alert.php'; ?>
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Soldier Information</h5>
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th>Soldier ID</th>
-                                    <td>
-                                        <?php echo $soldier['SOLDIERID']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <td>
-                                        <?php echo $soldier['NAME']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Company</th>
-                                    <td>
-                                        <?php echo $soldier['COMPANYNAME']; ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="col col-md-4">
+                <?php include '../includes/soldier_info.php'; ?>
 
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Leave Request</h5>
-                        <form method="post" action="">
-                            <input type="hidden" name="soldier_id" value="<?php echo $soldierID; ?>">
-                            <div class="form-group">
-                                <label for="leave_type">Leave Type:</label>
-                                <select name="leave_type" id="leave_type" class="form-control" required>
-                                    <?php foreach ($leaveTypes as $leaveId => $leaveType): ?>
-                                        <option value="<?php echo $leaveId; ?>">
-                                            <?php echo $leaveType; ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
+            </div>
+            <div class="col col-md-8">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" action="">
+                                    <input type="hidden" name="soldier_id" value="<?php echo $soldierID; ?>">
+                                    <div class="form-group">
+                                        <label for="leave_type">Leave Type:</label>
+                                        <select name="leave_type" id="leave_type" class="form-control" required>
+                                            <?php foreach ($leaveTypes as $leaveId => $leaveType): ?>
+                                                <option value="<?php echo $leaveId; ?>">
+                                                    <?php echo $leaveType; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="leave_start_date">Leave Start Date:</label>
+                                            <input type="date" name="leave_start_date" id="leave_start_date"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="leave_end_date">Leave End Date:</label>
+                                            <input type="date" name="leave_end_date" id="leave_end_date"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" name="send_leave_submit" class="btn btn-primary">Send Leave
+                                        Request</button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="leave_start_date">Leave Start Date:</label>
-                                <input type="date" name="leave_start_date" id="leave_start_date" class="form-control"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label for="leave_end_date">Leave End Date:</label>
-                                <input type="date" name="leave_end_date" id="leave_end_date" class="form-control"
-                                    required>
-                            </div>
-                            <button type="submit" name="send_leave_submit" class="btn btn-primary">Send Leave
-                                Request</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Leave History Card -->
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
