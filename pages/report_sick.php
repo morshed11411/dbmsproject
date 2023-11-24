@@ -2,6 +2,7 @@
 session_start();
 
 include '../includes/disposal_controller.php';
+include '../includes/leave_controller.php';
 
 $dispType = getDisposalTypes($conn);
 
@@ -86,7 +87,7 @@ function handleAddDisposalCMH($selectedDisposal, $noOfDays)
     global $activeDisposal, $soldierID;
     $dischargeReason = 'Disposal given from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
     $disposalReason = 'Discharged from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
-    updateDisposal($activeDisposal['MEDICALID'],'Discharged', date('Y-m-d'),$dischargeReason);
+    updateDisposal($activeDisposal['MEDICALID'], 'Discharged', date('Y-m-d'), $dischargeReason);
     addDisposal($soldierID, $selectedDisposal, date('Y-m-d'), date('Y-m-d', strtotime("+$noOfDays days")), $disposalReason);
 }
 
@@ -97,7 +98,8 @@ function handleNoDisposalCMH($soldierID)
 }
 
 include '../includes/header.php';
-
+$onLeave = getLeaveInfo($conn, null, null, null, $soldierID);
+$onLeave = (count($onLeave) > 0) ? 1 : 0;
 ?>
 
 <div class="card-body">
@@ -114,58 +116,82 @@ include '../includes/header.php';
 
         <?php include '../includes/alert.php';
         ?>
-        <?php if ($activeDisposal && strpos($activeDisposal['DISPOSALTYPE'], 'CMH') === 0 && $activeDisposal['ENDDATE'] === null): ?>
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-hospital text-warning fa-5x"></i>
-                            <h5 class="mt-3">Discharged from
-                                <?= $activeDisposal['DISPOSALTYPE'] ?>
-                            </h5>
-                            <button type="button" class="btn btn-warning btn-lg mt-3" data-toggle="modal"
-                                data-target="#returnFromCMHModal">
-                                Discharge
-                            </button>
+
+        <?php
+        if ($onLeave) {
+            $leaveStatusMessage = "Soldier is on leave.";
+            ?>
+
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-times text-warning fa-5x"></i> <!-- Assuming you want a bed icon for leave -->
+                    <h5 class="mt-3">
+                    </h5>
+                    <!-- Add your button or any other content here based on your requirements -->
+                    <button type="button" class="btn btn-warning btn-lg mt-3" data-toggle="modal"
+                        data-target="#yourModalId">
+                        <?= $leaveStatusMessage ?>
+                    </button>
+                </div>
+            </div>
+            <?php
+
+        } else {
+
+            if ($activeDisposal && strpos($activeDisposal['DISPOSALTYPE'], 'CMH') === 0 && $activeDisposal['ENDDATE'] === null): ?>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-hospital text-warning fa-5x"></i>
+                                <h5 class="mt-3">Discharged from
+                                    <?= $activeDisposal['DISPOSALTYPE'] ?>
+                                </h5>
+                                <button type="button" class="btn btn-warning btn-lg mt-3" data-toggle="modal"
+                                    data-target="#returnFromCMHModal">
+                                    Discharge
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php elseif ($activeDisposal && $activeDisposal['DISPOSALTYPE'] === 'R/S' && $activeDisposal['ENDDATE'] === null): ?>
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-hospital-alt text-primary fa-5x"></i>
-                            <h5 class="mt-3">Return from R/S or Admitted in CMH</h5>
-                            <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
-                                data-target="#selectDisposalModal">
-                                Return from R/S
-                            </button>
-                            <button type="button" class="btn btn-warning mt-3" data-toggle="modal"
-                                data-target="#updateToCMHModal">
-                                Admitted in CMH
-                            </button>
+            <?php elseif ($activeDisposal && $activeDisposal['DISPOSALTYPE'] === 'R/S' && $activeDisposal['ENDDATE'] === null): ?>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-hospital-alt text-primary fa-5x"></i>
+                                <h5 class="mt-3">Return from R/S or Admitted in CMH</h5>
+                                <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
+                                    data-target="#selectDisposalModal">
+                                    Return from R/S
+                                </button>
+                                <button type="button" class="btn btn-warning mt-3" data-toggle="modal"
+                                    data-target="#updateToCMHModal">
+                                    Admitted in CMH
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php else: ?>
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-notes-medical text-primary fa-5x"></i>
-                            <h5 class="mt-3">Send Report Sick</h5>
-                            <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
-                                data-target="#addDisposalModal">
-                                Send Report Sick
-                            </button>
+            <?php else: ?>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-notes-medical text-primary fa-5x"></i>
+                                <h5 class="mt-3">Send Report Sick</h5>
+                                <button type="button" class="btn btn-primary mt-3" data-toggle="modal"
+                                    data-target="#addDisposalModal">
+                                    Send Report Sick
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endif; ?>
+            <?php endif;
+        }
+        ?>
 
         <div class="modal fade" id="addDisposalModal" tabindex="-1" role="dialog"
             aria-labelledby="addDisposalModalLabel" aria-hidden="true">
@@ -222,7 +248,7 @@ include '../includes/header.php';
                             </div>
                             <div class="form-group">
                                 <label for="days">Number of Days:</label>
-                                <input type="number" name="days" id="days" class="form-control" >
+                                <input type="number" name="days" id="days" class="form-control">
                             </div>
                             <button type="submit" name="return_from_rs_submit" class="btn btn-primary">Return from
                                 R/S</button>

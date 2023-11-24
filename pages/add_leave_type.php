@@ -30,7 +30,7 @@ if (isset($_POST['edit_leave_submit'])) {
     $leave_type = $_POST['edit_leave_type'];
     $show_leave = isset($_POST['edit_show_leave']) ? 1 : 0;
 
-    $query = "UPDATE LEAVETYPE SET LEAVETYPE = :leave_type, SHOW_LEAVE = :show_leave WHERE LEAVEID = :leave_id";
+    $query = "UPDATE LEAVETYPE SET LEAVETYPE = :leave_type, SHOW_LEAVE = :show_leave WHERE LEAVETYPEID = :leave_id";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':leave_type', $leave_type);
     oci_bind_by_name($stmt, ':show_leave', $show_leave);
@@ -51,7 +51,7 @@ if (isset($_POST['edit_leave_submit'])) {
 if (isset($_POST['delete_leave_submit'])) {
     $leave_id = $_POST['delete_leave_id'];
 
-    $query = "DELETE FROM LEAVETYPE WHERE LEAVEID = :leave_id";
+    $query = "DELETE FROM LEAVETYPE WHERE LEAVETYPEID = :leave_id";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':leave_id', $leave_id);
 
@@ -84,12 +84,12 @@ if (isset($_POST['toggle_show_hide'])) {
     exit; // Terminate script after handling AJAX request
 }
 
-function toggleShowHideLeaveType($connection, $leaveId, $showStatus)
+function toggleShowHideLeaveType($connection, $LEAVETYPEID, $showStatus)
 {
-    $query = "UPDATE LEAVETYPE SET SHOW_LEAVE = :show_leave WHERE LEAVEID = :leave_id";
+    $query = "UPDATE LEAVETYPE SET SHOW_LEAVE = :show_leave WHERE LEAVETYPEID = :leave_id";
     $stmt = oci_parse($connection, $query);
     oci_bind_by_name($stmt, ':show_leave', $showStatus);
-    oci_bind_by_name($stmt, ':leave_id', $leaveId);
+    oci_bind_by_name($stmt, ':leave_id', $LEAVETYPEID);
 
     $result = oci_execute($stmt);
     if ($result) {
@@ -136,29 +136,29 @@ include '../includes/header.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $query = "SELECT * FROM LEAVETYPE ORDER BY LEAVEID";
+                                $query = "SELECT * FROM LEAVETYPE ORDER BY LEAVETYPEID";
                                 $stmt = oci_parse($conn, $query);
                                 oci_execute($stmt);
 
                                 while ($row = oci_fetch_assoc($stmt)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['LEAVEID'] . "</td>";
+                                    echo "<td>" . $row['LEAVETYPEID'] . "</td>";
                                     echo "<td>" . $row['LEAVETYPE'] . "</td>";
                                     echo "<td>";
-                                    echo '<button type="button" class="btn btn-success toggle-show-hide" data-id="' . $row['LEAVEID'] . '" data-status="' . $row['SHOW_LEAVE'] . '">' . ($row['SHOW_LEAVE'] ? 'Hide' : 'Show') . '</button>';
+                                    echo '<button type="button" class="btn btn-success toggle-show-hide" data-id="' . $row['LEAVETYPEID'] . '" data-status="' . $row['SHOW_LEAVE'] . '">' . ($row['SHOW_LEAVE'] ? 'Hide' : 'Show') . '</button>';
                                     echo "</td>";
                                     echo "<td>";
-                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLeaveModal-' . $row['LEAVEID'] . '">
+                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editLeaveModal-' . $row['LEAVETYPEID'] . '">
                                             <i class="fas fa-edit"></i> Edit
                                         </button>';
-                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteLeaveModal-' . $row['LEAVEID'] . '">
+                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteLeaveModal-' . $row['LEAVETYPEID'] . '">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>';
                                     echo "</td>";
                                     echo "</tr>";
 
                                     // Edit Leave Type Modal
-                                    echo '<div class="modal fade" id="editLeaveModal-' . $row['LEAVEID'] . '" tabindex="-1" role="dialog" aria-labelledby="editLeaveModalLabel" aria-hidden="true">
+                                    echo '<div class="modal fade" id="editLeaveModal-' . $row['LEAVETYPEID'] . '" tabindex="-1" role="dialog" aria-labelledby="editLeaveModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -169,7 +169,7 @@ include '../includes/header.php';
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="edit_leave_id" value="' . $row['LEAVEID'] . '">
+                                                        <input type="hidden" name="edit_leave_id" value="' . $row['LEAVETYPEID'] . '">
                                                         <div class="form-group">
                                                             <label for="edit_leave_type">Leave Type:</label>
                                                             <input type="text" name="edit_leave_type" id="edit_leave_type" class="form-control" value="' . $row['LEAVETYPE'] . '" required>
@@ -186,7 +186,7 @@ include '../includes/header.php';
                                     </div>';
 
                                     // Delete Leave Type Modal
-                                    echo '<div class="modal fade" id="deleteLeaveModal-' . $row['LEAVEID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteLeaveModalLabel" aria-hidden="true">
+                                    echo '<div class="modal fade" id="deleteLeaveModal-' . $row['LEAVETYPEID'] . '" tabindex="-1" role="dialog" aria-labelledby="deleteLeaveModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -198,7 +198,7 @@ include '../includes/header.php';
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this Leave Type?</p>
                                                     <form method="POST" action="">
-                                                        <input type="hidden" name="delete_leave_id" value="' . $row['LEAVEID'] . '">
+                                                        <input type="hidden" name="delete_leave_id" value="' . $row['LEAVETYPEID'] . '">
                                                         <button type="submit" name="delete_leave_submit" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </div>

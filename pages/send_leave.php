@@ -3,6 +3,27 @@ session_start();
 
 include '../includes/connection.php';
 
+function getLeaveTypes($conn)
+{
+    $leaveTypes = [];
+
+    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE";
+    $leaveStmt = oci_parse($conn, $leaveQuery);
+    oci_execute($leaveStmt);
+
+    while ($leaveRow = oci_fetch_assoc($leaveStmt)) {
+        $leaveTypes[$leaveRow['LEAVETYPEID']] = $leaveRow['LEAVETYPE'];
+    }
+
+    oci_free_statement($leaveStmt);
+
+    return $leaveTypes;
+}
+
+$leaveTypes = getLeaveTypes($conn);
+
+
+
 // Fetch soldier ID and name from the query parameter
 if (isset($_GET['soldier'])) {
     $soldierID = $_GET['soldier'];
@@ -17,6 +38,7 @@ if (isset($_GET['soldier'])) {
 
     oci_free_statement($stmt);
 }
+
 
 // Process the form submission to send a leave request
 if (isset($_POST['send_leave_submit'])) {
@@ -38,7 +60,8 @@ if (isset($_POST['send_leave_submit'])) {
         exit();
     } else {
         // Insert leave request into the database
-        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status)";
+
+        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPEID, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status)";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
         oci_bind_by_name($stmt, ':leave_type', $leaveType);
@@ -48,7 +71,7 @@ if (isset($_POST['send_leave_submit'])) {
         oci_bind_by_name($stmt, ':status', $status);
 
         $result = oci_execute($stmt);
-        
+
         if ($result) {
             $_SESSION['success'] = "Leave request sent successfully.";
 
@@ -94,7 +117,11 @@ if (isset($_GET['leave_id'])) {
 }
 
 // Fetch leave history of the soldier
-$query = "SELECT LEAVEID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS FROM LEAVEMODULE WHERE SOLDIERID = :soldier_id ORDER BY LEAVEID DESC";
+$query = "SELECT LM.LEAVEID, LT.LEAVETYPE, LM.LEAVESTARTDATE, LM.LEAVEENDDATE, LM.REQUESTDATE, LM.STATUS 
+          FROM LEAVEMODULE LM 
+          JOIN LEAVETYPE LT ON LM.LEAVETYPEID = LT.LEAVETYPEID
+          WHERE LM.SOLDIERID = :soldier_id 
+          ORDER BY LM.LEAVEID DESC";
 $stmt = oci_parse($conn, $query);
 oci_bind_by_name($stmt, ':soldier_id', $soldierID);
 oci_execute($stmt);
@@ -169,11 +196,11 @@ include '../includes/header.php';
                             <div class="form-group">
                                 <label for="leave_type">Leave Type:</label>
                                 <select name="leave_type" id="leave_type" class="form-control" required>
-                                    <option value="Weekend">Weekend</option>
-                                    <option value="C Leave">C Leave</option>
-                                    <option value="P Leave">P Leave</option>
-                                    <option value="R Leave">R Leave</option>
-                                    <option value="Sick Leave">Sick Leave</option>
+                                    <?php foreach ($leaveTypes as $leaveId => $leaveType): ?>
+                                        <option value="<?php echo $leaveId; ?>">
+                                            <?php echo $leaveType; ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -215,10 +242,12 @@ include '../includes/header.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $id=1; foreach ($leaveHistory as $leave):  ?>
+                                    <?php $id = 1;
+                                    foreach ($leaveHistory as $leave): ?>
                                         <tr>
                                             <td>
-                                                <?php echo $id; $id++; ?>
+                                                <?php echo $id;
+                                                $id++; ?>
                                             </td>
                                             <td>
                                                 <?php echo $leave->LeaveType; ?>
@@ -231,7 +260,7 @@ include '../includes/header.php';
                                             </td>
                                             <!-- Calculate and display total days -->
                                             <td>
-                                                <?php echo date_diff(date_create($leave->LeaveStartDate), date_create($leave->LeaveEndDate))->format('%a')+1; ?>
+                                                <?php echo date_diff(date_create($leave->LeaveStartDate), date_create($leave->LeaveEndDate))->format('%a') + 1; ?>
                                             </td>
                                             <td>
                                                 <?php echo $leave->RequestDate; ?>
@@ -258,10 +287,10 @@ include '../includes/header.php';
                                                     echo '<a href="send_leave.php?soldier=' . $soldierID . '&leave_id=' . $leave->LeaveID . '" class="btn btn-danger">Cancel</a>';
                                                 } elseif ($status === 'Approved') {
                                                     echo '<a href="leavecard.php?leaveid=' . $leave->LeaveID . '" class="btn btn-primary" target="_blank">Leave Card</a>';
-                                                } elseif (($status === 'Expired')||($status === 'On Leave')) {
+                                                } elseif (($status === 'Expired') || ($status === 'On Leave')) {
                                                     echo '<a href="leavecard.php?leaveid=' . $leave->LeaveID . '" class="btn btn-light" target="_blank">Leave Card</a>';
                                                 }
-                                                
+
                                                 ?>
                                                 <!-- Additional actions if needed -->
                                             </td>

@@ -5,11 +5,34 @@ session_start();
 
 // Include your database connection code here
 include '../includes/connection.php';
+function getLeaveTypes($conn)
+{
+    $leaveTypes = [];
 
-// Fetch the list of soldiers with leave requests from the database
-$query = "SELECT LEAVEID, SOLDIER.NAME AS SOLDIER_NAME, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS
-          FROM LEAVEMODULE
-          JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID WHERE STATUS='Pending' ORDER BY LEAVEID";
+    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE";
+    $leaveStmt = oci_parse($conn, $leaveQuery);
+    oci_execute($leaveStmt);
+
+    while ($leaveRow = oci_fetch_assoc($leaveStmt)) {
+        $leaveTypes[$leaveRow['LEAVETYPEID']] = $leaveRow['LEAVETYPE'];
+    }
+
+    oci_free_statement($leaveStmt);
+
+    return $leaveTypes;
+}
+
+$leaveTypes = getLeaveTypes($conn);
+
+
+
+$query = "SELECT LM.LEAVEID,SOLDIER.NAME AS SOLDIER_NAME, LT.LEAVETYPE, LM.LEAVESTARTDATE, LM.LEAVEENDDATE, LM.REQUESTDATE, LM.STATUS 
+          FROM LEAVEMODULE LM 
+          JOIN LEAVETYPE LT ON LM.LEAVETYPEID = LT.LEAVETYPEID
+          JOIN SOLDIER ON LM.SOLDIERID = SOLDIER.SOLDIERID
+          WHERE LM.STATUS='Pending'
+          ORDER BY LM.LEAVEID DESC";
+
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 
@@ -110,7 +133,7 @@ if (isset($_POST['quick_leave'])) {
 
     } else {
         // Insert leave request into the database
-        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS, AUTHBY) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status, :authid)";
+        $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPEID, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS, AUTHBY) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status, :authid)";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':soldier_id', $soldierID);
         oci_bind_by_name($stmt, ':leave_type', $leaveType);
@@ -358,11 +381,11 @@ include '../includes/header.php';
                             <div class="form-group">
                                 <label for="leave_type">Leave Type:</label>
                                 <select name="leave_type" id="leave_type" class="form-control" required>
-                                    <option value="Weekend">Weekend</option>
-                                    <option value="C Leave">C Leave</option>
-                                    <option value="P Leave">P Leave</option>
-                                    <option value="R Leave">R Leave</option>
-                                    <option value="Sick Leave">Sick Leave</option>
+                                    <?php foreach ($leaveTypes as $leaveId => $leaveType): ?>
+                                        <option value="<?php echo $leaveId; ?>">
+                                            <?php echo $leaveType; ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
 

@@ -36,11 +36,12 @@ if (isset($_POST['mark_in_for_leave'])) {
 }
 
 // Fetch the list of approved leaves with onleave=1 (marked as out)
-$query = "SELECT LEAVEID, SOLDIER.SOLDIERID, SOLDIER.NAME AS SOLDIER_NAME, LEAVETYPE, LEAVESTARTDATE, LEAVEENDDATE
-          FROM LEAVEMODULE
-          JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID
-          WHERE STATUS = 'On Leave' AND ONLEAVE = 1
-          ORDER BY LEAVEID";
+$query = "SELECT LEAVEMODULE.LEAVEID, SOLDIER.SOLDIERID, SOLDIER.NAME AS SOLDIER_NAME, LEAVETYPE.LEAVETYPE AS LEAVETYPE, LEAVEMODULE.LEAVESTARTDATE, LEAVEMODULE.LEAVEENDDATE
+FROM LEAVEMODULE
+JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID
+JOIN LEAVETYPE ON LEAVEMODULE.LEAVETYPEID = LEAVETYPE.LEAVETYPEID
+WHERE LEAVEMODULE.STATUS = 'On Leave' AND LEAVEMODULE.ONLEAVE = 1
+ORDER BY LEAVEMODULE.LEAVEID";
 $stmt = oci_parse($conn, $query);
 oci_execute($stmt);
 
@@ -69,7 +70,7 @@ include '../includes/header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                <div class="card-body">
+                    <div class="card-body">
                         <form method="POST" action="">
                             <div class="form-group">
                                 <label for="soldier_id">Enter Soldier ID:</label>

@@ -230,7 +230,7 @@ if (isset($_SESSION['userid'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="generate_parade_state.php" class="nav-link sublink">
+                <a href="parade_state.php" class="nav-link sublink">
                   <i class="fas fa-file-alt nav-icon"></i>
                   <p>Create Parade State</p>
                 </a>
