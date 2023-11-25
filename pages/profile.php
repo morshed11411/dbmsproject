@@ -102,7 +102,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                 <h3>Soldier Profile </h3>
             </div>
             <div class="text-right">
-                <a href="edit_soldier.php?soldier=<?php echo $soldierId; ?>" class="btn btn-primary">Edit Profile</a>
+                <a href="edit_soldier.php?soldier=<?php echo $soldier['SOLDIERID']; ?>" class="btn btn-primary">Edit Profile</a>
 
             </div>
         </div>
@@ -118,7 +118,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                         <div class="card-body box-profile mt-2">
                             <div class="text-center">
 
-                                <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>">
+                                <a href="uploadimage.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">
                                     <?php
                                     $profilePicture = $soldier['PROFILEPICTURE'];
                                     if (!empty($profilePicture)) {
@@ -157,9 +157,9 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 echo $lastLeave;
                                 ?> ago.
                             </p>
-                            <div class="text-center"> <a href="uploadimage.php?soldier=<?php echo $soldierId; ?>"
+                            <div class="text-center"> <a href="uploadimage.php?soldier=<?php echo $soldier['SOLDIERID']; ?>"
                                     class="btn btn-success">Image</a>
-                                <a href="uploadsignature.php?soldier=<?php echo $soldierId; ?>"
+                                <a href="uploadsignature.php?soldier=<?php echo $soldier['SOLDIERID']; ?>"
                                     class="btn btn-warning">Signature</a>
                             </div>
 

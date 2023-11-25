@@ -2,23 +2,6 @@
 // Assuming $conn is your Oracle database connection
 include '../includes/connection.php';
 
-function getAllCompanyData($conn)
-{
-    $query = "SELECT COMPANYID, COMPANYNAME FROM COMPANY";
-    $stmt = oci_parse($conn, $query);
-    oci_execute($stmt);
-
-    $companyData = [];
-    while ($row = oci_fetch_assoc($stmt)) {
-        $companyData[] = [
-            'ID' => $row['COMPANYID'],
-            'NAME' => $row['COMPANYNAME'],
-        ];
-    }
-
-    return $companyData;
-}
-$company= getAllCompanyData($conn);
 
 function getAllRank($conn)
 {
@@ -108,7 +91,7 @@ function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $
 }
 
 
-function printSoldierList($soldiersArray, $id, $name = null)
+function printAllSoldierList($soldiersArray, $id, $name = null)
 {
     $count = count($soldiersArray);
 
@@ -169,6 +152,35 @@ $postedTotal=getSoldiers($conn, null, null,  null, false, null, null) ;
 $allOfficer=getSoldiers($conn, null, null,  'Officer', false, null, null) ;
 $allJCO=getSoldiers($conn, null, null,  'JCO', false, null, null) ;
 $allORS=getSoldiers($conn, null, null,  'ORS', false, null, null) ;
+
+
+
+function getManpowerByCompany($conn) {
+    $manpowerByCompany = array();
+
+    // Query to retrieve manpower and company information
+    $queryAuthorization = "SELECT MANPOWER, COMPANYID FROM AUTHORIZATION";
+    $stmtAuthorization = oci_parse($conn, $queryAuthorization);
+    oci_execute($stmtAuthorization);
+
+    // Fetch the results
+    while ($row = oci_fetch_assoc($stmtAuthorization)) {
+        $companyId = $row['COMPANYID'];
+        $manpower = $row['MANPOWER'];
+
+        // Store the manpower information in the array
+        $manpowerByCompany[$companyId] = $manpower;
+    }
+
+    // Close the statement
+    oci_free_statement($stmtAuthorization);
+
+    return $manpowerByCompany;
+}
+
+// Example usage
+$manpowerData = getManpowerByCompany($conn);
+
 
 
 ?>

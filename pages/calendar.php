@@ -42,12 +42,13 @@ if (isset($_POST['add_event_submit'])) {
         // Failed to add event
         $error = oci_error($stmt);
         $_SESSION['error'] = "Failed to add event: " . $error['message'];
+        // Free statement resources
+        oci_free_statement($stmt);
+
         header("Location: calendar.php");
         exit();
     }
 }
-// Free statement resources
-oci_free_statement($stmt);
 
 
 // Fetch events from the database
@@ -237,7 +238,8 @@ if ($nextMonth === 13) {
                     <tbody id="eventModalBody">
                     </tbody>
                 </table>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal" data-dismiss="modal">Add Event</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal"
+                    data-dismiss="modal">Add Event</button>
             </div>
         </div>
     </div>
@@ -298,51 +300,51 @@ if ($nextMonth === 13) {
 
 
 <script>
-$(document).ready(function() {
-  // Event modal show event
-  $('#eventModal').on('show.bs.modal', function(event) {
-    var triggerElement = $(event.relatedTarget);
-    var date = triggerElement.data('date');
-    var selectedMonth = <?php echo $currentMonth; ?>;
-    var selectedYear = <?php echo $currentYear; ?>;
+    $(document).ready(function () {
+        // Event modal show event
+        $('#eventModal').on('show.bs.modal', function (event) {
+            var triggerElement = $(event.relatedTarget);
+            var date = triggerElement.data('date');
+            var selectedMonth = <?php echo $currentMonth; ?>;
+            var selectedYear = <?php echo $currentYear; ?>;
 
-    // Modify the modal title with the selected date
-    $(this).find('.modal-title').text('Events - ' + date);
+            // Modify the modal title with the selected date
+            $(this).find('.modal-title').text('Events - ' + date);
 
-    // Get the events for the selected date
-    var events = <?php echo json_encode($events); ?>;
-    var eventModalBody = $('#eventModalBody');
-    eventModalBody.empty();
+            // Get the events for the selected date
+            var events = <?php echo json_encode($events); ?>;
+            var eventModalBody = $('#eventModalBody');
+            eventModalBody.empty();
 
-    var serialNumber = 1; // Counter variable for serial number
+            var serialNumber = 1; // Counter variable for serial number
 
-    for (var i = 0; i < events.length; i++) {
-      var eventDate = new Date(events[i].EVENT_DATE);
-      var eventMonth = eventDate.getMonth() + 1;
-      var eventYear = eventDate.getFullYear();
+            for (var i = 0; i < events.length; i++) {
+                var eventDate = new Date(events[i].EVENT_DATE);
+                var eventMonth = eventDate.getMonth() + 1;
+                var eventYear = eventDate.getFullYear();
 
-      if (eventMonth === selectedMonth && eventYear === selectedYear && eventDate.getDate() == date) {
-        var eventRow = '<tr>' +
-          '<td>' + serialNumber + '</td>' +
-          '<td>' + events[i].EVENT_NAME + '</td>' +
-          '<td>' + events[i].EVENT_TIME + '</td>' +
-          '<td>' + events[i].EVENT_LOCATION + '</td>' +
-          '<td>' + events[i].ATTENDEES_RESPONSIBILITY + '</td>' +
-          '<td>' + events[i].REMARKS + '</td>' +
-          '</tr>';
+                if (eventMonth === selectedMonth && eventYear === selectedYear && eventDate.getDate() == date) {
+                    var eventRow = '<tr>' +
+                        '<td>' + serialNumber + '</td>' +
+                        '<td>' + events[i].EVENT_NAME + '</td>' +
+                        '<td>' + events[i].EVENT_TIME + '</td>' +
+                        '<td>' + events[i].EVENT_LOCATION + '</td>' +
+                        '<td>' + events[i].ATTENDEES_RESPONSIBILITY + '</td>' +
+                        '<td>' + events[i].REMARKS + '</td>' +
+                        '</tr>';
 
-        eventModalBody.append(eventRow);
+                    eventModalBody.append(eventRow);
 
-        serialNumber++; // Increment the serial number counter
-      }
-    }
+                    serialNumber++; // Increment the serial number counter
+                }
+            }
 
-    // Set the selected date in the "Add Event" form
-    $('#eventDate').val(selectedYear + '-' + selectedMonth.toString().padStart(2, '0') + '-' + date);
-    $('#selectedDate').text(selectedYear + '-' + selectedMonth.toString().padStart(2, '0') + '-' + date);
-  });
+            // Set the selected date in the "Add Event" form
+            $('#eventDate').val(selectedYear + '-' + selectedMonth.toString().padStart(2, '0') + '-' + date);
+            $('#selectedDate').text(selectedYear + '-' + selectedMonth.toString().padStart(2, '0') + '-' + date);
+        });
 
-});
+    });
 
 </script>
 
@@ -379,4 +381,3 @@ $(document).ready(function() {
         font-size: 12px;
     }
 </style>
-

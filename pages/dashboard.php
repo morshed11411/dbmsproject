@@ -5,6 +5,9 @@ define('BASE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/upcs/');
 require_once(BASE_DIR . 'includes/header.php');
 require_once(BASE_DIR . 'includes/parade_controller.php');
 require_once(BASE_DIR . 'includes/leave_controller.php');
+require_once(BASE_DIR . 'includes/disposal_controller.php');
+
+$company= getAllCompanyData($conn);
 
 
 foreach ($company as $coy) {
@@ -81,7 +84,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <?php printSoldierList($postedTotal, 'allSoldier', 'Posted Soldiers') ?>
+                        <?php printAllSoldierList($postedTotal, 'allSoldier', 'Posted Soldiers') ?>
                     </p>
                 </div>
             </div>
@@ -95,7 +98,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <?php printSoldierList($allOfficer, 'allOffr', 'All Officer') ?>
+                        <?php printAllSoldierList($allOfficer, 'allOffr', 'All Officer') ?>
                     </p>
                 </div>
             </div>
@@ -109,7 +112,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <?php printSoldierList($allJCO, 'allJCO', 'Posted JCO') ?>
+                        <?php printAllSoldierList($allJCO, 'allJCO', 'Posted JCO') ?>
                     </p>
                 </div>
             </div>
@@ -123,7 +126,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <?php printSoldierList($allORS, 'allORS', 'All Other Ranks') ?>
+                        <?php printAllSoldierList($allORS, 'allORS', 'All Other Ranks') ?>
                     </p>
                 </div>
             </div>

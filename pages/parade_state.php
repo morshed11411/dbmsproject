@@ -1,6 +1,8 @@
 <?php
 include '../includes/disposal_controller.php';
 include '../includes/leave_controller.php';
+include '../includes/parade_controller.php';
+
 
 // Get date to filter
 $currentDate = null;
@@ -44,6 +46,13 @@ foreach ($leaveTypes as $leaveType) {
         $onLeaveSolderList[$leaveType][$coy['ID']] = $soldierOnLeave;
     }
 }
+
+foreach ($company as $coy) {
+    $solderByCoy = getSoldiers($conn, null, null, null, false, $coy['ID'], null);
+
+    $byCoySoldiderList[$coy['ID']] = $solderByCoy;
+}
+
 
 include '../includes/header.php';
 ?>
@@ -93,7 +102,6 @@ include '../includes/header.php';
             </div>
             <div class="card-body table-responsive">
                 <table id="" class="table  table-bordered" style="border: 1px solid black;">
-                    <!-- Disposal Section -->
                     <tr>
                         <th style=" width: 150px;">
                             DETAILS
@@ -107,6 +115,54 @@ include '../includes/header.php';
                             TOTAL
                         </th>
                     </tr>
+                    <!-- Authorization Section -->
+
+                    <tr>
+                        <td>
+                            Authorized
+                        </td>
+                        <?php
+                        $totalAuth = 0;
+                        foreach ($company as $coy): ?>
+                            <td style="text-align: center;">
+                                <?php
+                                $totalAuth += $manpowerData[$coy['ID']];
+                                echo $manpowerData[$coy['ID']];
+                                ?>
+
+                            </td>
+                        <?php endforeach; ?>
+                        <td style="text-align: center;">
+                            <?= $totalAuth ?>
+                        </td>
+                    </tr>
+                    <!-- Held Section -->
+                    <tr>
+                        <td>
+                            Held
+                        </td>
+                        <?php
+                        $heldTotal = [];
+                        foreach ($company as $coy): ?>
+                            <td style="text-align: center;">
+                                <?php
+                                $byCoyHeldlist = $byCoySoldiderList[$coy['ID']];
+                                $modalId = $coy['ID'] . '-' . 'held';
+                                $modalName = $coy['NAME'] . '-' . 'Total Held' . ' ';
+                                printAllSoldierList($byCoyHeldlist, $modalId, $modalName);
+                                $heldTotal = array_merge($heldTotal, $byCoyHeldlist);
+
+                                ?>
+
+                            </td>
+                        <?php endforeach; ?>
+                        <td style="text-align: center;">
+                            <?php
+                            printSoldierList($heldTotal, 'held', 'Total Held');
+                            ?>
+                        </td>
+                    </tr>
+                    <!-- Disposal Section -->
 
                     <?php foreach ($disposalTypes as $disposal): ?>
                         <tr>
@@ -181,7 +237,7 @@ include '../includes/header.php';
                                 $coyTotal = array_merge($coyTotal, $leaveList);
                             endforeach;
 
-                            printSoldierList($coyTotal, $coy['ID'], $coy['NAME'] . ' Company Total ');
+                            printAllSoldierList($coyTotal, $coy['ID'], $coy['NAME'] . ' Company Total ');
                             $grandTotal = array_merge($grandTotal, $coyTotal);
                             echo '</td>';
                         endforeach;
@@ -189,7 +245,7 @@ include '../includes/header.php';
 
                         <td style="text-align: center;">
                             <?php
-                            printSoldierList($grandTotal, 'Grand', 'Grand Total');
+                            printAllSoldierList($grandTotal, 'Grand', 'Grand Total');
                             ?>
                         </td>
                     </tr>

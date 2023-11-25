@@ -132,6 +132,10 @@ function printSoldierList($soldiersArray, $id, $name = null)
                                         <th scope="col">Trade</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Company</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>';
@@ -143,6 +147,10 @@ function printSoldierList($soldiersArray, $id, $name = null)
             echo '<td>' . $soldier['TRADE'] . '</td>';
             echo '<td>' . $soldier['NAME'] . '</td>';
             echo '<td>' . $soldier['COMPANYNAME'] . '</td>';
+            echo '<td>' . $soldier['STARTDATE'] . '</td>';
+            echo '<td>' . $soldier['ENDDATE'] . '</td>';
+
+
             echo '</tr>';
         }
 
