@@ -158,7 +158,7 @@ include '../includes/header.php';
                         <?php endforeach; ?>
                         <td style="text-align: center;">
                             <?php
-                            printSoldierList($heldTotal, 'held', 'Total Held');
+                            printAllSoldierList($heldTotal, 'held', 'Total Held');
                             ?>
                         </td>
                     </tr>
