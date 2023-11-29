@@ -30,8 +30,7 @@ function getLeaveTypes($conn)
 }
 
 
-
-function getLeaveInfo($conn, $coyId = null, $currentDate = null, $leaveType = null, $soldierId = null)
+function getLeaveInfo($conn, $coyId = null, $currentDate = null, $leaveType = null, $soldierId = null, $statusFilter = null)
 {
     $currentDate = $currentDate ?: date('Y-m-d');
 
@@ -44,14 +43,20 @@ JOIN LEAVETYPE LT ON LM.LEAVETYPEID = LT.LEAVETYPEID
 JOIN RANKS R ON S.RANKID = R.RANKID
 JOIN TRADE T ON S.TRADEID = T.TRADEID
 JOIN COMPANY C ON S.COMPANYID = C.COMPANYID
-WHERE (LT.LEAVETYPE IS NOT NULL) AND LM.STATUS = 'On Leave' AND LM.ONLEAVE = 1";
+WHERE (LT.LEAVETYPE IS NOT NULL)";
+
+    if ($statusFilter !== null) {
+        $query .= " AND LM.STATUS = :statusFilter";
+    }
+    if ($statusFilter == null) {
+        $query .= " AND LM.STATUS = 'On Leave' AND LM.ONLEAVE = 1";
+    }
 
     if ($coyId !== null) {
         $query .= " AND C.COMPANYID = :coyId";
     }
 
     if ($leaveType !== null) {
-        // Adjust the join condition to use the correct alias
         $query .= " AND LT.LEAVETYPE = :leaveType";
     }
 
@@ -67,6 +72,10 @@ WHERE (LT.LEAVETYPE IS NOT NULL) AND LM.STATUS = 'On Leave' AND LM.ONLEAVE = 1";
     $query .= " ORDER BY LM.LEAVEID DESC";
 
     $stmt = oci_parse($conn, $query);
+
+    if ($statusFilter !== null) {
+        oci_bind_by_name($stmt, ':statusFilter', $statusFilter);
+    }
 
     if ($coyId !== null) {
         oci_bind_by_name($stmt, ':coyId', $coyId);
@@ -97,8 +106,6 @@ WHERE (LT.LEAVETYPE IS NOT NULL) AND LM.STATUS = 'On Leave' AND LM.ONLEAVE = 1";
 
     return $allSoldiers;
 }
-
-
 
 function printLeaveSoldierList($soldiersArray, $id, $name = null)
 {
