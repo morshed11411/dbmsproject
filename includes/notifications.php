@@ -163,16 +163,9 @@ function markNotificationAsRead($notificationId)
 // Function to display the time difference
 function displayTimeDifference($rawDate)
 {
-    // Convert the raw date to a DateTime object
     $date = DateTime::createFromFormat('d-M-y h.i.s.u A', $rawDate, new DateTimeZone('UTC'));
-
-    // Convert to the user's time zone
     $date->setTimeZone(new DateTimeZone('Asia/Dhaka'));
-
-    // Get the current date and time
     $now = new DateTime();
-
-    // Calculate the difference between the two dates
     $interval = $now->diff($date);
 
     // Format the output based on the difference
