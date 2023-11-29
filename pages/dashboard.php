@@ -33,8 +33,6 @@ foreach ($ranks as $rank) {
 
 // Example usage
 $companies = $company;
-$startDate = '2023-11-20'; // Replace with your start date
-$endDate = '2023-11-31';   // Replace with your end date
 
 $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
@@ -47,6 +45,27 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 <div class="card-body">
     <div class="d-flex justify-content-between">
+        <div class="text-left">
+            <h3>3 Signal Dashboard</h3>
+        </div>
+        <div class="text-right">
+            <form method="post" action="">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="startDate">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate"
+                            value="<?= $startDate; ?>">
+                    </div>
+                    <div class="col-auto">
+                        <label class="sr-only" for="endDate">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" value="<?= $endDate; ?>">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary" name="filterBtn">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
     </div>
 </div>
@@ -57,11 +76,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Total Soldiers Card -->
             <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white"><i class="fas fa-users"></i> Total Soldiers</h5>
+                <div class="card-header bg-light">
+                    <h5 class="card-title   text-dark"><i class="fas fa-users"></i> Total Soldiers</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text text-center ">
                         <?php printAllSoldierList($postedTotal, 'allSoldier', 'Posted Soldiers') ?>
                     </p>
                 </div>
@@ -71,11 +90,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Soldiers Present Card -->
             <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white"><i class="fas fa-user-tie"></i> Total Officer</h5>
+                <div class="card-header text-center bg-light">
+                    <h5 class="card-title   text-dark"><i class="fas fa-user-tie"></i> Total Officer</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text text-center ">
                         <?php printAllSoldierList($allOfficer, 'allOffr', 'All Officer') ?>
                     </p>
                 </div>
@@ -85,11 +104,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Total Teams Card -->
             <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white"><i class="fas fa-user-secret"></i> Total JCO</h5>
+                <div class="card-header text-center bg-light">
+                    <h5 class="card-title   text-dark"><i class="fas fa-user-secret"></i> Total JCO</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text text-center ">
                         <?php printAllSoldierList($allJCO, 'allJCO', 'Posted JCO') ?>
                     </p>
                 </div>
@@ -99,11 +118,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Soldiers on Leave Card -->
             <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white"><i class="fas fa-user"></i> Other Ranks</h5>
+                <div class="card-header text-center bg-light">
+                    <h5 class="card-title   text-dark"><i class="fas fa-user"></i> Other Ranks</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">
+                    <p class="card-text text-center ">
                         <?php printAllSoldierList($allORS, 'allORS', 'All Other Ranks') ?>
                     </p>
                 </div>
@@ -118,11 +137,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
         <div class="col-lg-6 flex-fill">
             <!-- Notice Board Card -->
-            <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
-                <div class="card-header bg-info">
-                    <h3 class="card-title text-white">Notice Board</h3>
+            <div class="card h-100">
+                <div class="card-header bg-light">
+                    <h3 class="card-title   text-dark">Notice Board</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body overflow-auto"> <!-- Added 'overflow-auto' for scrollable content -->
                     <ul class="list-unstyled">
                         <?php if (empty($notifications)): ?>
                             <p>No notifications available.</p>
@@ -146,12 +165,13 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     </ul>
                 </div>
             </div>
+
         </div>
 
         <div class="col-lg-6 flex-fill">
             <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
-                <div class="card-header bg-info">
-                    <h3 class="card-title text-white">Solder Leave State</h3>
+                <div class="card-header bg-light">
+                    <h3 class="card-title   text-dark">Leave State</h3>
                 </div>
                 <div class="card-body">
                     <canvas id="leave-counts-chart" width="400" height="200"></canvas>
@@ -159,14 +179,14 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
             </div>
         </div>
     </div>
-<br>
+    <br>
     <div class="row">
         <!-- Left Column -->
         <div class="col-lg-6">
             <!-- Online Store Visitors Chart -->
-            <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white"><i class="fas fa-chart-bar"></i> Soldiers by Company</h5>
+            <div class="card text-center">
+                <div class="card-header text-center bg-light">
+                    <h5 class="card-title   text-dark"><i class="fas fa-chart-bar"></i> Soldiers by Company</h5>
                 </div>
                 <div class="card-body">
                     <canvas id="soldiersByCompanyChart" height="200"></canvas>
@@ -179,8 +199,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-6">
             <!-- Online Store Visitors Chart -->
             <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title text-white">Soldiers by Rank</h5>
+                <div class="card-header bg-light">
+                    <h5 class="card-title   text-dark">Soldiers by Rank</h5>
                 </div>
                 <div class="card-body">
                     <!-- Create a canvas element for the bar chart -->
