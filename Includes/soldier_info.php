@@ -31,8 +31,8 @@ if (isset($soldierID)) {
 
     <div class="card-body box-profile mt-2">
         <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src=" <?php echo $profilePicture; ?>"
-                alt="User profile picture">
+            
+        <img class="profile-user-img img-fluid img-circle rounded-circle" src="<?php echo $profilePicture; ?>" alt="Profile Picture">
         </div>
 
         <h3 class="profile-username text-center">

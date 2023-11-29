@@ -89,7 +89,6 @@ include '../includes/header.php'; // Include your header
                 <div class="card">
                     <div class="card-body table-responsive">
                         <table class="table table-bordered table-hover">
-                            <thead>
                                 <tr>
                                     <th>Ser</th>
                                     <th>Soldier No</th>
@@ -98,11 +97,10 @@ include '../includes/header.php'; // Include your header
                                     <th>Reset Code</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
                             <tbody>
                                 <?php if (empty($resetRequests)): ?>
                                     <tr>
-                                        <td colspan="5" class="text-center">
+                                        <td colspan="6" class="text-center">
                                             <h4>No pending password reset requests.</h4>
                                         </td>
                                     </tr>

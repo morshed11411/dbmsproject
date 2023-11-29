@@ -34,7 +34,11 @@ include '../includes/notifications.php';
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-<?php include 'navbar.php'; ?>
+
+  <?php
+    include 'navbar.php';
+
+  ?>
   <div class="wrapper">
 
     <!-- Content Wrapper -->

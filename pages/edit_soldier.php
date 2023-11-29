@@ -185,7 +185,6 @@ include '../includes/header.php';
     <div class="d-flex justify-content-between">
         <div class="text-left">
             <h3>Edit Soldier</h3>
-            <?php echo $result; ?>
         </div>
     </div>
 </div>

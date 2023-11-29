@@ -1,8 +1,45 @@
 <?php
+
+
+// Check if already on the target page to avoid redirection loop
+$current_page = basename($_SERVER['PHP_SELF']);
+$target_pages = ['dashboard.php', 'coy-dashboard.php', 'profile.php'];
+
+if (isset($_SESSION['role'])) {
+    switch ($_SESSION['role']) {
+        case 'admin':
+            if ($current_page != 'dashboard.php') {
+                header('Location: dashboard.php');
+            }
+            break;
+        case 'manager':
+            if ($current_page != 'coy-dashboard.php') {
+                header('Location: coy-dashboard.php');
+            }
+            break;
+        case 'soldier':
+            if ($current_page != 'profile.php') {
+                header('Location: profile.php');
+            }
+            break;
+        default:
+            // Handle other roles or unexpected cases
+            break;
+    }
+} else {
+    // Handle the case when the role is not set in the session
+    // Redirect to a default location or show an error message
+    if (!in_array($current_page, $target_pages)) {
+        header('Location: login.php'); // Redirect to the login page, for example
+    }
+}
+?>
+
+<!-- <?php
 session_start(); // Start the session
 
 // Define user roles
-$userRoles = [
+$appts = [
     'CO', '2IC', 'Adjt', 'QM', 'BSM', 'RP NCO', 'Trg NCO',
     'Company Commander', 'CSM', 'Coy Clerk', 'Others'
 ];
@@ -43,4 +80,4 @@ function canAccessCompanyData($userRole, $companyID) {
 }
 
 
-?>
+?> -->

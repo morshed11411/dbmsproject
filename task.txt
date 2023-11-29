@@ -1,0 +1,22 @@
+1. fix the soldier page. ok
+2. add overweight soldier card 
+3. Fix the training pass fail of each type 
+4. fix training details page ok 
+5. add soldier into users when adding soldier 
+6. soldier table default status is posted when adding soldier. 
+7. postingdate postingOutDate
+8. fix district 
+
+coy view
+--------
+1. see coy soldier
+2. see coy leave state 
+3. see coy parade state 
+4. nominal roll 
+
+
+1. fix the profile's leave and disposal
+2. fix the navbar for soldier
+3. add data of leave, punishment, disposal 
+
+

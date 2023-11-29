@@ -1,13 +1,19 @@
 <?php
+session_start();
+require_once '../includes/access.php';
+
 $pageTitle = "Dashboard-UPCS";
 define('BASE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/upcs/');
+
 
 require_once(BASE_DIR . 'includes/header.php');
 require_once(BASE_DIR . 'includes/parade_controller.php');
 require_once(BASE_DIR . 'includes/leave_controller.php');
 require_once(BASE_DIR . 'includes/disposal_controller.php');
 
-$company= getAllCompanyData($conn);
+
+$company = getAllCompanyData($conn);
+
 
 
 foreach ($company as $coy) {
@@ -16,41 +22,18 @@ foreach ($company as $coy) {
     $byCoyCount[$coy['ID']] = count($solderByCoy);
 }
 
+
+
 foreach ($ranks as $rank) {
     $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, null, null);
 
     $byRankCount[$rank['ID']] = count($soldiersByRank);
 }
 
-function getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate)
-{
-    $leaveCountsByDate = array();
-
-    // Loop through each date in the date range
-    $currentDate = new DateTime($startDate);
-    $endDateObj = new DateTime($endDate);
-
-    while ($currentDate <= $endDateObj) {
-        $date = $currentDate->format('Y-m-d');
-
-        // Loop through each company and get leave count for the current date
-        foreach ($companies as $company) {
-            $leaveCount = getLeaveInfo($conn, $company['ID'], $date, null, null);
-
-            // Store leave count in the 2D array
-            $leaveCountsByDate[$date][$company['ID']] = count($leaveCount);
-        }
-
-        // Move to the next date
-        $currentDate->modify('+1 day');
-    }
-
-    return $leaveCountsByDate;
-}
 
 // Example usage
 $companies = $company;
-$startDate = '2023-11-15'; // Replace with your start date
+$startDate = '2023-11-20'; // Replace with your start date
 $endDate = '2023-11-31';   // Replace with your end date
 
 $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
@@ -60,19 +43,14 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 
 ?>
+
+
 <div class="card-body">
     <div class="d-flex justify-content-between">
-        <div class="text-left">
-            <h3>Welcome</h3>
-        </div>
-        <div class="text-right">
-            <?php
-            $currentDate = date("j F, Y"); // Format the current date as desired
-            echo "<h3>Date: " . $currentDate . "</h3>";
-            ?>
-        </div>
+
     </div>
 </div>
+
 <?php include '../includes/alert.php'; ?>
 <section class="content">
     <div class="row">
@@ -273,7 +251,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     min: 5, // Set the minimum value to 5
 
                 }
-                
+
             }
         }
     });

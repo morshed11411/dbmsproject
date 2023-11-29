@@ -2,18 +2,20 @@
 session_start();
 include '../includes/connection.php';
 
-// Check if the form is submitted
-if (isset($_POST['submit'])) {
-    $companyID = $_POST['company'];
-    $cycle = $_POST['cycle'];
-
+function retrievePlan($conn, $companyID)
+{
     // Retrieve the selected company name
     $queryCompany = "SELECT COMPANYNAME FROM COMPANY WHERE COMPANYID = :companyID";
     $stmtCompany = oci_parse($conn, $queryCompany);
     oci_bind_by_name($stmtCompany, ':companyID', $companyID);
     oci_execute($stmtCompany);
-    $row = oci_fetch_assoc($stmtCompany);
-    $selectedCompanyName = $row['COMPANYNAME'];
+
+    if ($row = oci_fetch_assoc($stmtCompany)) {
+        $selectedCompanyName = $row['COMPANYNAME'];
+    } else {
+        $selectedCompanyName = '';
+    }
+
     oci_free_statement($stmtCompany);
 
     // Retrieve the career plan for the selected company and cycle
@@ -27,8 +29,24 @@ if (isset($_POST['submit'])) {
 
     $stmtPlan = oci_parse($conn, $queryPlan);
     oci_bind_by_name($stmtPlan, ':companyID', $companyID);
-    oci_bind_by_name($stmtPlan, ':cycle', $cycle);
     oci_execute($stmtPlan);
+
+    return ['selectedCompanyName' => $selectedCompanyName, 'stmtPlan' => $stmtPlan];
+}
+
+if (isset($_POST['submit'])) {
+    $companyID = $_POST['company'];
+} elseif (isset($_SESSION['usercoy'])) {
+    $companyID = $_SESSION['usercoy'];
+} else {
+    $companyID = null;
+}
+
+// Check for a valid companyID before retrieving the plan
+if ($companyID !== null) {
+    $result = retrievePlan($conn, $companyID);
+    $selectedCompanyName = $result['selectedCompanyName'];
+    $stmtPlan = $result['stmtPlan'];
 }
 
 $queryCompanies = "SELECT * FROM COMPANY";
@@ -57,7 +75,8 @@ include '../includes/header.php';
                         <label for="company">Company:</label>
                         <select class="form-control" id="company" name="company" required>
                             <?php while ($company = oci_fetch_assoc($stmtCompanies)): ?>
-                                <option value="<?php echo $company['COMPANYID']; ?>"><?php echo $company['COMPANYNAME']; ?>
+                                <option value="<?php echo $company['COMPANYID']; ?>">
+                                    <?php echo $company['COMPANYNAME']; ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
@@ -76,10 +95,14 @@ include '../includes/header.php';
                 <?php echo $selectedCompanyName; ?>
             </h3>
         </div>
-        <div class="text-right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal"> <h5>Select Company</h5>
-            </button>
-        </div>
+        <?php if ($_SESSION['role'] === 'admin') {
+            ?>
+            <div class="text-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectModal">
+                    <h5>Select Company</h5>
+                </button>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
@@ -88,7 +111,7 @@ include '../includes/header.php';
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="tablex" class="table table-bordered" >
+                    <table id="tablex" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Soldier ID</th>
@@ -141,5 +164,6 @@ include '../includes/header.php';
 
 <?php
 oci_free_statement($stmtCompanies);
+
 include '../includes/footer.php';
 ?>

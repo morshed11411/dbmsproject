@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../includes/connection.php';
+include '../includes/parade_controller.php';
 
 // Check if event ID is provided in the URL
 if (isset($_GET['event_id'])) {
@@ -23,19 +24,19 @@ if (isset($_GET['event_id'])) {
         exit;
     }
 
-    // Retrieve all soldiers
-    $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, T.TRADE, C.COMPANYNAME
-              FROM SOLDIER S
-              JOIN RANKS R ON S.RANKID = R.RANKID
-              JOIN TRADE T ON S.TRADEID = T.TRADEID
-              JOIN COMPANY C ON S.COMPANYID = C.COMPANYID";
-    $stmt = oci_parse($conn, $query);
-    oci_execute($stmt);
 
+    $role = $_SESSION['role'];
+    $userCoy = $_SESSION['usercoy'];
     $allSoldiers = [];
-    while ($soldier = oci_fetch_assoc($stmt)) {
-        $allSoldiers[] = $soldier;
+    
+    
+    if ($role === 'admin') {
+        $allSoldiers = getSoldiers($conn, null, null, null, false, null, null);
+    } elseif ($role === 'manager') {
+        $allSoldiers = getSoldiers($conn, null, null, null, false, $userCoy, null);
     }
+    
+    
 
     // Retrieve soldiers assigned to the training event
     $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, T.TRADE, C.COMPANYNAME, ST.STATUS
@@ -270,20 +271,23 @@ include '../includes/header.php';
                 $iconClass = 'fa-unlock';
             }
             ?>
-                            <?php if ($event['STATUS'] != 'Terminated'): ?>
+            <?php if ($event['STATUS'] != 'Terminated'): ?>
 
-            <?php if ($event['STATUS'] != 'Forwarded'): ?>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availableSoldiersModal">
-                    Assign Soldiers
-                </button>
-
-                <form method="POST" action="" class="d-inline">
-                    <input type="hidden" name="lock_action" value="<?= $lockAction ?>">
-                    <button type="submit" class="btn btn-warning">
-                        <i class="fas <?= $iconClass ?>"></i>
-                        <?= $lockStatus . ' Soldiers' ?>
+                <?php if ($event['STATUS'] != 'Forwarded'): ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#availableSoldiersModal">
+                        Assign Soldiers
                     </button>
-                </form>
+                    <?php if ($_SESSION['role'] == 'admin') { ?>
+
+
+                        <form method="POST" action="" class="d-inline">
+                            <input type="hidden" name="lock_action" value="<?= $lockAction ?>">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas <?= $iconClass ?>"></i>
+                                <?= $lockStatus . ' Soldiers' ?>
+                            </button>
+                        </form>
+                    <?php } ?>
                 <?php endif; ?>
 
             <?php endif; ?>
@@ -429,9 +433,9 @@ include '../includes/header.php';
                                                 <th style="width: 120px;">Result</th>
                                                 <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
 
-                                                <th class="no-export" style="width:60px;">Pass</th>
-                                                <th class="no-export" style="width: 60px;">Fail</th>
-                                                <th class="no-export" style="width: 60px;">Incomplete</th>
+                                                    <th class="no-export" style="width:60px;">Pass</th>
+                                                    <th class="no-export" style="width: 60px;">Fail</th>
+                                                    <th class="no-export" style="width: 60px;">Incomplete</th>
                                                 <?php endif; ?>
                                             </tr>
                                         </thead>
@@ -454,56 +458,62 @@ include '../includes/header.php';
                                                         <?= $soldier['STATUS']; ?>
                                                     </td>
                                                     <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input type="radio"
-                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Pass"
-                                                                <?php echo ($soldier['STATUS'] === 'Pass') ? 'checked' : ''; ?>
-                                                                required>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input type="radio"
-                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Fail"
-                                                                <?php echo ($soldier['STATUS'] === 'Fail') ? 'checked' : ''; ?>
-                                                                required>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input type="radio"
-                                                                name="result[<?php echo $soldier['SOLDIERID']; ?>]"
-                                                                value="Incomplete" <?php echo ($soldier['STATUS'] === 'Incomplete') ? 'checked' : ''; ?>
-                                                                required>
-                                                        </div>
-                                                    </td>
-                                                    <?php endif;?>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="radio"
+                                                                    name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Pass"
+                                                                    <?php echo ($soldier['STATUS'] === 'Pass') ? 'checked' : ''; ?>
+                                                                    required>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="radio"
+                                                                    name="result[<?php echo $soldier['SOLDIERID']; ?>]" value="Fail"
+                                                                    <?php echo ($soldier['STATUS'] === 'Fail') ? 'checked' : ''; ?>
+                                                                    required>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="radio"
+                                                                    name="result[<?php echo $soldier['SOLDIERID']; ?>]"
+                                                                    value="Incomplete" <?php echo ($soldier['STATUS'] === 'Incomplete') ? 'checked' : ''; ?>
+                                                                    required>
+                                                            </div>
+                                                        </td>
+                                                    <?php endif; ?>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
-                                    <button type="submit" name="update_status_bulk" class="btn btn-primary">Update
-                                        Result</button>
-                                <?php endif; ?>
-                            </form>
-                            <!-- Display the Forward List button if the status is 'Ongoing' and the user is the board president -->
+                                <?php if ($event['STATUS'] != 'Terminated'): ?>
 
-                            <?php if (!$userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
-                                <!-- Display a message if the status is 'Forwarded' -->
-                                <button type="" class="btn btn-warning">
-                                    List Forwarded
-                                </button>
-                            <?php elseif($event['STATUS'] != 'Forwarded'): ?>
-                                <!-- Display the default Forward List button if the status is neither 'Ongoing' nor 'Forwarded' -->
-                                <form method="POST" action="" class="d-inline">
-                                    <input type="hidden" name="forward_list_action" value="forward">
-                                    <button type="submit" class="btn btn-success">
-                                        Forward List
-                                    </button>
+                                    <?php if ($userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
+                                        <button type="submit" name="update_status_bulk" class="btn btn-primary">Update
+                                            Result</button>
+                                    <?php endif; ?>
                                 </form>
+                                <!-- Display the Forward List button if the status is 'Ongoing' and the user is the board president -->
+                                <?php if ($_SESSION['role'] == 'admin') { ?>
+
+                                    <?php if (!$userIsBoardPresident && $event['STATUS'] === 'Forwarded'): ?>
+                                        <!-- Display a message if the status is 'Forwarded' -->
+                                        <button type="" class="btn btn-warning">
+                                            List Forwarded
+                                        </button>
+                                    <?php elseif ($event['STATUS'] != 'Forwarded'): ?>
+                                        <!-- Display the default Forward List button if the status is neither 'Ongoing' nor 'Forwarded' -->
+                                        <form method="POST" action="" class="d-inline">
+                                            <input type="hidden" name="forward_list_action" value="forward">
+                                            <button type="submit" class="btn btn-success">
+                                                Forward List
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+
+                                <?php } ?>
                             <?php endif; ?>
 
                         <?php else: ?>

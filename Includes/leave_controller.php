@@ -146,5 +146,30 @@ function printLeaveSoldierList($soldiersArray, $id, $name = null)
 
 //print_r(leaveDisposal($conn,1,null,null,null));
 
+function getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate)
+{
+    $leaveCountsByDate = array();
+
+    // Loop through each date in the date range
+    $currentDate = new DateTime($startDate);
+    $endDateObj = new DateTime($endDate);
+
+    while ($currentDate <= $endDateObj) {
+        $date = $currentDate->format('Y-m-d');
+
+        // Loop through each company and get leave count for the current date
+        foreach ($companies as $company) {
+            $leaveCount = getLeaveInfo($conn, $company['ID'], $date, null, null);
+
+            // Store leave count in the 2D array
+            $leaveCountsByDate[$date][$company['ID']] = count($leaveCount);
+        }
+
+        // Move to the next date
+        $currentDate->modify('+1 day');
+    }
+
+    return $leaveCountsByDate;
+}
 
 ?>

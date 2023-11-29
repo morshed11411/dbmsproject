@@ -2,6 +2,7 @@
 session_start();
 
 require_once('../includes/connection.php'); // No need for ../includes/init.php
+include '../includes/parade_controller.php';
 
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
@@ -68,7 +69,12 @@ if (isset($_POST['submit'])) {
     // Execute the INSERT statement for Soldier table
     $result = oci_execute($stmt);
     if ($result !== false) {
-        $_SESSION['success'] = "Soldier updated successfully.";
+        $updateResult = updateUserAccess($conn, $soldier_id, 'soldier');
+        if ($updateResult) {
+            $_SESSION['success'] = "Soldier Added successfully.";
+        } else {
+            $_SESSION['error'] = "Failed to update user access level.";
+        }
         header("Location: profile.php?soldierid=$soldier_id");
         exit();
     } else {
@@ -161,7 +167,8 @@ include '../includes/header.php';
                                         <select name="rank_id" id="rank_id" class="form-control custom-select" required>
                                             <option value="">Select Rank</option>
                                             <?php foreach ($rankList as $rank): ?>
-                                                <option value="<?php echo $rank->RankID ?>"><?php echo $rank->Rank ?>
+                                                <option value="<?php echo $rank->RankID ?>">
+                                                    <?php echo $rank->Rank ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
@@ -173,7 +180,8 @@ include '../includes/header.php';
                                             required>
                                             <option value="">Select Trade</option>
                                             <?php foreach ($tradeList as $trade): ?>
-                                                <option value="<?php echo $trade->TradeID ?>"><?php echo $trade->Trade ?>
+                                                <option value="<?php echo $trade->TradeID ?>">
+                                                    <?php echo $trade->Trade ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
@@ -185,7 +193,9 @@ include '../includes/header.php';
                                             required>
                                             <option value="">Select Company</option>
                                             <?php foreach ($companyList as $company): ?>
-                                                <option value="<?php echo $company->COMPANYID ?>"><?php echo $company->COMPANYNAME ?></option>
+                                                <option value="<?php echo $company->COMPANYID ?>">
+                                                    <?php echo $company->COMPANYNAME ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

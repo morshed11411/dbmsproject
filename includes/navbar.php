@@ -48,11 +48,17 @@ if (isset($_SESSION['userid'])) {
     <li class="nav-item">
       <div class="custom-control custom-switch  align-items-center">
         <input type="checkbox" class="custom-control-input" id="darkModeToggle">
-        <label class="custom-control-label d-none d-md-block" for="darkModeToggle">Dark Mode</label>
-        <label class="custom-control-label d-md-none md-1" for="darkModeToggle"></label>
+        <label class="custom-control-label d-none d-md-block" for="darkModeToggle">
+          <i class="fas fa-moon"></i>
+        </label> <label class="custom-control-label d-md-none md-1" for="darkModeToggle"></label>
       </div>
     </li>
   </ul>
+
+  <!-- Display Date and Time -->
+  <a href="calendar.php" class="navbar-text mx-auto text-center text-dark ">
+    <div id="datetime" class=""></div>
+  </a>
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
@@ -65,6 +71,31 @@ if (isset($_SESSION['userid'])) {
         </span>
       <?php endif; ?>
     </button>
+    <script>
+      function updateDateTime() {
+        var dateTimeElement = document.getElementById('datetime');
+        if (dateTimeElement) {
+          var now = new Date();
+          var hours = now.getHours();
+          var minutes = now.getMinutes();
+          var seconds = now.getSeconds();
+          var day = now.getDate();
+          var month = now.toLocaleString('default', { month: 'short' }); // Get month name
+          var dayOfWeek = now.toLocaleString('default', { weekday: 'short' }); // Get day of the week
+          var formattedTime = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+          var formattedDate = day + ' ' + month + ', ' + dayOfWeek;
+
+          dateTimeElement.textContent = formattedTime + ', ' + formattedDate;
+        }
+      }
+
+      // Update date and time every second
+      setInterval(updateDateTime, 1000);
+
+      // Initial call to set the initial date and time
+      updateDateTime();
+    </script>
 
 
     <li class="nav-item dropdown">
@@ -108,12 +139,13 @@ if (isset($_SESSION['userid'])) {
 
 
     <!-- Sidebar Menu -->
-    <?php
-    if ($_SESSION['role'] == 'admin') {
-      ?>
 
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+        <?php
+        if ($_SESSION['role'] == 'admin') {
+          ?>
           <li class="nav-item">
             <a href="dashboard.php" class="nav-link">
               <i class="fas fa-tachometer-alt nav-icon"></i>
@@ -135,6 +167,12 @@ if (isset($_SESSION['userid'])) {
               <p>
                 Company
               </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="calendar.php" class="nav-link">
+              <i class="fas fa-tachometer-alt nav-icon"></i>
+              <p>Calendar</p>
             </a>
           </li>
           <li class="nav-item has-treeview">
@@ -216,7 +254,12 @@ if (isset($_SESSION['userid'])) {
                   <p>Leave Out</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="add_leave_type.php" class="nav-link sublink">
+                  <i class="fas fa-key nav-icon"></i>
+                  <p>Manage Leave Type</p>
+                </a>
+              </li>
             </ul>
           </li>
 
@@ -232,13 +275,13 @@ if (isset($_SESSION['userid'])) {
               <li class="nav-item">
                 <a href="parade_state.php" class="nav-link sublink">
                   <i class="fas fa-file-alt nav-icon"></i>
-                  <p>Create Parade State</p>
+                  <p>Daily Parade State</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="absent_soldier.php" class="nav-link sublink">
+                <a href="leave_state.php" class="nav-link sublink">
                   <i class="fas fa-archive nav-icon"></i>
-                  <p>Archive</p>
+                  <p>Leave State</p>
                 </a>
               </li>
             </ul>
@@ -260,9 +303,9 @@ if (isset($_SESSION['userid'])) {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="medical_disposal_state.php" class="nav-link sublink">
-                  <i class="fas fa-archive nav-icon"></i>
-                  <p>Disposal State</p>
+                <a href="add_disposal_type.php" class="nav-link sublink">
+                  <i class="fas fa-key nav-icon"></i>
+                  <p>Manage Disposal Type</p>
                 </a>
               </li>
 
@@ -286,74 +329,115 @@ if (isset($_SESSION['userid'])) {
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="company.php" class="nav-link sublink">
-                  <i class="fas fa-tools nav-icon"></i>
-                  <p>Manage Company</p>
+
+              <!-- Company Management Group -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link sublink">
+                  <i class="fas fa-building nav-icon"></i>
+                  <p>
+                    Manage Options
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="company.php" class="nav-link sublink">
+                      <i class="fas fa-tools nav-icon"></i>
+                      <p>Manage Company</p>
+                    </a>
+                  </li>
+                  <!-- Add more items related to Company Management here -->
+
+
+                  <!-- Authorization Management -->
+                  <li class="nav-item">
+                    <a href="authorization.php" class="nav-link sublink">
+                      <i class="fas fa-user-lock nav-icon"></i>
+                      <p>Manage Authorization</p>
+                    </a>
+                  </li>
+
+                  <!-- Trade Management -->
+                  <li class="nav-item">
+                    <a href="trade.php" class="nav-link sublink">
+                      <i class="fas fa-tools nav-icon"></i>
+                      <p>Manage Trade</p>
+                    </a>
+                  </li>
+
+                  <!-- Rank Management -->
+                  <li class="nav-item">
+                    <a href="ranks.php" class="nav-link sublink">
+                      <i class="fas fa-user-tag nav-icon"></i>
+                      <p>Manage Rank</p>
+                    </a>
+                  </li>
+
+                  <!-- ERE Management -->
+                  <li class="nav-item">
+                    <a href="add_ere_type.php" class="nav-link sublink">
+                      <i class="fas fa-user-tag nav-icon"></i>
+                      <p>Manage ERE</p>
+                    </a>
+                  </li>
+
+                  <!-- Attachment Management -->
+                  <li class="nav-item">
+                    <a href="tempcomd.php" class="nav-link sublink">
+                      <i class="fas fa-user-tag nav-icon"></i>
+                      <p>Manage Attachment</p>
+                    </a>
+                  </li>
+
+                  <!-- Serving Status Management -->
+                  <li class="nav-item">
+                    <a href="servingstatus.php" class="nav-link sublink">
+                      <i class="fas fa-user-tag nav-icon"></i>
+                      <p>Serving Status</p>
+                    </a>
+                  </li>
+
+                  <!-- Appointment Management -->
+                  <li class="nav-item">
+                    <a href="appointment.php" class="nav-link sublink">
+                      <i class="fas fa-briefcase nav-icon"></i>
+                      <p>Manage Appointment</p>
+                    </a>
+                  </li>
+
+                  <!-- Training Type Management -->
+                  <li class="nav-item">
+                    <a href="add_training_type.php" class="nav-link sublink">
+                      <i class="fas fa-key nav-icon"></i>
+                      <p>Manage Training Type</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a href="trade.php" class="nav-link sublink">
-                  <i class="fas fa-tools nav-icon"></i>
-                  <p>Manage Trade</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ranks.php" class="nav-link sublink">
-                  <i class="fas fa-user-tag nav-icon"></i>
-                  <p>Manage Rank</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ere.php" class="nav-link sublink">
-                  <i class="fas fa-user-tag nav-icon"></i>
-                  <p>Manage ERE</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="tempcomd.php" class="nav-link sublink">
-                  <i class="fas fa-user-tag nav-icon"></i>
-                  <p>Temporary Comd</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="servingstatus.php" class="nav-link sublink">
-                  <i class="fas fa-user-tag nav-icon"></i>
-                  <p>Serving Status</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="appointment.php" class="nav-link sublink">
-                  <i class="fas fa-briefcase nav-icon"></i>
-                  <p>Manage Appointment</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="authorization.php" class="nav-link sublink">
-                  <i class="fas fa-user-lock nav-icon"></i>
-                  <p>Manage Authorization</p>
-                </a>
-              </li>
+              <!-- Access Management -->
               <li class="nav-item">
                 <a href="access.php" class="nav-link sublink">
                   <i class="fas fa-key nav-icon"></i>
                   <p>Manage Access</p>
                 </a>
               </li>
+
+              <!-- Password Management -->
               <li class="nav-item">
-                <a href="access.php" class="nav-link sublink">
-                  <i class="fas fa-cog nav-icon"></i>
-                  <p>Application Settings</p>
+                <a href="approve_reset.php" class="nav-link sublink">
+                  <i class="fas fa-key nav-icon"></i>
+                  <p>Manage Password</p>
                 </a>
               </li>
+
             </ul>
           </li>
 
           <?php
-    }
+        }
 
-    if ($_SESSION['role'] == 'user') {
-      ?>
+        if ($_SESSION['role'] == 'manager') {
+          ?>
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
             <li class="nav-item <?php echo $currentPage === 'dashboard.php' ? 'active' : ''; ?>">
               <a href="dashboard.php" class="nav-link">
@@ -370,25 +454,62 @@ if (isset($_SESSION['userid'])) {
             </li>
 
             <li class="nav-item">
-              <a href="company.php" class="nav-link">
+              <a href="parade_state.php" class="nav-link">
                 <i class="fas fa-building nav-icon"></i>
                 <p>
-                  কোম্পানি
+                  প্যারেড স্টেট
                 </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="company.php" class="nav-link">
+              <a href="training_event.php" class="nav-link">
                 <i class="fas fa-building nav-icon"></i>
                 <p>
-                  প্রশিক্ষণ
+                  প্রশিক্ষন
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="plan.php" class="nav-link">
+                <i class="fas fa-building nav-icon"></i>
+                <p>
+                  ক্যারিয়ার প্ল্যান
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="profile.php" class="nav-link">
+                <i class="fas fa-building nav-icon"></i>
+                <p>
+                  প্রোফাইল
                 </p>
               </a>
             </li>
 
+
+
             <?php
-    }
-    ?>
+        }
+        if ($_SESSION['role'] == 'soldier') { ?>
+            <li class="nav-item">
+              <a href="profile.php" class="nav-link">
+                <i class="fas fa-building nav-icon"></i>
+                <p>
+                  প্রোফাইল
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="change_password.php" class="nav-link">
+                <i class="fas fa-building nav-icon"></i>
+                <p>
+                  পাসওয়ার্ড পরিবর্তন
+                </p>
+              </a>
+            </li>
+            <?php
+        }
+        ?>
 
 
         </ul>
@@ -397,6 +518,7 @@ if (isset($_SESSION['userid'])) {
   </div>
   <!-- /.sidebar -->
 </aside>
+
 <script>
   var currentPageURL = window.location.href;
   var navLinks = document.querySelectorAll('.nav-link');
@@ -404,7 +526,7 @@ if (isset($_SESSION['userid'])) {
   navLinks.forEach(function (link) {
     var linkHref = link.getAttribute('href');
 
-    if (currentPageURL.indexOf(linkHref) !== -1) {
+    if (currentPageURL.includes(linkHref)) {
       // Add the 'active' class to the link
       link.classList.add('active');
 
@@ -414,8 +536,7 @@ if (isset($_SESSION['userid'])) {
         if (parentList) {
           var parentLink = parentList.previousElementSibling;
           if (parentLink) {
-            parentLink.classList.add('active');
-            parentLink.classList.add('menu-open');
+            parentLink.classList.add('active', 'menu-open');
           }
         }
       }
@@ -424,8 +545,7 @@ if (isset($_SESSION['userid'])) {
       if (link.parentElement.classList.contains('has-treeview')) {
         var parentListItem = link.parentElement;
         if (parentListItem) {
-          parentListItem.classList.remove('has-treeview');
-          parentListItem.classList.add('menu-open');
+          parentListItem.classList.add('active', 'menu-open');
         }
       }
     }

@@ -2,6 +2,79 @@
 // Assuming $conn is your Oracle database connection
 include '../includes/connection.php';
 
+function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $onLeave = false, $company = null, $status = null)
+{
+    $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, S.BLOODGROUP, S.DATEOFBIRTH, S.DISTRICT, T.TRADE, C.COMPANYNAME
+              FROM SOLDIER S
+              JOIN RANKS R ON S.RANKID = R.RANKID
+              JOIN TRADE T ON S.TRADEID = T.TRADEID
+              JOIN COMPANY C ON S.COMPANYID = C.COMPANYID";
+
+    // Add WHERE clause based on parameters
+    $conditions = [];
+
+    if ($soldierId !== null) {
+        $conditions[] = "S.SOLDIERID = :soldierId";
+    }
+    if ($rank !== null) {
+        $conditions[] = "R.RANK = :rank";
+    }
+    if ($category !== null) {
+        // Add your category conditions here
+        if ($category === 'Officer') {
+            $conditions[] = "R.RANK IN ('Lt Col', 'Maj', 'Capt', 'Lt', '2Lt')";
+        } elseif ($category === 'JCO') {
+            $conditions[] = "R.RANK IN ('H Capt', 'H Lt', 'MWO', 'SWO', 'WO')";
+        } elseif ($category === 'ORS') {
+            $conditions[] = "R.RANK NOT IN ('Lt Col', 'Maj', 'Capt', 'Lt', '2Lt', 'H Capt', 'H Lt', 'MWO', 'SWO', 'WO')";
+        }
+    }
+
+    if ($onLeave) {
+        $conditions[] = "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
+                                        JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
+                                        WHERE ONLEAVE = 1)";
+    }
+
+    if ($company !== null) {
+
+        $conditions[] = "C.COMPANYID = :company";
+
+    }
+
+    if ($status !== null) {
+        $conditions[] = "S.SOLDIERID IN (SELECT SOLDIER_ID FROM SOLDIERSTATUS WHERE STATUSID IN (SELECT STATUSID FROM SERVINGSTATUS WHERE SERVINGTYPE = :status))";
+    }
+
+    if (!empty($conditions)) {
+        $query .= " WHERE " . implode(" AND ", $conditions);
+    }
+
+    $stmt = oci_parse($conn, $query);
+
+    // Bind parameters
+    if ($soldierId !== null) {
+        oci_bind_by_name($stmt, ":soldierId", $soldierId);
+    }
+    if ($rank !== null) {
+        oci_bind_by_name($stmt, ":rank", $rank);
+    }
+    if ($company !== null) {
+        oci_bind_by_name($stmt, ":company", $company);
+    }
+    if ($status !== null) {
+        oci_bind_by_name($stmt, ":status", $status);
+    }
+
+    oci_execute($stmt);
+
+    $allSoldiers = [];
+    while ($soldier = oci_fetch_assoc($stmt)) {
+        $allSoldiers[] = $soldier;
+    }
+
+    return $allSoldiers;
+}
 
 function getAllRank($conn)
 {
@@ -20,76 +93,9 @@ function getAllRank($conn)
     return $rankData;
 }
 
-
+global $ranks;
 // Example usage:
 $ranks = getAllRank($conn);
-
-function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $onLeave = false, $company = null, $status = null) {
-    $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, T.TRADE, C.COMPANYNAME
-              FROM SOLDIER S
-              JOIN RANKS R ON S.RANKID = R.RANKID
-              JOIN TRADE T ON S.TRADEID = T.TRADEID
-              JOIN COMPANY C ON S.COMPANYID = C.COMPANYID";
-
-    // Add WHERE clause based on parameters
-    $conditions = [];
-
-    if ($soldierId !== null) {
-        $conditions[] = "S.SOLDIERID = :soldierId";
-    } elseif ($rank !== null) {
-        $conditions[] = "R.RANK = :rank";
-    } elseif ($category !== null) {
-        if ($category === 'Officer') {
-            $conditions[] = "R.RANK IN ('Lt Col', 'Maj', 'Capt', 'Lt', '2Lt')";
-        } elseif ($category === 'JCO') {
-            $conditions[] = "R.RANK IN ('H Capt', 'H Lt', 'MWO', 'SWO', 'WO')";
-        } elseif ($category === 'ORS') {
-            $conditions[] = "R.RANK NOT IN ('Lt Col', 'Maj', 'Capt', 'Lt', '2Lt', 'H Capt', 'H Lt', 'MWO', 'SWO', 'WO')";
-        }
-    }
-
-    if ($onLeave) {
-        $conditions[] = "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
-                                        JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
-                                        WHERE ONLEAVE = 1)";
-    }
-
-    if ($company !== null) {
-        $conditions[] = "C.COMPANYID = :company";
-    }
-
-    if ($status !== null) {
-            $conditions[] = "S.SOLDIERID IN (SELECT SOLDIER_ID FROM SOLDIERSTATUS WHERE STATUSID IN (SELECT STATUSID FROM SERVINGSTATUS WHERE SERVINGTYPE = :status))";
-        
-    }
-
-    if (!empty($conditions)) {
-        $query .= " WHERE " . implode(" AND ", $conditions);
-    }
-
-    $stmt = oci_parse($conn, $query);
-
-    // Bind parameters
-    if ($soldierId !== null) {
-        oci_bind_by_name($stmt, ":soldierId", $soldierId);
-    } elseif ($rank !== null) {
-        oci_bind_by_name($stmt, ":rank", $rank);
-    } elseif ($company !== null) {
-        oci_bind_by_name($stmt, ":company", $company);
-    } elseif ($status !== null) {
-        oci_bind_by_name($stmt, ":status", $status);
-    }
-
-    oci_execute($stmt);
-
-    $allSoldiers = [];
-    while ($soldier = oci_fetch_assoc($stmt)) {
-        $allSoldiers[] = $soldier;
-    }
-
-    return $allSoldiers;
-}
-
 
 function printAllSoldierList($soldiersArray, $id, $name = null)
 {
@@ -147,15 +153,47 @@ function printAllSoldierList($soldiersArray, $id, $name = null)
     return $count;
 }
 
+$role = $_SESSION['role'];
+$coyid = $_SESSION['usercoy'];
 
-$postedTotal=getSoldiers($conn, null, null,  null, false, null, null) ;
-$allOfficer=getSoldiers($conn, null, null,  'Officer', false, null, null) ;
-$allJCO=getSoldiers($conn, null, null,  'JCO', false, null, null) ;
-$allORS=getSoldiers($conn, null, null,  'ORS', false, null, null) ;
+if ($role == 'admin') {
+
+    $postedTotal = getSoldiers($conn, null, null, null, false, null, null);
+    $allOfficer = getSoldiers($conn, null, null, 'Officer', false, null, null);
+    $allJCO = getSoldiers($conn, null, null, 'JCO', false, null, null);
+    $allORS = getSoldiers($conn, null, null, 'ORS', false, null, null);
+
+}
+if ($role == 'manager') {
+
+    $postedTotal = getSoldiers($conn, null, null, null, false, $coyid, null);
+    $allOfficer = getSoldiers($conn, null, null, 'Officer', $coyid, null, null);
+    $allJCO = getSoldiers($conn, null, null, 'JCO', false, $coyid, null);
+    $allORS = getSoldiers($conn, null, null, 'ORS', false, $coyid, null);
+    
+    // Get counts for present, absent, and on leave for each category
+    $allPresent = getSoldiers($conn, null, null, null, false, $coyid, null);
+    $allAbsent = getSoldiers($conn, null, null, null, true, $coyid, null);
+    $allOnLeave = getSoldiers($conn, null, null, null, true, $coyid, null);
+    
+    $officerPresent = getSoldiers($conn, null, null, 'Officer', false, $coyid, null);
+    $officerAbsent = getSoldiers($conn, null, null, 'Officer', true, $coyid, null);
+    $officerOnLeave = getSoldiers($conn, null, null, 'Officer', true, $coyid, null);
+    
+    $jcoPresent = getSoldiers($conn, null, null, 'JCO', false, $coyid, null);
+    $jcoAbsent = getSoldiers($conn, null, null, 'JCO', true, $coyid, null);
+    $jcoOnLeave = getSoldiers($conn, null, null, 'JCO', true, $coyid, null);
+    
+    $orsPresent = getSoldiers($conn, null, null, 'ORS', false, $coyid, null);
+    $orsAbsent = getSoldiers($conn, null, null, 'ORS', true, $coyid, null);
+    $orsOnLeave = getSoldiers($conn, null, null, 'ORS', true, $coyid, null);
+    
+
+}
 
 
-
-function getManpowerByCompany($conn) {
+function getManpowerByCompany($conn)
+{
     $manpowerByCompany = array();
 
     // Query to retrieve manpower and company information
@@ -180,7 +218,59 @@ function getManpowerByCompany($conn) {
 
 // Example usage
 $manpowerData = getManpowerByCompany($conn);
+function getUserAccess($conn, $soldierId)
+{
+    $query = "SELECT ROLE FROM USERS WHERE SOLDIERID = :soldierId";
+    $stmt = oci_parse($conn, $query);
+    oci_bind_by_name($stmt, ':soldierId', $soldierId);
+    oci_execute($stmt);
+
+    $row = oci_fetch_assoc($stmt);
+
+    if ($row) {
+        return $row['ROLE']; // Return the user's current role (access level)
+    } else {
+        return null; // User not found
+    }
+}
+
+function updateUserAccess($conn, $soldierId, $newRole)
+{
+    // Check if the user already has an entry in the USERS table
+    $queryCheck = "SELECT COUNT(*) AS COUNT FROM USERS WHERE SOLDIERID = :soldierId";
+    $stmtCheck = oci_parse($conn, $queryCheck);
+    oci_bind_by_name($stmtCheck, ':soldierId', $soldierId);
+    oci_execute($stmtCheck);
+
+    $count = oci_fetch_assoc($stmtCheck)['COUNT'];
+
+    if ($count > 0) {
+        // User entry exists, update the role (access level)
+        $queryUpdate = "UPDATE USERS SET ROLE = :newRole WHERE SOLDIERID = :soldierId";
+        $stmtUpdate = oci_parse($conn, $queryUpdate);
+        oci_bind_by_name($stmtUpdate, ':soldierId', $soldierId);
+        oci_bind_by_name($stmtUpdate, ':newRole', $newRole);
+        $result = oci_execute($stmtUpdate);
+    } else {
+        // User entry does not exist, insert a new entry
+        $queryInsert = "INSERT INTO USERS (SOLDIERID, ROLE) VALUES (:soldierId, :newRole)";
+        $stmtInsert = oci_parse($conn, $queryInsert);
+        oci_bind_by_name($stmtInsert, ':soldierId', $soldierId);
+        oci_bind_by_name($stmtInsert, ':newRole', $newRole);
+        $result = oci_execute($stmtInsert);
+    }
+
+    return $result;
+}
 
 
-
+?>
+<?php
+function calculateAge($dateOfBirth)
+{
+    $dob = new DateTime($dateOfBirth);
+    $today = new DateTime('today');
+    $age = $dob->diff($today)->y;
+    return $age;
+}
 ?>

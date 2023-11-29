@@ -5,6 +5,8 @@ session_start();
 
 // Include your database connection code here
 include '../includes/connection.php';
+require_once '../includes/create_notification.php';
+
 function getLeaveTypes($conn)
 {
     $leaveTypes = [];
@@ -73,6 +75,28 @@ if (isset($_POST['approve_leave'])) {
 
         if ($result) {
             $_SESSION['success'] = "Leave request has been approved.";
+            $query = "SELECT SOLDIERID FROM LEAVEMODULE WHERE LEAVEID = :leave_id";
+            $stmt = oci_parse($conn, $query);
+
+            oci_bind_by_name($stmt, ':leave_id', $leaveIDToApprove);
+            oci_execute($stmt);
+
+            // Fetch the result
+            if ($row = oci_fetch_assoc($stmt)) {
+                $notifiedSoldierId = $row['SOLDIERID'];
+            } else {
+                // Handle the case where no result is found
+                $notifiedSoldierId = null;
+            }
+
+            // Free the statement
+            oci_free_statement($stmt);
+
+            $notifiedGroup = ''; // Assuming 'all' represents all users
+            $message = "Your leave request is approved. Download leave card: <a href='leavecard?leaveid=$leaveIDToApprove'>Download</a>";
+            $notifierSoldierId = $_SESSION['userid'];
+            // Call the createNotification function
+            $result = createNotification(null, $notifierSoldierId, $notifiedGroup, $message);
 
         } else {
             $error = oci_error($stmt);
@@ -110,7 +134,7 @@ if (isset($_POST['reject_leave'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
-
+global $notified;
 
 // Process the form submission to send a quick leave request
 if (isset($_POST['quick_leave'])) {
@@ -122,15 +146,13 @@ if (isset($_POST['quick_leave'])) {
 
     // Get the soldier ID from the input field
     $soldierID = $_POST['soldier_id'];
+
     if ($leaveStartDate < date('Y-m-d')) {
         // Display error message
         $_SESSION['error'] = "Error: Leave start date cannot be in the past.";
-
     } elseif ($leaveEndDate < $leaveStartDate) {
-
         // Display error message
         $_SESSION['error'] = "Error: Leave end date cannot be before the start date.";
-
     } else {
         // Insert leave request into the database
         $query = "INSERT INTO LEAVEMODULE (SOLDIERID, LEAVETYPEID, LEAVESTARTDATE, LEAVEENDDATE, REQUESTDATE, STATUS, AUTHBY) VALUES (:soldier_id, :leave_type, TO_DATE(:leave_start_date, 'YYYY-MM-DD'), TO_DATE(:leave_end_date, 'YYYY-MM-DD'), TO_DATE(:leave_request_date, 'YYYY-MM-DD'), :status, :authid)";
@@ -143,28 +165,49 @@ if (isset($_POST['quick_leave'])) {
         oci_bind_by_name($stmt, ':status', $status);
         oci_bind_by_name($stmt, ':authid', $_SESSION['userid']);
 
-
         $result = oci_execute($stmt);
 
         if ($result) {
             $_SESSION['success'] = "Leave approved successfully.";
+            // Fetch the last inserted leave ID
+            $query = "SELECT SOLDIERID, LEAVEID FROM LEAVEMODULE ORDER BY LEAVEID DESC FETCH FIRST 1 ROW ONLY";
+            $stmtLeaveId = oci_parse($conn, $query);
+            oci_execute($stmtLeaveId);
 
-            // Open leave certificate in a popup window
+            // Fetch the result
+            $notified = oci_fetch_assoc($stmtLeaveId);
 
-        } else {
-            $error = oci_error($stmt);
-            $_SESSION['error'] = "Failed to send leave request: " . $error['message'];
+            // Check if a result is found
+            if ($notified) {
+                $notifiedSoldierId = $notified['SOLDIERID'];
+                $leaveIDToApprove = $notified['LEAVEID'];
 
+                // Free the statement for fetching leave ID
+                oci_free_statement($stmtLeaveId);
+
+                $notifiedGroup = ''; // Assuming 'all' represents all users
+                $message = "Your leave request is approved. Download leave card: <a href='leavecard.php?leaveid=$leaveIDToApprove'>Download</a>";
+                $notifierSoldierId = $_SESSION['userid'];
+
+                // Call the createNotification function
+                $result = createNotification($notifiedSoldierId, $notifierSoldierId, $notifiedGroup, $message);
+            } else {
+                // Handle the case where no result is found
+                $_SESSION['error'] = "Failed to send leave notification: No result found.";
+            }
+
+            // Close the connection
+            oci_close($conn);
+
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         }
     }
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-
-    oci_free_statement($stmt);
-    oci_close($conn);
 }
 
+
 include '../includes/header.php';
+print_r($notified);
 ?>
 
 <div class="card-body">
@@ -183,7 +226,8 @@ include '../includes/header.php';
 
 <section class="content">
     <div class="container-fluid">
-        <?php include '../includes/alert.php'; ?>
+        <?php
+        include '../includes/alert.php'; ?>
 
         <div class="row">
             <div class="col-md-12">
@@ -211,7 +255,7 @@ include '../includes/header.php';
                                     </tr>
                                 <?php else: ?>
                                     <?php foreach ($leaveRequests as $leave):
-                                        $soldierID=$leave['SOLDIERID'];
+                                        $soldierID = $leave['SOLDIERID'];
                                         ?>
                                         <tr>
                                             <td>
@@ -270,7 +314,7 @@ include '../includes/header.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <?php include '../includes/soldier_info.php'; ?>
+                                                        <?php include '../includes/soldier_info.php'; ?>
                                                         <form method="POST" action="">
                                                             <!-- Leave ID for reference -->
                                                             <input type="hidden" name="leave_id"

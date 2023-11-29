@@ -10,8 +10,8 @@ function login($conn, $username, $password)
 {
 
 
-   $query = "SELECT s.SOLDIERID, s.NAME, l.ROLE, l.FAILED_LOGIN_ATTEMPTS, l.LAST_LOGIN_TIME, l.STATUS, l.PASSWORD
-             FROM LOGIN l
+   $query = "SELECT s.SOLDIERID, s.NAME, s.COMPANYID, l.ROLE, l.FAILED_LOGIN_ATTEMPTS, l.LAST_LOGIN_TIME, l.STATUS, l.PASSWORD
+             FROM USERS l
              JOIN SOLDIER s ON l.SOLDIERID = s.SOLDIERID
              WHERE l.SOLDIERID = :username";
 
@@ -26,27 +26,36 @@ function login($conn, $username, $password)
          } else {
             if ($password == $row['PASSWORD']) { // Compare plain text passwords
                // Reset failed login attempts
-               $query = "UPDATE LOGIN SET FAILED_LOGIN_ATTEMPTS = 0 WHERE SOLDIERID = :username";
+               $query = "UPDATE USERS SET FAILED_LOGIN_ATTEMPTS = 0 WHERE SOLDIERID = :username";
                $stmt = oci_parse($conn, $query);
                oci_bind_by_name($stmt, ':username', $username);
                oci_execute($stmt);
 
                // Update last login time
-               $query = "UPDATE LOGIN SET LAST_LOGIN_TIME = CURRENT_TIMESTAMP WHERE SOLDIERID = :username";
+               $query = "UPDATE USERS SET LAST_LOGIN_TIME = CURRENT_TIMESTAMP WHERE SOLDIERID = :username";
                $stmt = oci_parse($conn, $query);
                oci_bind_by_name($stmt, ':username', $username);
                oci_execute($stmt);
 
+
+
                $_SESSION['username'] = $row['NAME'];
                $_SESSION['userid'] = $row['SOLDIERID'];
                $_SESSION['role'] = $row['ROLE'];
-               $_SESSION['success'] = 'Logged in successfully.';
-               header('Location: dashboard.php');
+               $_SESSION['usercoy'] = $row['COMPANYID'];
+               if ($row['PASSWORD'] === '123456') {
+                  $_SESSION['success'] = 'Log in success. Please change your password from default password.';
+                  header('Location: change_password.php');
+
+               } else {
+                  $_SESSION['success'] = 'Logged in successfully.';
+                  header('Location: dashboard.php');
+               }
                exit();
             } else {
                // Update failed login attempts
                $failedAttempts = $row['FAILED_LOGIN_ATTEMPTS'] + 1;
-               $query = "UPDATE LOGIN SET FAILED_LOGIN_ATTEMPTS = :failedAttempts WHERE SOLDIERID = :username";
+               $query = "UPDATE USERS SET FAILED_LOGIN_ATTEMPTS = :failedAttempts WHERE SOLDIERID = :username";
                $stmt = oci_parse($conn, $query);
                oci_bind_by_name($stmt, ':failedAttempts', $failedAttempts);
                oci_bind_by_name($stmt, ':username', $username);
@@ -54,7 +63,7 @@ function login($conn, $username, $password)
 
                if ($failedAttempts >= 5) {
                   // Disable the user
-                  $query = "UPDATE LOGIN SET STATUS = 1 WHERE SOLDIERID = :username";
+                  $query = "UPDATE USERS SET STATUS = 1 WHERE SOLDIERID = :username";
                   $stmt = oci_parse($conn, $query);
                   oci_bind_by_name($stmt, ':username', $username);
                   oci_execute($stmt);
@@ -83,7 +92,7 @@ global $loginAttempt;
 if (isset($_POST['login'])) {
    $username = $_POST['username'];
    $password = $_POST['password'];
-   $loginAttempt=login($conn, $username, $password);
+   $loginAttempt = login($conn, $username, $password);
 }
 ?>
 
@@ -114,7 +123,8 @@ if (isset($_POST['login'])) {
                <!-- Display the login form -->
                <form method="post">
                   <div class="input-group mb-3">
-                     <input type="text" class="form-control" placeholder="Personal No" id="username" name="username" value="<?=$username?>">
+                     <input type="text" class="form-control" placeholder="Personal No" id="username" name="username"
+                        value="<?= $username ?>">
                      <div class="input-group-append">
                         <div class="input-group-text">
                            <span class="fas fa-user-alt"></span>

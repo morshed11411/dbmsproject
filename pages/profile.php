@@ -101,9 +101,11 @@ if ($row = oci_fetch_assoc($stmt)) {
             <div class="text-left">
                 <h3>Soldier Profile </h3>
             </div>
-            <div class="text-right">
-                <a href="edit_soldier.php?soldier=<?php echo $soldier['SOLDIERID']; ?>" class="btn btn-primary">Edit Profile</a>
-
+            <?php if ($_SESSION['role'] == 'admin') { ?>
+                <div class="text-right">
+                    <a href="edit_soldier.php?soldier=<?php echo $soldier['SOLDIERID']; ?>" class="btn btn-primary">Edit
+                        Profile</a>
+                <?php } ?>
             </div>
         </div>
     </div>

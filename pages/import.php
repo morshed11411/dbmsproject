@@ -162,12 +162,11 @@ include '../includes/header.php';
     <?php
 // Display import log
 if (isset($_SESSION['success']) || isset($_SESSION['error'])) {
-    echo '<div class="card card-warning">    ';
+    echo '<div class="card card-warning" style="height: 300px; overflow-y: auto;">';
     echo '<div class="card-header">';
     echo '<b>Import Log</b>';
     echo '</div>';
     echo '<div class="card-body">';
-    
     // Display success messages in green text
     if (isset($_SESSION['success'])) {
         foreach ($_SESSION['success'] as $successMessage) {

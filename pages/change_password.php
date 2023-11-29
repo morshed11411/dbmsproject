@@ -35,21 +35,21 @@ if (isset($_POST['submit'])) {
                 session_unset();
                 session_destroy();
                 session_start();
-    
+
                 $_SESSION['success'] = "Password changed successfully.\nPlease login again.";
-    
+
                 header("location:../index.php");
                 exit();
             } else {
-                $error_message = "Failed to update password.";
+                $_SESSION['error'] = "Failed to update password.";
             }
         } else {
-            $error_message = "New password and confirm password do not match. Please try again.";
+            $_SESSION['error'] = "New password and confirm password do not match. Please try again.";
         }
     } else {
-        $error_message = "Invalid current password. Please try again.";
+        $_SESSION['error'] = "Invalid current password. Please try again.";
     }
-    
+
 }
 
 include '../includes/header.php';
@@ -65,11 +65,8 @@ include '../includes/header.php';
 
 <section class="content">
     <div class="container-fluid">
-        <?php
-        if (isset($error_message)) {
-            echo '<div class="alert alert-danger">' . $error_message . '</div>';
-        }
-        ?>
+        <?php include '../includes/alert.php'; ?>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -104,4 +101,3 @@ include '../includes/header.php';
 </section>
 
 <?php include '../includes/footer.php'; ?>
-

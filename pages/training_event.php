@@ -107,7 +107,7 @@ if (isset($_POST['add_event_submit'])) {
     $message = "A new training event ('$event_name') has been added.";
     $notifierSoldierId = $_SESSION['userid'];
     // Call the createNotification function
-    $result=createNotification(null, $notifierSoldierId, $notifiedGroup, $message);
+    $result = createNotification(null, $notifierSoldierId, $notifiedGroup, $message);
 
 
 }
@@ -205,12 +205,12 @@ function generateEditEventModal($row, $trainingTypes, $officerNames)
                         <div class="form-group">
                             <label for="edit_training_type">Training Type:</label>
                             <select name="edit_training_type" id="edit_training_type" class="form-control" required>';
-                            foreach ($trainingTypes as $trainingTypeId => $trainingType) {
-                                $selected = ($row['TRGID'] == $trainingTypeId) ? 'selected' : '';
-                                echo "<option value=\"$trainingTypeId\" $selected>$trainingType</option>";
-                            }
+    foreach ($trainingTypes as $trainingTypeId => $trainingType) {
+        $selected = ($row['TRGID'] == $trainingTypeId) ? 'selected' : '';
+        echo "<option value=\"$trainingTypeId\" $selected>$trainingType</option>";
+    }
 
-                            echo '</select>
+    echo '</select>
                         </div>
 
                         <div class="form-group">
@@ -226,12 +226,12 @@ function generateEditEventModal($row, $trainingTypes, $officerNames)
                         <div class="form-group">
                             <label for="edit_board_president">Board President:</label>
                             <select name="edit_board_president" id="edit_board_president" class="form-control" required>';
-                            foreach ($officerNames as $soldierID => $officerName) {
-                                $selected = ($row['BOARDPRESIDENTID'] == $soldierID) ? 'selected' : '';
-                                echo "<option value=\"$soldierID\" $selected>$officerName</option>";
-                            }
+    foreach ($officerNames as $soldierID => $officerName) {
+        $selected = ($row['BOARDPRESIDENTID'] == $soldierID) ? 'selected' : '';
+        echo "<option value=\"$soldierID\" $selected>$officerName</option>";
+    }
 
-                            echo '</select>
+    echo '</select>
                         </div>
 
                         <div class="form-group">
@@ -301,9 +301,13 @@ include '../includes/header.php';
         <div class="text-left">
             <h3>Training Event Management</h3>
         </div>
-        <div class="text-right">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">Add Training Event</button>
-        </div>
+        <?php if ($_SESSION['role'] == 'admin') { ?>
+
+            <div class="text-right">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">Add Training Event</button>
+            </div>
+        <?php } ?>
+
     </div>
 </div>
 <!-- Add Event Modal -->
@@ -387,7 +391,6 @@ include '../includes/header.php';
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-bordered">
-                            <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Event Name</th>
@@ -396,9 +399,10 @@ include '../includes/header.php';
                                     <th>Board President</th>
                                     <th>Authority Letter No</th>
                                     <th>Board No</th>
-                                    <th>Action</th>
+                                    <?php if ($_SESSION['role'] == 'admin') { ?>
+                                        <th>Action</th>
+                                    <?php } ?>
                                 </tr>
-                            </thead>
                             <tbody>
                                 <?php
                                 foreach ($trainingEvents as $row) {
@@ -410,14 +414,17 @@ include '../includes/header.php';
                                     echo "<td>" . $row['BOARD_PRESIDENT'] . "</td>";
                                     echo "<td>" . $row['AUTHORITYLETTERNO'] . "</td>";
                                     echo "<td>" . $row['BOARDNO'] . "</td>";
-                                    echo "<td>";
-                                    echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#terminateEventModal-' . $row['EVENTID'] . '">
+                                    if ($_SESSION['role'] === 'admin') {
+
+                                        echo "<td>";
+                                        echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#terminateEventModal-' . $row['EVENTID'] . '">
                                                     <i class="fas fa-ban"></i> Terminate
                                                 </button>';
-                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEventModal-' . $row['EVENTID'] . '">
+                                        echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEventModal-' . $row['EVENTID'] . '">
                                                 <i class="fas fa-edit"></i> Edit
                                                 </button>';
-                                    echo "</td>";
+                                        echo "</td>";
+                                    }
                                     echo "</tr>";
                                     displayTerminateEventModal($row['EVENTID']);
                                     generateEditEventModal($row, $trainingTypes, $officerNames);
@@ -478,7 +485,9 @@ include '../includes/header.php';
                                     <th>Board President</th>
                                     <th>Authority Letter No</th>
                                     <th>Board No</th>
-                                    <th>Action</th>
+                                    <?php if ($_SESSION['role'] == 'admin') { ?>
+                                        <th>Action</th>
+                                    <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -493,15 +502,20 @@ include '../includes/header.php';
                                     echo "<td>" . $row['BOARD_PRESIDENT'] . "</td>";
                                     echo "<td>" . $row['AUTHORITYLETTERNO'] . "</td>";
                                     echo "<td>" . $row['BOARDNO'] . "</td>";
-                                    echo "<td>";
-                                    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEventModal-' . $row['EVENTID'] . '">
+
+                                    if ($_SESSION['role'] === 'admin') {
+
+                                        echo "<td>";
+
+                                        echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editEventModal-' . $row['EVENTID'] . '">
                                     <i class="fas fa-edit"></i> Edit
                                     </button>';
-                                    echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal-' . $row['EVENTID'] . '">
+                                        echo '<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal-' . $row['EVENTID'] . '">
                                     <i class="fas fa-trash"></i> Delete
                                     </button>';
 
-                                    echo "</td>";
+                                        echo "</td>";
+                                    }
                                     echo "</tr>";
                                     generateEditEventModal($row, $trainingTypes, $officerNames);
                                     generateDeleteEventModal($row);
