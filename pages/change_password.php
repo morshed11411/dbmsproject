@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $confirm_password = $_POST['confirm_password'];
 
     // Check if the current password matches the stored password for the soldier
-    $query = "SELECT PASSWORD FROM LOGIN WHERE SOLDIERID = :soldier_id";
+    $query = "SELECT PASSWORD FROM USERS WHERE SOLDIERID = :soldier_id";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
     oci_execute($stmt);
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
             $error_message = "New password cannot be the same as the current password.";
         } elseif ($new_password === $confirm_password) {
             // New password and confirm password match
-            $update_query = "UPDATE LOGIN SET PASSWORD = :new_password WHERE SOLDIERID = :soldier_id";
+            $update_query = "UPDATE USERS SET PASSWORD = :new_password WHERE SOLDIERID = :soldier_id";
             $update_stmt = oci_parse($conn, $update_query);
             oci_bind_by_name($update_stmt, ':new_password', $new_password);
             oci_bind_by_name($update_stmt, ':soldier_id', $soldier_id);

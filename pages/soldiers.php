@@ -15,11 +15,10 @@ $soldiersByRank = [];
 
 
 if ($role === 'admin') {
-    if(isset($_GET['company'])){
+    if (isset($_GET['company'])) {
         $soldierList = getSoldiers($conn, null, null, null, false, $userCoy, null);
 
-    }
-    else{
+    } else {
         $soldierList = getSoldiers($conn, null, null, null, false, null, null);
 
     }
@@ -31,11 +30,10 @@ if ($role === 'admin') {
 if ($role === 'admin') {
 
     foreach ($ranks as $rank) {
-        if(isset($_GET['company'])){
+        if (isset($_GET['company'])) {
             $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, $userCoy, null);
-    
-        }
-        else{
+
+        } else {
             $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, null, null);
 
         }
@@ -226,27 +224,23 @@ include '../includes/header.php';
                                                     href="report_sick.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Send
                                                     Report Sick
                                                 </a>
-                                                <a class="dropdown-item"
-                                                    href="manage_training.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Manage
-                                                    Training</a>
+                                                
                                                 <a class="dropdown-item"
                                                     href="give_punishment.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Manage
                                                     Punishment</a>
                                                 <a class="dropdown-item"
                                                     href="assign_appointment.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Assign
                                                     Appointment</a>
-                                                <a class="dropdown-item"
-                                                    href="assign_team.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Assign
-                                                    Team</a>
+                                                
                                                 <a class="dropdown-item"
                                                     href="add_ere.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Manage
                                                     ERE</a>
                                                 <a class="dropdown-item"
                                                     href="add_comd.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Manage
-                                                    Comd</a>
+                                                    Attachment</a>
                                                 <a class="dropdown-item"
-                                                    href="update_status.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Update
-                                                    State</a>
+                                                    href="update_status.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Serving
+                                                    Status</a>
                                                 <a class="dropdown-item"
                                                     href="uploadimage.php?soldier=<?php echo $soldier['SOLDIERID']; ?>">Upload
                                                     Image</a>

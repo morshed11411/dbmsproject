@@ -16,7 +16,7 @@ if (isset($_POST['request_reset'])) {
     $username = $_POST['username'];
 
     // Check if the user is disabled (you may need to adjust the table and column names)
-    $query = "SELECT STATUS FROM LOGIN WHERE SOLDIERID = :username";
+    $query = "SELECT STATUS FROM USERS WHERE SOLDIERID = :username";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':username', $username);
     oci_execute($stmt);
@@ -62,7 +62,9 @@ if (isset($_POST['request_reset'])) {
         }
     } else {
         // User is disabled, display an error message
-        $_SESSION['error'] = 'Your account is not disabled. Password can not be reset';
+        $error = oci_error($stmt);
+
+        $_SESSION['error'] = 'Your account is not disabled. Password can not be reset'. $error['message'];;
     }
 }
 ?>
