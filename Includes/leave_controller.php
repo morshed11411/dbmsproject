@@ -10,7 +10,7 @@ if (isset($_POST['filterBtn'])) {
     $endDate = $_POST['endDate'] ?? date('Y-m-t');
 
 
-    $_SESSION['success'] = 'Showing leave state from: ' . $startDate. ' to '.$endDate;
+    $_SESSION['success'] = 'Showing leave state from: ' . $startDate . ' to ' . $endDate;
 }
 function getLeaveTypes($conn)
 {
@@ -34,7 +34,7 @@ function getLeaveInfo($conn, $coyId = null, $currentDate = null, $leaveType = nu
 {
     $currentDate = $currentDate ?: date('Y-m-d');
 
-    $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, T.TRADE, C.COMPANYNAME,
+    $query = "SELECT LM.LEAVEID, S.SOLDIERID, R.RANK, S.NAME, T.TRADE, C.COMPANYNAME,
     LT.LEAVETYPE, LM.LEAVEID, LM.LEAVESTARTDATE, LM.LEAVEENDDATE,
     LM.STATUS AS REMARKS
 FROM SOLDIER S
@@ -46,7 +46,10 @@ JOIN COMPANY C ON S.COMPANYID = C.COMPANYID
 WHERE (LT.LEAVETYPE IS NOT NULL)";
 
     if ($statusFilter !== null) {
-        $query .= " AND LM.STATUS = :statusFilter";
+        if ($statusFilter !== 'all') {
+            $query .= " AND LM.STATUS = :statusFilter";
+
+        }
     }
     if ($statusFilter == null) {
         $query .= " AND LM.STATUS = 'On Leave' AND LM.ONLEAVE = 1";
@@ -90,7 +93,7 @@ WHERE (LT.LEAVETYPE IS NOT NULL)";
             oci_bind_by_name($stmt, ':currentDate', $currentDate);
         }
     }
-       
+
     if ($soldierId !== null) {
         oci_bind_by_name($stmt, ':soldierId', $soldierId);
     }
@@ -189,6 +192,47 @@ function getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate)
     }
 
     return $leaveCountsByDate;
+}
+
+global $leaveTypes;
+$leaveTypes = getLeaveTypes($conn);
+
+function calculateLeaveCount($conn, $leaveTypes, $soldierId)
+{
+    // Initialize an array to store total days for each leave type
+    $totalDays = [];
+
+    // Loop through leave types
+    foreach ($leaveTypes as $leaveType) {
+        // Initialize total count for the leave type
+        $total[$leaveType] = 0;
+
+        // Get leave count for the specified leave type and status
+        $leaveCountList = getLeaveInfo($conn, null, 'all', $leaveType, $soldierId, 'Expired');
+
+        // Calculate total days for the leave type
+        $totalDays[$leaveType] = 0;
+
+        // Loop through leave entries
+        foreach ($leaveCountList as $leave) {
+            $startDate = new DateTime($leave['LEAVESTARTDATE']);
+            $endDate = new DateTime($leave['LEAVEENDDATE']);
+
+            // Check if dates are valid
+            if ($startDate && $endDate) {
+                // Calculate the duration and add to the total
+                $duration = $startDate->diff($endDate)->format("%a");
+                if ($duration == 0) {
+                    $duration = 1; // Set the duration to 1 day
+                }
+
+                $totalDays[$leaveType] += $duration;
+            }
+        }
+    }
+
+    // Return the array containing total days for each leave type
+    return $totalDays;
 }
 
 ?>

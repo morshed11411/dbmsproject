@@ -2,23 +2,7 @@
 session_start();
 
 include '../includes/connection.php';
-
-function getLeaveTypes($conn)
-{
-    $leaveTypes = [];
-
-    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE";
-    $leaveStmt = oci_parse($conn, $leaveQuery);
-    oci_execute($leaveStmt);
-
-    while ($leaveRow = oci_fetch_assoc($leaveStmt)) {
-        $leaveTypes[$leaveRow['LEAVETYPEID']] = $leaveRow['LEAVETYPE'];
-    }
-
-    oci_free_statement($leaveStmt);
-
-    return $leaveTypes;
-}
+include '../includes/leave_controller.php';
 
 $leaveTypes = getLeaveTypes($conn);
 
@@ -140,6 +124,8 @@ while ($row = oci_fetch_assoc($stmt)) {
 
 oci_free_statement($stmt);
 
+$totalDays = calculateLeaveCount($conn, $leaveTypes, $soldierID);
+
 include '../includes/header.php';
 ?>
 
@@ -154,7 +140,7 @@ include '../includes/header.php';
 <section class="content">
     <div class="container-fluid">
         <?php include '../includes/alert.php'; ?>
-        <div class="row">
+        <div class="row align-items-stretch">
             <div class="col col-md-4">
                 <?php include '../includes/soldier_info.php'; ?>
 
@@ -164,7 +150,7 @@ include '../includes/header.php';
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card h-100">
                             <div class="card-body">
                                 <form method="post" action="">
                                     <input type="hidden" name="soldier_id" value="<?php echo $soldierID; ?>">
@@ -200,7 +186,38 @@ include '../includes/header.php';
                 </div>
             </div>
         </div>
-
+        
+        <div class='card mt-3'>
+            <div class='card-header'>
+                <h5 class='card-title'>Leave Summary</h5>
+            </div>
+            <div class='card-body'>
+                <table class='table table-bordered'>
+                    <thead>
+                        <tr>
+                            <?php foreach ($leaveTypes as $leaveType): ?>
+                                <th class='text-center'>
+                                    <?php echo $leaveType; ?>
+                                </th>
+                            <?php endforeach; ?>
+                            <th class='text-center'>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php foreach ($leaveTypes as $leaveType): ?>
+                                <td class='text-center'>
+                                    <?php echo $totalDays[$leaveType]; ?> Days
+                                </td>
+                            <?php endforeach; ?>
+                            <td class='text-center'>
+                                <?php echo array_sum($totalDays); ?> Days
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <!-- Leave History Card -->
         <div class="row mt-2">
             <div class="col-md-12">

@@ -1,6 +1,7 @@
 <?php
 
 include '../includes/connection.php';
+include '../includes/leave_controller.php';
 
 // Check if the soldier ID is present in the session or URL parameter
 if (isset($_SESSION['userid'])) {
@@ -59,22 +60,16 @@ if ($row = oci_fetch_assoc($stmt)) {
     oci_free_statement($stmt);
 
     // Fetch leave history of the soldier
-    $query = "SELECT * FROM LEAVEMODULE WHERE SOLDIERID = :soldierId ORDER BY LEAVESTARTDATE DESC";
-    $stmt = oci_parse($conn, $query);
-    oci_bind_by_name($stmt, ':soldierId', $soldierId);
-    oci_execute($stmt);
 
-    $leaveHistory = array();
-    while ($row = oci_fetch_assoc($stmt)) {
-        $leave = new stdClass();
-        $leave->LeaveID = $row['LEAVEID'];
-        $leave->LeaveType = $row['LEAVETYPEID'];
-        $leave->LeaveStartDate = $row['LEAVESTARTDATE'];
-        $leave->LeaveEndDate = $row['LEAVEENDDATE'];
-        $leaveHistory[] = $leave;
-    }
 
-    oci_free_statement($stmt);
+    $leaveHistory = getLeaveInfo($conn, null, 'all', null, $soldierId, 'Expired');
+    $lastLeave = $leaveHistory[0];
+
+
+    $totalDays = calculateLeaveCount($conn, $leaveTypes, $soldierId);
+
+
+
 
     $query = "SELECT cp.*
     FROM SOLDIER s
@@ -100,6 +95,7 @@ if ($row = oci_fetch_assoc($stmt)) {
         <div class="d-flex justify-content-between">
             <div class="text-left">
                 <h3>Soldier Profile </h3>
+
             </div>
             <?php if ($_SESSION['role'] == 'admin') { ?>
                 <div class="text-right">
@@ -182,6 +178,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     <a class="nav-link" id="trainingInfoTab" data-toggle="pill" href="#trainingInfo"
                                         role="tab" aria-controls="trainingInfo" aria-selected="false">Punishment
                                         History</a>
+
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="medicalInfoTab" data-toggle="pill" href="#medicalInfo"
@@ -345,17 +342,18 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Ser</th>
                                                 <th>Punishment</th>
                                                 <th>Reason</th>
                                                 <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($punishmentList as $punishment): ?>
+                                            <?php $i = 1;
+                                            foreach ($punishmentList as $punishment): ?>
                                                 <tr>
                                                     <td>
-                                                        <?php echo $punishment->PunishmentID; ?>
+                                                        <?php echo $i++; ?>
                                                     </td>
                                                     <td>
                                                         <?php echo $punishment->Punishment; ?>
@@ -378,7 +376,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Ser</th>
                                                 <th>Disposal Type</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
@@ -386,10 +384,11 @@ if ($row = oci_fetch_assoc($stmt)) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($disposalList as $disposal): ?>
+                                            <?php $i = 1;
+                                            foreach ($disposalList as $disposal): ?>
                                                 <tr>
                                                     <td>
-                                                        <?php echo $disposal->DisposalID; ?>
+                                                        <?php echo $i++; ?>
                                                     </td>
                                                     <td>
                                                         <?php echo $disposal->DisposalType; ?>
@@ -495,37 +494,101 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <!-- Leave History Tab -->
                                 <div class="tab-pane fade" id="leaveHistory" role="tabpanel"
                                     aria-labelledby="leaveHistoryTab">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Leave Type</th>
-                                                    <th>Leave Start Date</th>
-                                                    <th>Leave End Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($leaveHistory as $leave): ?>
+                                    <div class='card'>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>Leave Summary</h5>
+                                        </div>
+                                        <div class='card-body'>
+                                            <table class='table table-bordered'>
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <?php echo $leave->LeaveID; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $leave->LeaveType; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $leave->LeaveStartDate; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $leave->LeaveEndDate; ?>
+                                                        <?php foreach ($leaveTypes as $leaveType): ?>
+                                                            <th class='text-center'>
+                                                                <?php echo $leaveType; ?>
+                                                            </th>
+                                                        <?php endforeach; ?>
+                                                        <th class='text-center'>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php foreach ($leaveTypes as $leaveType): ?>
+                                                            <td class='text-center'>
+                                                                <?php echo $totalDays[$leaveType]; ?> Days
+                                                            </td>
+                                                        <?php endforeach; ?>
+                                                        <td class='text-center'>
+                                                            <?php echo array_sum($totalDays); ?> Days
                                                         </td>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <div class='card'>
+                                            <div class='card-header'>
+                                                <h5 class='card-title'>Leave History</h5>
+                                            </div>
+                                            <div class='card-body'>
+                                                <table class='table table-bordered' id="tablex">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ser</th>
+                                                            <th>Type</th>
+                                                            <th>Duration</th>
+                                                            <th>Start Date</th>
+                                                            <th>End Date</th>
+                                                            <th>Leave Card</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $i = 1;
+                                                        foreach ($leaveHistory as $leave): ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <?php echo $i++; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $leave['LEAVETYPE']; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php
+                                                                    $startDate = new DateTime($leave['LEAVESTARTDATE']);
+                                                                    $endDate = new DateTime($leave['LEAVEENDDATE']);
+                                                                    $duration = $startDate->diff($endDate)->format("%a days");
+                                                                    
+                                                                    if ($duration == "0 days") {
+                                                                        $duration = "1 day";
+                                                                    } else {
+                                                                        $duration .= " days";
+                                                                    }
+                                                                    
+                                                                    echo $duration;
+                                                                    
+                                                                    ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $leave['LEAVESTARTDATE']; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php echo $leave['LEAVEENDDATE']; ?>
+                                                                </td>
+                                                                <td>
+                                                                    <?php
+                                                                    echo '<a href="leavecard.php?leaveid=' . $leave['LEAVEID'] . '" class="btn btn-light" target="_blank">Leave Card</a>';
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

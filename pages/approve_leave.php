@@ -6,26 +6,7 @@ session_start();
 // Include your database connection code here
 include '../includes/connection.php';
 require_once '../includes/create_notification.php';
-
-function getLeaveTypes($conn)
-{
-    $leaveTypes = [];
-
-    $leaveQuery = "SELECT LEAVETYPEID, LEAVETYPE FROM LEAVETYPE";
-    $leaveStmt = oci_parse($conn, $leaveQuery);
-    oci_execute($leaveStmt);
-
-    while ($leaveRow = oci_fetch_assoc($leaveStmt)) {
-        $leaveTypes[$leaveRow['LEAVETYPEID']] = $leaveRow['LEAVETYPE'];
-    }
-
-    oci_free_statement($leaveStmt);
-
-    return $leaveTypes;
-}
-
-$leaveTypes = getLeaveTypes($conn);
-
+require_once '../includes/leave_controller.php';
 
 
 $query = "SELECT LM.LEAVEID,SOLDIER.SOLDIERID,SOLDIER.NAME AS SOLDIER_NAME, LT.LEAVETYPE, LM.LEAVESTARTDATE, LM.LEAVEENDDATE, LM.REQUESTDATE, LM.STATUS 
@@ -229,6 +210,7 @@ print_r($notified);
         <?php
         include '../includes/alert.php'; ?>
 
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -257,6 +239,7 @@ print_r($notified);
                                     <?php foreach ($leaveRequests as $leave):
                                         $soldierID = $leave['SOLDIERID'];
                                         ?>
+
                                         <tr>
                                             <td>
                                                 <?php echo $leave['LEAVEID']; ?>
@@ -291,7 +274,6 @@ print_r($notified);
                                                     data-target="#rejectLeaveModal_<?php echo $leave['LEAVEID']; ?>">
                                                     Reject
                                                 </button>
-
                                             </td>
                                         </tr>
 
@@ -300,9 +282,8 @@ print_r($notified);
                                             tabindex="-1" role="dialog"
                                             aria-labelledby="approveLeaveModalLabel_<?php echo $leave['LEAVEID']; ?>"
                                             aria-hidden="true">
-
                                             <!-- Modal content for approving leave request -->
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title"
@@ -314,50 +295,93 @@ print_r($notified);
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <?php include '../includes/soldier_info.php'; ?>
+
+
+                                                        <?php
+                                                        include '../includes/soldier_info.php';
+                                                        $totalDays = calculateLeaveCount($conn, $leaveTypes, $soldierID);
+                                                        ?>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <?php foreach ($leaveTypes as $leaveType): ?>
+                                                                                <div class="col text-center">
+                                                                                    <strong>
+                                                                                        <?php echo $leaveType; ?>
+                                                                                    </strong>
+                                                                                </div>
+                                                                            <?php endforeach; ?>
+                                                                            <div class="col text-center">
+                                                                                <strong>Total</strong>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <?php foreach ($leaveTypes as $leaveType): ?>
+                                                                                <div class="col text-center">
+                                                                                    <?php echo $totalDays[$leaveType]; ?> Days
+                                                                                </div>
+                                                                            <?php endforeach; ?>
+                                                                            <div class="col text-center">
+                                                                                <?php echo array_sum($totalDays); ?> Days
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
                                                         <form method="POST" action="">
                                                             <!-- Leave ID for reference -->
                                                             <input type="hidden" name="leave_id"
                                                                 value="<?php echo $leave['LEAVEID']; ?>">
 
                                                             <!-- Leave Start Date (Editable) -->
-                                                            <div class="form-group">
-                                                                <label for="new_start_date">Start Date:</label>
-                                                                <input type="date" name="new_start_date"
-                                                                    id="new_start_date_<?php echo $leave['LEAVEID']; ?>"
-                                                                    class="form-control" required
-                                                                    value="<?php echo date('Y-m-d', strtotime($leave['LEAVESTARTDATE'])); ?>"
-                                                                    onchange="updateTotalDays('<?php echo $leave['LEAVEID']; ?>')">
-                                                            </div>
+                                                            <div class="form-row">
+                                                                <!-- Leave Start Date (Editable) -->
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="new_start_date">Start Date:</label>
+                                                                    <input type="date" name="new_start_date"
+                                                                        id="new_start_date_<?php echo $leave['LEAVEID']; ?>"
+                                                                        class="form-control" required
+                                                                        value="<?php echo date('Y-m-d', strtotime($leave['LEAVESTARTDATE'])); ?>"
+                                                                        onchange="updateTotalDays('<?php echo $leave['LEAVEID']; ?>')">
+                                                                </div>
 
-                                                            <!-- Leave End Date (Editable) -->
-                                                            <div class="form-group">
-                                                                <label for="new_end_date">End Date:</label>
-                                                                <input type="date" name="new_end_date"
-                                                                    id="new_end_date_<?php echo $leave['LEAVEID']; ?>"
-                                                                    class="form-control" required
-                                                                    value="<?php echo date('Y-m-d', strtotime($leave['LEAVEENDDATE'])); ?>"
-                                                                    onchange="updateTotalDays('<?php echo $leave['LEAVEID']; ?>')">
-                                                            </div>
+                                                                <!-- Leave End Date (Editable) -->
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="new_end_date">End Date:</label>
+                                                                    <input type="date" name="new_end_date"
+                                                                        id="new_end_date_<?php echo $leave['LEAVEID']; ?>"
+                                                                        class="form-control" required
+                                                                        value="<?php echo date('Y-m-d', strtotime($leave['LEAVEENDDATE'])); ?>"
+                                                                        onchange="updateTotalDays('<?php echo $leave['LEAVEID']; ?>')">
+                                                                </div>
 
-                                                            <div class="form-group">
-                                                                <label for="total_days">Total Days:</label>
-                                                                <input type="text" name="total_days"
-                                                                    id="total_days_<?php echo $leave['LEAVEID']; ?>"
-                                                                    class="form-control"
-                                                                    value="<?php echo date_diff(date_create($leave['LEAVESTARTDATE']), date_create($leave['LEAVEENDDATE']))->format('%a') + 1; ?>"
-                                                                    readonly>
+                                                                <!-- Total Days (Readonly) -->
+                                                                <div class="form-group col-md-4">
+                                                                    <label for="total_days">Total Days:</label>
+                                                                    <input type="text" name="total_days"
+                                                                        id="total_days_<?php echo $leave['LEAVEID']; ?>"
+                                                                        class="form-control"
+                                                                        value="<?php echo date_diff(date_create($leave['LEAVESTARTDATE']), date_create($leave['LEAVEENDDATE']))->format('%a') + 1; ?>"
+                                                                        readonly>
+                                                                </div>
                                                             </div>
 
                                                             <!-- Submit Button for Approving Leave -->
                                                             <button type="submit" name="approve_leave"
                                                                 class="btn btn-success">Approve Leave</button>
                                                         </form>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <!-- End Approve Leave Modal -->
 
                                         <!-- Reject Leave Modal -->
                                         <div class="modal fade" id="rejectLeaveModal_<?php echo $leave['LEAVEID']; ?>"
@@ -369,8 +393,8 @@ print_r($notified);
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title"
-                                                            id="rejectLeaveModalLabel_<?php echo $leave['LEAVEID']; ?>">
-                                                            Reject Leave Request</h5>
+                                                            id="rejectLeaveModalLabel_<?php echo $leave['LEAVEID']; ?>">Reject
+                                                            Leave Request</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -379,13 +403,11 @@ print_r($notified);
                                                     <div class="modal-body">
                                                         <!-- Confirmation message for rejecting leave -->
                                                         <p>Are you sure you want to reject this leave request?</p>
-
                                                         <!-- Replace with your form fields for rejecting -->
                                                         <form method="POST" action="">
                                                             <!-- Leave ID for reference -->
                                                             <input type="hidden" name="leave_id"
                                                                 value="<?php echo $leave['LEAVEID']; ?>">
-
                                                             <!-- Submit Button for Rejecting Leave -->
                                                             <button type="submit" name="reject_leave"
                                                                 class="btn btn-danger">Reject Leave</button>
@@ -394,9 +416,8 @@ print_r($notified);
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endforeach;
-                                endif;
-                                ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

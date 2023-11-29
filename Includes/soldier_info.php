@@ -27,20 +27,20 @@ if (isset($soldierID)) {
 
 <!-- Profile Image -->
 
-<div class="card card-primary">
+<div class="card card-primary h-100 d-flex flex-column align-items-stretch">
 
     <div class="card-body box-profile mt-2">
         <div class="text-center">
-            
-        <img class="profile-user-img img-fluid img-circle rounded-circle" src="<?php echo $profilePicture; ?>" alt="Profile Picture">
+            <img class="profile-user-img img-fluid img-circle rounded-circle" src="<?php echo $profilePicture; ?>"
+                alt="Profile Picture">
         </div>
-
         <h3 class="profile-username text-center">
             <?= $soldierProfileInfo['RANK'] . ' ' . $soldierProfileInfo['NAME'] ?>
         </h3>
-
         <p class="text-muted text-center">
             <?= $soldierProfileInfo['COMPANYNAME'] ?>
         </p>
     </div>
+
 </div>
+

@@ -76,8 +76,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Total Soldiers Card -->
             <div class="card">
-                <div class="card-header bg-light">
-                    <h5 class="card-title   text-dark"><i class="fas fa-users"></i> Total Soldiers</h5>
+                <div class="card-header bg-info">
+                    <h5 class="card-title   text-light"><i class="fas fa-users"></i> Total Soldiers</h5>
                 </div>
                 <div class="card-body">
                     <p class="card-text text-center ">
@@ -90,8 +90,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Soldiers Present Card -->
             <div class="card">
-                <div class="card-header text-center bg-light">
-                    <h5 class="card-title   text-dark"><i class="fas fa-user-tie"></i> Total Officer</h5>
+                <div class="card-header text-center bg-info">
+                    <h5 class="card-title   text-light"><i class="fas fa-user-tie"></i> Total Officer</h5>
                 </div>
                 <div class="card-body">
                     <p class="card-text text-center ">
@@ -104,8 +104,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Total Teams Card -->
             <div class="card">
-                <div class="card-header text-center bg-light">
-                    <h5 class="card-title   text-dark"><i class="fas fa-user-secret"></i> Total JCO</h5>
+                <div class="card-header text-center bg-info">
+                    <h5 class="card-title   text-light"><i class="fas fa-user-secret"></i> Total JCO</h5>
                 </div>
                 <div class="card-body">
                     <p class="card-text text-center ">
@@ -118,8 +118,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-3">
             <!-- Soldiers on Leave Card -->
             <div class="card">
-                <div class="card-header text-center bg-light">
-                    <h5 class="card-title   text-dark"><i class="fas fa-user"></i> Other Ranks</h5>
+                <div class="card-header text-center bg-info">
+                    <h5 class="card-title   text-light"><i class="fas fa-user"></i> Other Ranks</h5>
                 </div>
                 <div class="card-body">
                     <p class="card-text text-center ">
@@ -138,8 +138,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-6 flex-fill">
             <!-- Notice Board Card -->
             <div class="card h-100">
-                <div class="card-header bg-light">
-                    <h3 class="card-title   text-dark">Notice Board</h3>
+                <div class="card-header bg-info">
+                    <h3 class="card-title   text-light">Notice Board</h3>
                 </div>
                 <div class="card-body overflow-auto"> <!-- Added 'overflow-auto' for scrollable content -->
                     <ul class="list-unstyled">
@@ -170,8 +170,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
         <div class="col-lg-6 flex-fill">
             <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
-                <div class="card-header bg-light">
-                    <h3 class="card-title   text-dark">Leave State</h3>
+                <div class="card-header bg-info">
+                    <h3 class="card-title   text-light">Leave State</h3>
                 </div>
                 <div class="card-body">
                     <canvas id="leave-counts-chart" width="400" height="200"></canvas>
@@ -185,8 +185,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-6">
             <!-- Online Store Visitors Chart -->
             <div class="card text-center">
-                <div class="card-header text-center bg-light">
-                    <h5 class="card-title   text-dark"><i class="fas fa-chart-bar"></i> Soldiers by Company</h5>
+                <div class="card-header text-center bg-info">
+                    <h5 class="card-title   text-light"><i class="fas fa-chart-bar"></i> Soldiers by Company</h5>
                 </div>
                 <div class="card-body">
                     <canvas id="soldiersByCompanyChart" height="200"></canvas>
@@ -199,8 +199,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         <div class="col-lg-6">
             <!-- Online Store Visitors Chart -->
             <div class="card">
-                <div class="card-header bg-light">
-                    <h5 class="card-title   text-dark">Soldiers by Rank</h5>
+                <div class="card-header bg-info">
+                    <h5 class="card-title   text-light">Soldiers by Rank</h5>
                 </div>
                 <div class="card-body">
                     <!-- Create a canvas element for the bar chart -->
