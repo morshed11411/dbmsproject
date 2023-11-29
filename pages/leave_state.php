@@ -9,6 +9,16 @@ require_once(BASE_DIR . 'includes/disposal_controller.php');
 $company = getAllCompanyData($conn);
 $companies = $company;
 
+$startDate = date('Y-m-01'); // If the filter is not handled, the start date will be the start date of the month 
+$endDate = date('Y-m-t');  // the end date will be the end date of the month 
+// Handle filter button 
+if (isset($_POST['filterBtn'])) {
+    $startDate = $_POST['startDate'] ?? date('Y-m-01');
+    $endDate = $_POST['endDate'] ?? date('Y-m-t');
+
+
+    $_SESSION['success'] = 'Showing leave state from: ' . $startDate. ' to '.$endDate;
+}
 $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 ?>

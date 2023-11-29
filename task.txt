@@ -15,10 +15,8 @@ coy view
 4. nominal roll 
 
 
-1. fix the profile's leave and disposal 
-2. fix the navbar for soldier- done
-
-
+1. fix the profile's leave and disposal
+2. fix the navbar for soldier
 3. add data of leave, punishment, disposal 
 
 

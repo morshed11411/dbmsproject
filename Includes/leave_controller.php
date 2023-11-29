@@ -1,17 +1,5 @@
 <?php
 include '../includes/connection.php';
-
-
-$startDate = date('Y-m-d', strtotime('-7 days'));
-$endDate = date('Y-m-t');  // the end date will be the end date of the month 
-// Handle filter button 
-if (isset($_POST['filterBtn'])) {
-    $startDate = $_POST['startDate'] ?? date('Y-m-d', strtotime('-7 days'));
-    $endDate = $_POST['endDate'] ?? date('Y-m-t');
-
-
-    $_SESSION['success'] = 'Showing leave state from: ' . $startDate. ' to '.$endDate;
-}
 function getLeaveTypes($conn)
 {
     $leaveTypes = [];
