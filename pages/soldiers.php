@@ -11,6 +11,7 @@ $userCoy = isset($_GET['company']) ? $_GET['company'] : $_SESSION['usercoy'];
 $role = $_SESSION['role'];
 $soldierList = [];
 $byRankCount = [];
+$soldiersByRank = [];
 
 
 if ($role === 'admin') {
@@ -33,6 +34,10 @@ if ($role === 'admin') {
         if(isset($_GET['company'])){
             $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, $userCoy, null);
     
+        }
+        else{
+            $soldiersByRank = getSoldiers($conn, null, $rank['NAME'], null, false, null, null);
+
         }
 
         $byRankCount[$rank['ID']] = count($soldiersByRank);
