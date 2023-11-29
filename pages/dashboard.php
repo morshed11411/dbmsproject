@@ -114,11 +114,11 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 
     <!-- Notice Board and Random Data Table -->
-    <div class="row d-flex">
+    <div class="row">
 
-        <div class="col-lg-6 flex-fill">
+        <div class="col-lg-4">
             <!-- Notice Board Card -->
-            <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
+            <div class="card">
                 <div class="card-header bg-info">
                     <h3 class="card-title text-white">Notice Board</h3>
                 </div>
@@ -127,6 +127,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                         <?php if (empty($notifications)): ?>
                             <p>No notifications available.</p>
                         <?php else: ?>
+
                             <?php $noNotification = true; // Assume no unread notifications initially ?>
                             <?php foreach ($notifications as $notification): ?>
                                 <?php if ($notification['STATUS']) { ?>
@@ -143,23 +144,26 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                                 <?php } ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
+
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-6 flex-fill">
-            <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
+        <!-- Random Data Table -->
+        <div class="col-lg-8">
+            <div class="card">
                 <div class="card-header bg-info">
                     <h3 class="card-title text-white">Solder Leave State</h3>
                 </div>
                 <div class="card-body">
                     <canvas id="leave-counts-chart" width="400" height="200"></canvas>
+
                 </div>
             </div>
         </div>
     </div>
-<br>
+
     <div class="row">
         <!-- Left Column -->
         <div class="col-lg-6">

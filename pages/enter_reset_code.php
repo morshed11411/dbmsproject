@@ -21,7 +21,7 @@ if (isset($_POST['reset_password'])) {
         $hashed_password = $new_password;
 
         // Update the user's password in the appropriate table (replace 'users' with your actual table name)
-        $query = "UPDATE USERS SET password = :hashed_password,   FAILED_LOGIN_ATTEMPTS=0, LAST_LOGIN_TIME =null, STATUS=0 WHERE SOLDIERID = :username";
+        $query = "UPDATE login SET password = :hashed_password,   FAILED_LOGIN_ATTEMPTS=0, LAST_LOGIN_TIME =null, STATUS=0 WHERE SOLDIERID = :username";
         $stmt = oci_parse($conn, $query);
         oci_bind_by_name($stmt, ':hashed_password', $hashed_password);
         oci_bind_by_name($stmt, ':username', $username);

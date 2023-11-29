@@ -44,20 +44,19 @@ if (isset($_SESSION['userid'])) {
   </ul>
 
   <!-- Display "Dark Mode" on mobile devices -->
-  <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-1">
     <li class="nav-item">
-      <div class="custom-control custom-switch  align-items-center"><label
-          class="custom-control-label d-none d-md-block" for="darkModeToggle">
-          <input type="checkbox" class="custom-control-input" id="darkModeToggle">
+      <div class="custom-control custom-switch  align-items-center">
+        <input type="checkbox" class="custom-control-input" id="darkModeToggle">
+        <label class="custom-control-label d-none d-md-block" for="darkModeToggle">
           <i class="fas fa-moon"></i>
-
         </label> <label class="custom-control-label d-md-none md-1" for="darkModeToggle"></label>
       </div>
     </li>
   </ul>
 
   <!-- Display Date and Time -->
-  <a href="calendar.php" class="navbar-text mx-auto text-center text-dark text-bold ">
+  <a href="calendar.php" class="navbar-text mx-auto text-center text-dark ">
     <div id="datetime" class=""></div>
   </a>
 
