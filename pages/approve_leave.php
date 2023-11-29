@@ -73,43 +73,43 @@ if (isset($_POST['approve_leave'])) {
 
         $result = oci_execute($stmt);
 
-        if ($result) {
-            $_SESSION['success'] = "Leave request has been approved.";
-            $query = "SELECT SOLDIERID FROM LEAVEMODULE WHERE LEAVEID = :leave_id";
-            $stmt = oci_parse($conn, $query);
+        $_SESSION['success'] = "Leave approved successfully.";
+        // Fetch the last inserted leave ID
+        $query = "SELECT SOLDIERID, LEAVEID FROM LEAVEMODULE ORDER BY LEAVEID DESC FETCH FIRST 1 ROW ONLY";
+        $stmtLeaveId = oci_parse($conn, $query);
+        oci_execute($stmtLeaveId);
 
-            oci_bind_by_name($stmt, ':leave_id', $leaveIDToApprove);
-            oci_execute($stmt);
+        // Fetch the result
+        $notified = oci_fetch_assoc($stmtLeaveId);
 
-            // Fetch the result
-            if ($row = oci_fetch_assoc($stmt)) {
-                $notifiedSoldierId = $row['SOLDIERID'];
-            } else {
-                // Handle the case where no result is found
-                $notifiedSoldierId = null;
-            }
+        // Check if a result is found
+        if ($notified) {
+            $notifiedSoldierId = $notified['SOLDIERID'];
+            $leaveIDToApprove = $notified['LEAVEID'];
 
-            // Free the statement
-            oci_free_statement($stmt);
+            // Free the statement for fetching leave ID
+            oci_free_statement($stmtLeaveId);
 
             $notifiedGroup = ''; // Assuming 'all' represents all users
-            $message = "Your leave request is approved. Download leave card: <a href='leavecard?leaveid=$leaveIDToApprove'>Download</a>";
+            $message = "Your leave request is approved. Download leave card: <a href='leavecard.php?leaveid=$leaveIDToApprove'>Download</a>";
             $notifierSoldierId = $_SESSION['userid'];
-            // Call the createNotification function
-            $result = createNotification(null, $notifierSoldierId, $notifiedGroup, $message);
 
+            // Call the createNotification function
+            $result = createNotification($notifiedSoldierId, $notifierSoldierId, $notifiedGroup, $message);
         } else {
             $error = oci_error($stmt);
             $_SESSION['error'] = "Failed to approve leave request: " . $error['message'];
         }
 
-        oci_free_statement($stmt);
+        // Close the connection
+        oci_close($conn);
+
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
-
-
     }
+
 }
+
 
 if (isset($_POST['reject_leave'])) {
     $leaveIDToReject = $_POST['leave_id'];

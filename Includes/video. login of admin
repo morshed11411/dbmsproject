@@ -6,4 +6,19 @@
 6. Add single soldier, bulk Import soldiers data from csv
 7. soldiers profile, punishment tab, medical disposal, leave history
 8. uploading image of solders and soldiers singature 
-9. 
+9. showing calendar, addming event feature
+10. Showing sending leave request by company sergant and then approving by the company commander
+    Leave out page or leave in page to 
+11. Printing leave card after leave request approved.
+11. Showing quick leave option for company commander
+12. Showing reporting sick option, shwoing adding disposal and returning from cmh or admitting in cmh
+13. Managing punishment
+14. Adding appointment for soldier, it also shows appointment history
+15. Assinging ere and and attachment and changing serving status
+16. adding a training event, unlcoking the event so soldiers can be assigned. solders assignment then forwarding list and then publshing the result when after clicking termianted.
+17. Carrear plan of four cycle dashbaord. Clicking on company name it will show options to update the career plan for each soldier.
+18. showing paradestate for everyday, leave state of the month
+19. Medical disposal page to find the disposal holder. 
+20. Managin team. creating team. Assinging team members. 
+21. managing access for each soldier. changing permission from admin, manager or soldier
+22. If password is wrong 5 times it will disable the account, then initate password recovery method. 
