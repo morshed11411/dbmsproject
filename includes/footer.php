@@ -4,7 +4,7 @@
 </div>
 
 <footer class="main-footer">
-    <strong>Unit Management System v2.0 &copy; 2023</strong>
+    <strong>Unit Management System v2.0 &copy; 2023</strong> Developed by BA-11411 Lt Sarower Morshed Sajib, Sigs
 </footer>
 
 <script src="../js/jquery.min.js"></script>
