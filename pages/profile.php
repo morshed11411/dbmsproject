@@ -2,6 +2,7 @@
 
 include '../includes/connection.php';
 include '../includes/leave_controller.php';
+include '../includes/disposal_controller.php';
 
 // Check if the soldier ID is present in the session or URL parameter
 if (isset($_SESSION['userid'])) {
@@ -13,7 +14,6 @@ if (isset($_SESSION['userid'])) {
 }
 
 // Perform database query to fetch the soldier details
-
 $query = "SELECT * FROM soldier_view WHERE SOLDIERID = :soldierId";
 $stmt = oci_parse($conn, $query);
 oci_bind_by_name($stmt, ':soldierId', $soldierId);
@@ -40,7 +40,9 @@ if ($row = oci_fetch_assoc($stmt)) {
         $punishmentList[] = $punishment;
     }
     oci_free_statement($stmt);
-    //fetch disposal info
+
+
+    //fetch medical disposal info
     $query = "SELECT * FROM MEDICALINFO WHERE SOLDIERID = :soldierId";
     $stmt = oci_parse($conn, $query);
     oci_bind_by_name($stmt, ':soldierId', $soldierId);
@@ -59,13 +61,15 @@ if ($row = oci_fetch_assoc($stmt)) {
 
     oci_free_statement($stmt);
 
+    // Fetch leave disposal of the soldier
+    $dispType = getDisposalTypes($conn);
+    $disposalList = medicalDisposal($conn, null, 'all', null, $soldierId);
+    $totalDisposal = calculateDisposalCount($conn, $dispType, $soldierId);
+
     // Fetch leave history of the soldier
-
-
     $leaveHistory = getLeaveInfo($conn, null, 'all', null, $soldierId, 'Expired');
-    $lastLeave = $leaveHistory[0];
-
-
+    if (isset($leaveHistory[0]))
+        $lastLeave = $leaveHistory[0];
     $totalDays = calculateLeaveCount($conn, $leaveTypes, $soldierId);
 
 
@@ -177,12 +181,13 @@ if ($row = oci_fetch_assoc($stmt)) {
                                 <li class="nav-item">
                                     <a class="nav-link" id="trainingInfoTab" data-toggle="pill" href="#trainingInfo"
                                         role="tab" aria-controls="trainingInfo" aria-selected="false">Punishment
-                                        History</a>
+                                        History
+                                    </a>
 
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="medicalInfoTab" data-toggle="pill" href="#medicalInfo"
-                                        role="tab" aria-controls="medicalInfo" aria-selected="false">Medical Info</a>
+                                        role="tab" aria-controls="medicalInfo" aria-selected="false">Medical Disposal</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="careerPlanInfoTab" data-toggle="pill" href="#careerPlanInfo"
@@ -370,43 +375,90 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     </table>
                                 </div>
 
-                                <!-- Medical Info Tab -->
+                                <!-- Medical Disposal Tab -->
                                 <div class="tab-pane fade" id="medicalInfo" role="tabpanel"
                                     aria-labelledby="medicalInfoTab">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Ser</th>
-                                                <th>Disposal Type</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Reason</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $i = 1;
-                                            foreach ($disposalList as $disposal): ?>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $i++; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $disposal->DisposalType; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $disposal->StartDate; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $disposal->EndDate; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $disposal->Reason; ?>
-                                                    </td>
+                                    <div class='card'>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>Medical Disposal Summary</h5>
+                                        </div>
+                                        <div class='card-body'>
+                                            <table class='table table-bordered'>
+                                                <thead>
+                                                    <tr>
+                                                        <?php foreach ($dispType as $disp): ?>
+                                                            <th class='text-center'>
+                                                                <?php echo $disp; ?>
+                                                            </th>
+                                                        <?php endforeach; ?>
+                                                        <th class='text-center'>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php foreach ($dispType as $disp): ?>
+                                                            <td class='text-center'>
+                                                                <?php echo $totalDisposal[$disp]; ?> Days
+                                                            </td>
+                                                        <?php endforeach; ?>
+                                                        <td class='text-center'>
+                                                            <?php echo array_sum($totalDisposal); ?> Days
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class='card'>
 
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>Medical Diposal History</h5>
+                                        </div>
+                                        <div class='card-body'>
+                                            <div class="table-responsive">
+
+                                                <table class='table table-bordered' >
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ser</th>
+                                                            <th>Type</th>
+                                                            <th>Duration</th>
+                                                            <th>Start Date</th>
+                                                            <th>End Date</th>
+                                                            <th>Reason</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $i = 1;
+                                                        foreach ($disposalList as $disposal):
+                                                            $startDate = new DateTime($disposal['STARTDATE']);
+                                                            $endDate = new DateTime($disposal['ENDDATE']);
+                                                            $duration = $startDate->diff($endDate)->format("%a days");
+
+                                                            if ($duration == "0 ") {
+                                                                $duration = "1 ";
+                                                            } else {
+                                                                $duration .= " ";
+                                                            }
+
+                                                            echo '<tr>';
+                                                            echo '<td>' . $i++ . '</td>';
+                                                            echo '<td>' . $disposal['DISPOSALTYPE'] . '</td>';
+                                                            echo '<td>' . $duration . '</td>';
+                                                            echo '<td>' . $disposal['STARTDATE'] . '</td>';
+                                                            echo '<td>' . $disposal['ENDDATE'] . '</td>';
+                                                            echo '<td>' . $disposal['REMARKS'] . '</td>';
+                                                            echo '</tr>';
+
+
+                                                            ?>
+
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Career Plan Info Tab -->
                                 <div class="tab-pane fade" id="careerPlanInfo" role="tabpanel"
@@ -491,6 +543,7 @@ if ($row = oci_fetch_assoc($stmt)) {
                                     ?>
 
                                 </div>
+
                                 <!-- Leave History Tab -->
                                 <div class="tab-pane fade" id="leaveHistory" role="tabpanel"
                                     aria-labelledby="leaveHistoryTab">
@@ -526,13 +579,14 @@ if ($row = oci_fetch_assoc($stmt)) {
                                         </div>
                                     </div>
 
-                                    <div class="table-responsive">
-                                        <div class='card'>
-                                            <div class='card-header'>
-                                                <h5 class='card-title'>Leave History</h5>
-                                            </div>
-                                            <div class='card-body'>
-                                                <table class='table table-bordered' id="tablex">
+                                    <div class='card'>
+                                        <div class='card-header'>
+                                            <h5 class='card-title'>Leave History</h5>
+                                        </div>
+                                        <div class='card-body'>
+                                            <div class="table-responsive">
+
+                                                <table class='table table-bordered' >
                                                     <thead>
                                                         <tr>
                                                             <th>Ser</th>
@@ -558,15 +612,15 @@ if ($row = oci_fetch_assoc($stmt)) {
                                                                     $startDate = new DateTime($leave['LEAVESTARTDATE']);
                                                                     $endDate = new DateTime($leave['LEAVEENDDATE']);
                                                                     $duration = $startDate->diff($endDate)->format("%a days");
-                                                                    
+
                                                                     if ($duration == "0 days") {
                                                                         $duration = "1 day";
                                                                     } else {
                                                                         $duration .= " days";
                                                                     }
-                                                                    
+
                                                                     echo $duration;
-                                                                    
+
                                                                     ?>
                                                                 </td>
                                                                 <td>

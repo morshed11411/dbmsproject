@@ -238,8 +238,12 @@ if ($nextMonth === 13) {
                     <tbody id="eventModalBody">
                     </tbody>
                 </table>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal"
-                    data-dismiss="modal">Add Event</button>
+                <?php
+                if ($_SESSION['role'] == 'admin'):
+                    ?>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#addEventModal"
+                        data-dismiss="modal">Add Event</button>
+                <?php endif ?>
             </div>
         </div>
     </div>
@@ -291,7 +295,11 @@ if ($nextMonth === 13) {
                         <label for="remarks">Remarks</label>
                         <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="add_event_submit">Add Event</button>
+                    <?php
+                    if ($_SESSION['role'] == 'admin'):
+                        ?>
+                        <button type="submit" class="btn btn-primary" name="add_event_submit">Add Event</button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

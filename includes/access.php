@@ -40,12 +40,22 @@ session_start(); // Start the session
 
 // Define user roles
 $appts = [
-    'CO', '2IC', 'Adjt', 'QM', 'BSM', 'RP NCO', 'Trg NCO',
-    'Company Commander', 'CSM', 'Coy Clerk', 'Others'
+    'CO',
+    '2IC',
+    'Adjt',
+    'QM',
+    'BSM',
+    'RP NCO',
+    'Trg NCO',
+    'Company Commander',
+    'CSM',
+    'Coy Clerk',
+    'Others'
 ];
 
 // Function to check if a user has access to a page/action
-function hasAccess($requiredRole, $companyID = null) {
+function hasAccess($requiredRole, $companyID = null)
+{
     global $userRoles;
 
     // Check if the user is logged in and their role is allowed
@@ -74,7 +84,8 @@ function hasAccess($requiredRole, $companyID = null) {
 }
 
 // Function to check if a user can access data for their company
-function canAccessCompanyData($userRole, $companyID) {
+function canAccessCompanyData($userRole, $companyID)
+{
     // Implement logic to check if $userRole is allowed to access data for $companyID
     // Return true if allowed, false otherwise
 }

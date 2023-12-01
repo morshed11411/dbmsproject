@@ -1,0 +1,8 @@
+
+Improvements Plan
+-----------------
+1. report sick / morning sick
+2. if the soldier is in leave disposal will be not in disposal 
+3. civil info
+4. solder current status in profile 
+5. Date of next report in R/S option

@@ -149,7 +149,8 @@ include '../includes/header.php';
                                 $byCoyHeldlist = $byCoySoldiderList[$coy['ID']];
                                 $modalId = $coy['ID'] . '-' . 'held';
                                 $modalName = $coy['NAME'] . '-' . 'Total Held' . ' ';
-                                printAllSoldierList($byCoyHeldlist, $modalId, $modalName);
+                                echo count($byCoyHeldlist);
+                                //printAllSoldierList($byCoyHeldlist, $modalId, $modalName);
                                 $heldTotal = array_merge($heldTotal, $byCoyHeldlist);
 
                                 ?>
@@ -158,7 +159,9 @@ include '../includes/header.php';
                         <?php endforeach; ?>
                         <td style="text-align: center;">
                             <?php
-                            printAllSoldierList($heldTotal, 'held', 'Total Held');
+                            echo count($byCoyHeldlist);
+
+                            // printAllSoldierList($heldTotal, 'held', 'Total Held');
                             ?>
                         </td>
                     </tr>

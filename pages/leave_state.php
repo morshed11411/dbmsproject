@@ -53,7 +53,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     <h3 class="card-title text-white">Monthly Leave State</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered text-center" id="tablex">
                         <thead>
                             <tr>
                                 <th style="width: 10%">Date</th> <!-- Fix the th size and make it center -->

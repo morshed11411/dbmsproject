@@ -25,7 +25,7 @@ function retrievePlan($conn, $companyID)
                   JOIN TRADE t ON s.TRADEID = t.TRADEID
                   LEFT JOIN CarrierPlan cp ON s.SOLDIERID = cp.SOLDIERID
                   WHERE s.COMPANYID = :companyID
-                  AND r.RANK IN ('Snk', 'Lcpl', 'Cpl', 'Sgt', 'WO', 'SWO')";
+                  AND r.RANK IN ('SNK', 'LCPL', 'CPL', 'SGT', 'WO', 'SWO')";
 
     $stmtPlan = oci_parse($conn, $queryPlan);
     oci_bind_by_name($stmtPlan, ':companyID', $companyID);

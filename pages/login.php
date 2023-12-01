@@ -44,6 +44,7 @@ function login($conn, $username, $password)
                $_SESSION['role'] = $row['ROLE'];
                $_SESSION['usercoy'] = $row['COMPANYID'];
                if ($row['PASSWORD'] === '123456') {
+                  $_SESSION['default_password'] =true;
                   $_SESSION['success'] = 'Log in success. Please change your password from default password.';
                   $_SESSION['usercoy'] = $row['COMPANYID'];
                   header('Location: change_password.php');

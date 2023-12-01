@@ -286,4 +286,28 @@ function deleteDisposal($deleteDisposalID)
 }
 
 
+function calculateDisposalCount($conn, $disposalTypes, $soldierId)
+{
+    $totalDays = [];
+    foreach ($disposalTypes as $disposalType) {
+        $total[$disposalType] = 0;
+        $disposalCountList = medicalDisposal($conn, null, 'all', $disposalType, $soldierId);
+        $totalDays[$disposalType] = 0;
+        foreach ($disposalCountList as $disposal) {
+            $startDate = new DateTime($disposal['STARTDATE']);
+            $endDate = new DateTime($disposal['ENDDATE']);
+            if ($startDate && $endDate) {
+                $duration = $startDate->diff($endDate)->format("%a");
+                if ($duration == 0) {
+                    $duration = 1; // Set the duration to 1 day
+                }
+
+                $totalDays[$disposalType] += $duration;
+            }
+        }
+    }
+    return $totalDays;
+}
+
+
 ?>

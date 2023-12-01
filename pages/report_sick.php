@@ -115,7 +115,7 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
 
 
         <?php include '../includes/alert.php'; ?>
-        <div class="row">
+        <div class="row align-items-stretch">
             <div class="col col-md-4">
                 <?php include '../includes/soldier_info.php'; ?>
 
@@ -123,32 +123,30 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
             <div class="col col-md-8">
 
 
-                <?php
-                if ($onLeave) {
-                    $leaveStatusMessage = "Soldier is on leave.";
-                    ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card h-100">
 
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <i class="fas fa-user-times text-warning fa-5x"></i>
-                            <!-- Assuming you want a bed icon for leave -->
-                            <h5 class="mt-3">Can not sent R/S</h5>
-                            </h5>
-                            <!-- Add your button or any other content here based on your requirements -->
-                            <button type="button" class="btn btn-warning btn-lg mt-4" data-toggle="modal"
-                                data-target="#yourModalId">
-                                <?= $leaveStatusMessage ?>
-                            </button>
-                        </div>
-                    </div>
-                    <?php
 
-                } else {
+                            <?php
+                            if ($onLeave) {
+                                $leaveStatusMessage = "Soldier is on leave.";
+                                ?>
 
-                    if ($activeDisposal && strpos($activeDisposal['DISPOSALTYPE'], 'CMH') === 0 && $activeDisposal['ENDDATE'] === null): ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-times text-warning fa-5x"></i>
+                                    <h5 class="mt-3">Can not sent R/S</h5>
+                                    <button type="button" class="btn btn-warning btn-lg mt-4" data-toggle="modal"
+                                        data-target="#yourModalId">
+                                        <?= $leaveStatusMessage ?>
+                                    </button>
+                                </div>
+                                <?php
+
+                            } else {
+
+                                if ($activeDisposal && strpos($activeDisposal['DISPOSALTYPE'], 'CMH') === 0 && $activeDisposal['ENDDATE'] === null): ?>
+
                                     <div class="card-body text-center">
                                         <i class="fas fa-hospital text-warning fa-5x"></i>
                                         <h5 class="mt-3">Discharged from
@@ -159,13 +157,8 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
                                             Discharge
                                         </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php elseif ($activeDisposal && $activeDisposal['DISPOSALTYPE'] === 'R/S' && $activeDisposal['ENDDATE'] === null): ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
+                                <?php elseif ($activeDisposal && $activeDisposal['DISPOSALTYPE'] === 'R/S' && $activeDisposal['ENDDATE'] === null): ?>
+
                                     <div class="card-body text-center">
                                         <i class="fas fa-hospital-alt text-primary fa-5x"></i>
                                         <h5 class="mt-3">Return from R/S or Admitted in CMH</h5>
@@ -178,13 +171,9 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
                                             Admitted in CMH
                                         </button>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
+
+                                <?php else: ?>
+
                                     <div class="card-body text-center">
                                         <i class="fas fa-notes-medical text-primary fa-5x"></i>
                                         <h5 class="mt-3">Send Report Sick</h5>
@@ -193,14 +182,17 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
                                             Send Report Sick
                                         </button>
                                     </div>
-                                </div>
-                            </div>
+
+                                <?php endif;
+                            }
+                            ?>
                         </div>
-                    <?php endif;
-                }
-                ?>
+                    </div>
+                </div>
             </div>
         </div>
+
+
         <div class="modal fade" id="addDisposalModal" tabindex="-1" role="dialog"
             aria-labelledby="addDisposalModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -217,7 +209,8 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
                                 <label for="reason">Reason:</label>
                                 <input type="text" name="reason" id="reason" class="form-control" required>
                             </div>
-                            <button type="submit" name="add_disposal_submit" class="btn btn-primary">Send R/S</button>
+                            <button type="submit" name="add_disposal_submit" class="btn btn-primary">Send
+                                R/S</button>
                         </form>
                     </div>
                 </div>
@@ -350,7 +343,7 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -402,7 +395,8 @@ $onLeave = (count($onLeave) > 0) ? 1 : 0;
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editDisposalModalLabel">Edit Disposal
+                                                        <h5 class="modal-title" id="editDisposalModalLabel">Edit
+                                                            Disposal
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">

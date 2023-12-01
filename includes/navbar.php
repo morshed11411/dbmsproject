@@ -64,7 +64,7 @@ if (isset($_SESSION['userid'])) {
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Trigger Notification Modal -->
-    <button onclick="showNotificationModal()" class="btn btn-light">
+    <button onclick="showNotificationModal()" class="btn">
       <i class="fas fa-bell"></i>
       <?php if ($unreadCount): ?>
         <span class="badge badge-danger">
