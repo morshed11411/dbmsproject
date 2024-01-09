@@ -4,7 +4,7 @@ session_start();
 include '../includes/connection.php';
 include '../includes/parade_controller.php';
 
-
+$pageTitle="Nominal Roll";
 
 $userCoy = isset($_GET['company']) ? $_GET['company'] : $_SESSION['usercoy'];
 
