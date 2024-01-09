@@ -29,12 +29,13 @@ function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $
             $conditions[] = "R.RANK NOT IN ('Lt Col', 'Maj', 'Capt', 'Lt', '2Lt', 'H Capt', 'H Lt', 'MWO', 'SWO', 'WO')";
         }
     }
-
-    if ($onLeave) {
-        $conditions[] = "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
-                                        JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
-                                        WHERE ONLEAVE = 1)";
-    }
+    $conditions[] = ($onLeave)
+    ? "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
+                        JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
+                        WHERE ONLEAVE = 1)"
+    : "S.SOLDIERID NOT IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
+                            JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
+                            WHERE ONLEAVE = 1)";
 
     if ($company !== null) {
 

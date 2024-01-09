@@ -60,6 +60,9 @@ include '../includes/header.php';
             display: table-cell !important;
         }
     }
+    
+
+
 </style>
 
 <div class="card-body">
@@ -92,7 +95,7 @@ include '../includes/header.php';
                 </div>
             </div>
 
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -131,7 +134,7 @@ include '../includes/header.php';
                     </button>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="soldierTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -337,14 +340,23 @@ include '../includes/header.php';
                 },
                 {
                     extend: 'print',
+                     customize: function ( win ) { //this function is added to make the title center 
+                        $(win.document.body).find('h1').css('text-align', 'center');
+                     },
                     exportOptions: {
                         columns: ':not(.no-export)'
                     }
                 },
+                
+                
                 'colvis'
             ]
+            
+
         });
 
         table.buttons().container().appendTo('#soldierTable_wrapper .col-md-6:eq(0)');
     });
 </script>
+
+

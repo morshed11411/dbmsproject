@@ -159,7 +159,7 @@ include '../includes/header.php';
                         <?php endforeach; ?>
                         <td style="text-align: center;">
                             <?php
-                            echo count($byCoyHeldlist);
+                            echo count($heldTotal);
 
                             // printAllSoldierList($heldTotal, 'held', 'Total Held');
                             ?>
@@ -219,10 +219,10 @@ include '../includes/header.php';
                         </tr>
                     <?php endforeach; ?>
 
-                    <!-- Grand Total Section -->
+                    <!-- Absent Total Section -->
                     <tr>
                         <td>
-                            Grand Total
+                            Absent Total
                         </td>
 
                         <?php
@@ -252,6 +252,40 @@ include '../includes/header.php';
                             ?>
                         </td>
                     </tr>
+                    <!-- Present Total Section -->
+                    <td>
+                            Present Total
+                        </td>
+
+                        <?php
+                        $grandTotal = [];
+                        foreach ($company as $coy):
+                            $coyTotal = [];
+                            echo '<td style="text-align: center;">';
+                            foreach ($disposalTypes as $disposal):
+                                $dispList = $disposalHolderList[$disposal][$coy['ID']];
+                                $coyTotal = array_merge($coyTotal, $dispList);
+                            endforeach;
+
+                            foreach ($leaveTypes as $leaveType):
+                                $leaveList = $onLeaveSolderList[$leaveType][$coy['ID']];
+                                $coyTotal = array_merge($coyTotal, $leaveList);
+                            endforeach;
+                            $byCoyHeldlist = $byCoySoldiderList[$coy['ID']];
+                            echo count($byCoyHeldlist)-count($coyTotal);
+                            // printAllSoldierList($coyTotal, $coy['ID'], $coy['NAME'] . ' Company Total ');
+                            $grandTotal = array_merge($grandTotal, $coyTotal);
+
+                            echo '</td>';
+                        endforeach;
+                        ?>
+
+                        <td style="text-align: center;">
+                            <?php
+                            echo count($heldTotal)-count($grandTotal);
+                            ?>
+                        </td>
+
                 </table>
             </div>
 

@@ -35,11 +35,6 @@ foreach ($ranks as $rank) {
 $companies = $company;
 
 $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
-
-
-
-
-
 ?>
 
 
@@ -72,76 +67,68 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 <?php include '../includes/alert.php'; ?>
 <section class="content">
-    <div class="row">
-        <div class="col-lg-3">
-            <!-- Total Soldiers Card -->
-            <div class="card">
-                <div class="card-header bg-info">
-                    <h5 class="card-title   text-light"><i class="fas fa-users"></i> Total Soldiers</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-center ">
-                        <?php printAllSoldierList($postedTotal, 'allSoldier', 'Posted Soldiers') ?>
-                    </p>
-                </div>
+<div class="row">
+    <div class="col-lg-3 col-6">
+    <div class="small-box border-primary">
+            <div class="inner">
+                <h3><?php echo count($postedTotal); ?></h3>
+                <p>Total Soldiers</p>
             </div>
-        </div>
-
-        <div class="col-lg-3">
-            <!-- Soldiers Present Card -->
-            <div class="card">
-                <div class="card-header text-center bg-info">
-                    <h5 class="card-title   text-light"><i class="fas fa-user-tie"></i> Total Officer</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-center ">
-                        <?php printAllSoldierList($allOfficer, 'allOffr', 'All Officer') ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <!-- Total Teams Card -->
-            <div class="card">
-                <div class="card-header text-center bg-info">
-                    <h5 class="card-title   text-light"><i class="fas fa-user-secret"></i> Total JCO</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-center ">
-                        <?php printAllSoldierList($allJCO, 'allJCO', 'Posted JCO') ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <!-- Soldiers on Leave Card -->
-            <div class="card">
-                <div class="card-header text-center bg-info">
-                    <h5 class="card-title   text-light"><i class="fas fa-user"></i> Other Ranks</h5>
-                </div>
-                <div class="card-body">
-                    <p class="card-text text-center ">
-                        <?php printAllSoldierList($allORS, 'allORS', 'All Other Ranks') ?>
-                    </p>
-                </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
             </div>
         </div>
     </div>
+
+    <div class="col-lg-3 col-6">
+    <div class="small-box border-primary">
+            <div class="inner">
+                <h3><?php echo count($allOfficer); ?></h3>
+                <p>Total Officer</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-user-tie"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+    <div class="small-box border-primary">
+            <div class="inner">
+                <h3><?php echo count($allJCO); ?></h3>
+                <p>Total JCO</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-user-secret"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+    <div class="small-box border-primary">
+            <div class="inner">
+                <h3><?php echo count($allORS); ?></h3>
+                <p>All Other Ranks</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
     <!-- /.row -->
 
 
     <!-- Notice Board and Random Data Table -->
     <div class="row d-flex">
 
-        <div class="col-lg-6 flex-fill">
-            <!-- Notice Board Card -->
+        <!-- <div class="col-lg-6 flex-fill">
             <div class="card h-100">
                 <div class="card-header bg-info">
                     <h3 class="card-title   text-light">Notice Board</h3>
                 </div>
-                <div class="card-body overflow-auto"> <!-- Added 'overflow-auto' for scrollable content -->
+                <div class="card-body overflow-auto">
                     <ul class="list-unstyled">
                         <?php if (empty($notifications)): ?>
                             <p>No notifications available.</p>
@@ -165,16 +152,15 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     </ul>
                 </div>
             </div>
+        </div> -->
 
-        </div>
-
-        <div class="col-lg-6 flex-fill">
+        <div class="col-lg-12 flex-fill">
             <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
                 <div class="card-header bg-info">
                     <h3 class="card-title   text-light">Leave State</h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="leave-counts-chart" width="400" height="200"></canvas>
+                    <canvas id="leave-counts-chart" width="400" height="150"></canvas>
                 </div>
             </div>
         </div>
@@ -216,6 +202,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+
 <script>
     // Replace the PHP code with the actual data from your PHP script
     var leaveCountsByDate = <?php echo json_encode($result); ?>;
@@ -264,7 +252,6 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
             scales: {
                 y: {
                     beginAtZero: true,
-                    min: 5, // Set the minimum value to 5
 
                 }
 
@@ -272,6 +259,8 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         }
     });
 </script>
+
+
 <!-- Initialize and configure your charts (visitors-chart, sales-chart) here -->
 <script>
     // Data for Soldiers by Company
@@ -342,4 +331,6 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
         }
     });
 </script>
+
+
 <?php include '../includes/footer.php'; ?>

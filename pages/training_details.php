@@ -314,7 +314,7 @@ include '../includes/header.php';
                     <!-- Added "overflow: auto;" -->
                     <form method="POST" action="">
 
-                        <table id="availableSoldiersTable" class="table table-bordered table-head-fixed text-nowrap">
+                        <table id="tablem" class="table table-bordered table-head-fixed text-nowrap">
 
                             <thead>
                                 <tr>
@@ -553,6 +553,21 @@ include '../includes/header.php';
                 },
                 'colvis'
             ]
+        });
+
+        table.buttons().container().appendTo('#tablem_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('#tabley').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "paging": false,  // Add this line to disable paging
+            
         });
 
         table.buttons().container().appendTo('#tablem_wrapper .col-md-6:eq(0)');

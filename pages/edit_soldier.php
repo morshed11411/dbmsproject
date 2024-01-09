@@ -353,11 +353,11 @@ include '../includes/header.php';
                                             <option value="">Select Living Status</option>
                                             <option value="Inliving" <?php if ($living_status == 'Inliving') {
                                                 echo 'selected';
-                                            } ?>>Inliving
+                                            } ?>>Inliving Family 
                                             </option>
                                             <option value="Outliving" <?php if ($living_status == 'Outliving') {
                                                 echo 'selected';
-                                            } ?>>Outliving
+                                            } ?>>Outliving Family
                                             </option>
                                             <option value="Barak" <?php if ($living_status == 'Barak') {
                                                 echo 'selected';

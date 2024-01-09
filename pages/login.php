@@ -108,7 +108,7 @@ if (isset($_POST['login'])) {
       <div class="card card-outline card-primary">
          <div class="card-header text-center">
             <div class="logo-container">
-               <img src="../assets/logo.png" alt="Logo" class="logo img-circle img-responsive">
+               <img src="../assets/logo.png" alt="Logo" class="logo img img-responsive" style="width:auto;">
             </div>
             <a href="#" class="h3"><b>UNIT PERSONNEL COORDINATION SYSTEM</b></a>
          </div>

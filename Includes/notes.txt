@@ -6,3 +6,4 @@ Improvements Plan
 3. civil info
 4. solder current status in profile 
 5. Date of next report in R/S option
+6. Serving status should be also containing date of starting and end and it should show the history of the service 

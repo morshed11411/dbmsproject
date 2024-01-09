@@ -1,0 +1,634 @@
+SOLDIERID,NAME,MARITALSTATUS,BLOODGROUP,WEIGHT,HEIGHT,RELIGION,DATEOFBIRTH,GENDER,LIVINGSTATUS,VILLAGE,THANA,DISTRICT,DATEOFENROLL,TRADEID,RANKID,COMPANYID,AGE,PARENTUNIT,MISSION,MEDCATEGORY,NOOFCHILDREN,DATERETIREMENT,PERSONALCONTACT,EMERGENCYCONTACT
+12573,Mohammad Mokleshur Rahman,MARRIED ,B+,149.94,66,ISLAM,9-Nov-72,Male,Jco Mess,Boalkhali,Majila,Tangail,31-Jul-22,2,5,1,51,,,A,1,11-Jan-24,728042521,01732866112
+16941,Md Hassan,MARRIED ,A+,156.555,65,ISLAM,6-Jan-76,Male,FM (In living),Naikhyongchari,Bijoynagar,Lakshmipur,2-Sep-18,7,7,2,46,,,A,1,6-May-24,1709328280,1709328280
+17206,Mohammad Firoz Sheikh,MARRIED ,O-,143.325,68,ISLAM,7-Jul-74,Male,FM (In living),Noakhali-S,Patabuka,Rajbari,16-Apr-21,5,6,1,50,,,A,3,7-May-24,1717471557,01704534772
+17210,Esam Uddin,MARRIED ,A+,154.35,60,ISLAM,13-Dec-74,Male,SM Barrak,Dighinala,Boropukur,Gazipur,8-Oct-21,8,6,3,48,,,A,2,9-Apr-24,1769011411,01769011412
+17213,Muhammod Mokhlesur Rahman,MARRIED ,A+,143.325,60,ISLAM,15-Nov-73,Male,SM Barrak,Kaukhali,Arambagh,Tangail,20-Aug-22,3,6,2,49,,,A,2,4-Oct-24,1731510452,01644319486
+17220,Md. Zakir hossain,UNMARRIED,B+,143.325,63,ISLAM,30-Nov-75,Male,SM Barrak,Karnaphuli,Patabuka,Comilla,1-Dec-22,3,6,4,47,,,A,3,7-May-24,1994725415,01994725415
+17233,Mohammad Lutfor Rahman,MARRIED ,B+,180.81,69,ISLAM,4-Jun-75,Male,SM Barrak,Lalmai,Nelfamari,Manikganj,8-Nov-22,2,6,1,48,,,A,4,9-Apr-23,1708361530,01778152769
+58036,Md Abdul  Mannan,MARRIED ,A+,167.58,63,ISLAM,31-Dec-75,Male,SM Barrak,Belaichari,Kaligong,Naogaon,28-Feb-19,2,6,2,48,,,A,2,6-May-23,1769099011,01769099012
+58074,Md Helal Uddin,MARRIED ,B+,169.785,60,ISLAM,2-Jan-75,Male,FM (In living),Debidwar,Kaligong,Sirajganj,5-Dec-21,2,6,5,47,,,A,2,7-May-23,1736732882,01723208719
+58096,Mohammad Rariqul Islam,MARRIED ,A+,174.195,69,ISLAM,1-Mar-77,Male,FM (In living),Kachua,Majila,Jamalpur,7-May-22,2,6,6,46,,,A,3,5-May-24,1724901453,01793352463
+58131,Mohammad Akkas Ali,MARRIED ,B+,165.375,61,ISLAM,27-Jan-76,Male,JCO Mess,Rangunia,Golapbagh,Netrokona,14-Aug-21,5,7,1,46,,,A,3,6-May-22,1721171102,01721171102
+58141,Mohamod Shofikul Islam,MARRIED ,A+,163.17,68,ISLAM,11-Jul-77,Male,FM (In living),Langadu,Bolarampur,Brahmanbaria,20-Jun-19,2,6,7,45,,,A,2,16-Jul-26,1675231586,01745433455
+58183,Helal Uddin,MARRIED ,B+,163.17,61,ISLAM,8-Mar-79,Male,SM Barrak,Alikadam,Boropukur,Kishoreganj,9-Feb-19,2,6,2,44,,,A,2,27-Jul-19,1709328280,01709328279
+58185,Md Ferdaus,MARRIED ,A+,154.35,69,ISLAM,20-Feb-79,Male,SM Barrak,Nasirnagar,Sitakunda,Satkhira,29-Nov-22,2,7,5,43,,,A,0,10-Jul-25,1997080156,01738-734148
+58256,Md Shohel Rana,MARRIED ,A+,154.35,64,ISLAM,13-Jan-81,Male,FM (Out living),Rangamati-S,Soilkupa,Jamalpur,24-Apr-17,2,7,7,42,,,C,2,8-Oct-24,1745271388,01749114406
+58257,Mohammod Saiful Islam,UNMARRIED,B+,158.76,69,ISLAM,1-Apr-81,Male,SM Barrak,Cumilla-S Daksin,Monirampur,Brahmanbaria,25-Jun-19,6,7,3,44,,,A,2,10-Jul-25,1779011411,01779011412
+58265,Md Delwar Hossain,MARRIED ,O+,149.94,67,ISLAM,1-Jan-79,Male,SM Barrak,Alikadam,Tona,Barguna,5-Nov-19,2,7,2,44,,,A,0,10-Jan-26,1813287822,01706040221
+58268,Sajjad Hossen Khan,MARRIED ,B+,171.99,60,ISLAM,1-Jan-80,Male,FM (In living),Laxmipur-S,Charbalakh,Jessore,10-Sep-22,7,7,2,42,,,A,2,11-Jan-25,1721530267,01721530267
+58271,Md Selim Hosen,MARRIED ,B+,154.35,64,ISLAM,21-Jul-83,Male,FM (Out living),Baghaichari,Charbalakh,Chuadanga,19-Jul-21,3,7,4,39,,,A,3,1-Dec-26,1728269101,01914710581
+58336,Md Mijanur Rahman,MARRIED ,B+,163.17,63,ISLAM,21-Sep-80,Male,FM (In living),Nazirpur,Charbalakh,Rajshahi,4-Mar-21,8,7,8,42,,,A,2,31-Dec-27,01714929373,01740088594
+58343,Md Abdul Malak,MARRIED ,B+,167.58,68,ISLAM,1-Jan-80,Male,SM Barrak,Fulgazi,Kaligong,Kushtia,4-Nov-20,6,7,3,43,,,A,2,8-Jul-25,1769073035,01769073036
+58355,RAJIB AHMED,MARRIED ,A+,145.53,66,ISLAM,15-Nov-83,Male,SM Barrak,Rajosthali,Golapbagh,Joypurhat,26-Mar-22,3,7,4,39,,,A,1,16-Jun-30,01816239445,0181629446
+58380,Md Zahirul Islam,MARRIED ,A+,187.425,62,ISLAM,1-Jan-95,Male,JCO Mess,Mahalchari,Khasial,Chandpur,20-Sep-20,4,7,1,28,,,A,2,26-Jan-43,01955533063,01955533063
+87135,Syed Jahangir Alam,MARRIED ,A+,202.86,69,ISLAM,7-Aug-78,Male,SM Barrak,Chakoria,Charbalakh,Jhenaidah,4-May-20,9,8,7,45,,,A,,10-Jan-23,1715937023,01708917060
+1611374,Md Masud karim,MARRIED ,A+,163.17,63,ISLAM,1-Apr-80,Male,SM Barrak,Matlab (Uttar),Majila,Noakhali,31-Mar-22,6,8,5,32,,,A,3,10-Jan-23,1769242157,01738-734148
+1611454,Sharif Rashel,MARRIED ,B+,136.71,61,ISLAM,10-Apr-79,Male,JCO Mess,Mahalchari,Majila,Chittagong,8-May-22,5,7,1,44,,,A,3,10-Jan-27,1716406760,01936046905
+1611566,Md Habibur Rahman,MARRIED ,O+,167.58,66,ISLAM,30-Dec-79,Male,SM Barrak,Ramganj,Sitakunda,Pirojpur,24-Sep-21,10,8,4,44,,,A,2,9-Jul-23,01701484419,01719728800
+1611821,Md Abdul Gaffar,MARRIED ,O+,149.94,60,ISLAM,26-Oct-78,Male,SM Barrak,Jhalokathi-S,Soilkupa,Rangpur,27-Nov-21,11,8,4,44,,,A,0,9-Jul-23,1703992377,01796796680
+1611850,Mohammad Sahidul Islam,MARRIED ,O+,154.35,63,ISLAM,7-Mar-79,Male,SM Barrak,Matlab (Uttar),Soilkupa,Mymensingh,20-Sep-18,13,8,4,43,,,A,3,9-Jul-23,1777281744,1777-281745
+1611857,Shahalom mujumdar,MARRIED ,A+,176.4,63,ISLAM,10-May-79,Male,SM Barrak,Laksham,Khasial,Comilla,2-Aug-11,6,8,7,43,,,A,2,25-Dec-23,01769051906,01793664005
+1611906,Mirshadul Haque miru,MARRIED ,B+,165.375,68,ISLAM,1-Feb-81,Male,SM Barrak,Faridganj,Arambagh,Jessore,13-Nov-22,2,7,2,43,,,A,3,8-Jul-27,01715351730,01728852101
+1612053,Md Belayet Hosen,MARRIED ,A+,123.48,69,ISLAM,5-Oct-79,Male,FM (Out living),Moheskhali,Nelfamari,Pirojpur,6-May-16,2,7,2,43,,,A,1,8-Jul-24,1718309638,01718-309638
+1612109,Md Nuruzzaman,MARRIED ,O+,149.94,69,ISLAM,15-Dec-81,Male,FM (In living),Hizla,Khandakarpara,Pabna,1-May-19,6,8,3,41,,,A,3,8-Jul-24,1730649452,01734219462
+1612124,Md Toimur Hasan,MARRIED ,A+,154.35,64,ISLAM,16-Jul-80,Male,SM Barrak,Bamna,Khasial,Thakurgaon,27-Aug-21,6,8,2,43,,,A,3,31-Dec-25,1721791929,01774453990
+1612280,Md Shafiqul Islam,MARRIED ,B+,174.195,60,ISLAM,30-Jun-81,Male,SM Barrak,Laxmipur-S,Kaligong,Sirajganj,16-Feb-18,2,7,8,41,,,A,2,31-Dec-27,01714606929,01678098477
+1612304,Md Faruq,MARRIED ,O+,143.325,60,ISLAM,13-May-81,Male,SM Barrak,Gouranadi,Bolarampur,Narayanganj,22-Feb-22,6,8,6,43,,,A,3,31-Dec-24,01724939214,01993926610
+1612365,Md Jahangir Alam,UNMARRIED,B+,176.4,60,ISLAM,5-Feb-82,Male,SM Barrak,Bandarban-S,Arambagh,Jamalpur,10-Oct-22,6,7,6,41,,,A,3,31-Dec-24,1712616758,01712-616759
+1612372,Md Saidul Islam,UNMARRIED,AB+,176.4,65,ISLAM,3-Feb-80,Male,SM Barrak,Laxmipur-S,Shatkura,Jamalpur,19-May-22,6,8,3,43,,,A,2,31-Dec-25,1712586242,01727074690
+1612401,Mohammad Iqbal Hossain,MARRIED ,A-,141.12,68,ISLAM,31-Dec-80,Male,SM Barrak,Monpura,Bijoynagar,Comilla,18-Aug-22,11,8,2,43,,,A,2,31-Dec-24,1833000594,01752562913
+1612413,Manik Chandra Debnath,MARRIED ,A+,132.3,62,ISLAM,1-Jan-82,Male,SM Barrak,Dumki,Boropukur,Noakhali,13-Sep-18,12,8,6,41,,,A,3,31-Dec-22,01814258085,01871313020
+1612513,Mohammad Mahbubur Rahman,MARRIED ,B+,158.76,61,ISLAM,1-Jan-81,Male,SM Barrak,Subarna Char,Khandakarpara,Natore,12-May-20,11,8,2,42,,,A,2,25-Jun-25,1783823292,01975838354
+1612534,GM Monirul Islam,MARRIED ,O+,167.58,66,ISLAM,10-Dec-80,Male,SM Barrak,Muladi,Khandakarpara,Khulna,27-May-19,5,8,8,42,,,A,2,16-May-23,1735570808,01387788451
+1612541,Md Noman Bhuiya,MARRIED ,B+,158.76,61,ISLAM,11-May-81,Male,SM Barrak,Kasba,Kaligong,Brahman Baria,19-Jun-22,6,8,8,42,,,A,2,24-Jun-23,1717095737,01684401310
+1612545,Md Mohiuddin,MARRIED ,B+,154.35,67,ISLAM,15-Jan-81,Male,SM Barrak,Guimara,Bijoynagar,Kishoregonj,12-Jun-22,6,8,1,42,,,A,2,24-Jun-22,1795416859,01722042072
+1612576,Md Mizanur Rahman,MARRIED ,B+,169.785,65,ISLAM,25-Sep-81,Male,SM Barrak,Amtali,Soilkupa,Joypurhat,22-Apr-19,5,8,1,42,,,A,2,30-Sep-17,1765504463,01740286482
+1612579,Md Abdullah Khan,MARRIED ,B+,152.145,64,ISLAM,1-Jan-82,Male,FM (Out living),Langadu,Charbalakh,Sirajgong,17-Aug-22,9,8,8,40,,,A,2,24-Jun-24,01747124368,01762364178
+1612595,Md Atikur Rahman,MARRIED ,B+,169.785,68,ISLAM,25-May-81,Male,SM Barrak,Laxmipur-S,Nelfamari,Bogra,16-Mar-22,6,8,8,40,,,A,3,25-Jun-06,1708104187,01606291829
+1612609,Mohammad Wadud Hossain,MARRIED ,B+,143.325,60,ISLAM,31-Dec-81,Male,SM Barrak,Daulatkhan,Charbalakh,Comilla,16-Mar-22,10,8,1,42,,,A,3,25-Jun-23,1769056669,01769-056670
+1612726,Md Abu Bakkar Siddique,MARRIED ,AB+,149.94,65,ISLAM,1-Oct-81,Male,FM (Out living),Galachipa,Shatkura,Mymensingh,9-Nov-20,12,10,2,39,,,A,2,24-Jun-23,1918415895,01922053168
+1612733,Md Iliyas Hossen,MARRIED ,B+,154.35,62,ISLAM,3-Jan-81,Male,SM Barrak,Meghna,Tona,Mymensingh,26-Jul-19,1,12,2,42,,,C,2,24-Jun-25,01913401452,01831657427
+1612747,Md Shah Afgan Asadullah,MARRIED ,A+,141.12,63,ISLAM,15-Jan-82,Male,SM Barrak,Ramgati,Shatkura,Kishoregonj,7-Nov-22,11,8,4,41,,,A,3,30-Dec-23,1724398145,01724-398146
+1612770,Md Anarul Islam,MARRIED ,B+,174.195,66,ISLAM,16-May-81,Male,SM Barrak,Gouranadi,Shatkura,Rangpur,1-May-19,8,8,3,41,,,A,1,31-Dec-26,1722244175,01739732811
+1612830,Nur Muhammad,MARRIED ,O+,158.76,60,ISLAM,5-Jul-81,Male,SM Barrak,Muladi,Boropukur,Mymensingh,8-Sep-21,9,8,7,42,,,A,2,30-Dec-23,01687803293,01687803294
+1612831,Md Nahid hossine,MARRIED ,A+,167.58,68,ISLAM,5-Sep-82,Male,SM Barrak,Guimara,Kaligong,Vivaria,30-Jan-20,6,8,5,41,,,A,2,30-Dec-25,1923426206,01913630530
+1612855,Md Momin Miya,MARRIED ,B+,149.94,61,ISLAM,10-Jun-81,Male,SM Barrak,Monpura,Charbalakh,Manikgonj,5-Jun-22,6,9,8,42,,,A,2,31-Dec-22,1916650828,01955580217
+1612890,Md Liton Hossen,MARRIED ,B+,171.99,62,ISLAM,28-Dec-80,Male,SM Barrak,Kachua,Kaligong,Jhenaidah,18-Aug-22,6,8,5,42,,,A,2,30-Dec-23,1724431895,01724634430
+1612912,Md Zuran Ali,MARRIED ,B+,160.965,70,ISLAM,5-Dec-81,Male,SM Barrak,Rowangchari,Tona,Jamalpur,29-Mar-22,10,9,8,40,,,A,3,31-Dec-22,1770500198,01742503985
+1612920,Md Babul Islam,MARRIED ,A+,183.015,68,ISLAM,15-May-83,Male,FM (Out living),Barkal,Kaligong,Nilfamari,20-May-22,9,8,7,39,,,A,3,30-Dec-23,1774468546,01761176166
+1612928,Md Murshid Alam,MARRIED ,A+,149.94,60,ISLAM,4-Jun-82,Male,FM (In living),Rangabali,Monirampur,Jamalpur,1-May-19,12,9,8,40,,,A,2,31-Dec-24,01991415483,01764304511
+1612934,Abu Alam,MARRIED ,O+,141.12,67,ISLAM,1-Dec-81,Male,SM Barrak,Nesarabad,Tona,Tangail,9-Feb-22,9,9,8,41,,,A,2,30-Dec-22,1761102803,01795803948
+1612970,Md Mohiuddin Molla,MARRIED ,O+,147.735,60,ISLAM,10-Jan-82,Male,FM (Out living),Haziganj,Soilkupa,Barisal,24-Sep-21,6,8,3,41,,,A,3,15-Jun-24,1754983330,01797347264
+1613040,Md Saiful Islam,MARRIED ,O+,167.58,68,ISLAM,1-Jan-83,Male,FM (Out living),Thanchi,Khandakarpara,Tangail,17-Aug-22,6,8,5,39,,,A,3,15-Jun-26,1710690532,01738-734148
+1613053,Md Hanif Fakir,MARRIED ,B+,114.66,63,ISLAM,5-Jul-82,Nake,SM Barrak,Bhola-S,Khandakarpara,Borisal,17-Dec-20,6,8,7,43,,,A,2,4-Jan-25,1776096900,01726916021
+1613175,Md Syful Alam,MARRIED ,B+,154.35,66,ISLAM,15-Feb-83,Male,SM Barrak,Barkal,Charbalakh,Netrokona,13-Dec-18,9,8,3,40,,,A,2,21-Jun-26,19144021829,017602988222
+1613188,MD Abdul Muttalib,MARRIED ,O+,158.76,64,ISLAM,4-May-83,Male,SM Barrak,Betagi,Arambagh,Habiganj,23-Jul-22,11,8,4,39,,,A,2,4-Jan-27,01678063354,01303146449
+1613200,Md Nahid Alam,MARRIED ,O+,154.35,69,ISLAM,15-Dec-82,Male,FM (Out living),Amtali,Boropukur,Tangail,27-Jan-22,9,8,7,40,,,A,3,4-Jan-25,1731828072,01629290869
+1613206,Md Golam Rosul,MARRIED ,A+,171.99,70,ISLAM,12-Jul-84,Male,SM Barrak,Thanchi,Tona,Tangail,3-Aug-20,6,8,5,39,,,A,2,15-Jun-26,01799865085,01738-734148
+1613318,Mohammad Badsha Mia,MARRIED ,O+,220.5,60,ISLAM,31-Dec-82,Male,FM (In living),Noakhali-S,Majila,Dhaka,12-Oct-22,6,8,2,40,,,A,2,30-Jun-25,1714465087,01746639321
+1613323,Md Anamul Huque,MARRIED ,B+,143.325,68,ISLAM,25-Dec-83,Male,SM Barrak,Brahmanpara,Charbalakh,Chuadanaga,29-Apr-15,9,8,2,40,,,A,2,30-Jun-25,1721024700,01772161982
+1613328,Md Zillur Rahman,MARRIED ,O+,138.915,63,ISLAM,20-Oct-82,Male,SM Barrak,Bamna,Sitakunda,Kishoregonj,25-Apr-20,6,8,6,41,,,A,1,28-Jun-25,1728478345,01728-478346
+1613360,Md Arif Uddin,MARRIED ,A+,154.35,68,ISLAM,3-Jul-83,Male,SM Barrak,Fulgazi,Majila,Lakshmipur,17-Oct-21,13,9,2,39,,,A,2,28-Jun-26,1718739789,01835071913
+1613364,Md Mojnuzzman,MARRIED ,O+,163.17,66,ISLAM,15-Nov-82,Male,SM Barrak,Daganbhuiyan,Patabuka,Kushtia,29-Oct-15,9,10,7,41,,,A,0,30-Jun-24,1856453694,01856453694
+1613374,Mohammad Hafizur Rahman,MARRIED ,B+,143.325,67,ISLAM,16-Sep-83,Male,FM (Out living),Tazumuddin,Tona,Jamalpur,10-May-19,13,10,5,39,,,A,3,30-Jun-25,01718970745,01915132663
+1613419,Md Selim Miya,MARRIED ,O+,211.68,66,ISLAM,15-Oct-82,Male,SM Barrak,Ramu,Bijoynagar,Sunamgonj,10-Mar-21,13,10,6,41,,,A,3,28-Jun-23,1709949845,01709949846
+1613424,Abdul Monnaf,MARRIED ,A+,169.785,62,ISLAM,14-Mar-84,Male,SM Barrak,Nangalkot,Nelfamari,Jamalpur,16-Aug-22,11,9,4,39,,,A,2,29-Jun-24,1744229775,01787094396
+1613427,Md Ziaur Rahman,MARRIED ,B+,171.99,60,ISLAM,5-Mar-83,Male,SM Barrak,Thanchi,Boropukur,Dinajpur,30-Jul-22,10,9,8,39,,,A,1,28-Jun-24,1999945697,01906291829
+1613429,Md Zakaria Masud,MARRIED ,AB+,163.17,65,ISLAM,19-Apr-84,Male,SM Barrak,Alikadam,Soilkupa,Brahman Baria,16-Mar-22,10,8,8,38,,,A,3,4-Jan-25,1721772698,01748314346
+1613448,Md Anwar Hossain,MARRIED ,B+,163.17,60,ISLAM,6-Jul-83,Male,SM Barrak,Chhagalniya,Kaligong,Tangail,1-Feb-17,6,8,2,39,,,A,2,5-Jan-26,1721764997,01722891351
+1613449,Md Mehedi Hasan,MARRIED ,B+,165.375,61,ISLAM,18-Nov-82,Male,SM Barrak,Homna,Majila,Tangail,20-Sep-21,13,11,7,40,,,A,3,3-Jan-23,1763716473,01700615010
+1613509,Md Kobir Hosen,MARRIED ,A+,178.605,66,ISLAM,8-Apr-83,Male,SM Barrak,Karnaphuli,Shatkura,Gazipur,8-Sep-22,5,8,6,40,,,A,2,28-Jun-28,1712490573,01712-490574
+1613527,Md Faysal Mahmud,MARRIED ,O+,158.76,70,ISLAM,12-May-83,Male,FM (Out living),Charfassion,Bijoynagar,Barisal,1-May-19,10,11,8,39,,,A,2,23-Jan-25,01732638602,01706261580
+1613541,Md Nazem ansari,MARRIED ,A+,165.375,63,ISLAM,3-Jan-85,Male,SM Barrak,Matlab (Dakshin),Golapbagh,Chittagong,16-Mar-22,8,8,8,38,,,A,2,3-Jan-26,01709344496,01709344495
+1613551,Md Shariful Islam,MARRIED ,A+,160.965,69,ISLAM,15-Dec-82,Male,SM Barrak,Lama,Bolarampur,Khulna,15-Oct-22,6,8,6,41,,,A,2,3-Jan-26,1715612292,01715-612292
+1613573,Md Shah Alam,MARRIED ,A+,165.375,65,ISLAM,2-Sep-83,Male,SM Barrak,Tazumuddin,Bolarampur,Bogura,3-Jun-22,15,9,1,39,,,A,2,12-Jul-25,1713506917,01718731546
+1613594,Aminur Rahman,MARRIED ,B+,158.76,61,ISLAM,1-Jan-85,Male,SM Barrak,Patharghata,Majila,Jamalpur,4-Jan-22,9,9,2,38,,,A,2,25-Jul-13,01736092952,01736854335
+1613670,Md Mohiuddin Molla,MARRIED ,B+,132.3,67,ISLAM,21-Nov-85,Male,FM (Out living),Mothbaria,Tona,Narail,22-Nov-13,9,8,2,38,,,A,1,11-Jul-26,1759231563,01635308491
+1613679,MD Ruhul Azam,MARRIED ,A+,121.275,63,ISLAM,6-Oct-84,Male,SM Barrak,Barura,Boropukur,Dinajpur,11-Oct-21,6,8,3,38,,,A,2,12-Jul-26,1660194649,01761859206
+1613688,Md Anamul Haque,MARRIED ,B+,187.425,68,ISLAM,17-Jul-85,Male,FM (Out living),Hatiya,Khasial,Dinajpur,11-Nov-20,6,8,3,38,,,A,2,9-Jan-27,1810787090,01890708731
+1613745,Md Shariful Islam,MARRIED ,A+,154.35,67,ISLAM,31-Dec-85,Male,FM (In living),Bandarban-S,Kaligong,Kushtia,2-Aug-22,10,8,4,39,,,A,2,8-Jan-25,1914962496,01769197536
+1613751,Morari Chandra Nondi,MARRIED ,A+,154.35,64,ISLAM,30-Jun-84,Male,SM Barrak,Porshuram,Nelfamari,Mymensingh,2-Dec-21,10,8,2,38,,,A,2,10-Jan-27,1728059124,01725307724
+1613753,Md Toimur Ali,MARRIED ,A+,149.94,64,ISLAM,6-Jan-85,Male,SM Barrak,Kachua,Soilkupa,Thakurgaon,1-May-19,11,9,2,38,,,A,2,8-Jan-27,01710306900,01795202101
+1613758,Md Asraful Alam,MARRIED ,O+,180.81,68,ISLAM,1-Mar-86,Male,SM Barrak,Anwara,Kaligong,Kishoregonj,5-Nov-22,10,9,6,37,,,A,3,10-Jan-26,1717898552,01990783927
+1613767,Mir Mobarak Ali,MARRIED ,B+,138.915,67,ISLAM,15-Apr-85,Male,FM (In living),Homna,Monirampur,Bagerhat,23-Jul-22,9,8,3,39,,,A,2,11-Jan-27,01712494502,01782032625
+1613812,Mohammad Asaduzzaman,MARRIED ,AB+,138.915,61,ISLAM,8-Feb-85,Male,SM Barrak,Nalchity,Bijoynagar,Mymensingh,19-Sep-21,6,8,8,37,,,A,2,10-Jan-26,1709327828,01775334807
+1613813,Mohammad Monirul Islam,MARRIED ,B+,165.375,68,ISLAM,1-Mar-86,Male,FM (Out living),Daulatkhan,Golapbagh,Jhalakathi,3-Aug-20,10,8,4,36,,,A,2,10-Jan-29,1709344234,01755033233
+1613844,Md Noman Mia,MARRIED ,AB+,171.99,61,ISLAM,1-Feb-84,Male,FM (In living),Matiranga,Arambagh,Narayangonj,17-Dec-20,5,9,2,39,,,A,3,10-Jan-25,01769110140,01760650110
+1613855,Md saidur rahman,MARRIED ,B+,169.785,63,ISLAM,20-Sep-84,Male,SM Barrak,Rajapur,Khandakarpara,Pabna,10-Jun-22,6,8,8,38,,,A,3,10-Jan-27,01724212527,01708373688
+1613858,Md Abul Kalam Azad,MARRIED ,O+,136.71,69,ISLAM,7-Nov-86,Male,FM (In living),Begumganj,Kaligong,Jhenaidah,16-Mar-22,10,8,2,37,,,A,3,10-Jan-27,1916021900,01766507403
+1613862,Md Harun or Rashid,MARRIED ,A+,165.375,65,ISLAM,5-Nov-86,Male,SM Barrak,Dighinala,Patabuka,Mymensingh,10-Sep-21,9,8,6,35,,,A,2,11-Jan-24,01714344482,0751813141
+1613882,Ekbal Bashar pramanik,MARRIED ,B+,169.785,63,ISLAM,10-Oct-85,Male,SM Barrak,Sitakunda,Khandakarpara,Tangail,8-Dec-22,9,9,6,37,,,A,3,10-Jan-25,01820515764,01756351301
+1613884,Muhammod Monirul Hauqe,MARRIED ,A+,149.94,61,ISLAM,25-Oct-85,Male,SM Barrak,Muladi,Charbalakh,Mymensingh,6-May-22,11,10,2,38,,,A,2,9-Jul-25,01721940858,01735022327
+1613946,Md Mozammel Hossain,MARRIED ,A+,143.325,70,ISLAM,31-Aug-86,Male,SM Barrak,Amtali,Boropukur,Joypurhat,30-Oct-22,11,8,4,37,,,A,2,11-Jul-27,1724634439,01745673144
+1613970,Md Rubel Miah,UNMARRIED,O+,143.325,63,ISLAM,1-Oct-86,Male,SM Barrak,Moheskhali,Khandakarpara,Moulavibazae,7-Nov-21,6,8,3,37,,,A,1,9-Jul-27,1715753513,01716403592
+1613971,Md Jamal Husain,MARRIED ,B+,171.99,70,ISLAM,30-Oct-85,Male,SM Barrak,Mirsharai,Monirampur,Chapai Nawabganj,23-Jul-22,9,8,8,38,,,A,2,9-Jul-29,01718800785,01793637181
+1614032,Faruk Ahmed,MARRIED ,B+,152.145,64,ISLAM,2-Jan-86,Male,FM (Out living),Cumilla-S,Boropukur,Manikgonj,25-Nov-22,6,10,8,37,,,A,2,11-Jul-25,1883418845,01832685634
+1614042,Md Faruk,MARRIED ,O-,165.375,66,ISLAM,1-Jan-85,Male,SM Barrak,Feni-S,Soilkupa,Jamalpur,31-Jan-21,10,8,8,38,,,A,2,16-Jul-28,01783024471,01776291829
+1614064,Abdul Hamid,MARRIED ,B+,163.17,62,ISLAM,21-Feb-85,Male,SM Barrak,Dashmina,Boropukur,Natore,16-Mar-22,10,8,2,40,,,A,2,9-Jul-27,1736626931,01724083120
+1614067,Saha Alam,MARRIED ,A+,185.22,70,ISLAM,1-Jan-86,Male,SM Barrak,Sitakunda,Bolarampur,Rajbari,27-Apr-22,6,8,5,36,,,A,2,9-Jan-27,1725978008,01738-734148
+1614191,Sattajit Kumar Das,MARRIED ,O+,191.835,62,ISLAM,27-Apr-86,Male,FM (Out living),Borhanuddin,Bolarampur,Satkhira,16-Mar-22,6,8,1,37,,,A,2,9-Jan-27,1756964438,01719782961
+1614192,Md Babul Aktar,MARRIED ,O+,152.145,68,ISLAM,1-Mar-86,Male,FM (Out living),Lalmohan,Bolarampur,Kurigram,5-Aug-18,8,8,3,38,,,A,2,8-Jan-30,1712200520,01759764256
+1614208,Md Humayun kabir,MARRIED ,B+,158.76,66,ISLAM,8-Jan-86,Male,SM Barrak,Sonaimuri,Boropukur,Mymensingh,17-Aug-22,9,9,4,36,,,A,2,7-Jan-28,1723805401,1723-805402
+1614252,Md Isha Ali,MARRIED ,A+,149.94,64,ISLAM,29-Sep-85,Male,FM (Out living),Babuganj,Khandakarpara,Rajshahi,16-Mar-19,6,8,5,37,,,A,2,9-Jan-27,1739030238,01762850899
+1614288,Md Ershad Ali,MARRIED ,O+,132.3,66,ISLAM,8-Apr-85,Male,SM Barrak,Bakerganj,Sitakunda,Habiganj,12-Feb-19,5,8,1,38,,,A,2,9-Jan-31,1724637288,01787368915
+1614317,Md Moin Uddin,MARRIED ,A+,183.015,68,ISLAM,1-Jan-85,Male,SM Barrak,Cumilla-S,Bolarampur,Sylhet,27-Nov-21,9,9,2,38,,,A,2,9-Jan-29,1734795798,01753558949
+1614329,Md Tuhin Uddin,MARRIED ,AB+,167.58,69,ISLAM,15-May-86,Male,FM (Out living),Taltali,Arambagh,Chuadanaga,9-Oct-12,6,10,8,37,,,A,2,9-Jan-25,1609234571,01913107160
+1614337,Md Akter Hossen,MARRIED ,O+,136.71,68,ISLAM,6-Jun-86,Male,FM (Out living),Uzirpur,Khandakarpara,Sherpur,18-Aug-19,13,10,2,37,,,C,2,9-Jan-26,1714872111,01725667618
+1614351,Md Kamal Hossain,MARRIED ,B+,152.145,65,ISLAM,15-Nov-86,Male,SM Barrak,Senbag,Sitakunda,Comilla,19-Feb-17,9,9,5,36,,,A,3,7-Jul-27,1708512260,01708-512259
+1614449,Md Zakiruzzaman,MARRIED ,O+,156.555,68,ISLAM,31-Dec-85,Male,FM (Out living),Rajapur,Khandakarpara,Tangail,11-May-22,6,9,8,37,,,A,2,7-Jul-26,1629641455,01730494664
+1614467,Md Elias Ripon,MARRIED ,A+,132.3,70,ISLAM,1-Jan-88,Male,FM (Out living),Barkal,Nelfamari,Jhenaidah,21-Oct-21,9,9,4,34,,,C,2,9-Jul-27,1715706499,01715-706100
+1614512,Md Shahabuddin,MARRIED ,O+,163.17,64,ISLAM,18-Sep-87,Male,SM Barrak,Ramgarh,Bolarampur,Kushtia,17-May-21,9,9,3,35,,,A,2,6-May-27,01769334513,01769336038
+1614513,Md Habibur Rahman,MARRIED ,O+,158.76,63,ISLAM,1-Mar-88,Male,SM Barrak,Haziganj,Khandakarpara,Mymensingh,13-Nov-22,6,9,2,35,,,A,2,10-Jul-26,1714729738,01831498352
+1614517,Md Uzzal Hussain,MARRIED ,A+,160.965,69,ISLAM,2-Dec-87,Male,SM Barrak,Galachipa,Charbalakh,Natore,11-Mar-22,6,9,5,35,,,A,2,10-Jul-27,01615335032,01708350650
+1614541,Moznu Ahmed,MARRIED ,O+,171.99,62,ISLAM,1-Jan-88,Male,FM (Out living),Laxmipur-S,Tona,Mymensingh,24-Sep-22,6,9,8,34,,,A,1,9-Jul-29,1725338075,01745662990
+1614543,Md Akul Hossain,MARRIED ,O+,156.555,66,ISLAM,8-Jun-85,Male,FM (Out living),Babuganj,Golapbagh,Natore,26-Jun-22,9,9,8,37,,,A,2,9-Jul-27,01719194724,01704317466
+1614553,Faruk Ahmed,MARRIED ,B+,154.35,66,ISLAM,11-Nov-86,Male,FM (Out living),Patuakhali-S,Bijoynagar,Netrokona,9-Feb-22,13,9,4,36,,,A,2,7-Jul-27,1710779164,01772635893
+1614565,Shabbir Ahmed,MARRIED ,B+,158.76,66,ISLAM,3-Dec-87,Male,SM Barrak,Kachua,Nelfamari,Chittagong,1-May-19,6,9,5,35,,,A,3,7-Jul-27,01739906168,01612409818
+1614599,Md Mostafizur Rahman,MARRIED ,O+,156.555,65,ISLAM,5-Feb-87,Male,SM Barrak,Karnaphuli,Khandakarpara,Rajbari,20-Sep-21,9,9,7,37,,,A,2,9-Jul-27,1714606401,01721297622
+1614604,Md Sohel Miah,MARRIED ,A+,158.76,63,ISLAM,10-Dec-87,Male,SM Barrak,Debidwar,Tona,Sherpur,19-Sep-18,6,9,8,36,,,A,2,9-Jul-27,01851245477,01704317454
+1614608,Md Nurujjaman Islam,MARRIED ,A+,136.71,61,ISLAM,8-Jul-87,Male,SM Barrak,Senbag,Nelfamari,Naogaon,9-Jul-22,6,9,5,35,,,A,2,23-Dec-27,1718563256,01738-734148
+1614619,Faruk Hossain,MARRIED ,O+,149.94,60,ISLAM,6-Jul-85,male,SM Barrak,Alikadam,Boropukur,Tangail,23-Aug-22,9,9,3,37,,,A,2,7-Jul-28,1721770153,01708505502
+1614628,Jannatul Ferdous,MARRIED ,o+,127.89,67,ISLAM,4-Jan-86,Male,SM Barrak,Monohorganj,Bolarampur,Chapai Nawabganj,21-Apr-22,6,9,5,37,,,A,2,10-Jul-27,1719823999,01772505951
+1614674,Md Jonirul Islam,MARRIED ,A+,187.425,60,ISLAM,27-May-87,Male,FM (Out living),Ramgati,Soilkupa,Kushtia,12-Dec-21,9,9,7,35,,,A,0,9-Jul-27,1728770324,01729309620
+1614682,Md Sadekun Islam,MARRIED ,A+,152.145,62,ISLAM,18-Aug-87,Male,SM Barrak,Uzirpur,Arambagh,Dinajpur,12-Mar-21,6,9,3,35,,,A,2,23-Dec-24,01791788418,0111609801684
+1614706,MD Nasim Ali,MARRIED ,B+,158.76,61,ISLAM,24-Nov-86,Male,FM (Out living),Hatiya,Sitakunda,Jhenaidah,5-Jan-04,6,9,8,35,,,A,3,9-Jul-29,01723258941,01774558761
+1614737,Md Shekh Forid,MARRIED ,A-,158.76,64,ISLAM,15-Sep-85,Male,FM (Out living),Begumganj,Golapbagh,Kishoregonj,16-Mar-22,9,9,5,38,,,A,2,9-Jul-27,1824727983,01736493213
+1614791,Md Toslim Akondo,MARRIED ,O+,154.35,62,ISLAM,1-Jan-87,Male,FM (Out living),Mirsharai,Shatkura,Gazipur,1-May-19,9,9,8,36,,,A,2,7-Jul-27,01833849990,01787146668
+1614907,Md Abdul Alim,MARRIED ,B+,158.76,60,ISLAM,1-Feb-86,Male,SM Barrak,Sitakunda,Tona,Chapai Nawabganj,20-Feb-22,6,11,5,36,,,A,2,10-Jul-25,01915726279,01744909590
+1614908,Md Abu Hayat,MARRIED ,B+,169.785,65,ISLAM,5-Jul-85,Male,FM (Out living),Rajosthali,Bijoynagar,Dinajpur,2-Nov-22,14,10,2,38,,,B,2,9-Jul-25,1729664906,01763069369
+1614929,Md Suzaul Alam,MARRIED ,B+,158.76,61,ISLAM,15-Apr-86,Male,SM Barrak,Betagi,Majila,Nilphamari,17-Jul-15,15,9,1,37,,,A,2,9-Jul-27,01725560707,01708363788
+1614966,Md Azim Uddin,MARRIED ,B+,167.58,63,ISLAM,8-Jan-87,Male,SM Barrak,Babuganj,Arambagh,Sirajgong,27-Jun-22,9,9,5,35,,,C,2,9-Jul-27,1739810901,01738-734148
+1614971,Md Anisur Rahman,MARRIED ,B+,165.375,64,ISLAM,23-Jun-85,Male,SM Barrak,Naikhyongchari,Bolarampur,Gaibandha,11-Aug-17,6,9,5,37,,,A,2,7-Sep-27,01888000713,01724833238
+1614977,Md Jakir Hossain,MARRIED ,B+,163.17,69,ISLAM,1-May-87,Male,SM Barrak,Barkal,Khasial,Comilla,11-Dec-22,10,9,8,36,,,B,2,29-Jan-28,01720274924,01769177190
+1615026,Md Anwar Hossain Durjoy,MARRIED ,O+,163.17,60,ISLAM,10-Aug-88,Male,SM Barrak,Raojan,Nelfamari,Natore,22-Sep-22,11,8,2,35,,,A,2,6-Jan-28,1797450074,01724521868
+1615049,Abdul Jabbar Sheikh,MARRIED ,B+,158.76,69,ISLAM,10-Dec-85,Male,SM Barrak,Fulgazi,Tona,Narail,8-Sep-22,11,8,4,36,,,A,2,5-Jan-29,1735746929,01407250472
+1615075,Md Abdul Al Mamun,MARRIED ,B+,149.94,65,ISLAM,9-Jan-88,Male,SM Barrak,Rowangchari,Charbalakh,Jhenaidah,3-Mar-22,9,9,4,36,,,A,2,5-Jan-28,1723046426,01745567052
+1615113,Md Based Ali,MARRIED ,B+,138.915,63,ISLAM,17-Jun-86,Male,SM Barrak,Gouranadi,Boropukur,Mymensingh,24-Apr-18,6,10,5,36,,,A,2,5-Jan-29,1721957525,01761-508656
+1615162,Taher Nur,MARRIED ,O+,147.735,70,ISLAM,2-Feb-88,Male,SM Barrak,Ramu,Monirampur,Rangamati,5-Aug-21,9,9,7,35,,,A,0,30-Mar-29,01788340977,01840691217
+1615173,Md Abul Kalam Azad,MARRIED ,O+,149.94,65,ISLAM,1-Jan-87,Male,SM Barrak,Lohagara,Nelfamari,Naogaon,21-Nov-22,6,9,8,35,,,A,2,31-Dec-28,01318398296,01772876169
+1615178,Md Arif Hossain,MARRIED ,O+,141.12,69,ISLAM,11-Aug-86,Male,SM Barrak,Bamna,Kaligong,Chapai Nawabganj,11-Nov-22,6,10,8,37,,,A,0,5-Jan-27,1721197709,01781396813
+1615179,Md Shukur Ali,MARRIED ,B+,147.735,66,ISLAM,18-Oct-88,Male,SM Barrak,Bakerganj,Charbalakh,Manikgonj,10-Jul-21,10,9,7,35,,,A,2,5-Jan-28,1769023077,01736597915
+1615199,Md Mukul Mia,MARRIED ,A+,136.71,63,ISLAM,1-Jan-87,Male,FM (Out living),Muladi,Khandakarpara,Jamalpur,4-Aug-21,9,9,1,36,,,A,1,8-Jul-28,1918853682,01950315822
+1615254,MD:  Salauddin,MARRIED ,B+,160.965,69,ISLAM,7-Jul-87,Male,SM Barrak,Agailjhara,Bolarampur,Jhalokati,30-Nov-19,9,9,4,35,,,A,2,26-Jul-28,01724934050,01765925935
+1615412,MD SHAHALAM,MARRIED ,O+,127.89,60,ISLAM,25-May-87,Male,SM Barrak,Rajosthali,Sitakunda,Bogra,13-Jul-22,9,11,7,36,,,A,1,7-Aug-26,01711713491,01713085954
+1615415,Md Helal Uddin,UNMARRIED,A+,147.735,65,ISLAM,16-Dec-88,Male,FM (Out living),Kalapara,Boropukur,Bhola,1-Aug-22,6,9,3,34,,,A,2,8-Jul-28,01727450694,01623922806
+1615454,Md Melzar Hossain,MARRIED ,B+,160.965,65,ISLAM,8-Apr-86,Male,FM (Out living),Banskhali,Khandakarpara,Jessore,7-Sep-20,6,9,5,36,,,A,1,8-Jul-26,01775728634,01738-734148
+1615464,Md Kamrul Hasan,MARRIED ,O+,132.3,60,ISLAM,12-Oct-88,Male,FM (Out living),Panchari,Sitakunda,Bhola,3-Jul-22,9,9,8,35,,,A,2,8-Jul-28,01719992787,01781075464
+1615487,Md Masum Alam,MARRIED ,B+,158.76,68,ISLAM,10-Jan-87,Male,SM Barrak,Companiganj,Patabuka,Sylhet,24-Mar-22,13,10,8,35,,,A,2,8-Jul-27,1728185283,01725522051
+1615518,Md Sazzadur Rahman,MARRIED ,B+,167.58,64,ISLAM,14-Mar-87,Male,SM Barrak,Laxmichari,Kaligong,Jessore,4-Jun-22,10,9,7,37,,,A,2,7-Jan-30,1728125485,01722732794
+1615533,Md Hafizur Rahman,MARRIED ,B+,178.605,67,ISLAM,10-Oct-88,Male,SM Barrak,Rangunia,Arambagh,Sirajgong,1-May-19,11,8,6,34,,,A,4,7-Jan-30,01769056770,01769056770
+1615553,Al emran,MARRIED ,O-,165.375,60,ISLAM,15-Dec-87,Male,FM (Out living),Barishal-S,Monirampur,Naogaon,6-Dec-19,11,9,2,35,,,A,2,7-Jan-28,1728561692,01786207678
+1615577,Saroar Alam,MARRIED ,B+,158.76,68,ISLAM,26-Sep-87,Male,SM Barrak,Burichong,Charbalakh,Netrokona,8-Jun-22,11,9,6,35,,,C,2,7-Jan-29,01766258390,01760957924
+1615621,Md Ashraful Alam,MARRIED ,A+,158.76,70,ISLAM,6-Sep-87,Male,FM (In living),Bandarban-S,Arambagh,Satkhira,9-Feb-22,10,9,4,36,,,A,0,1-Mar-28,01303311829,01303408382
+1615628,Md Aminul Islam,MARRIED ,AB+,158.76,67,ISLAM,26-Dec-88,Male,SM Barrak,Alikadam,Majila,Kurigram,3-Sep-21,6,9,6,32,,,A,3,30-Jan-26,01724465265,01724465266
+1615690,Md Shahidujjaman,MARRIED ,A+,149.94,60,ISLAM,17-May-88,Male,FM (Out living),Haziganj,Golapbagh,Thakurgaon,25-Jan-22,6,9,5,36,,,A,2,7-Jul-29,01723782522,01738-734148
+1615698,Md Hasib Chowdhuy,MARRIED ,O+,147.735,69,ISLAM,20-Dec-86,Male,SM Barrak,Kasba,Sitakunda,Naougan,8-Nov-21,6,9,5,36,,,A,2,7-Jan-28,1759963011,01738-734148
+1615727,Md Sohel Rana,MARRIED ,O+,174.195,66,ISLAM,18-Sep-88,Male,SM Barrak,Panchari,Sitakunda,Dinajpur,7-Oct-21,11,8,4,35,,,A,2,7-Jan-29,1720359227,01763091778
+1615739,Md Saiful Islam,MARRIED ,AB+,167.58,60,ISLAM,7-Jan-87,Male,FM (Out living),Tazumuddin,Tona,Natore,9-Nov-20,9,9,8,36,,,A,2,7-Jan-28,1736805078,01949550169
+1615743,Md Shahin Alam,MARRIED ,O+,158.76,60,ISLAM,12-Mar-87,Male,SM Barrak,Fulgazi,Golapbagh,Naogaon,12-Jan-18,6,9,7,37,,,A,2,7-Jan-27,1769096266,01303433231
+1615766,Md Belal Hossen,MARRIED ,B+,171.99,70,ISLAM,3-Jul-87,Male,SM Barrak,Daulatkhan,Nelfamari,Sirajgong,3-Oct-21,6,9,5,35,,,A,3,7-Jan-28,1739470358,01738-734148
+1615807,Md Jahurul Islam,MARRIED ,O+,141.12,67,ISLAM,23-Feb-89,Male,SM Barrak,Noakhali-S,Patabuka,Pabna,20-Feb-14,6,9,5,34,,,A,2,8-Jul-30,1727810948,01756661083
+1615911,Md Shahanoor Rahman,MARRIED ,B+,156.555,63,ISLAM,2-Jul-87,Male,SM Barrak,Kachua,Boropukur,Nilfamari,8-Dec-22,6,9,7,35,,,A,2,8-Jul-28,1725365953,01786954515
+1615925,Md Naimur Rahman,MARRIED ,AB+,165.375,68,ISLAM,20-Dec-87,Male,SM Barrak,Hathazari,Sitakunda,Kushtia,1-May-19,6,9,3,35,,,A,3,8-Jul-28,1729403038,01783731871
+1616000,Md Bablu Miah,MARRIED ,B+,154.35,66,ISLAM,25-May-88,Male,SM Barrak,Chatkhil,Monirampur,Kurigram,1-May-19,6,9,8,35,,,A,3,8-Jul-29,1731942806,01717557961
+1616067,Md Rakibul Islam,MARRIED ,B+,171.99,69,ISLAM,30-Dec-87,Male,FM (Out living),Homna,Soilkupa,Kushtia,2-Jul-22,11,9,4,35,,,A,2,7-Jul-29,1728437144,01722202782
+1616077,Salahuddin,MARRIED ,B+,138.915,61,ISLAM,12-Jul-88,Male,SM Barrak,Fatikchari,Arambagh,Chapai Nawabganj,26-Jun-22,10,9,8,35,,,A,2,8-Jul-28,1725433628,01727256935
+1616145,Md Robiul Islam,MARRIED ,AB+,158.76,70,ISLAM,12-Mar-87,Male,SM Barrak,Betagi,Monirampur,Joypurhat,20-Aug-22,6,10,7,34,,,A,2,6-Jan-29,1722907812,0172812288
+1616203,A K M Babul Shek,MARRIED ,A+,127.89,61,ISLAM,10-Oct-89,Male,SM Barrak,Taltali,Nelfamari,Satkhira,15-Nov-18,6,9,5,33,,,A,3,6-Jan-29,1880451152,01738-734148
+1616211,Md Abdur Razzak,MARRIED ,A-,165.375,60,ISLAM,24-Mar-89,Male,SM Barrak,Sonaimuri,Monirampur,Meherpur,13-Aug-22,6,9,7,34,,,A,2,6-Jan-29,1731362159,01758248704
+1616215,Md Amirul Islam,MARRIED ,O+,152.145,66,ISLAM,3-Oct-89,Male,SM Barrak,Kaukhali,Monirampur,Chapai Nawabganj,13-Aug-22,6,10,8,34,,,A,3,7-Jan-29,01727340881,01760597779
+1616231,Md Lutfor Rhaman,MARRIED ,B+,176.4,61,ISLAM,1-Jan-88,Male,SM Barrak,Panchari,Patabuka,Kurigram,16-Mar-22,9,10,8,35,,,B,2,12-Jan-28,01768902198,01734154377
+1616248,Md Hafizur Rahman,MARRIED ,O+,160.965,64,ISLAM,4-Dec-88,Male,FM (Out living),Daudkandi,Monirampur,Chuadanaga,11-Nov-22,12,10,2,34,,,A,0,6-Jan-29,1611189878,01950370031
+1616262,Md Abu Taher Uddin,MARRIED ,A+,138.915,68,ISLAM,14-Jan-89,Male,FM (Out living),Naikhyongchari,Bolarampur,Jhenaidah,25-Jun-07,11,8,4,33,,,A,1,6-Jan-32,1714444471,01780798372
+1616269,Md Sumon Hosan,MARRIED ,O+,143.325,61,ISLAM,25-Jun-88,Male,FM (Out living),Ramgarh,Majila,Madaripur,11-Oct-21,6,9,5,34,,,A,2,7-Jul-29,1745622202,01705983181
+1616306,Md Nurul Amin,MARRIED ,O+,149.94,60,ISLAM,15-Aug-88,Male,SM Barrak,Cumilla-S,Boropukur,Jhenaidah,18-Apr-21,6,9,3,34,,,A,2,18-Dec-32,1794448580,01794448581
+1616317,Md Saiful Islam,MARRIED ,O+,143.325,64,ISLAM,5-Feb-89,Male,SM Barrak,Belaichari,Khasial,Dinajpur,30-Aug-22,6,9,3,34,,,A,2,7-Jul-28,1738286098,01723705906
+1616329,Abdul halim,UNMARRIED,A+,158.76,65,ISLAM,9-Jul-89,Male,SM Barrak,Ramganj,Boropukur,Kurigram,1-May-19,9,10,3,43,,,A,2,7-Jul-28,1709342743,01778415839
+1616378,Md Rabiul Islam,MARRIED ,A+,145.53,61,ISLAM,15-Nov-88,Male,SM Barrak,Cox'S Bazar-S,Charbalakh,Rangpur,14-Sep-18,11,9,8,34,,,A,2,7-Jul-29,01737139834,01729149697
+1616398,Md Robiul Islam,UNMARRIED,O+,174.195,66,ISLAM,1-Jan-89,Male,SM Barrak,Ashuganj,Arambagh,Noakhali,5-Nov-22,9,10,3,32,,,A,1,8-Jul-29,173535367,01714409388
+1616405,Mohammad Rofikul Islam,MARRIED ,A+,158.76,60,ISLAM,20-Nov-89,Male,FM (Out living),Bijoynagar,Bijoynagar,Thakurgah,30-Aug-22,6,9,1,33,,,A,2,17-Dec-29,1732063659,01703252304
+1616414,Md Shah Alam,MARRIED ,B+,185.22,70,ISLAM,15-Feb-90,Male,SM Barrak,Sandwip,Sitakunda,Kurigram,21-Dec-07,10,10,8,33,,,A,,7-Jul-29,1308033466,01716244794
+1616448,Md Rasel Ahmmed,MARRIED ,O+,158.76,70,ISLAM,4-Jan-90,Male,SM Barrak,Fatikchari,Bijoynagar,Narail,1-May-19,6,9,5,32,,,A,2,30-Jul-30,1708379880,01708-372179
+1616455,Ridoanur Rahman,MARRIED ,A+,152.145,63,ISLAM,18-Feb-89,Male,FM (In living),Kasba,Khasial,Chittagong,17-Dec-21,5,9,1,33,,,A,2,7-Jul-31,1769273747,01879151750
+1616460,Sree Sonjoy Kumar Ghos,MARRIED ,A+,149.94,64,ISLAM,5-Jan-89,Male,SM Barrak,Chakoria,Kaligong,Sirajgong,7-May-22,9,10,8,32,,,A,,7-Jul-28,1708919628,01304527760
+1616463,Md Rafiqul Islam,MARRIED ,B+,158.76,70,ISLAM,1-Jan-90,Male,FM (In living),Laxmichari,Shatkura,Gaibanda,22-Aug-17,6,10,8,31,,,A,1,7-Jul-29,01762091605,01737417182
+1616471,Md Al amin Hossain,MARRIED ,AB+,145.53,70,ISLAM,1-Jan-90,Male,SM Barrak,Naikhyongchari,Patabuka,Sirajganj,16-Mar-22,10,10,6,33,,,A,2,29-Dec-29,01784186394,01784186395
+1616484,Md Abdullah Al Mamun,MARRIED ,O+,138.915,70,ISLAM,15-Jun-90,Male,FM (In living),Panchari,Soilkupa,Jessore,14-Jul-22,11,9,6,33,,,A,2,5-Jan-29,1745286128,01745-286128
+1616559,Md AMIR Hossain,MARRIED ,A+,163.17,63,ISLAM,10-Nov-89,Male,SM Barrak,Barishal-S,Monirampur,Rangpur,25-Jan-21,9,10,5,33,,,A,2,4-Jan-30,1744996680,01717323502
+1616596,Md Khairul Islam,MARRIED ,B+,123.48,65,ISLAM,29-Sep-90,Male,FM (In living),Kachua,Boropukur,Pabna,24-Nov-21,6,9,8,32,,,A,1,5-Jan-29,1706007489,01706291887
+1616598,Rofiqul Alam,MARRIED ,B+,165.375,60,ISLAM,24-May-90,Male,FM (Out living),Jhalokathi-S,Kaligong,Gopalganj,16-Jul-20,9,10,2,33,,,A,1,5-Jan-29,1643647427,01305422136
+1616624,Md Moniruzzaman,MARRIED ,B-,158.76,67,ISLAM,2-Feb-89,Male,FM (Out living),Companiganj,Sitakunda,Jamalpur,5-Dec-19,9,10,5,33,,,A,1,5-Jan-28,1703598063,01974430124
+1616663,Aslam Hossain Nahid,MARRIED ,O-,169.785,66,ISLAM,10-Jun-89,Male,FM (In living),Sitakunda,Tona,Faridpur,16-Mar-22,11,9,2,34,,,A,2,5-Jul-31,01739000407,01828110900
+1616686,Md Zahirul Islam,MARRIED ,A+,141.12,61,ISLAM,12-Aug-90,Male,SM Barrak,Kalapara,Patabuka,Jamalpur,18-Jan-22,6,9,5,33,,,A,2,3-Jan-31,1765383877,01746242418
+1616761,Md Amir Hossain,MARRIED ,A+,149.94,67,ISLAM,1-Oct-91,Male,SM Barrak,Nalchity,Shatkura,Khagrachhari,19-Jul-22,6,11,5,31,,,A,2,4-Jan-29,1769335510,01612-399519
+1616764,MD ANISUR RAHMAN,MARRIED ,B+,198.45,64,ISLAM,13-Dec-89,Male,SM Barrak,Komol Nagar,Bijoynagar,Kurigram,7-Nov-22,11,9,4,33,,,A,1,27-Jun-29,0181228634,01914403373
+1616813,Md Masud Rana,MARRIED ,O+,147.735,62,ISLAM,31-Dec-90,Male,FM (Out living),Ramu,Boropukur,Sirajgong,11-Nov-22,,12,2,32,,,A,1,3-Jan-23,1723246083,01780512079
+1616856,Md Sanwar Hossain,MARRIED ,A+,160.965,70,ISLAM,29-Nov-90,Male,SM Barrak,Brahmanpara,Khasial,Tangail,21-Jun-09,6,9,5,32,,,A,3,4-Jul-31,1721579505,01768271627
+1616892,Anisur Rahman,MARRIED ,O+,152.145,63,ISLAM,4-Mar-92,Male,FM (In living),Debidwar,Bijoynagar,Jamalpur,2-Feb-21,6,9,8,31,,,A,1,4-Jul-31,1782849700,01312426707
+1616900,Md Alamin Hossen,MARRIED ,B+,165.375,63,ISLAM,17-Feb-92,Male,SM Barrak,Lalmai,Soilkupa,Lalmonirhat,6-Feb-21,6,10,8,30,,,A,2,5-Jul-30,01767883502,01706291836
+1616920,Md Saiful Islam,MARRIED ,B+,121.275,70,ISLAM,15-Feb-91,Male,SM Barrak,Juraichari,Monirampur,Patuakhali,28-Oct-22,5,9,2,30,,,A,0,1-Sep-36,01733992871,01708379921
+1617032,Md Aminul Islam,MARRIED ,A+,145.53,64,ISLAM,15-Jul-92,Male,SM Barrak,Dighinala,Majila,Comilla,5-Dec-22,9,10,5,30,,,A,1,9-Jan-32,1754591032,01889-860716
+1617080,Md Zillur Rahman,UNMARRIED,O+,156.555,68,ISLAM,23-Apr-92,Male,FM (Out living),Rajosthali,Arambagh,Satkhira,20-Feb-14,6,9,3,30,,,A,2,10-Jul-31,1925208152,01931432155
+1617118,Abdul Momin,MARRIED ,B+,156.555,60,ISLAM,21-Aug-91,Male,FM (Out living),Senbag,Majila,Satkhira,25-Dec-10,6,9,2,32,,,A,0,11-Jul-33,01872290654,01620125416
+1617122,Md Nur Hossain,MARRIED ,A+,145.53,70,ISLAM,10-Sep-91,Male,SM Barrak,Nanniarchar,Arambagh,Jessore,14-Jan-22,7,9,2,31,,,A,1,11-Jul-34,01738176748,01738318392
+1617141,Md Al Amin,MARRIED ,A+,149.94,60,ISLAM,27-Jan-93,Male,FM (Out living),Porshuram,Khandakarpara,Dhaka,1-Jan-22,13,11,8,30,,,A,1,10-Jul-31,1793184229,01845347810
+1617166,Md Sabuj Rana,MARRIED ,A+,149.94,69,ISLAM,31-Dec-91,Male,FM (Out living),Muradnagar,Bijoynagar,Sirajgong,20-Sep-14,-,12,2,27,,,A,2,10-Jul-23,1741060052,01735573336
+1617168,Md Asadujjaman,MARRIED ,O+,167.58,60,ISLAM,15-Aug-93,Male,SM Barrak,Bhola-S,Shatkura,Bhola,18-Jan-18,11,10,4,29,,,A,1,8-Jan-32,1753199915,01743885270
+1617174,Piyal Borua Misu,UNMARRIED,O+,152.145,63,ISLAM,8-Dec-92,Male,FM (In living),Banaripara,Shatkura,Coxs Bazar,14-Jul-22,10,10,4,26,,,A,1,8-Jan-32,1614944820,01614-944821
+1617193,Md Rakib Hossen,MARRIED ,B+,147.735,70,ISLAM,3-Feb-93,Male,FM (Out living),Mahalchari,Patabuka,Chuadanaga,25-Jun-11,10,10,4,29,,,A,2,8-Jan-32,1797069111,01797-069112
+1617202,Md Juwel Hossain,MARRIED ,O+,152.145,61,ISLAM,5-Dec-92,Male,SM Barrak,Akhaura,Shatkura,Jhenaidah,19-Jan-14,6,9,5,30,,,A,1,8-Jan-32,1872632535,01872-632534
+1617207,Md Kamrul Hasan,MARRIED ,B+,138.915,62,ISLAM,15-May-92,Male,FM (In living),Karnaphuli,Khandakarpara,Kishoregonj,14-Apr-18,13,11,6,31,,,A,1,1-Jan-32,01774169258,01742997230
+1617235,Md Saddam Hossen,MARRIED ,A+,171.99,61,ISLAM,11-Aug-92,Male,FM (Out living),Panchari,Shatkura,Rangamati,16-Mar-22,6,9,5,31,,,A,1,16-Jul-34,1732807533,01321-193159
+1617260,Md Uzzal Hossain,MARRIED ,O+,156.555,68,ISLAM,26-Sep-92,Male,FM (In living),Naikhyongchari,Shatkura,Kushtia,23-Dec-11,6,10,5,31,,,A,1,9-Jul-32,1947299718,01742-637361
+1617269,MD. MAHMUDUL HASAN JUWEL,MARRIED ,B+,169.785,64,ISLAM,19-Feb-94,Male,FM (Out living),Mahalchari,Golapbagh,Jessore,26-Jul-20,11,11,4,30,,,A,1,21-Dec-31,01712742139,01835502830
+1617274,Al Emran,MARRIED ,A+,163.17,60,ISLAM,31-Oct-90,Male,FM (Out living),Sitakunda,Kaligong,Chuadanaga,14-Feb-22,8,9,3,31,,,A,1,9-Sep-34,1735803941,01781581745
+1617294,Harun ar Rashid,MARRIED ,B+,163.17,70,ISLAM,1-Jan-93,Male,SM Barrak,Kalapara,Nelfamari,Jamalpur,24-Aug-22,8,8,3,30,,,A,1,9-Jul-34,1833572375,01770772842
+1617318,Md Selim Reza,MARRIED ,O+,145.53,69,ISLAM,10-Nov-93,Male,SM Barrak,Mirsharai,Soilkupa,Jamalpur,21-Oct-20,13,11,8,29,,,A,1,7-Jan-33,01757245557,01706291829
+1617360,FAISHAL AHAMMED,MARRIED ,O+,152.145,60,ISLAM,1-Jan-93,Male,SM Barrak,Noakhali-S,Charbalakh,Meherpur,16-Mar-22,11,9,4,30,,,A,1,21-Jun-35,01791651550,01974013423
+1617375,Md Abdur Rouf,MARRIED ,A+,147.735,60,ISLAM,11-Feb-93,Male,FM (In living),Laxmipur-S,Nelfamari,Nilfamari,18-Nov-22,6,9,5,30,,,A,0,7-Jan-36,1738171733,01728160314
+1617383,Md Rasel Hossain,MARRIED ,B+,154.35,68,ISLAM,25-Jun-94,Male,FM (In living),Mehendiganj,Shatkura,Joypurhat,23-Jun-12,13,11,4,28,,,A,1,7-Jan-33,1776656812,01726316262
+1617386,Md Sujon Ajad,MARRIED ,AB+,154.35,63,ISLAM,31-Dec-92,Male,SM Barrak,Babuganj,Patabuka,Rajbari,8-Mar-17,9,10,4,30,,,A,1,7-Jan-36,1731590296,01792236891
+1617441,Jannatul Ferdous,UNMARRIED,B+,163.17,63,ISLAM,8-Aug-94,Male,SM Barrak,Nalchity,Arambagh,Kishoreganj,23-Jun-22,1,12,2,28,,,A,1,12-Jun-24,01741682145,01741682145
+1617470,Md Abdula Al Mamun,MARRIED ,A+,149.94,65,ISLAM,22-Oct-94,Male,FM (Out living),Ruma,Boropukur,Bogra,3-Nov-22,6,10,3,29,,,A,0,7-Jul-33,1787449071,01310689318
+1617527,Al Amin,UNMARRIED,O+,136.71,63,ISLAM,1-Dec-93,Male,SM Barrak,Mirsharai,Golapbagh,Brahman Baria,22-Dec-12,10,10,4,29,,,A,1,5-Jan-34,1741661756,01951060527
+1617591,Md Jahid Hasan,MARRIED ,B+,143.325,66,ISLAM,9-Feb-94,Male,FM (Out living),Cumilla-S Daksin,Kaligong,Dhaka,22-Jun-13,10,11,7,28,,,A,0,5-Jan-36,1718680175,01719745385
+1617686,Md Helal Uddin,MARRIED ,AB-,156.555,61,ISLAM,19-Sep-94,Male,SM Barrak,Uzirpur,Khasial,Dinajpur,8-Jul-20,9,10,8,28,,,A,1,5-Jan-34,01788275282,01706291258
+1617689,Md Lutfor Rahman,MARRIED ,A-,149.94,69,ISLAM,20-Jul-94,Male,SM Barrak,Bauphal,Charbalakh,Naogaon,9-Feb-22,6,10,5,29,,,A,1,6-Jul-34,01728829113,01738-734148
+1617705,Md Arif Hossain,MARRIED ,B-,165.375,66,ISLAM,3-Jan-94,Male,SM Barrak,Senbag,Bolarampur,Jhalakathi,12-Nov-22,8,9,3,28,,,A,0,5-Jan-38,01787988573,01724840385
+1617717,Md Nazmul Alam Tuhin,MARRIED ,O+,141.12,70,ISLAM,13-Jul-94,Male,SM Barrak,Kutubdia,Shatkura,Gazipur,16-Mar-22,10,11,4,29,,,A,0,5-Jan-36,1749517293,01731607929
+1617774,Rubel Ahamed,MARRIED ,B+,141.12,64,ISLAM,13-Dec-98,Male,SM Barrak,Nabinagar,Bijoynagar,Natore,16-Jul-22,6,11,7,28,,,A,1,5-Jan-34,1761331908,01738016255
+1617776,Md Mofizul Islam,UNMARRIED,O+,156.555,69,ISLAM,20-Dec-94,Male,SM Barrak,Kachua,Boropukur,Kurigram,22-Jun-13,9,10,8,26,,,A,1,5-Jan-34,1762904890,01306291829
+1617783,Mohammad Kobir Hossain,MARRIED ,O+,152.145,66,ISLAM,30-Dec-93,Male,SM Barrak,Chandanish,Majila,Jamalpur,22-Jun-13,13,11,5,29,,,A,0,5-Jan-34,1751635964,01916-098458
+1617815,Md Alomgir,MARRIED ,A+,147.735,63,ISLAM,18-Feb-94,male,SM Barrak,Fatikchari,Kaligong,Jamalpur,21-Jun-13,6,11,6,29,,,A,1,5-Jan-35,01731514493,01729729637
+1617822,Md Nazmul Hasan,MARRIED ,B+,138.915,62,ISLAM,25-Dec-93,Male,SM Barrak,Brahmanpara,Khandakarpara,Mymensingh,17-Feb-22,10,10,6,29,,,A,1,13-Jan-32,01784804929,01784804929
+1617834,Shohanur Rahman,MARRIED ,O+,158.76,68,ISLAM,25-Dec-93,Male,SM Barrak,Barkal,Kaligong,Satkhira,4-Dec-22,6,11,6,29,,,A,1,13-Jan-32,01784186354,01784186356
+1617876,Md Jewel Rana,MARRIED ,O+,149.94,64,ISLAM,12-Mar-95,Male,SM Barrak,B.Baria-S,Arambagh,Jessore,15-Dec-21,6,11,3,27,,,C,2,3-Jun-36,1738867030,01304844835
+1617898,Md Rezaul Haque,UNMARRIED,B+,156.555,66,ISLAM,18-Aug-94,Male,SM Barrak,Chakoria,Tona,Manikganj,16-Jan-14,6,11,8,28,,,A,1,13-Jul-32,01715830027,01945347810
+1617920,Md Shamim Reza,MARRIED ,A+,189.63,62,ISLAM,22-Oct-95,Male,SM Barrak,Karnaphuli,Khasial,Satkhira,16-Mar-22,6,10,5,28,,,A,0,13-Jul-36,1942083769,01846-912906
+1617924,Md Abul Hasnat,MARRIED ,O+,149.94,62,ISLAM,27-Dec-94,Male,SM Barrak,Dighinala,Charbalakh,Chapai Nawabganj,16-Jan-14,11,11,2,28,,,A,0,14-Jul-34,01874502195,01303846796
+1617926,A.Rakib,MARRIED ,B+,165.375,63,ISLAM,20-Feb-96,Male,SM Barrak,Daganbhuiyan,Khandakarpara,Dinajpur,18-Nov-22,11,9,4,26,,,A,0,17-Jul-38,01770949727,01795401220
+1617943,Md Abdur Rohim,MARRIED ,B+,149.94,67,ISLAM,13-Feb-95,Male,FM (Out living),Sandwip,Monirampur,Dinajpur,19-Nov-22,10,10,4,27,,,A,0,14-Jul-35,01788325688,01750406977
+1617965,Mohammad Mushfikur Rahman Shohag,MARRIED ,O+,176.4,61,ISLAM,4-Apr-96,Male,FM (In living),Cox'S Bazar-S,Sitakunda,Cumilla,18-May-22,7,9,2,27,,,A,0,13-Jul-37,01303930616,01787875081
+1617966,Md Razib Hosen,MARRIED ,A+,158.76,66,ISLAM,5-Oct-93,Male,SM Barrak,Daudkandi,Monirampur,Tangail,14-Jan-14,9,11,8,29,,,A,0,30-Dec-34,01777130102,01747593514
+1617978,Md Rayhan Ali,MARRIED ,B+,167.58,70,ISLAM,5-Mar-95,Male,SM Barrak,Sandwip,Bijoynagar,Sirajgong,11-Jul-22,6,10,5,27,,,A,0,13-Jul-36,1750376945,01738-734148
+1617993,Md Yousuf,MARRIED ,O+,136.71,60,ISLAM,13-Jun-94,Male,SM Barrak,Monohorganj,Sitakunda,Gopalganj,31-Dec-13,6,11,6,28,,,A,1,31-Dec-36,01746612236,01731624803
+1617999,Md Sadequr Rahman Sakil,MARRIED ,O+,149.94,62,ISLAM,20-Dec-94,Male,SM Barrak,Rajosthali,Majila,Barguna,12-Jan-14,6,11,5,28,,,A,1,30-Dec-13,01609982950,013001738985569
+1618044,Md Jahidul Islam,MARRIED ,O+,158.76,67,ISLAM,20-Dec-95,Male,SM Barrak,Ramgati,Bolarampur,Bagerhat,21-Jun-22,6,11,5,27,,,A,1,13-Jul-36,1722715079,01738985569
+1618047,Md Sajedur Rahman,UNMARRIED,O+,145.53,60,ISLAM,5-Sep-95,Male,SM Barrak,Ashuganj,Nelfamari,Jessore,13-Aug-22,1,12,2,27,,,A,0,13-Jul-23,1786716917,01786-716917
+1618055,Md Mehadi Hasan,MARRIED ,A+,147.735,61,ISLAM,29-Sep-95,Male,SM Barrak,Patuakhali-S,Majila,Thakurgaon,16-Jan-14,11,10,8,27,,,A,1,25-Jan-38,01773536240,01847593515
+1618067,MD MYDUL ISLAM,MARRIED ,O+,132.3,65,ISLAM,13-May-95,Male,SM Barrak,Teknaf,Tona,Rangpur,16-Oct-22,11,10,4,27,,,A,0,26-Jan-37,01774454375,1783201092
+1618077,Md Rakibul Islam,MARRIED ,B+,163.17,65,ISLAM,1-Jan-96,Male,SM Barrak,Bhandaria,Monirampur,Faridpur,7-Nov-19,6,10,5,26,,,A,0,25-Jan-21,1811591346,01738985569
+1618084,Md Mehedi Hasan,MARRIED ,O+,134.505,64,ISLAM,4-May-96,Male,SM Barrak,Muladi,Khasial,Jamalpur,3-Mar-21,9,11,7,26,,,A,1,25-Jan-37,1714077960,01302370522
+1618097,Md Ismail Hossain,MARRIED ,B+,154.35,70,ISLAM,20-Jan-96,Male,SM Barrak,Chandanish,Bolarampur,Comilla,1-Mar-17,10,11,4,26,,,A,0,25-Jan-37,01829378751,01601378751
+1618294,Abu Huraira,MARRIED ,A+,123.48,67,ISLAM,27-Dec-95,Male,SM Barrak,Barkal,Monirampur,Jamalpur,31-May-22,5,9,1,27,,,A,2,7-Aug-38,1729503725,1904536708
+1618317,Mamun Molla,MARRIED ,O+,165.375,64,ISLAM,30-Dec-97,Male,FM (Out living),Kasba,Khasial,Magura,26-Aug-21,8,9,5,25,,,A,,23-Jan-41,01729629207,01732327321
+1618388,Md Anwarul Islam,MARRIED ,A+,114.66,70,ISLAM,17-Jan-97,Male,SM Barrak,Amtali,Soilkupa,Chuadanga,15-Jan-16,5,10,2,26,,,A,1,24-Jan-39,01775112833,01950453833
+1618391,Luxmi Saha,UNMARRIED,O+,149.94,66,ISLAM,1-Mar-96,Female,SM Barrak,Bandarban-S,Bolarampur,Tangail,12-Apr-22,11,11,4,26,,,A,1,23-Jan-38,1792098014,
+1618406,Md Sahin Reza,MARRIED ,O+,167.58,68,ISLAM,15-Sep-97,Male,SM Barrak,Rowangchari,Boropukur,Rajbari,23-Dec-21,8,9,8,26,,,A,1,27-Jan-38,01757519297,01747185466
+1618426,Ijaj Ahamed,MARRIED ,AB+,125.685,63,ISLAM,3-Nov-97,Male,SM Barrak,Bhandaria,Golapbagh,Brahman Baria,14-Jan-16,6,10,5,25,,,A,1,23-Jan-38,1771338179,01648-473849
+1618434,Md Ahsan Habib,UNMARRIED,O+,158.76,65,ISLAM,25-Oct-96,Male,SM Barrak,Bakerganj,Patabuka,Tangail,14-Jan-16,8,9,5,26,,,A,0,23-Jan-40,01770087209,01738985569
+1618435,Arif Farazi,MARRIED ,A+,116.865,63,ISLAM,1-Jan-97,Male,SM Barrak,Faridganj,Arambagh,Barguna,13-Jan-16,5,10,1,26,,,A,0,12-Jan-37,1729624125,
+1618464,Bipasha Hayat,UNMARRIED,O+,149.94,63,ISLAM,15-Apr-95,Female,SM Barrak,Nanniarchar,Sitakunda,Sherpur,3-Nov-21,6,10,7,27,,,A,1,23-Jan-38,01858599617,
+1618510,Md Shuvo Hossen,UNMARRIED,B+,138.915,69,ISLAM,20-Oct-96,Male,SM Barrak,Kasba,Bijoynagar,Dhaka,23-May-21,6,10,1,26,,,A,0,23-Jan-39,1785992534,
+1618544,Md Motiur Rahman,MARRIED ,O+,145.53,67,ISLAM,30-Dec-95,Male,FM (Out living),Mirjaganj,Kaligong,Kurigram,14-Jan-16,12,11,2,27,,,A,,23-Jan-38,1796041395,01747822969
+1618585,Nazifa Akter,MARRIED ,O+,136.71,60,ISLAM,2-Aug-98,Female,FM (In living),Juraichari,Boropukur,Mymensingh,14-Jan-16,6,11,8,25,,,A,1,22-Jan-39,1746261480,01788638863
+1618635,MD Arafat Biswas,MARRIED ,A+,149.94,63,ISLAM,25-Oct-95,Male,SM Barrak,Lalmohan,Khandakarpara,magura,23-Jul-21,6,11,5,26,,,A,1,22-Jan-39,01910687074,01985054345
+1618642,Md Nahid Hasan,MARRIED ,B+,152.145,62,ISLAM,2-Feb-97,Male,SM Barrak,Homna,Shatkura,Meherpur,16-Mar-22,10,11,8,26,,,A,1,23-Jan-39,1781703860,01322102900
+1618644,Md Rohan Khan,MARRIED ,A-,154.35,68,ISLAM,15-Mar-97,Male,SM Barrak,Cumilla-S,Khandakarpara,Jamalpur,5-Dec-22,9,11,4,26,,,A,0,22-Jan-39,01849422842,01889310468
+1618665,Md Sumon Mollah,UNMARRIED,A-,127.89,62,ISLAM,5-Mar-97,Male,SM Barrak,Cumilla-S Daksin,Bijoynagar,Faridpur,30-Dec-16,9,11,4,26,,,A,0,22-Jan-39,1766203006,
+1618670,Zannatun Ferdaus,MARRIED ,A+,165.375,64,ISLAM,1-Jan-96,Female,SM Barrak,Agailjhara,Tona,Bogra,30-Dec-16,6,11,3,26,,,A,0,3-Jun-36,01796789913,015217720
+1618691,Md Kamrul Hasan,UNMARRIED,AB+,149.94,69,ISLAM,12-Jan-96,Male,SM Barrak,Feni-S,Arambagh,Joypurhat,30-Dec-16,9,11,1,27,,,A,0,22-Jan-39,01720866820,
+1618693,Shahin Miah,UNMARRIED,B+,163.17,70,ISLAM,15-Aug-98,Male,SM Barrak,Fatikchari,Tona,Serpur,1-Jan-17,6,11,8,25,,,A,,22-Jan-39,1765680733,01946593577
+1618703,Md Nazrul Islam,MARRIED ,B+,160.965,61,ISLAM,5-Nov-97,Male,SM Barrak,Ashuganj,Arambagh,Sirajgong,30-Dec-16,9,11,5,25,,,A,0,22-Jan-39,1744431224,01735-882064
+1618726,Nur  Islam,MARRIED ,AB+,138.915,61,ISLAM,18-Mar-97,Male,SM Barrak,Monohorganj,Majila,Jhenaidah,30-Dec-16,9,11,2,25,,,A,0,22-Jan-40,1749877424,01720860583
+1618734,Ashish Baroi,UNMARRIED,B+,152.145,64,ISLAM,15-Jul-97,Male,SM Barrak,Chatkhil,Nelfamari,Madaripur,20-Jul-22,6,11,8,25,,,A,0,22-Jan-39,1967726039,01777597677
+1618769,Md Raihan Ali,MARRIED ,A+,154.35,64,ISLAM,9-Aug-96,Male,SM Barrak,Rangamati-S,Shatkura,Naogaon,1-Jan-17,6,11,2,26,,,A,0,16-Jan-40,01767160403,01768507755
+1618771,Md Ibrahim Khan,MARRIED ,O+,163.17,61,ISLAM,23-Jun-98,Male,SM Barrak,Burichong,Majila,Barisal,28-Nov-22,6,11,7,25,,,A,0,31-Jan-39,01743832664,01739410648
+1618775,Md Nasim Uddin,MARRIED ,B+,149.94,64,ISLAM,30-Dec-97,Male,SM Barrak,Sarail,Shatkura,Bogra,22-Oct-21,9,11,5,25,,,A,0,22-Jan-39,01753604626,01715-249233
+1618782,Shamaun Mir,UNMARRIED,A+,191.835,64,ISLAM,15-Jul-98,Male,SM Barrak,Laksham,Boropukur,Naogaon,30-Dec-16,6,11,5,24,,,A,0,22-Jan-39,1717174635,01797885982
+1618792,Tapan Ray,UNMARRIED,O+,127.89,69,ISLAM,10-Jan-97,Male,SM Barrak,Burichong,Khandakarpara,Madaripur,30-Dec-16,9,11,1,26,,,A,0,22-Jan-39,1797346871,
+1618805,Shilpi Akter,MARRIED ,B+,158.76,62,ISLAM,10-Oct-97,Female,SM Barrak,Begumganj,Tona,Thakurgaon,1-Jan-17,11,11,4,25,,,A,,23-Jan-39,01723783161,01750620435
+1618811,Md Shahin Ahmed,MARRIED ,B+,123.48,70,ISLAM,10-Mar-96,Male,FM (In living),Companiganj,Monirampur,Chuadanaga,30-Dec-16,9,11,8,25,,,A,0,22-Jan-39,1707510809,01745722736
+1618894,Ariful Islam,UNMARRIED,AB+,147.735,61,ISLAM,4-Mar-97,Male,SM Barrak,Homna,Patabuka,Rajbari,1-May-19,8,9,3,25,,,A,0,22-Jan-39,1796692452,01714409388
+1618910,Md Motiar Rahman,MARRIED ,B+,147.735,64,ISLAM,3-Apr-97,Male,SM Barrak,Gouranadi,Majila,Jessore,30-Dec-16,6,11,7,25,,,A,0,22-Jan-39,1752217284,01954697104
+1618931,Shahin Alam,MARRIED ,B+,152.145,66,ISLAM,15-Mar-97,Male,FM (In living),Meghna,Khandakarpara,Thakurgaon,30-Dec-16,9,11,8,27,,,A,0,22-Jan-39,1744633769,01789593595
+1618944,Mahmudul Hasan,MARRIED ,B+,125.685,67,ISLAM,10-Nov-98,Male,FM (Out living),Brahmanpara,Kaligong,Sherpur,1-Jan-17,6,11,5,24,,,A,1,22-Jan-39,1763197309,01660106297
+1618969,Mst Sumaiya Khatun,MARRIED ,A+,149.94,64,ISLAM,30-Nov-96,Female,SM Barrak,Banskhali,Nelfamari,Rajshahi,30-Dec-16,6,11,5,26,,,A,0,22-Jan-39,01778603088,01736482119
+1618991,Md Sujun Hossain,MARRIED ,A+,110.25,69,ISLAM,15-Aug-97,Male,SM Barrak,Matiranga,Nelfamari,Naogaon,10-Nov-22,6,11,5,26,,,A,0,23-Jan-39,01787402774,01710-969878
+1619006,Sumaya Shema,MARRIED ,A+,156.555,61,ISLAM,25-Oct-97,Female,FM (In living),Barishal-S,Shatkura,Jamalpur,9-Nov-22,11,11,2,26,,,A,0,22-Jan-39,1625609333,01752808258
+1619015,Md Tauhidul Islam,UNMARRIED,O+,156.555,69,ISLAM,8-Nov-96,Male,SM Barrak,Daulatkhan,Bolarampur,Comilla,15-Apr-18,9,11,5,25,,,A,1,22-Jan-39,1639065238,01859924301
+1619022,Md Jakariya Hossan,UNMARRIED,B+,127.89,70,ISLAM,1-Apr-98,Male,SM Barrak,Sitakunda,Shatkura,Sharpur,1-May-19,6,11,3,25,,,A,0,24-Jan-39,1611226852,01933730305
+1619030,Md  Shaziv Hossain,MARRIED ,B+,149.94,61,ISLAM,7-May-96,Male,SM Barrak,Matlab (Dakshin),Golapbagh,Meherpur,7-Aug-22,9,11,6,26,,,A,0,23-Jan-41,01718131170,
+1619038,Raju Ahammed,MARRIED ,A+,143.325,68,ISLAM,7-Feb-95,Male,SM Barrak,Companiganj,Khandakarpara,Tangail,1-Jan-17,11,11,4,27,,,A,0,22-Jan-39,1978963428,
+1619068,Md Emdad Hossain,MARRIED ,B+,163.17,66,ISLAM,8-Apr-97,Male,SM Barrak,B.Baria-S,Bijoynagar,Mymensingh,31-Dec-16,9,11,5,25,,,C,0,22-Jan-39,01704074849,01738985569
+1619083,Md Iftear Mahmud,UNMARRIED,O+,145.53,67,ISLAM,20-Sep-96,Male,SM Barrak,Hatiya,Charbalakh,Pabna,16-Mar-22,11,11,4,25,,,A,0,22-Jan-39,1761327683,
+1619085,Md Monnaf Ali,MARRIED ,B+,138.915,62,ISLAM,6-Apr-97,Male,SM Barrak,Porshuram,Majila,Sirajgong,30-Dec-16,6,11,1,25,,,A,0,28-Dec-39,01918212749,01718730589
+1619152,Md Shoriful Islam,MARRIED ,O+,154.35,60,ISLAM,25-Nov-97,Male,SM Barrak,Nasirnagar,Soilkupa,Nilphamari,1-Jan-17,1,12,7,24,,,A,,22-Jan-26,1732531597,01728506755
+1619213,Md Selim Reja,MARRIED ,B+,143.325,66,ISLAM,13-Oct-97,Male,FM (In living),Muladi,Sitakunda,Gaibanda,31-Dec-16,1,12,2,25,,,A,1,29-Dec-23,01610843128,01402970167
+1619217,Sohag,MARRIED ,B+,127.89,69,ISLAM,31-May-98,Male,SM Barrak,Moheskhali,Boropukur,Madaripr,30-Dec-16,1,12,8,24,,,A,0,22-Dec-26,1712552473,01752421300
+1619220,Rabbi Mia,MARRIED ,O+,154.35,68,ISLAM,2-Mar-96,Male,SM Barrak,Amtali,Patabuka,Tangail,16-Mar-22,1,12,2,26,,,A,0,22-Jan-25,01558274587,01756245775
+1619226,Sajal Molla,UNMARRIED,B+,147.735,61,ISLAM,28-Oct-97,Male,SM Barrak,Kutubdia,Nelfamari,Faridpur,1-May-19,13,11,5,25,,,A,0,17-Jul-39,1756688821,01717371110
+1619238,Md Selim Alahi,MARRIED ,AB-,134.505,60,ISLAM,11-May-98,Male,SM Barrak,Lohagara,Majila,Joypurhat,27-Dec-16,13,11,4,24,,,A,0,17-Jul-39,1743444209,
+1619239,Md Saimun Hossain,MARRIED ,B+,149.94,62,ISLAM,3-Aug-97,Male,SM Barrak,Charfassion,Monirampur,Magura,31-Dec-16,14,11,2,25,,,A,0,17-Jul-39,1772656824,01972656824
+1619243,Emon Hossain,UNMARRIED,B+,152.145,70,ISLAM,5-Jul-97,Male,SM Barrak,Kathalia,Khandakarpara,Gazipur,27-Dec-16,1,12,6,25,,,A,0,19-Jan-27,1938068678,
+1619268,Mohammad Rakibul Hasan,UNMARRIED,B+,134.505,60,ISLAM,11-Oct-98,Male,SM Barrak,Kalapara,Tona,Mymensingh,6-Oct-17,11,11,4,24,,,A,0,14-Jan-40,1776158036,
+1619274,Md Hasan Ali,MARRIED ,A+,127.89,61,ISLAM,17-Jan-97,Male,SM Barrak,Rangamati-S,Patabuka,Gaibanda,8-Jul-17,9,11,3,26,,,A,0,14-Jan-40,01966527087,01936885142
+1619327,Zihad Hossain,UNMARRIED,O+,138.915,63,ISLAM,1-Sep-97,Male,SM Barrak,Pekua,Shatkura,Jhenaidah,9-Feb-22,9,11,6,25,,,A,1,14-Jan-40,1765692750,0
+1619333,Md Abul Bashar,UNMARRIED,O+,143.325,70,ISLAM,15-Dec-98,Male,SM Barrak,Rangunia,Bolarampur,Rajshahi,6-Jul-17,11,11,4,24,,,A,0,14-Jan-40,1796158581,
+1619360,Shakil khan,UNMARRIED,B+,152.145,69,ISLAM,4-May-97,Male,SM Barrak,Uzirpur,Nelfamari,Manikgonj,8-Jul-17,9,11,3,25,,,A,0,14-Jan-39,1779732760,01789320683
+1619379,Md Touhiduzzaman,UNMARRIED,O+,138.915,61,ISLAM,28-Jun-98,Male,SM Barrak,Chandina,Bijoynagar,Barisal,8-Jul-17,9,11,7,24,,,A,0,14-Jan-40,01773342696,
+1619409,Md Abdul Aziz Repon,UNMARRIED,A+,141.12,67,ISLAM,25-Sep-98,Male,SM Barrak,Taltali,Kaligong,Dinajpur,9-Feb-22,5,11,6,25,,,A,0,14-Jan-40,1789061736,
+1619415,Shariful Haque,UNMARRIED,A+,141.12,62,ISLAM,20-Jun-97,Male,SM Barrak,Kasba,Patabuka,Bogra,8-Jul-17,8,9,8,26,,,A,0,14-Jan-40,1782465976,
+1619436,Md Mehedi Hasan,UNMARRIED,AB+,138.915,70,ISLAM,16-Oct-99,Male,SM Barrak,Babuganj,Majila,Jhenaidah,8-Jul-17,7,11,6,24,,,A,0,14-Jan-40,01709431814,1943574551
+1619468,Md Robiul Islam,UNMARRIED,O+,152.145,61,ISLAM,15-Aug-97,Male,SM Barrak,Dashmina,Soilkupa,Lalmonirhat,8-Jul-17,9,11,8,26,,,A,0,14-Jan-40,01861588889,
+1619469,Md Masud Rana,UNMARRIED,B+,145.53,64,ISLAM,25-Oct-97,Male,SM Barrak,Juraichari,Arambagh,Bogra,9-Feb-22,11,11,4,26,,,A,0,14-Jan-40,1517093425,
+1619482,Md Sabbir Ahmed,UNMARRIED,A+,143.325,62,ISLAM,12-Dec-97,Male,SM Barrak,Belaichari,Nelfamari,Bogra,8-Jul-17,9,11,6,26,,,A,0,13-Jan-40,1792702946,
+1619486,Md Zahedul Islam,MARRIED ,B+,136.71,60,ISLAM,11-Aug-97,Male,SM Barrak,Chhagalniya,Bijoynagar,Dinajpur,8-Jul-17,11,11,4,25,,,A,0,5-Jul-40,01717663918,01798992372
+1619502,Shawon Hossain,MARRIED ,B+,149.94,65,ISLAM,14-Feb-98,Male,SM Barrak,Bijoynagar,Patabuka,Jessore,9-Feb-22,9,11,1,25,,,A,0,14-Jan-40,1648214298,01797373499
+1619534,Md Ariful Islam,UNMARRIED,O+,160.965,68,ISLAM,14-Jul-98,Male,SM Barrak,Guimara,Shatkura,Tangail,8-Jul-17,1,12,6,25,,,A,0,3-Oct-27,01770487702,
+1619556,Md Noor Hosen,MARRIED ,B+,147.735,60,ISLAM,1-Aug-97,Male,FM (In living),Bakerganj,Bijoynagar,Kurigram,16-Mar-22,9,11,6,26,,,A,0,14-Jan-40,1773982051,
+1619570,Farhan Tanvir Rafi,UNMARRIED,AB-,149.94,61,ISLAM,5-Dec-97,Male,SM Barrak,Zianagar,Majila,Manikgonj,1-May-19,6,11,2,25,,,A,0,14-Jan-40,01850224177,
+1619587,Sumon Islam,MARRIED ,B+,119.07,64,ISLAM,9-Mar-97,Male,SM Barrak,Amtali,Majila,Panchagar,8-Jul-17,10,11,6,26,,,A,0,14-Jan-40,1761266998,
+1619621,Md Hasebul Islam,UNMARRIED,O+,171.99,62,ISLAM,28-Sep-22,Male,FM (Out living),Patharghata,Kaligong,Rajshahi,1-May-19,9,11,3,26,,,A,1,7-Jul-40,1790149515,01946480600
+1619650,Mamun,MARRIED ,O-,154.35,66,ISLAM,5-Aug-97,Male,SM Barrak,Laksham,Majila,Natore,16-Mar-22,5,11,2,26,,,A,0,7-Jun-40,01759805490,01785960422
+1619656,Imtiaz Mahmud,MARRIED ,B+,132.3,64,ISLAM,16-Nov-96,Male,FM (Out living),Dashmina,Boropukur,Chandpur,3-Dec-22,11,11,2,26,,,A,0,14-Jan-40,01675336615,01684396010
+1619658,Md. Ariful Islam,MARRIED ,B+,158.76,65,ISLAM,14-Jul-98,Male,SM Barrak,Sarail,Arambagh,Chandpur,1-May-19,1,Other,6,25,,,A,0,23-Nov-41,01770487702,01760695020
+1619666,Nur Mahamud,MARRIED ,O+,176.4,68,ISLAM,2-Jul-97,Male,SM Barrak,Kaptai,Monirampur,Tangail,28-Mar-22,9,11,8,25,,,A,0,21-Jan-40,1782627622,01799479233
+1619681,Khondokar Washim Akram,MARRIED ,B+,154.35,62,ISLAM,9-Mar-97,Male,SM Barrak,Homna,Nelfamari,Kushtia,30-Nov-17,6,11,5,26,,,A,0,21-Jan-40,1772911311,01994554355
+1619682,Md Sohel Rana,UNMARRIED,O+,132.3,70,ISLAM,30-Nov-97,Male,SM Barrak,Taltali,Bijoynagar,Sirajgong,30-Nov-17,11,11,4,26,,,A,0,21-Jan-40,1791598254,
+1619687,Md Hasan Motiur Rahman,MARRIED ,A+,152.145,65,ISLAM,24-Apr-97,Male,In living,Monohorganj,Nelfamari,Natore,30-Nov-17,10,11,6,25,,,A,0,21-Jan-40,01795006141,01321193157
+1619724,Md Parves Hossain,UNMARRIED,A+,136.71,68,ISLAM,25-Oct-99,Male,SM Barrak,Lama,Bijoynagar,Chuadanaga,1-Dec-17,6,11,1,23,,,A,0,21-Jan-40,1737377234,01750-624319
+1619727,Md Sahin Alam,UNMARRIED,B+,125.685,69,ISLAM,19-Dec-97,Male,SM Barrak,Bakerganj,Khandakarpara,Dinajpur,30-Nov-17,9,11,8,26,,,A,,18-May-37,01643560602,
+1619771,Md Suzon Mia,UNMARRIED,A+,136.71,69,ISLAM,6-Oct-97,Male,SM Barrak,Ramgati,Nelfamari,Jamalpur,19-May-22,6,11,3,25,,,A,0,19-Jan-40,01727617504,01617828055
+1619787,Towsif Ahmmed,UNMARRIED,O+,149.94,70,ISLAM,30-Nov-96,Male,SM Barrak,Bijoynagar,Patabuka,Mymensingh,16-Mar-22,10,11,7,25,,,A,0,19-Jan-40,1771182905,
+1619829,Md Masud Rana,UNMARRIED,B+,156.555,62,ISLAM,2-Jan-99,Male,SM Barrak,Sonaimuri,Shatkura,Sirajgong,30-Nov-17,6,11,1,24,,,A,0,21-Jan-40,1747678175,
+1619834,Md Robiul Islam,MARRIED ,O+,138.915,63,ISLAM,2-Mar-97,Male,SM Barrak,Moheskhali,Khasial,Satkhira,30-Nov-17,9,11,7,25,,,A,,21-Jan-40,1746205809,01305387189
+1619843,Rasedul Islam,UNMARRIED,B+,149.94,61,ISLAM,27-Sep-97,Male,SM Barrak,Sonagazi,Monirampur,Manikgonj,1-May-19,9,11,8,26,,,A,1,21-Jan-40,1710278623,
+1619889,Md Imran Hossain,MARRIED ,A+,174.195,69,ISLAM,11-Mar-97,Male,FM (Out living),Bakerganj,Golapbagh,Netrokona,30-Nov-17,9,11,4,25,,,A,0,19-Jan-40,1710880474,01753476347
+1619905,Md Shamim Kazi,MARRIED ,B+,143.325,68,ISLAM,1-Jul-96,Male,SM Barrak,Ashuganj,Shatkura,Rajbari,16-Mar-22,9,11,6,26,,,A,0,21-Jan-40,01738089702,01841364459
+1619922,Md Rajib Miah,UNMARRIED,A+,149.94,66,ISLAM,24-Jun-97,Male,SM Barrak,Patiya,Arambagh,Manikgonj,30-Nov-17,9,11,7,25,,,A,0,21-Jan-40,1776021989,01612379234
+1619958,Md Asraful Islam,UNMARRIED,B+,149.94,61,ISLAM,11-Nov-97,Male,SM Barrak,Tazumuddin,Shatkura,Manikgonj,30-Nov-17,9,11,6,25,,,A,0,19-Jan-40,01729689869,1728332055
+1619985,Md Johurul Islam,UNMARRIED,A+,143.325,60,ISLAM,1-Nov-98,Male,SM Barrak,Manikchari,Soilkupa,Rajshahi,30-Nov-17,10,11,4,25,,,A,0,19-Jan-40,1773693053,01792664286
+1620029,Shakil Ahmmed,UNMARRIED,AB+,152.145,62,ISLAM,12-Dec-97,Male,SM Barrak,Panchari,Boropukur,Tangail,30-Nov-17,9,11,6,25,,,C,0,21-Jan-40,1705171772,
+1620043,Rubel Mia,MARRIED ,A+,143.325,69,ISLAM,8-Mar-97,Male,FM (Out living),Bancharampur,Arambagh,Jamalpur,30-Nov-17,10,11,7,25,,,A,0,21-Jan-40,1777476727,
+1620066,Md Riday Chaprasi,UNMARRIED,O+,154.35,66,ISLAM,10-May-99,Male,SM Barrak,Ukhiya,Monirampur,Barisal,30-Nov-17,8,9,3,24,,,A,0,17-Jun-40,1799707104,01736613155
+1620089,Md Wasim Ali,MARRIED ,O+,147.735,61,ISLAM,15-Dec-95,Male,SM Barrak,Matiranga,Patabuka,Chapai Nawabganj,30-Nov-17,6,11,3,27,,,A,0,21-Jan-40,1773367754,01769809863
+1620124,Md Golam Mostofa Sumon,UNMARRIED,O+,132.3,60,ISLAM,28-May-99,Male,SM Barrak,Boalkhali,Shatkura,Sherpur,30-Nov-17,6,11,5,24,,,A,0,21-Jan-40,1731589218,01984135029
+1620125,Md Shamim Miah,UNMARRIED,B+,149.94,70,ISLAM,21-Jan-99,Male,SM Barrak,Ukhiya,Bolarampur,Bogra,30-Nov-17,11,11,2,23,,,A,0,19-Jan-40,01734630891,
+1620139,Md Ariful Islam,MARRIED ,O+,149.94,61,ISLAM,5-Jul-98,Male,SM Barrak,Cumilla-S,Shatkura,Tangail,30-Nov-17,10,11,7,24,,,A,0,21-Jan-40,1778098896,01760754099
+1620143,Md Rasel Ahmed,UNMARRIED,B+,176.4,62,ISLAM,11-Nov-99,Male,SM Barrak,Teknaf,Khasial,Jhenaidah,30-Nov-17,9,11,5,23,,,A,0,21-Jan-40,1626583597,01733-602258
+1620164,Md Sahadot Hossen,MARRIED ,A+,143.325,62,ISLAM,6-Mar-97,Male,SM Barrak,Kawkhali,Golapbagh,Tangail,30-Nov-17,9,11,4,26,,,A,0,21-Jan-40,1783655918,01627222350
+1620266,Md Wali Ullah,UNMARRIED,O+,152.145,70,ISLAM,2-Dec-96,Male,SM Barrak,Uzirpur,Bolarampur,Mymensingh,30-Nov-17,6,11,7,25,,,A,0,21-Jan-40,1316392315,01609073612
+1620269,Md Sohanur Rahman,MARRIED ,A+,136.71,69,ISLAM,15-May-97,Male,SM Barrak,Thanchi,Khasial,Kushtia,30-Nov-17,9,11,4,25,,,A,0,19-Jan-40,1938972913,
+1620280,Md Tipu Sultan,MARRIED ,A+,132.3,65,ISLAM,21-Jun-98,Male,SM Barrak,Bakerganj,Golapbagh,Bogra,16-Mar-22,10,11,4,24,,,A,0,22-Jul-40,1309037548,01773543488
+1620310,Md Hazrat Ali,UNMARRIED,O+,143.325,67,ISLAM,22-Dec-99,Male,SM Barrak,Matlab (Dakshin),Bolarampur,Khulna,8-Jan-18,11,11,4,24,,,A,0,22-Jul-40,1731891953,
+1620312,Md Al Mamun,UNMARRIED,A+,119.07,67,ISLAM,29-Dec-97,Male,SM Barrak,Panchari,Arambagh,Chapai Nawabganj,1-May-19,11,11,4,26,,,A,0,22-Jul-40,1749174756,
+1620314,Md Naim Hossain,UNMARRIED,A+,158.76,70,ISLAM,3-May-99,Male,SM Barrak,Lama,Bolarampur,Pabna,8-Jan-18,16,11,2,24,,,A,0,22-Jul-40,01640372658,
+1620325,Md Sumon Reza,MARRIED ,O-,149.94,60,ISLAM,6-Sep-98,Male,SM Barrak,Babuganj,Charbalakh,Tangail,8-Jan-18,9,11,2,25,,,A,0,31-Dec-40,01788712411,01306983523
+1620338,Md Emran Ali,UNMARRIED,B+,154.35,64,ISLAM,13-Feb-98,Male,SM Barrak,Khagrachari-S,Sitakunda,Dinajpur,16-Mar-22,9,11,8,28,,,A,0,22-Jul-40,1704226049,
+1620346,Md Assaduzzaman,MARRIED ,O+,145.53,62,ISLAM,31-Aug-98,Male,SM Barrak,Barishal-S,Khasial,Sherpur,8-Jan-18,11,11,4,25,,,A,0,22-Jul-40,1910863271,
+1620386,Sumon Hossain,MARRIED ,O+,149.94,69,ISLAM,7-Jul-98,Male,SM Barrak,Nanniarchar,Soilkupa,Rajbari,8-Jan-18,9,11,8,25,,,A,0,22-Jul-40,01703132537,01738784129
+1620387,Mohammad Kobir Uddin,UNMARRIED,B+,138.915,62,ISLAM,28-Dec-97,Male,SM Barrak,Banaripara,Charbalakh,Kushtia,16-Mar-22,8,9,6,26,,,A,0,5-Jan-41,1721505041,
+1620389,Md Nahid Hossain,UNMARRIED,AB+,154.35,64,ISLAM,7-Oct-99,Male,SM Barrak,Patuakhali-S,Monirampur,Dhaka,7-Jan-18,11,11,2,23,,,A,0,22-Jul-40,1867854289,
+1620393,Md Sishir Ali,UNMARRIED,B+,158.76,63,ISLAM,11-Dec-97,Male,SM Barrak,Matlab (Dakshin),Monirampur,Natore,8-Jan-18,10,11,8,26,,,A,0,22-Jul-40,01305152551,
+1620414,Md Tareq Mia,UNMARRIED,O+,158.76,64,ISLAM,27-Nov-97,Male,SM Barrak,Dashmina,Nelfamari,Netrokona,16-Mar-22,9,11,6,25,,,A,0,22-Jul-41,01777515257,01783910609
+1620425,Rasel Thalukdar,UNMARRIED,AB+,147.735,60,ISLAM,4-May-98,Male,SM Barrak,Raojan,Patabuka,Madaripur,7-Jan-18,13,11,2,24,,,A,0,22-Jul-40,1729478649,
+1620439,Imdadul Hasan,MARRIED ,B+,123.48,67,ISLAM,23-Dec-97,Male,SM Barrak,Barishal-S,Sitakunda,Tangail,8-Jan-18,10,11,4,25,,,A,0,22-Jul-40,1739955920,01725214752
+1620441,Md Shakib Hossain,MARRIED ,O+,138.915,63,ISLAM,25-May-98,Male,SM Barrak,Amtali,Shatkura,Joypurhat,7-Jan-18,9,11,6,25,,,A,0,22-Jul-40,01797680618,01742321237
+1620458,Md Rakib Hossain,UNMARRIED,B+,149.94,68,ISLAM,15-Feb-99,Male,SM Barrak,Rangamati-S,Arambagh,Patuakhali,16-Mar-22,11,11,7,24,,,A,0,22-Jul-40,01739939731,
+1620473,Md Basir Uddin,UNMARRIED,B+,149.94,60,ISLAM,31-Aug-98,Male,FM (In living),Cumilla-S Daksin,Soilkupa,Pabna,16-Mar-22,9,11,4,26,,,A,0,22-Jul-40,1773658450,
+1620516,Md Himel Biswas,UNMARRIED,AB+,149.94,67,ISLAM,1-Nov-99,Male,SM Barrak,Nasirnagar,Shatkura,Khulna,16-Mar-22,11,11,6,24,,,A,0,22-Jul-40,01870155837,01922649230
+1620531,Md Sabuz Miah,UNMARRIED,B+,152.145,66,ISLAM,20-Feb-99,Male,SM Barrak,Barguna-S,Khasial,Tangail,1-May-19,9,11,8,23,,,A,0,22-Jul-40,01748484046,
+1620543,Md Sabbir Hossain,UNMARRIED,A+,149.94,67,ISLAM,17-Oct-99,Male,SM Barrak,Haziganj,Bolarampur,Sylhet,23-Jul-17,6,12,6,23,,,A,0,13-Dec-27,1816045762,
+1620616,Md Mehedi Hasan,UNMARRIED,A+,158.76,60,ISLAM,29-Mar-99,Male,SM Barrak,Baghaichari,Tona,Rangpur,17-Feb-18,6,11,5,23,,,A,0,21-Jan-41,01723868790,01781401180
+1620627,Md Nayeem Mollah,UNMARRIED,B+,143.325,66,ISLAM,11-Sep-99,Male,SM Barrak,Kathalia,Soilkupa,Magura,29-Nov-18,9,11,5,23,,,A,0,20-Jan-41,1733098324,01781401180
+1620638,Robin Sorkar,UNMARRIED,O+,149.94,67,ISLAM,13-Jul-00,Male,SM Barrak,Tazumuddin,Monirampur,Jamalpur,30-Nov-18,6,11,3,23,,,A,0,20-Jan-41,01770454307,01736415803
+1620647,Mahmudul Hasan,UNMARRIED,A+,143.325,60,ISLAM,12-Jan-00,Male,SM Barrak,Hathazari,Patabuka,Satkhira,30-Nov-18,6,11,1,22,,,A,0,20-Jan-41,1754125706,
+1620652,Shahin Molla,UNMARRIED,B+,143.325,61,ISLAM,10-Jan-00,Male,SM Barrak,Muradnagar,Monirampur,Shariatpur,30-Nov-18,8,9,3,23,,,A,,20-Jan-41,1635884528,01766327257
+1620673,Md Sumon Ali,UNMARRIED,O+,149.94,65,ISLAM,12-Nov-99,Male,SM Barrak,Dighinala,Boropukur,Sirajgong,30-Nov-18,6,11,5,24,,,A,0,20-Jan-41,1789699257,01301374765
+1620687,Md Sabuj Rana,MARRIED ,A+,149.94,62,ISLAM,26-Mar-98,Male,SM Barrak,Borhanuddin,Shatkura,Sherpur,30-Nov-18,6,11,6,24,,,A,0,20-Jan-41,01307598036,
+1620745,Mazaharul Islam,UNMARRIED,O+,119.07,61,ISLAM,19-Sep-99,Male,SM Barrak,Babuganj,Boropukur,Sherpur,16-Mar-22,6,11,8,23,,,A,0,20-Jan-41,01946472147,
+1620776,Md Asadul Islam,UNMARRIED,AB+,130.095,66,ISLAM,31-Dec-99,Male,SM Barrak,Chatkhil,Nelfamari,Sirajgong,9-Feb-22,11,11,4,23,,,A,0,20-Jan-41,01783929556,01768345000
+1620803,Md Mehedi Hasan,UNMARRIED,B-,134.505,62,ISLAM,4-Feb-98,Male,SM Barrak,Laxmichari,Arambagh,Tangail,30-Nov-18,8,9,3,25,,,A,0,20-Jan-41,1793895470,0721861833
+1620811,Nasim Hossain,UNMARRIED,O+,143.325,68,ISLAM,14-May-00,Male,SM Barrak,Barkal,Bijoynagar,Gaajipr,30-Nov-18,6,11,3,22,,,A,0,20-Jan-41,01608844218,01720914135
+1620829,Kowsar Patowari,UNMARRIED,B+,152.145,69,ISLAM,9-Jan-99,Male,SM Barrak,Barguna-S,Kaligong,Rajbari,16-Mar-22,5,11,2,24,,,A,0,20-Jan-41,01784173046,
+1620846,Md Nur E Alam,UNMARRIED,AB+,125.685,64,ISLAM,19-Nov-99,Male,SM Barrak,Panchari,Golapbagh,Kishoregonj,30-Nov-18,11,11,6,24,,,A,0,20-Jan-41,1940158784,
+1620853,Md Salim Hossen,UNMARRIED,A+,147.735,62,ISLAM,20-Mar-99,Male,SM Barrak,Cox'S Bazar-S,Patabuka,Narayangonj,30-Nov-18,9,11,1,24,,,A,0,20-Jan-41,1648355232,
+1620871,Md Sumon Miah,UNMARRIED,B-,136.71,63,ISLAM,3-Jan-00,Male,SM Barrak,Kabir Hat,Charbalakh,Tangail,30-Nov-18,5,11,1,22,,,A,,20-Jan-41,1303369677,
+1620875,Md Golap Nobi,UNMARRIED,B+,154.35,70,ISLAM,1-Jan-99,Male,SM Barrak,Patuakhali-S,Charbalakh,Tangail,30-Nov-18,6,11,5,23,,,A,,20-Jan-41,01844917772,01969725448
+1620920,Md Roni Mia,UNMARRIED,B+,141.12,62,ISLAM,1-Jan-99,Male,SM Barrak,Bhola-S,Tona,Meherpur,16-Mar-22,6,11,8,24,,,A,0,20-Jan-41,1707913700,
+1620947,Onirban Shika Karmoker,UNMARRIED,B+,143.325,62,ISLAM,1-May-99,Male,SM Barrak,Nangalkot,Shatkura,Gaibanda,1-May-19,6,11,7,23,,,A,0,21-Jan-41,1786874195,
+1620978,Liton Chandra Barman,UNMARRIED,O+,132.3,62,ISLAM,1-Sep-98,Male,SM Barrak,Bhandaria,Arambagh,Rangpur,30-Nov-18,10,11,8,24,,,A,0,20-Jan-41,01784034173,
+1621010,Md Manik Hossain,UNMARRIED,AB+,143.325,62,ISLAM,25-Nov-98,Male,SM Barrak,Karnaphuli,Khasial,Panchagar,16-Mar-22,9,11,4,27,,,A,0,20-Jan-41,1750920259,
+1621022,Lopa Aktar,MARRIED ,O+,143.325,69,ISLAM,25-Jan-98,Female,SM Barrak,Patharghata,Golapbagh,Cumilla,1-May-19,6,11,5,24,,,A,0,20-Jan-41,1773691435,01781401180
+1621028,Md Rakib Monsi,MARRIED ,O+,127.89,62,ISLAM,28-May-98,Male,SM Barrak,Nangalkot,Arambagh,Narail,12-Jul-22,9,11,7,24,,,A,0,20-Jan-41,01746813594,01732777248
+1621060,Md Foridul Islam,UNMARRIED,B+,158.76,63,ISLAM,8-May-00,Male,SM Barrak,Sarail,Majila,Panchagar,1-May-19,6,11,6,22,,,A,0,20-Jan-41,01740354992,
+1621075,Shamim Mohon,UNMARRIED,B+,134.505,64,ISLAM,8-Jan-99,Male,SM Barrak,Rajosthali,Bolarampur,Narsingdi,1-May-19,6,11,5,24,,,A,0,20-Jan-41,1646317579,01956643562
+1621079,Md Joshim Uddin,UNMARRIED,O+,134.505,66,ISLAM,12-Jul-98,Male,SM Barrak,Kabir Hat,Khasial,Chapai Nawabganj,30-Nov-18,6,11,8,24,,,A,0,20-Jan-41,01784034173,
+1621112,Md Saifuddin,UNMARRIED,B+,116.865,68,ISLAM,3-Mar-99,Male,SM Barrak,Langadu,Tona,Sirajgong,1-May-19,6,11,8,23,,,A,0,20-Jan-41,1889980973,
+1621141,Md Sagor Ali,UNMARRIED,B+,158.76,66,ISLAM,10-Mar-99,Male,SM Barrak,Fatikchari,Bolarampur,Sirajgong,16-Mar-22,11,11,4,23,,,A,0,20-Jan-41,01627025691,
+1621213,Shamim Miah,UNMARRIED,O+,149.94,61,ISLAM,5-May-00,Male,SM Barrak,Sandwip,Charbalakh,Tangail,1-May-19,10,11,8,23,,,A,0,21-Jul-41,01742639314,
+1621220,Arif Hossen,UNMARRIED,O+,125.685,60,ISLAM,7-Jul-99,Male,SM Barrak,Cox'S Bazar-S,Shatkura,Jessore,16-Mar-22,13,11,6,23,,,A,0,21-Jul-41,1844528165,
+1621230,Al Mahbub,UNMARRIED,O+,147.735,61,ISLAM,27-Jul-99,Male,SM Barrak,Patharghata,Soilkupa,Kishoregonj,8-Jan-19,6,11,6,23,,,A,0,21-Jul-41,1795415515,
+1621243,Md Unus Ali,UNMARRIED,O+,121.275,68,ISLAM,2-Nov-98,Male,SM Barrak,Betagi,Majila,Jessore,9-Jan-19,13,11,2,24,,,A,0,21-Jul-41,01713934805,
+1621257,Md Abdul Malek Bappi,UNMARRIED,A-,163.17,67,ISLAM,10-Nov-99,Male,SM Barrak,Mothbaria,Tona,Dinajpur,8-Jan-19,6,11,5,23,,,A,0,21-Jul-41,1701586173,01751072644
+1621263,Mahbobur Rashid Sumon,UNMARRIED,O+,143.325,69,ISLAM,30-Nov-00,Male,SM Barrak,Dighinala,Patabuka,Sherpur,9-Jan-19,11,11,4,22,,,A,0,30-Dec-41,1969597174,01795939474
+1621269,Md Shazedul Islam,UNMARRIED,A+,147.735,64,ISLAM,9-Nov-99,Male,SM Barrak,Sonaimuri,Boropukur,Jhenaidah,30-Dec-18,13,11,3,23,,,A,0,21-Jul-41,1305618074,01703958893
+1621272,Masud Parves,UNMARRIED,B+,143.325,62,ISLAM,10-Jan-99,Male,SM Barrak,Nanniarchar,Patabuka,Pabna,8-Jan-19,6,11,5,24,,,A,0,21-Jul-41,1798291355,01710809130
+1621283,Md Emran Sheikh,UNMARRIED,AB+,127.89,62,ISLAM,18-Sep-99,Male,SM Barrak,Porshuram,Khasial,Narail,8-Jan-19,Tlr,11,2,23,,,A,0,21-Jul-41,1761167096,
+1621285,Md Sohel Rana,UNMARRIED,B+,130.095,63,ISLAM,7-Feb-99,Male,SM Barrak,Chhagalniya,Sitakunda,Sherpur,7-Jan-19,6,12,7,23,,,A,0,3-Mar-29,1947144106,
+1621315,Md Saydul Haque,UNMARRIED,O+,152.145,66,ISLAM,22-Dec-00,Male,SM Barrak,Laksham,Sitakunda,Pirojpur,13-May-19,6,11,3,22,,,A,0,10-Jan-41,1737231887,0174580047
+1621325,Md Abu Hanif,UNMARRIED,A+,132.3,67,ISLAM,1-Mar-99,Male,SM Barrak,Burichong,Boropukur,Rajshahi,28-Jun-19,6,11,3,23,,,A,0,12-Jan-42,1318721380,01625372370
+1621328,Md Abul Bashar,UNMARRIED,O+,143.325,64,ISLAM,6-Jul-00,Male,SM Barrak,Barguna-S,Patabuka,Pabna,27-Jun-19,6,11,8,23,,,A,0,12-Jan-42,1767256721,
+1621332,Md Mostafizur Rahman,UNMARRIED,B+,141.12,62,ISLAM,19-Nov-01,Male,SM Barrak,Companiganj,Soilkupa,Kushtia,28-Jun-19,6,11,2,22,,,A,0,26-Jan-42,01745894851,
+1621438,Md Abdur Rakib Jepu,MARRIED ,O+,149.94,65,ISLAM,19-Feb-98,Male,SM Barrak,Bhandaria,Tona,Jessore,1-Jan-20,6,11,2,24,,,A,0,26-Jan-42,1746638107,
+1621470,Md Mohiminul Islam,UNMARRIED,A+,130.095,67,ISLAM,24-Jan-01,Male,SM Barrak,Cox'S Bazar-S,Tona,Rangpur,1-Jan-20,6,11,5,22,,,A,0,26-Jan-42,1797978730,01723279725
+1621499,Md Abbas Ali,UNMARRIED,B+,130.095,62,ISLAM,7-Oct-01,Male,SM Barrak,Cox'S Bazar-S,Shatkura,Jessore,31-Dec-19,6,11,8,21,,,A,0,26-Jan-42,1738226452,
+1621503,S K Al Amin,UNMARRIED,A+,138.915,64,ISLAM,12-Dec-99,Male,SM Barrak,Subarna Char,Majila,Magura,1-Jan-20,11,11,6,23,,,A,0,26-Jan-42,01716747109,
+1621508,Md Sabbir Hossain,UNMARRIED,O+,165.375,65,ISLAM,8-Feb-01,Male,SM Barrak,Tazumuddin,Kaligong,Jessore,1-Jan-20,6,11,7,21,,,A,0,26-Jan-42,1794656349,
+1621510,Md Ashaduzzaman,UNMARRIED,B+,154.35,68,ISLAM,10-Jan-00,Male,SM Barrak,Nalchity,Khandakarpara,Jessore,31-Dec-19,6,11,5,22,,,A,0,26-Jan-42,01996862524,01738985569
+1621527,Kamrul Islam,UNMARRIED,AB+,143.325,70,ISLAM,1-May-99,Male,SM Barrak,Haziganj,Khasial,Jessore,1-Jan-20,11,11,4,23,,,A,0,26-Jan-42,1786387778,01770142865
+1621528,Md Rakib Uddin,UNMARRIED,O+,132.3,63,ISLAM,15-Nov-00,Male,SM Barrak,Mehendiganj,Shatkura,Jessore,1-Jan-20,6,11,8,21,,,A,0,26-Jan-42,01822751348,
+1621545,Biplob Ali,UNMARRIED,O+,136.71,68,ISLAM,15-May-01,Male,SM Barrak,Gouranadi,Soilkupa,Kushtia,1-Jan-20,6,11,7,22,,,A,0,26-Jan-42,1701357544,
+1621549,Md Sourav Hossain Suvo,UNMARRIED,O+,138.915,68,ISLAM,20-Jun-00,Male,SM Barrak,Kathalia,Majila,Narail,1-Jan-20,9,11,4,22,,,A,0,26-Jan-41,1918313160,01941954896
+1621567,Md Soyaeb Mostak,UNMARRIED,O+,134.505,62,ISLAM,7-Nov-99,Male,SM Barrak,Rangabali,Tona,Bogra,1-Jan-20,6,11,7,23,,,A,0,26-Jan-42,1794601243,
+1621582,Md Mostafizur,UNMARRIED,B+,132.3,70,ISLAM,27-Jan-01,Male,SM Barrak,Charfassion,Nelfamari,Magura,1-Jan-20,6,11,8,21,,,A,0,26-Jan-42,01780881201,
+1621616,Sujoy Mondal,UNMARRIED,A+,158.76,67,ISLAM,15-Sep-99,Male,SM Barrak,Kawkhali,Soilkupa,Rajbari,1-Jan-20,6,11,8,22,,,A,0,26-Jan-42,1992864509,
+1621646,Md Shahab Uddin,UNMARRIED,A+,152.145,61,ISLAM,28-Feb-01,Male,SM Barrak,Komol Nagar,Boropukur,Borguna,1-Jan-20,6,11,3,22,,,A,0,25-Jan-42,1725579986,01797773278
+1621649,Md Shaharul Islam,UNMARRIED,B+,149.94,65,ISLAM,22-Jul-00,Male,SM Barrak,Porshuram,Arambagh,Meherpur,1-Jan-20,9,11,1,22,,,A,0,26-Jan-42,1307660245,
+1621655,Md Masud Rana,UNMARRIED,A+,143.325,66,ISLAM,24-Nov-00,Male,SM Barrak,Lalmohan,Nelfamari,Thakurgaon,1-Jan-20,6,11,3,22,,,A,,26-Jan-42,1738006079,01720914135
+1621658,Md Foysal Khan,UNMARRIED,B+,158.76,69,ISLAM,18-May-01,Male,SM Barrak,Sonagazi,Charbalakh,Kushtia,1-Jan-20,6,11,3,23,,,A,0,26-Jan-42,1860545226,01712770494
+1621670,Md Al Amin,UNMARRIED,B-,165.375,63,ISLAM,13-Apr-01,Male,SM Barrak,Rangunia,Charbalakh,Kushtia,1-Jan-20,11,11,6,23,,,A,0,26-Jan-42,01708634859,
+1621673,Md Ismail Hosen,UNMARRIED,B+,147.735,67,ISLAM,12-Jul-01,Male,SM Barrak,Chandpur-S,Bijoynagar,Jessore,1-Jan-20,6,11,5,22,,,A,0,26-Jan-42,1608742635,01709-300609
+1621680,Md Ashaduzzaman,UNMARRIED,O+,154.35,66,ISLAM,31-Oct-01,Male,SM Barrak,Senbag,Tona,Chuadanaga,1-Jan-20,6,11,6,23,,,A,0,26-Jan-42,1307015309,
+1621688,Md Rajib Hossain,UNMARRIED,O+,156.555,62,ISLAM,7-May-01,Male,SM Barrak,Komol Nagar,Patabuka,Noakhali,1-Jan-20,6,11,6,23,,,A,0,26-Jan-42,1859102132,
+1621698,Md Rony Sheikh,UNMARRIED,O+,134.505,63,ISLAM,12-Jan-02,Male,SM Barrak,Daganbhuiyan,Tona,Gopalganj,1-Jan-20,9,11,6,21,,,A,0,26-Jan-42,1994753636,
+1621773,Md Riku Hossain,UNMARRIED,O+,132.3,60,ISLAM,18-Mar-98,Male,SM Barrak,Faridganj,Bijoynagar,Jessore,1-Jan-20,9,11,7,24,,,A,0,26-Jan-42,1778324365,01747779472
+1621797,Md Sadhin Mia,UNMARRIED,A+,149.94,64,ISLAM,7-Jan-01,Male,SM Barrak,Brahmanpara,Bolarampur,Rangpur,31-Dec-19,6,11,7,22,,,A,0,25-Jan-42,1781008303,
+1621803,Md Abdullah Al Mamun,UNMARRIED,B+,136.71,61,ISLAM,12-Nov-01,Male,SM Barrak,B.Baria-S,Soilkupa,Jessore,1-Jan-20,9,11,5,21,,,A,0,26-Jan-42,1745878778,01731389548
+1621834,Md Muntakim Ali,UNMARRIED,O+,147.735,65,ISLAM,20-Nov-99,Male,SM Barrak,Sandwip,Tona,Dinajpur,1-Jan-20,6,11,8,23,,,A,0,26-Jan-42,01751125296,
+1621876,Md Forhad Hossain,UNMARRIED,O+,143.325,61,ISLAM,2-Feb-00,Male,SM Barrak,Kaukhali,Soilkupa,Magura,9-Feb-22,9,11,8,23,,,A,0,26-Jan-42,01982322257,
+1621884,Md Zakaria Habib Sagor,UNMARRIED,B+,123.48,66,ISLAM,11-Nov-99,Male,SM Barrak,Patharghata,Nelfamari,Chuadanaga,1-Jan-20,9,11,3,23,,,A,0,26-Jan-42,01304100187,01304100187
+1621902,Suriya Begum,MARRIED ,B+,143.325,67,ISLAM,11-Mar-00,Female,SM Barrak,Naikhyongchari,Monirampur,Joypurhat,1-Jan-20,11,11,5,23,,,A,0,26-Jan-42,1856136666,01781401180
+1621950,Md Rasel Miah,UNMARRIED,O+,132.3,61,ISLAM,1-Aug-01,Male,SM Barrak,Zianagar,Tona,Manikgonj,1-Jan-20,6,11,3,22,,,A,0,24-Jan-42,01774890446,01312790604
+1621962,Zahid Hasan,UNMARRIED,O+,132.3,62,ISLAM,17-Jan-01,Male,SM Barrak,Nalchity,Majila,Manikganj,16-Mar-22,5,11,8,23,,,A,0,16-Jan-43,01710109604,
+1621963,Md Sumon Miah,UNMARRIED,B+,119.07,62,ISLAM,25-Jul-99,Male,SM Barrak,Patiya,Kaligong,Habiganj,16-Mar-22,10,11,4,23,,,A,0,26-Jan-42,017040499184,01871782579
+1621987,Sabiha Shayla,UNMARRIED,B+,149.94,67,ISLAM,18-Sep-98,Female,SM Barrak,Zianagar,Arambagh,Jhalakathi,12-Jun-22,5,11,7,23,,,A,0,26-Jan-42,1718581897,
+1622011,Mst Nawrin Islam Nijhum,UNMARRIED,B+,154.35,64,ISLAM,2-Oct-00,Female,SM Barrak,Fulgazi,Bolarampur,Borguna,1-Jan-20,5,11,3,22,,,A,0,26-Jan-42,1893636906,01720914135
+1622012,Md Babu Miah,UNMARRIED,B+,110.25,69,ISLAM,8-Aug-01,Male,SM Barrak,Hathazari,Bijoynagar,Tangail,31-Dec-19,6,11,8,21,,,A,0,26-Jan-42,759036024,
+1622036,Kudratul Muntaha,MARRIED ,O+,136.71,67,ISLAM,6-Dec-99,Female,SM Barrak,Raojan,Bolarampur,Habiganj,16-Mar-22,7,11,2,23,,,A,0,26-Jan-43,1756435680,01739669262
+1622061,Md Abdullah Al Mahmud,UNMARRIED,O+,141.12,60,ISLAM,21-Dec-99,Male,SM Barrak,Hathazari,Nelfamari,Chuadanaga,1-Jan-20,9,11,6,23,,,A,0,26-Jan-42,1915972077,
+1622065,Md Ismail Hosen,UNMARRIED,O+,130.095,68,ISLAM,10-Nov-00,Male,SM Barrak,Kaptai,Sitakunda,Rajshahi,1-Jan-20,11,11,4,22,,,A,0,20-Jun-42,1772197119,01636987286
+1622074,Md Shakil,UNMARRIED,A+,141.12,62,ISLAM,1-Dec-01,Male,SM Barrak,Belaichari,Arambagh,Borguna,1-Jan-20,6,11,5,21,,,A,0,20-Jul-42,1721113910,01765430037
+1622079,Md Mizanur Rahman,UNMARRIED,O+,127.89,69,ISLAM,24-Oct-01,Male,SM Barrak,Cox'S Bazar-S,Kaligong,Jhenaidah,1-Jan-20,5,11,4,21,,,A,0,20-Jul-43,1998936509,
+1622090,Md Rubel Hossain,UNMARRIED,O+,149.94,68,ISLAM,3-Apr-00,Male,SM Barrak,Titas,Charbalakh,Jessore,1-Jan-20,9,11,1,22,,,A,0,20-Jul-42,1953321424,
+1622100,Ahmadullah Raihan,UNMARRIED,B+,141.12,65,ISLAM,31-Dec-00,Male,SM Barrak,Porshuram,Khandakarpara,Chapai Nawabganj,1-Jan-20,6,11,8,22,,,A,,20-Jul-42,01601199425,
+1622102,Md Neag Morshed Nayan,UNMARRIED,O+,136.71,60,ISLAM,19-Feb-00,Male,SM Barrak,Faridganj,Arambagh,Rangpur,1-Jan-20,6,11,3,22,,,A,0,20-Jul-42,1738651205,01731448395
+1622103,Md Ekhlas Hossain,UNMARRIED,B+,156.555,63,ISLAM,12-Nov-00,Male,SM Barrak,Hatiya,Boropukur,Chuadanaga,1-Jan-20,9,11,5,22,,,A,0,20-Jul-42,1761869271,01763333552
+1622116,Md Nahid Hasan,UNMARRIED,AB+,134.505,61,ISLAM,18-May-01,Male,SM Barrak,Panchari,Arambagh,Rangpur,1-Jan-20,11,11,4,22,,,A,0,20-Jul-42,1744725612,
+1622143,Mehedi Hossain,UNMARRIED,AB+,143.325,63,ISLAM,6-Jul-00,Male,SM Barrak,Charfassion,Arambagh,Gopalganj,1-Jan-20,5,11,1,22,,,A,0,26-Jan-42,1955307336,
+1622150,Md Sabbir,UNMARRIED,B+,152.145,60,ISLAM,16-Feb-02,Male,SM Barrak,Ramganj,Sitakunda,Barisal,1-Jan-20,6,11,7,21,,,A,,20-Jul-42,1795178941,
+1622169,Md Ripon Miah,UNMARRIED,AB+,127.89,66,ISLAM,24-Mar-01,Male,SM Barrak,Nanniarchar,Nelfamari,Manikgonj,31-Dec-19,6,11,7,22,,,A,0,20-Jul-42,1793649441,
+1622178,Khan Abdullah,UNMARRIED,O+,149.94,69,ISLAM,18-Oct-00,Male,SM Barrak,Sitakunda,Bijoynagar,Bagerhat,1-Jan-20,9,11,2,22,,,A,0,20-Jul-42,1742223615,
+1622196,Akash Biswas,UNMARRIED,O-,158.76,70,ISLAM,1-Oct-01,Male,SM Barrak,Taltali,Nelfamari,Jessore,1-Jan-20,Tlr,11,2,21,,,A,0,20-Jul-42,1940239002,
+1622203,Sagor Hosen,UNMARRIED,A+,121.275,66,ISLAM,4-Apr-00,Male,SM Barrak,Laksham,Tona,Pabna,1-Jan-20,6,11,5,22,,,A,0,20-Jul-42,1876576859,01781401180
+1622230,Md Hasib Sheikh,UNMARRIED,O+,130.095,62,ISLAM,1-Feb-01,Male,SM Barrak,Patiya,Boropukur,Gazipur,1-Jan-20,16,11,2,22,,,A,0,26-Jan-42,01815197380,
+1622324,Md Shakib Bhuyan,UNMARRIED,AB+,158.76,66,ISLAM,12-Mar-00,Male,SM Barrak,Patharghata,Arambagh,Chandpur,1-Jan-20,6,11,8,22,,,A,0,20-Jul-42,1863767465,
+1622331,Md Riajul Islam,UNMARRIED,B+,149.94,68,ISLAM,30-Nov-01,Male,SM Barrak,Shahrasti,Khasial,Shariatpur,30-Dec-19,9,11,7,22,,,A,0,20-Jul-42,1855126771,
+1622336,Md Shimul Hossain,UNMARRIED,B+,149.94,61,ISLAM,12-Feb-00,Male,SM Barrak,Chandpur-S,Patabuka,Jhenaidah,1-Jan-20,9,11,2,22,,,A,0,20-Jul-42,1777169781,
+1622361,Md Hashem Ali,UNMARRIED,B+,143.325,62,ISLAM,5-Jun-01,Male,SM Barrak,Bhola-S,Monirampur,Chuadanaga,1-Jan-20,9,11,7,22,,,A,0,20-Jan-42,01786172058,
+1622382,Israfil Hossain,UNMARRIED,O+,132.3,62,ISLAM,2-Apr-01,Male,SM Barrak,Shahrasti,Shatkura,Jessore,31-Dec-19,13,11,8,21,,,C,0,20-Jul-42,01638968192,
+1622388,Ridoy Hasan,UNMARRIED,B+,136.71,70,ISLAM,21-Dec-99,Male,SM Barrak,Cumilla-S Daksin,Tona,Jamalpur,16-Mar-22,1,11,8,22,,,A,0,5-Jun-29,01317283545,
+1622398,Md Sohel Bhuiya,UNMARRIED,B+,134.505,60,ISLAM,12-Dec-00,Male,SM Barrak,Hizla,Bolarampur,Barisal,16-Mar-22,6,11,1,22,,,A,0,11-Jan-43,1783742096,
+1622403,Abdullah al Mamun,UNMARRIED,O+,141.12,67,ISLAM,31-Dec-00,Male,SM Barrak,Teknaf,Bolarampur,Jashore,7-Aug-20,11,11,4,22,,,A,,11-Jan-43,1988070288,01745955901
+1622408,Mahabur Rahman,UNMARRIED,O+,154.35,66,ISLAM,7-Dec-01,Male,SM Barrak,Galachipa,Golapbagh,Jashore,7-Aug-20,6,11,1,21,,,A,0,11-Jan-43,1861738425,
+1622411,Md mizanur Rahman Sohag,UNMARRIED,A+,134.505,63,ISLAM,29-Nov-01,Male,SM Barrak,Burichong,Khasial,Panchagarh,7-Aug-20,6,11,6,21,,,A,,30-Dec-42,01796119135,
+1622425,Sayeed Ahmed,UNMARRIED,O+,125.685,70,ISLAM,25-Dec-00,Male,SM Barrak,Teknaf,Bijoynagar,Chapai Nawabganj,31-Dec-20,11,11,2,22,,,A,0,11-Jan-43,01822980267,01626143184
+1622440,Md Mahmudul Hasan,UNMARRIED,A+,143.325,67,ISLAM,2-Jan-02,Male,SM Barrak,Nalchity,Soilkupa,Chuadanaga,7-Aug-20,6,11,5,21,,,A,0,11-Jan-43,01911695452,01922372130
+1622451,Mehedi Hasan,UNMARRIED,A+,136.71,69,ISLAM,23-Dec-00,Male,SM Barrak,Barguna-S,Patabuka,Noakhali,7-Aug-20,6,11,8,22,,,A,0,10-Jan-43,01879704719,
+1622458,Md Mahedi Hassan,UNMARRIED,B+,127.89,62,ISLAM,3-Feb-02,Male,SM Barrak,Laxmichari,Bijoynagar,Jashore,7-Aug-20,6,11,8,21,,,A,0,11-Jan-43,1905192622,
+1622472,Md Sahadot,UNMARRIED,O+,141.12,70,ISLAM,20-Apr-00,Male,SM Barrak,Teknaf,Arambagh,Thakurgaon,7-Aug-20,6,11,2,22,,,A,0,12-Jan-43,1719403967,
+1622477,Md Ali Howlader,UNMARRIED,B+,134.505,60,ISLAM,10-Oct-01,Male,SM Barrak,Chandina,Charbalakh,Bagerhat,7-Aug-20,6,11,6,21,,,A,0,10-Jan-43,01955764736,
+1622530,Musfikur Rahman,UNMARRIED,B+,110.25,61,ISLAM,13-Sep-02,Male,SM Barrak,Barura,Majila,Gopalganj,7-Aug-20,6,11,8,21,,,A,0,11-Jan-43,1300949420,
+1622552,Md Ibrahim,UNMARRIED,A+,132.3,68,ISLAM,2-Apr-01,Male,SM Barrak,Sandwip,Soilkupa,Barisal,7-Aug-20,6,11,7,22,,,A,0,10-Jan-43,01758320756,
+1622579,Md Abu Bakkar Siddique,UNMARRIED,O+,132.3,64,ISLAM,4-Jul-02,Male,SM Barrak,Mehendiganj,Patabuka,Natore,7-Aug-20,7,11,8,21,,,A,0,11-Jan-43,01724809340,
+1622582,Mehir Kumar Mondal,UNMARRIED,O+,163.17,65,ISLAM,10-Mar-02,Male,SM Barrak,Matlab (Dakshin),Tona,Satkhira,16-Mar-22,6,11,8,21,,,A,0,11-Jan-43,1723395274,
+1622593,Abdullah Sarder,UNMARRIED,A+,156.555,65,ISLAM,27-Jul-00,Male,SM Barrak,Mothbaria,Golapbagh,Barisal,7-Aug-20,6,11,5,22,,,A,0,11-Jan-43,1758889554,01724455905
+1622622,Abdul Halim,UNMARRIED,O-,132.3,65,ISLAM,19-Apr-99,Male,SM Barrak,Feni-S,Khasial,Jashore,7-Aug-20,9,11,4,23,,,A,0,11-Jan-43,1401360036,01300092791
+1622634,Md Sadman Shakib Pial,UNMARRIED,B+,149.94,67,ISLAM,1-Jan-02,Male,SM Barrak,Lalmai,Arambagh,Rangpur,7-Aug-20,10,11,4,20,,,A,0,11-Jan-43,1867616978,01773080657
+1622649,Mehedi Hasan,UNMARRIED,AB+,132.3,63,ISLAM,6-Aug-01,Male,SM Barrak,Subarna Char,Khandakarpara,Sylhet,7-Aug-20,6,11,3,21,,,A,0,11-Jan-43,1748721803,01737947560
+1622665,All Hamari,UNMARRIED,A+,138.915,68,ISLAM,1-Jan-01,Male,SM Barrak,Bancharampur,Soilkupa,Narail,7-Aug-20,11,11,6,21,,,A,0,13-Dec-42,01766095641,
+1622672,Sahin Ali Khan,UNMARRIED,AB+`,134.505,60,ISLAM,21-Oct-00,Male,SM Barrak,Nazirpur,Patabuka,Gaibanda,8-Aug-20,10,11,8,21,,,A,0,11-Jan-43,01761301357,
+1622680,Md Shakil Miah,UNMARRIED,B+,180.81,67,ISLAM,21-Dec-00,Male,SM Barrak,Daudkandi,Tona,Rangpur,16-Mar-22,6,11,2,22,,,A,0,11-Jan-43,1650278227,
+1622681,Md Imran Hossain Sikder,UNMARRIED,B+,123.48,65,ISLAM,8-Oct-02,Male,SM Barrak,Uzirpur,Charbalakh,Barisal,7-Aug-20,6,11,6,20,,,A,0,11-Jan-43,1996904874,
+1622696,Md Abu Sayed Shakil,UNMARRIED,B+,138.915,61,ISLAM,20-May-02,Male,SM Barrak,Charfassion,Majila,Netrokona,7-Aug-20,6,12,8,20,,,A,0,11-Sep-30,1912670194,
+1622708,Rahat Islam,UNMARRIED,A+,152.145,61,ISLAM,21-Nov-00,Male,SM Barrak,Satkania,Kaligong,Brahman Baria,10-Nov-20,11,11,2,22,,,A,0,25-Jan-43,1723609331,
+1622734,Md Raihan Sharif,UNMARRIED,B+,136.71,70,ISLAM,1-Jan-02,Male,SM Barrak,Barura,Nelfamari,Panchagar,30-Oct-20,11,11,4,21,,,A,0,25-Jan-43,1776935977,01788451727
+1622738,Md Zahidul Islam,UNMARRIED,O+,136.71,65,ISLAM,4-Feb-00,Male,SM Barrak,Hathazari,Patabuka,Jessore,30-Oct-20,6,11,5,22,,,A,0,25-Jan-43,1776410672,01781401180
+1622753,Md Shohel,UNMARRIED,O+,141.12,68,ISLAM,2-May-01,Male,SM Barrak,Ramu,Arambagh,Manikgonj,30-Oct-20,15,11,1,21,,,A,0,28-Oct-43,1813539988,
+1622767,Md Masud Rana,UNMARRIED,B+,132.3,64,ISLAM,15-Sep-02,Male,SM Barrak,Kathalia,Golapbagh,Dinajpur,30-Oct-20,11,11,4,20,,,A,,25-Jan-43,1306070527,
+1622778,Asif Rezwan Miraj,UNMARRIED,A+,132.3,70,ISLAM,10-Nov-00,Male,SM Barrak,Cox'S Bazar-S,Golapbagh,Jessore,30-Oct-20,6,11,5,22,,,A,0,25-Jan-43,1926290102,01781401180
+1622790,Md Ariful Islam,UNMARRIED,O-,143.325,66,ISLAM,22-Aug-01,Male,SM Barrak,B.Baria-S,Shatkura,Khulna,29-Nov-20,6,11,1,21,,,A,0,25-Jan-43,1732944381,
+1622803,Md Saiful Islam,UNMARRIED,A+,143.325,64,ISLAM,4-May-01,Male,SM Barrak,Raipur,Kaligong,Pirojpur,30-Oct-20,11,11,6,21,,,A,,25-Jan-43,1302694378,
+1622810,Sazedul Karim,UNMARRIED,B+,154.35,69,ISLAM,8-Apr-02,Male,SM Barrak,Moheskhali,Majila,Comilla,30-Oct-20,6,11,5,21,,,A,0,25-Nov-43,1644237902,01753618502
+1622844,Md Abu Sayeed,UNMARRIED,A+,149.94,69,ISLAM,19-Aug-02,Male,SM Barrak,Komol Nagar,Monirampur,Kurigram,29-Nov-20,6,11,7,21,,,A,0,25-Jan-43,1705854946,
+1622858,Md Junayeed Sorker,UNMARRIED,A+,147.735,66,ISLAM,8-Jan-01,Male,SM Barrak,Banskhali,Khandakarpara,Munshigong,30-Oct-20,6,11,3,21,,,A,0,25-Jan-43,1838446840,01978446840
+1622871,Md Arif Hossain,UNMARRIED,O+,132.3,65,ISLAM,31-Oct-02,Male,SM Barrak,Patuakhali-S,Shatkura,Barisal,30-Oct-20,9,11,3,21,,,A,0,25-Jan-43,1748648457,01818892622
+1622892,Md Rasel Pramanik,UNMARRIED,B+,138.915,68,ISLAM,25-Oct-01,Male,SM Barrak,Nangalkot,Majila,Pabna,30-Oct-20,6,11,7,21,,,A,0,25-Jan-43,1765908518,
+1622895,Tarif Hossen,UNMARRIED,B+,138.915,63,ISLAM,12-Oct-02,Male,SM Barrak,Kachua,Shatkura,Sunamgonj,29-Oct-20,6,11,3,21,,,A,0,25-Jan-20,01721096974,01761999648
+1622931,Md Rabbi Hossain,UNMARRIED,A+,123.48,61,ISLAM,20-Sep-01,Male,SM Barrak,Cumilla-S,Bijoynagar,Kushtia,30-Oct-20,6,11,3,21,,,A,0,25-Jan-43,1611514347,0178805538
+1622943,Md Rakib,UNMARRIED,A+,143.325,60,ISLAM,16-Jun-01,Male,SM Barrak,Rajapur,Nelfamari,Barisal,30-Oct-20,6,11,5,21,,,A,0,25-Jan-43,1307190774,01752-901885
+1622961,Zehad Hossain,UNMARRIED,B+,147.735,66,ISLAM,1-Jan-02,Male,SM Barrak,Bancharampur,Nelfamari,Shirajganj,30-Oct-20,10,11,8,21,,,A,0,23-Jan-43,1745320336,
+1622991,Zahangir Alam,UNMARRIED,B+,121.275,68,ISLAM,11-Apr-99,Male,SM Barrak,Nesarabad,Khandakarpara,Jessore,9-Feb-22,6,11,3,23,,,A,0,25-Jan-43,1731698565,01855896365
+1622992,Abul Hasan Sikder,UNMARRIED,AB+,127.89,61,ISLAM,1-Jun-01,Male,SM Barrak,Dighinala,Kaligong,Faridpur,30-Oct-20,6,11,7,21,,,A,0,25-Jan-43,1830166024,
+1623011,Md Rabbi Hossen,UNMARRIED,O+,121.275,61,ISLAM,15-Jul-02,Male,SM Barrak,Bhola-S,Golapbagh,Pabna,30-Oct-20,11,11,4,21,,,A,0,25-Jan-43,1776014563,
+1623021,Md Yousuf Ali,UNMARRIED,B+,154.35,60,ISLAM,1-May-00,Male,SM Barrak,Guimara,Shatkura,Chuadanaga,30-Oct-20,6,11,5,21,,,A,0,25-Jan-43,1921511831,01781401180
+1623033,Md Habib Mollah,UNMARRIED,A+,143.325,60,ISLAM,1-Jan-02,Male,SM Barrak,Hizla,Shatkura,Gopalganj,30-Oct-20,6,11,2,21,,,A,0,25-Jan-43,1749717070,
+1623065,Md Saymun Ali,UNMARRIED,A+,136.71,67,ISLAM,26-Apr-02,Male,SM Barrak,Kutubdia,Sitakunda,Chuadanaga,30-Oct-20,6,11,3,21,,,A,0,25-Jan-43,1703114133,01621860102
+1623088,Md Sagor Ahmed,UNMARRIED,A+,127.89,63,ISLAM,1-Jan-03,Male,SM Barrak,Teknaf,Khasial,Rajbari,30-Oct-20,6,11,7,19,,,A,0,25-Jan-43,1311542400,
+1623093,Md Ismail Hossain,UNMARRIED,O+,132.3,65,ISLAM,1-Jan-02,Male,SM Barrak,Borhanuddin,Bolarampur,Faridpur,30-Oct-20,6,11,6,20,,,A,0,25-Jan-43,1775914141,
+1623120,Nurul Islam Jablu,UNMARRIED,O+,143.325,69,ISLAM,17-Jun-02,Male,SM Barrak,Chandanish,Bolarampur,Sylhet,30-Oct-20,6,11,6,20,,,A,0,25-Jan-43,1751527365,
+1623177,Md Burhan Uddin,UNMARRIED,B+,143.325,63,ISLAM,11-Jun-02,Male,SM Barrak,Haziganj,Shatkura,Chapai Nawabganj,30-Oct-20,10,11,6,20,,,A,0,20-Nov-42,1797638427,
+1623189,Humayun Kabir,UNMARRIED,A+,127.89,66,ISLAM,16-Jun-00,Male,SM Barrak,Kutubdia,Shatkura,Meherpur,30-Oct-20,6,11,8,23,,,A,0,25-Jan-43,1719898645,
+1623212,Md Shakil Ahmed,UNMARRIED,A+,147.735,62,ISLAM,30-Oct-00,Male,SM Barrak,Dashmina,Khandakarpara,Barisal,30-Oct-20,6,11,6,23,,,A,0,25-Jan-43,1706896753,
+1623231,Md Rezwanul Islam,UNMARRIED,B+,136.71,67,ISLAM,13-Dec-02,Male,SM Barrak,Kabir Hat,Golapbagh,Rangpur,30-Oct-20,6,11,6,20,,,A,0,25-Jan-43,1797636701,
+1623256,Md Rafiqul Islam,UNMARRIED,B+,132.3,60,ISLAM,15-Jan-01,Male,SM Barrak,Thanchi,Khandakarpara,Madaripur,30-Oct-20,10,11,4,21,,,A,0,25-Jan-43,1403717994,
+1623284,Md Shaykat Hassan,UNMARRIED,B+,145.53,64,ISLAM,14-Oct-02,Male,SM Barrak,Chakoria,Bijoynagar,Naogaon,30-Oct-20,11,11,4,20,,,A,0,30-Jan-44,1775255266,01768191838
+1623351,Md Mehedi Hassan,UNMARRIED,B+,130.095,64,ISLAM,5-Jan-02,Male,SM Barrak,Monpura,Nelfamari,Lalmonir Hat,12-Nov-21,6,11,5,21,,,A,0,30-Jan-44,1796989243,01796989243
+1623357,Md Abdur Rahman,UNMARRIED,B+,134.505,64,ISLAM,1-Jan-02,Male,SM Barrak,Dashmina,Khasial,Jessore,12-Nov-21,10,11,4,21,,,A,0,30-Jan-44,1832315097,
+1623372,Md Abdur Rouf,UNMARRIED,O+,130.095,66,ISLAM,12-Aug-02,Male,SM Barrak,Bakerganj,Khasial,Sirajgong,12-Nov-21,11,11,3,20,,,A,0,30-Jan-44,1774263915,01821977556
+1623390,Md Sajjad Hossan,UNMARRIED,O+,138.915,63,ISLAM,22-Nov-01,Male,SM Barrak,Mehendiganj,Kaligong,Thakurgaon,12-Nov-21,5,11,3,21,,,A,0,30-Jan-44,1751470544,01776299812
+1623398,Md Alomgir Hossain,UNMARRIED,O+,127.89,62,ISLAM,22-Nov-00,Male,SM Barrak,Haziganj,Soilkupa,Chapai Nawabganj,12-Nov-21,11,11,7,22,,,A,0,30-Jan-44,1762186017,
+1623415,MD Hanif,UNMARRIED,B+,143.325,68,ISLAM,1-Jan-03,Male,SM Barrak,Muradnagar,Monirampur,Madaripur,12-Nov-21,9,11,8,20,,,A,0,30-Jan-44,1795578445,
+1623427,Md Samsur Rahman,UNMARRIED,B+,132.3,63,ISLAM,8-Jun-02,Male,SM Barrak,Barkal,Boropukur,Kurigram,12-Nov-21,9,11,3,20,,,A,0,30-Jan-44,1991729863,01723363507
+1623441,Md Sahadot Mia,UNMARRIED,O+,132.3,66,ISLAM,1-Jan-02,Male,SM Barrak,Shahrasti,Sitakunda,Gaibanda,12-Nov-21,6,11,7,21,,,A,0,30-Jan-44,1773405641,
+1623444,Md Habibur Raham,UNMARRIED,B+,125.685,67,ISLAM,2-May-03,Male,SM Barrak,Haimchar,Boropukur,Kurigram,12-Nov-21,11,11,4,19,,,A,0,30-Jan-44,1774173830,01317119964
+1623446,Md Ataur Rahman Manik,UNMARRIED,B+,121.275,62,ISLAM,13-Dec-02,Male,SM Barrak,Moheskhali,Tona,patuakhali,12-Nov-21,6,11,8,20,,,A,0,30-Jan-44,1754767207,
+1623458,Md Anik Ahmed,UNMARRIED,O+,149.94,62,ISLAM,6-Feb-03,Male,SM Barrak,Nabinagar,Tona,Meherpur,12-Nov-21,6,11,7,20,,,A,0,30-Jan-44,1707085025,
+1623460,Md Samsujjaman Sobur,UNMARRIED,B+,134.505,65,ISLAM,16-Feb-02,Male,SM Barrak,Sarail,Bolarampur,Thakurgaon,12-Nov-21,10,11,8,20,,,A,0,30-Jan-44,17366671255,
+1623467,Md Mostafijur Rahman Mithu,UNMARRIED,O+,147.735,62,ISLAM,5-Oct-03,Male,SM Barrak,Ramganj,Sitakunda,Rajshahi,12-Nov-21,11,11,4,19,,,A,0,30-Jan-44,177377214,01735692345
+1623484,Md Rakib Khan,UNMARRIED,B+,138.915,66,ISLAM,30-Dec-00,Male,SM Barrak,Rowangchari,Khandakarpara,Kushtia,12-Nov-21,9,11,2,22,,,A,0,30-Jan-44,1966794313,
+1623491,Ontor Ali,UNMARRIED,O+,134.505,60,ISLAM,24-Mar-02,Male,SM Barrak,Porshuram,Boropukur,Kushtia,12-Nov-21,6,11,5,20,,,A,0,30-Jan-44,1612705188,01724800613
+1623494,M A Moin Khan,UNMARRIED,O+,143.325,69,ISLAM,7-Dec-01,Male,SM Barrak,Rangabali,Monirampur,Dhaka,12-Nov-21,11,11,4,21,,,A,0,30-Jan-44,1754148721,
+1623504,Tanzim Ahmed,UNMARRIED,B+,127.89,65,HINDU,1-Dec-02,Male,SM Barrak,Senbag,Soilkupa,Satkhira,12-Nov-21,6,11,3,20,,,A,0,30-Jan-44,1731099697,01720914135
+1623520,Md Solaiman Islam,UNMARRIED,O+,154.35,65,ISLAM,20-Oct-02,Male,SM Barrak,Raojan,Khandakarpara,Joypurhat,12-Nov-21,5,11,5,20,,,A,0,30-Jan-44,1789861592,01781401180
+1623529,Md Samim Hasan,UNMARRIED,B+,145.53,63,ISLAM,13-Jul-02,Male,SM Barrak,Chatkhil,Patabuka,Chandpur,12-Nov-21,9,11,7,21,,,A,0,30-Jan-44,1639070512,
+1623532,Md Ripon Mia,UNMARRIED,B+,136.71,68,ISLAM,5-Mar-02,Male,SM Barrak,Akhaura,Khandakarpara,Lalmonirhat,12-Nov-21,6,11,8,20,,,A,0,30-Jan-44,1795471101,
+1623539,Md Nazmul Islam,UNMARRIED,B+,143.325,65,ISLAM,11-Sep-01,Male,SM Barrak,Agailjhara,Khandakarpara,Gopalganj,12-Nov-21,6,11,8,21,,,A,0,30-Jan-44,1781861816,
+1623549,Al amin,UNMARRIED,A+,141.12,63,ISLAM,11-Feb-02,Male,SM Barrak,Ramu,Monirampur,Rajshahi,12-Nov-21,6,11,5,20,,,A,0,30-Jan-44,1710383199,01753618502
+1623566,Md Mostakin Islam,UNMARRIED,B+,136.71,63,ISLAM,2-Apr-02,Male,SM Barrak,Patharghata,Patabuka,Nilfamari,12-Nov-21,6,11,5,20,,,A,0,30-Jan-44,1310183833,01737-590482
+1623568,Md Parvej Hosan,UNMARRIED,B+,143.325,68,ISLAM,18-Oct-02,Male,SM Barrak,Kathalia,Soilkupa,Laxmipur,12-Nov-21,6,11,3,20,,,A,0,30-Jan-44,1309771002,01760901390
+1623587,Md Abdul Kuddos,UNMARRIED,B+,141.12,65,ISLAM,5-Mar-01,Male,SM Barrak,Haimchar,Arambagh,Nilfamari,12-Nov-21,11,11,7,22,,,A,0,30-Jan-44,1705835197,
+1623598,Sohel Rana Essa,UNMARRIED,B+,143.325,65,ISLAM,26-Jul-00,Male,SM Barrak,Bamna,Shatkura,Jessore,12-Nov-21,9,11,7,22,,,A,0,30-Jan-44,1706168819,
+1623621,Md Sifat Alom,UNMARRIED,B+,141.12,70,ISLAM,21-Feb-03,Male,SM Barrak,Raojan,Shatkura,Kurigram,12-Nov-21,6,11,5,20,,,A,0,30-Jan-44,1722220687,01774072767
+1623639,Md Awoal,UNMARRIED,O+,147.735,68,ISLAM,26-Nov-02,Male,SM Barrak,Naikhyongchari,Tona,Chittagong,12-Nov-21,6,11,7,20,,,A,0,11-Dec-43,1892043501,
+1623654,Sayedur Rahman Adnan,UNMARRIED,A+,127.89,64,ISLAM,26-May-01,Male,SM Barrak,Rangamati-S,Patabuka,Shariatpur,12-Nov-21,9,11,7,22,,,A,0,30-Jan-44,1734667592,
+1623658,Md Ariful Islam,UNMARRIED,A+,141.12,67,ISLAM,2-Mar-02,Male,SM Barrak,Ruma,Boropukur,Naogaon,12-Nov-21,11,11,6,20,,,A,0,30-Jan-44,1315384579,
+1623677,Siyam Haoladar,UNMARRIED,A+,136.71,64,ISLAM,28-Dec-02,Male,SM Barrak,Matlab (Uttar),Soilkupa,Bagerhat,12-Nov-21,6,11,3,20,,,A,0,30-Jan-44,1400986562,01400986562
+1623683,Md Najmul Huda,UNMARRIED,O+,138.915,70,ISLAM,25-Jul-02,Male,SM Barrak,Kutubdia,Kaligong,Satkhira,12-Nov-21,9,11,5,20,,,A,0,30-Jan-44,1996873889,01918615052
+1623704,Md Gulam Robbaini,UNMARRIED,B+,136.71,60,ISLAM,25-May-02,Male,SM Barrak,Barkal,Khandakarpara,Narail,12-Nov-21,9,11,2,21,,,A,0,30-Jan-44,1903774770,
+1623732,Md Rashedul,UNMARRIED,O+,132.3,65,ISLAM,15-Dec-00,Male,SM Barrak,Homna,Monirampur,Kurigram,12-Nov-21,6,11,3,21,,,A,0,30-Jan-43,1701529628,01713427436
+1623741,Rifat Ahmed,UNMARRIED,B+,136.71,67,ISLAM,2-Jan-02,Male,SM Barrak,Sonaimuri,Patabuka,Shariatpur,12-Nov-21,9,11,4,20,,,A,0,30-Jan-44,1627483356,
+1623766,Md Mahidul Islam,UNMARRIED,B+,127.89,69,ISLAM,2-Oct-01,Male,SM Barrak,Barkal,Khasial,Rangpur,12-Nov-21,11,11,4,21,,,A,0,30-Jan-44,1717520350,01618708960
+1623780,Md Manik Hossen,UNMARRIED,O+,134.505,67,ISLAM,1-Jan-02,Male,SM Barrak,Feni-S,Tona,Jhenaidah,12-Nov-21,6,11,3,20,,,A,0,30-Jan-44,1402430226,01952894203
+1623789,Md Merajul isman,UNMARRIED,O-,138.915,68,ISLAM,10-Feb-01,Male,SM Barrak,Kaukhali,Golapbagh,Bogra,12-Nov-21,9,11,4,21,,,A,0,30-Jan-44,1733762722,
+1623796,Md Ebrahim,UNMARRIED,A+,130.095,64,ISLAM,30-Aug-01,Male,SM Barrak,Belaichari,Golapbagh,Patuakhali,12-Nov-21,15,11,8,21,,,A,0,30-Jan-44,1892558083,
+1623808,Limon Hosan,UNMARRIED,B+,121.275,64,ISLAM,18-Sep-01,Male,SM Barrak,Nasirnagar,Khasial,Jhenaidah,12-Nov-21,9,11,8,21,,,A,0,30-Jan-44,1760171520,
+1623823,Limon Sekh,UNMARRIED,AB+,121.275,62,ISLAM,1-Feb-02,Male,SM Barrak,Cox'S Bazar-S,Bolarampur,Barisal,12-Nov-21,6,12,7,21,,,A,0,23-Jun-37,1719337226,
+1623839,Efat hossan,UNMARRIED,AB+,132.3,62,ISLAM,28-Apr-02,Male,SM Barrak,Daganbhuiyan,Arambagh,Gazipur,14-Aug-22,6,12,8,20,,,A,0,23-Jun-37,1978142643,
+1623843,Rasel Rana,UNMARRIED,O+,138.915,64,ISLAM,18-Aug-03,Male,SM Barrak,Hathazari,Nelfamari,Dhaka,14-Aug-22,15,11,2,19,,,A,0,12-Sep-45,1972843851,
+1623851,Md Mahim Hasan Fakir,UNMARRIED,A-,132.3,67,ISLAM,27-May-04,Male,SM Barrak,Tazumuddin,Charbalakh,Faridpur,14-Sep-22,10,11,2,18,,,A,0,12-Oct-45,1743955427,
+1623858,Md Mirajul Islam,UNMARRIED,O+,136.71,64,ISLAM,22-Sep-02,Male,SM Barrak,Barguna-S,Sitakunda,Jaypurhat,14-Oct-22,9,11,2,20,,,A,0,12-Oct-45,1309886881,
+1623864,MD Moshiar Rahman,UNMARRIED,O+,141.12,61,ISLAM,15-Aug-03,Male,SM Barrak,Debidwar,Boropukur,Nilphamari,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1767006824,
+1623875,MD Habibur Rahman Hino,UNMARRIED,B+,123.48,62,ISLAM,2-May-04,Male,SM Barrak,Barura,Majila,Gaibandha,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1326009116,01738400648
+1623896,Md Aminul Islam,UNMARRIED,O+,154.35,62,ISLAM,1-Aug-01,Male,SM Barrak,Panchari,Bijoynagar,Panchagarh,14-Oct-22,11,11,2,21,,,A,0,12-Oct-45,1704388624,
+1623908,Rakib Hasan,UNMARRIED,B+,143.325,64,ISLAM,13-Nov-03,Male,SM Barrak,Chandina,Arambagh,Dinajpur,14-Oct-22,10,11,2,19,,,A,0,12-Oct-45,1710838356,
+1623911,Sozib Mondol,UNMARRIED,A-,132.3,66,ISLAM,13-Nov-03,Male,SM Barrak,Kutubdia,Boropukur,Kurigram,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1728215605,
+1623924,Abu Tahir,UNMARRIED,B+,134.505,68,ISLAM,2-Mar-03,Male,SM Barrak,Teknaf,Nelfamari,Chapai Nawabganj,14-Oct-22,7,11,2,19,,,A,0,12-Oct-45,1595100491,
+1623949,Sheikh Shahariar Shibly,UNMARRIED,B+,143.325,66,ISLAM,22-Sep-03,Male,SM Barrak,Panchari,Tona,Gopalganj,14-Oct-22,9,11,2,19,,,A,0,12-Oct-45,1780298182,
+1623952,Md Anik Sheikh,UNMARRIED,B+,152.145,61,ISLAM,28-Jul-03,Male,SM Barrak,Guimara,Monirampur,Pabna,14-Oct-22,9,11,2,19,,,A,0,12-Oct-45,1725929590,
+1623959,Md Sohorab parvez sourav,UNMARRIED,B+,136.71,70,ISLAM,18-Aug-02,Male,SM Barrak,Bancharampur,Nelfamari,Thakurgaon,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1706800761,
+1623967,Md Rashel Mondol,UNMARRIED,B+,141.12,66,ISLAM,25-Dec-04,Male,SM Barrak,Sandwip,Bijoynagar,Rangpur,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1976474007,
+1624007,Md Mehadi Hassan,UNMARRIED,B+,147.735,64,ISLAM,26-Dec-02,Male,SM Barrak,Dighinala,Khasial,Rajshahi,14-Oct-22,11,11,2,20,,,A,0,12-Oct-45,1972844012,
+1624012,Md Mehedi Hasan,UNMARRIED,B+,141.12,68,ISLAM,7-Jul-02,Male,SM Barrak,Laksham,Golapbagh,Kurigram,14-Oct-22,10,11,2,20,,,A,0,12-Oct-45,1942313556,
+1624052,Md Shahin Rahman,UNMARRIED,O+,149.94,61,ISLAM,15-Apr-03,Male,SM Barrak,Hatiya,Charbalakh,Rajshahi,14-Oct-22,5,11,2,19,,,A,0,12-Oct-45,1739371428,
+1624083,Arafat Islam,UNMARRIED,A+,149.94,60,ISLAM,29-Dec-02,Male,SM Barrak,Barishal-S,Sitakunda,Jessore,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1720821603,
+1624098,Md; Golam Rabbany,UNMARRIED,B+,136.71,65,ISLAM,29-Aug-02,Male,SM Barrak,Daudkandi,Sitakunda,Khulna,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1700697047,
+1624106,Md Anamul Haque Akando,UNMARRIED,B+,125.685,65,ISLAM,1-Feb-03,Male,SM Barrak,Laxmipur-S,Bolarampur,Sirajganj,14-Oct-22,11,11,2,19,,,A,0,12-Oct-45,1973954115,
+1624115,Md: Mominuzzaman sumon,UNMARRIED,O+,136.71,63,ISLAM,12-Mar-02,Male,SM Barrak,Muladi,Khandakarpara,Panchagarh,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1750081772,
+1624138,Md Mosfiqur Islam,UNMARRIED,O+,143.325,66,ISLAM,18-Jul-02,Male,SM Barrak,Hathazari,Sitakunda,Nilphamari,14-Oct-22,9,11,2,20,,,A,0,12-Oct-45,1315277685,
+1624145,Md Sazzad Hossen,UNMARRIED,A+,127.89,70,ISLAM,25-Feb-03,Male,SM Barrak,Kawkhali,Patabuka,Panchagarh,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1614000255,
+1624164,Md Sakibul Hasan,UNMARRIED,A+,123.48,69,ISLAM,21-Oct-02,Male,SM Barrak,Bandarban-S,Soilkupa,Chapai Nawabganj,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1740191500,
+1624185,Suraya yasmin,UNMARRIED,O+,132.3,65,ISLAM,29-Dec-03,Female,SM Barrak,Haziganj,Charbalakh,Jhenaidah,14-Oct-22,11,11,2,19,,,A,0,12-Oct-45,1925150184,
+1624187,Md Mamun Hosen,UNMARRIED,A+,132.3,62,ISLAM,20-Jun-02,Male,SM Barrak,Senbag,Arambagh,Kushtia,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1828161501,
+1624195,Mst Mursalin Tinni,UNMARRIED,A+,141.12,65,ISLAM,13-Jul-04,Female,SM Barrak,Chouddagram,Bijoynagar,Kushtia,14-Oct-22,11,11,2,18,,,A,0,12-Oct-45,1998288292,
+1624214,Md Masud Hossain,UNMARRIED,AB+,127.89,65,ISLAM,12-Sep-02,Male,SM Barrak,Panchari,Patabuka,Bagerhat,14-Oct-22,10,11,2,20,,,A,0,12-Oct-45,1976474219,
+1624219,Mst Monira Khatun,UNMARRIED,A+,141.12,66,ISLAM,12-Jan-04,Female,SM Barrak,Bamna,Majila,Chapai Nawabganj,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1727826969,
+1624221,Mamun mia,UNMARRIED,A+,145.53,65,ISLAM,5-Nov-02,Male,SM Barrak,Agailjhara,Kaligong,Kishoreganj,14-Oct-22,9,11,2,20,,,A,0,12-Oct-45,1904247608,
+1624222,Md Sojib Ali,UNMARRIED,B+,119.07,61,ISLAM,4-Jan-04,Male,SM Barrak,Muradnagar,Tona,Natore,14-Oct-22,9,11,2,18,,,A,0,12-Oct-45,1315107512,
+1624224,Shirina Akter,UNMARRIED,AB+,123.48,64,ISLAM,13-Nov-03,Female,SM Barrak,Kabir Hat,Patabuka,Shariatpur,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1728280054,
+1624232,Tahamina Akter,UNMARRIED,O+,132.3,62,ISLAM,17-May-03,Female,SM Barrak,Shahrasti,Boropukur,Habiganj,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1303652305,
+1624239,Md Al Amin,UNMARRIED,A+,134.505,61,ISLAM,17-May-03,Male,SM Barrak,Kaukhali,Soilkupa,Meherpur,14-Oct-22,6,11,2,0,,,A,0,12-Oct-45,1760194749,
+1624244,Shah Poran,UNMARRIED,AB+,99.225,62,ISLAM,15-Mar-03,Male,SM Barrak,Barguna-S,Soilkupa,Sunamganj,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1305830367,
+1624266,Moury Khatun,UNMARRIED,O+,136.71,68,ISLAM,30-Dec-02,Female,SM Barrak,Rangabali,Arambagh,Jamalpur,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1994003050,
+1624269,Md Arafat Shahoriar Ridoy,UNMARRIED,B+,149.94,60,ISLAM,1-Aug-04,Male,SM Barrak,Kalapara,Tona,Rangpur,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1819935886,
+1624270,Md Jagir Hossen,UNMARRIED,O+,132.3,60,ISLAM,26-Jan-03,Male,SM Barrak,Bamna,Bijoynagar,Chittagong,14-Oct-22,9,11,2,19,,,A,0,12-Oct-45,1973954279,
+1624278,Md Mohiuddin,UNMARRIED,O+,130.095,70,ISLAM,2-Jun-04,Male,SM Barrak,Thanchi,Golapbagh,Pabna,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1798260366,
+1624286,Md Shehave Hossen Rabby,UNMARRIED,O+,158.76,63,ISLAM,14-Oct-03,Male,SM Barrak,Bancharampur,Arambagh,Gopalganj,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1717029662,
+1624308,Md Abdul kyoum Backly,UNMARRIED,A+,110.25,65,ISLAM,20-Dec-02,Male,SM Barrak,Uzirpur,Shatkura,Jhalokati,14-Oct-22,9,11,2,20,,,A,0,12-Oct-45,1642880115,
+1624311,Nabila,UNMARRIED,B+,119.07,66,ISLAM,26-Apr-04,Female,SM Barrak,Sandwip,Bijoynagar,Madaripur,14-Oct-22,6,11,2,18,,,A,0,12-Oct-45,1775330534,
+1624317,Md Shaharul Islam Sagor,UNMARRIED,O+,127.89,66,ISLAM,7-Dec-03,Male,SM Barrak,Ramgarh,Khandakarpara,Khulna,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1308067435,
+1624327,Md Abu Nasher,UNMARRIED,O+,149.94,70,ISLAM,1-Jan-03,Male,SM Barrak,Laxmichari,Bijoynagar,Joypurhat,14-Oct-22,6,11,2,19,,,A,0,12-Oct-45,1724679470,
+1624330,Md Sanzid Hosen,UNMARRIED,A+,127.89,68,ISLAM,17-May-03,Male,SM Barrak,Kabir Hat,Shatkura,Rajshahi,14-Oct-22,9,11,2,19,,,A,0,12-Oct-45,1744774144,
+1624332,Md Al-Amin,UNMARRIED,B+,169.785,69,ISLAM,20-Jun-02,Male,SM Barrak,Rangabali,Bijoynagar,Gaibandha,14-Oct-22,6,11,2,20,,,A,0,12-Oct-45,1723558281,
+1624352,Md Zakir hossain,MARRIED ,B+,156.555,64,ISLAM,25-Jun-80,Male,FM (Out living),Rangamati-S,Arambagh,Tangail,14-Oct-22,17,8,9,42,,,A,0,2-Jan-24,1717803666,01718773959
+2410326,juwel khan,MARRIED ,B+,154.35,61,ISLAM,17-Mar-88,Male,SM Barrak,Daulatkhan,Arambagh,Tangail,22-Sep-21,18,9,9,34,,,A,2,30-Nov-27,1769602392,01969602330
+2412935,Md. Omur Faruk,MARRIED ,B+,147.735,70,ISLAM,10-Dec-87,Male,FM (In living),Noakhali-S,Tona,Pabna,18-May-21,18,9,9,36,,,A,2,7-Jan-30,1716278410,01760017164
+2413722,MD Mintu Mia,MARRIED ,O+,132.3,66,ISLAM,15-Oct-88,Male,FM (In living),Sarail,Monirampur,Kurigram,7-Feb-22,19,9,9,33,,,A,2,23-Nov-28,1719212795,01773311554
+2414215,MD Atiqur rahaman,MARRIED ,O+,169.785,64,ISLAM,1-Dec-96,Male,SM Barrak,Nalchity,Arambagh,Naogaon,2-Jul-21,17,11,9,26,,,A,2,22-Jan-39,1717178375,01764537404
+2417295,Md jakir hossain,UNMARRIED,B+,127.89,66,ISLAM,2-Aug-98,Male,SM Barrak,Banaripara,Golapbagh,Dinajpur,22-Jul-22,17,11,9,24,,,A,0,20-Jan-40,1612871924,01920-736056
+2417883,Md Raju Ahamed,MARRIED ,O+,147.735,69,ISLAM,2-Feb-98,Male,FM (Out living),Charfassion,Monirampur,Kurigram,12-Feb-22,17,11,9,25,,,A,0,20-Jan-40,1300170731,01300191395
+2417901,jowel mia,UNMARRIED,O+,143.325,66,ISLAM,20-Oct-99,Male,SM Barrak,Dashmina,Patabuka,Jamalpur,12-Feb-22,19,11,9,24,,,A,0,20-Jan-40,1983784453,01963464823
+2417914,Forid,UNMARRIED,A+,143.325,68,ISLAM,7-May-99,Male,SM Barrak,Nanniarchar,Monirampur,Jamalpur,8-Aug-21,7,11,9,24,,,A,0,1-Dec-42,1608695638,01876936676
+2419150,Arifuzzaman,UNMARRIED,B+,0,63,ISLAM,20-Sep-00,Male,SM Barrak,Bhola-S,Khandakarpara,Jessore,24-Sep-22,7,11,9,22,,,A,0,1-Jul-41,1821344476,01705576263

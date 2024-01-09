@@ -85,8 +85,8 @@ function handleAdmittedInCMH($selectedDisposal)
 function handleAddDisposalCMH($selectedDisposal, $noOfDays)
 {
     global $activeDisposal, $soldierID;
-    $dischargeReason = 'Disposal given from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
-    $disposalReason = 'Discharged from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
+    $dischargeReason = 'Discharged from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
+    $disposalReason = 'Disposal given from ' . $activeDisposal['DISPOSALTYPE'] . ' for: ' . $activeDisposal['REMARKS'];
     updateDisposal($activeDisposal['MEDICALID'], 'Discharged', date('Y-m-d'), $dischargeReason);
     addDisposal($soldierID, $selectedDisposal, date('Y-m-d'), date('Y-m-d', strtotime("+$noOfDays days")), $disposalReason);
 }

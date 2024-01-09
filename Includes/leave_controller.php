@@ -2,7 +2,7 @@
 include '../includes/connection.php';
 
 
-$startDate = date('Y-m-d', strtotime('-7 days'));
+$startDate = date('Y-m-01');
 $endDate = date('Y-m-t');  // the end date will be the end date of the month 
 // Handle filter button 
 if (isset($_POST['filterBtn'])) {

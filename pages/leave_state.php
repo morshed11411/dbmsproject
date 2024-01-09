@@ -1,5 +1,6 @@
 <?php
-$pageTitle = "Leave State";
+$pageTitle = "Leave State of " . date('M,Y');
+;
 define('BASE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/upcs/');
 
 require_once(BASE_DIR . 'includes/header.php');
@@ -16,7 +17,9 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
     <!-- Welcome message and date -->
     <div class="d-flex justify-content-between">
         <div class="text-left">
-            <h3>Leave State</h3>
+            <h3>Leave State-
+                <?php echo date('M,Y'); ?>
+            </h3>
         </div>
         <div class="text-right">
             <form method="post" action="">
@@ -28,8 +31,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     </div>
                     <div class="col-auto">
                         <label class="sr-only" for="endDate">End Date</label>
-                        <input type="date" class="form-control" id="endDate" name="endDate"
-                            value="<?= $endDate; ?>">
+                        <input type="date" class="form-control" id="endDate" name="endDate" value="<?= $endDate; ?>">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary" name="filterBtn">Filter</button>
@@ -53,7 +55,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                     <h3 class="card-title text-white">Monthly Leave State</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered text-center" id="tablex">
+                    <table class="table table-bordered text-center text-small table-hover" id="leavetable">
                         <thead>
                             <tr>
                                 <th style="width: 10%">Date</th> <!-- Fix the th size and make it center -->
@@ -62,6 +64,7 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                                         <?php echo $coy['NAME']; ?>
                                     </th>
                                 <?php endforeach; ?>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,11 +73,15 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
                                     <td style="width: 10%"> <!-- Fix the td size and make it center text -->
                                         <?php echo $date; ?>
                                     </td>
-                                    <?php foreach ($leaveCounts as $count): ?>
+                                    <?php
+                                    foreach ($leaveCounts as $count): ?>
                                         <td style="width: 10%">
                                             <?php echo $count; ?>
                                         </td>
                                     <?php endforeach; ?>
+                                    <td>
+                                        <?= array_sum($leaveCounts); ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -87,4 +94,43 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
     <!-- /.row -->
 </section>
 
+
 <?php include '../includes/footer.php'; ?>
+
+
+<script>
+$(document).ready(function () {
+      $('#leavetable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+          {
+            extend: 'excel',
+            text: 'Excel'
+          },
+          {
+            extend: 'pdfHtml5',
+            text: 'PDF',
+            orientation: 'portrait',
+            pageSize: 'A4',
+            customize: function (doc) {
+              doc.defaultStyle.fontSize = 12;
+              doc.defaultStyle.font = 'Times New Roman';
+              var pageSize = doc.internal.pageSize;
+              var pageWidth = pageSize.width - doc.internal.margins.left - doc.internal.margins.right;
+              var table = doc.content[1].table;
+              table.widths = Array(table.body[0].length + 1).join('*').split('').map(function () {
+                return pageWidth / table.body[0].length;
+              });
+            }
+          },
+          {
+            extend: 'print',
+            text: 'Print'
+          }
+        ],
+        searching: false,
+        paging: false
+      });
+    });
+    
+</script>
