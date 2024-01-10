@@ -101,6 +101,7 @@ if (isset($_POST['submit'])) {
 
     oci_free_statement($stmt);
 }
+<<<<<<< HEAD
 // Fetch data for the trade table
 $queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
 $stmtTrade = oci_parse($conn, $queryTrade);
@@ -143,6 +144,8 @@ while ($row = oci_fetch_assoc($stmt)) {
     $company->COMPANYNAME = $row['COMPANYNAME'];
     $companyList[] = $company;
 }
+=======
+>>>>>>> 371ffbeab4393b3b461cc37bceabd45f30b11468
 
 include '../includes/header.php';
 ?>
