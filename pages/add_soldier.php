@@ -92,6 +92,7 @@ $stmtTrade = oci_parse($conn, $queryTrade);
 oci_execute($stmtTrade);
 
 $tradeList = array();
+
 while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
     $trade = new stdClass();
     $trade->TradeID = $rowTrade['TRADEID'];
@@ -343,8 +344,24 @@ include '../includes/header.php';
 
                                     <div class="form-group">
                                         <label for="parent_unit">Parent Unit:</label>
-                                        <input type="text" name="parent_unit" id="parent_unit" class="form-control"
-                                            required>
+                                        <?php
+                                    // Define the unitList array
+                                    $unitList = array("1 Sig Bn", "2 Sig Bn", "3 Sig Bn", "4 Sig Bn", "5 Sig Bn", "6 Sig Bn", "7 Sig Bn", "8 Sig Bn", "9 Sig Bn", "10 Sig Bn", "11 Sig Bn", "12 Sig Bn");
+                                    
+                                    // Get the select element
+                                    $selectElement = "<select name='parent_unit' id='parent_unit' class='form-control' required>";
+                                    
+                                    // Loop through the unitList array and create an option element for each value
+                                    foreach ($unitList as $unit) {
+                                      $selectElement.= "<option value='". $unit. "'>". $unit. "</option>";
+                                    }
+                                    
+                                    // Close the select element
+                                    $selectElement.= "</select>";
+                                    
+                                    // Output the select element
+                                    echo $selectElement;
+                                    ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="mission">Mission:</label>

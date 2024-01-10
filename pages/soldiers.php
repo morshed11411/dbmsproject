@@ -13,39 +13,32 @@ $soldierList = [];
 $byRankCount = [];
 $soldiersByRank = [];
 
+function deleteSoldierAndUser($conn, $soldier_id) {
+    $deleteSoldierQuery = "DELETE FROM SOLDIER WHERE SOLDIERID = :soldier_id";
+    $stmtSoldier = oci_parse($conn, $deleteSoldierQuery);
+    oci_bind_by_name($stmtSoldier, ':soldier_id', $soldier_id);
+    $resultSoldier = oci_execute($stmtSoldier);
+    oci_free_statement($stmtSoldier);
+
+    $deleteUserQuery = "DELETE FROM USERS WHERE SOLDIERID = :soldier_id";
+    $stmtUser = oci_parse($conn, $deleteUserQuery);
+    oci_bind_by_name($stmtUser, ':soldier_id', $soldier_id);
+    $resultUser = oci_execute($stmtUser);
+    oci_free_statement($stmtUser);
+
+    return $resultSoldier && $resultUser;
+}
+
+// Usage example to delete a soldier and user
 if (isset($_POST['delete_soldier_submit'])) {
-    global $conn;
-    // Get the soldier ID to be deleted
-    $delete_soldier_id = $_POST['delete_soldier_id'];
-
-    // Perform the deletion logic here (assuming you have a function or SQL query to delete a soldier)
-
-    // Example function for deletion (you should replace this with your actual deletion logic)
-    function deleteSoldier($conn, $soldier_id) {
-        // Perform the deletion logic (replace this with your actual deletion query)
-        // For example, assuming your Soldier table has a primary key 'SOLDIERID':
-        $deleteQuery = "DELETE FROM SOLDIER WHERE SOLDIERID = :soldier_id";
-        $stmt = oci_parse($conn, $deleteQuery);
-        oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
-        
-        // Execute the delete statement
-        $result = oci_execute($stmt);
-
-        // Free the statement
-        oci_free_statement($stmt);
-
-        return $result;
-    }
-
-    // Assuming you have a database connection established ($conn), you can call the deleteSoldier function
-    $deletionResult = deleteSoldier($conn, $delete_soldier_id);
+    $soldier_id = $_POST['delete_soldier_id'];
+    $deletionResult = deleteSoldierAndUser($conn, $soldier_id);
 
     if ($deletionResult) {
-        // Successful deletion
-        $_SESSION['success'] = "Soldier deleted successfully.";
+        $_SESSION['success'] = "Soldier and User deleted successfully.";
     } else {
-        // Failed deletion
-        $_SESSION['error'] = "Failed to delete soldier.";
+        $error = oci_error($conn);
+        $_SESSION['error'] = "Failed to delete soldier and user: " . $error['message'];
     }
 
     // Redirect to the soldiers page or any other appropriate page
