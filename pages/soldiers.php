@@ -14,6 +14,7 @@ $byRankCount = [];
 $soldiersByRank = [];
 
 if (isset($_POST['delete_soldier_submit'])) {
+    global $conn;
     // Get the soldier ID to be deleted
     $delete_soldier_id = $_POST['delete_soldier_id'];
 
