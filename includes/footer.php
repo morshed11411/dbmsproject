@@ -24,8 +24,7 @@
 <script src="../js/adminlte.min.js"></script>
 <script src="../js/chart.js"></script>
 <script src="../js/scripts.js"></script>
-
-
+<script src="../js/select2.full.min.js"></script>
 </body>
 
 </html>
