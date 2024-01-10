@@ -2,6 +2,22 @@
 // Assuming $conn is your Oracle database connection
 include '../includes/connection.php';
 
+function createSelectElement($arrayName, $arrayValues) {
+    // Get the select element
+    $selectElement = "<select name='". $arrayName. "' id='". $arrayName. "' class='form-control' required>";
+  
+    // Loop through the array values and create an option element for each value
+    foreach ($arrayValues as $value) {
+      $selectElement.= "<option value='". $value. "'>". $value. "</option>";
+    }
+  
+    // Close the select element
+    $selectElement.= "</select>";
+  
+    // Return the select element
+    return $selectElement;
+  }
+  
 function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $onLeave = false, $company = null, $status = null)
 {
     $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, S.BLOODGROUP, S.DATEOFBIRTH, S.DISTRICT, T.TRADE, C.COMPANYNAME
