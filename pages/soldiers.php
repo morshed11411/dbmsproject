@@ -13,6 +13,44 @@ $soldierList = [];
 $byRankCount = [];
 $soldiersByRank = [];
 
+if (isset($_POST['delete_soldier_submit'])) {
+    // Get the soldier ID to be deleted
+    $delete_soldier_id = $_POST['delete_soldier_id'];
+
+    // Perform the deletion logic here (assuming you have a function or SQL query to delete a soldier)
+
+    // Example function for deletion (you should replace this with your actual deletion logic)
+    function deleteSoldier($conn, $soldier_id) {
+        // Perform the deletion logic (replace this with your actual deletion query)
+        // For example, assuming your Soldier table has a primary key 'SOLDIERID':
+        $deleteQuery = "DELETE FROM SOLDIER WHERE SOLDIERID = :soldier_id";
+        $stmt = oci_parse($conn, $deleteQuery);
+        oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+        
+        // Execute the delete statement
+        $result = oci_execute($stmt);
+
+        // Free the statement
+        oci_free_statement($stmt);
+
+        return $result;
+    }
+
+    // Assuming you have a database connection established ($conn), you can call the deleteSoldier function
+    $deletionResult = deleteSoldier($conn, $delete_soldier_id);
+
+    if ($deletionResult) {
+        // Successful deletion
+        $_SESSION['success'] = "Soldier deleted successfully.";
+    } else {
+        // Failed deletion
+        $_SESSION['error'] = "Failed to delete soldier.";
+    }
+
+    // Redirect to the soldiers page or any other appropriate page
+    header("Location: soldiers.php");
+    exit();
+}
 
 if ($role === 'admin') {
     if (isset($_GET['company'])) {
