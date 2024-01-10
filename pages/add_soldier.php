@@ -3,13 +3,6 @@ session_start();
 
 require_once('../includes/connection.php'); // No need for ../includes/init.php
 include '../includes/parade_controller.php';
-// Function to bind parameters for Oracle statement
-function bindParams($stmt, $params)
-{
-    foreach ($params as $paramName => $paramValue) {
-        oci_bind_by_name($stmt, $paramName, $paramValue);
-    }
-}
 
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
@@ -40,49 +33,41 @@ if (isset($_POST['submit'])) {
     $date_retirement = $_POST['date_retirement'];
     $personal_contact = $_POST['personal_contact'];
     $emergency_contact = $_POST['emergency_contact'];
-
     // Establish a connection to the Oracle database
 
     // Prepare the INSERT statement for Soldier table
-    $querySoldier = "INSERT INTO SOLDIER (SOLDIERID, NAME, RANKID, TRADEID, COMPANYID, GENDER, RELIGION, DATEOFBIRTH, DATEOFENROLL, BLOODGROUP, MARITALSTATUS, VILLAGE, THANA, DISTRICT, HEIGHT, WEIGHT, LIVINGSTATUS, PARENTUNIT, MISSION, MEDCATEGORY, NOOFCHILDREN, DATERETIREMENT, PERSONALCONTACT, EMERGENCYCONTACT) 
-                 VALUES (:SOLDIER_ID, :NAME, :RANK, :TRADE, :COMPANY, :GENDER, :RELIGION, TO_DATE(:DATE_OF_BIRTH, 'YYYY-MM-DD'), TO_DATE(:DATE_OF_JOINING, 'YYYY-MM-DD'), :BLOOD_GROUP, :MARITAL_STATUS, :VILLAGE, :THANA, :DISTRICT, :HEIGHT, :WEIGHT, :LIVING_STATUS, :PARENT_UNIT, :MISSION, :MED_CATEGORY, :NO_OF_CHILDREN, TO_DATE(:DATE_RETIREMENT, 'YYYY-MM-DD'), :PERSONAL_CONTACT, :EMERGENCY_CONTACT)";
-    
+    $querySoldier = "INSERT INTO Soldier (SoldierID, Name, RankID, TradeID, CompanyID, Gender, Religion, DateOfBirth, DateOfEnroll, BloodGroup, MaritalStatus, Village, Thana, District, Height, Weight, LivingStatus, ParentUnit, Mission, MedCategory, NoOfChildren, DateRetirement, PersonalContact, EmergencyContact) 
+                 VALUES (:soldier_id, :name, :rank, :trade, :company, :gender, :religion, TO_DATE(:date_of_birth, 'YYYY-MM-DD'), TO_DATE(:date_of_joining, 'YYYY-MM-DD'), :blood_group, :marital_status, :village, :thana, :district, :height, :weight, :living_status, :parent_unit, :mission, :med_category, :no_of_children, TO_DATE(:date_retirement, 'YYYY-MM-DD'), :personal_contact, :emergency_contact)";
     $stmt = oci_parse($conn, $querySoldier);
 
-    // Define an array with parameter names and values
-    $params = array(
-        ':SOLDIER_ID' => $soldier_id,
-        ':NAME' => $name,
-        ':RANK' => $rank,
-        ':TRADE' => $trade,
-        ':COMPANY' => $company,
-        ':GENDER' => $gender,
-        ':RELIGION' => $religion,
-        ':DATE_OF_BIRTH' => $date_of_birth,
-        ':DATE_OF_JOINING' => $date_of_joining,
-        ':BLOOD_GROUP' => $blood_group,
-        ':MARITAL_STATUS' => $marital_status,
-        ':VILLAGE' => $village,
-        ':THANA' => $thana,
-        ':DISTRICT' => $district,
-        ':HEIGHT' => $height,
-        ':WEIGHT' => $weight,
-        ':LIVING_STATUS' => $living_status,
-        ':PARENT_UNIT' => $parent_unit,
-        ':MISSION' => $mission,
-        ':MED_CATEGORY' => $med_category,
-        ':NO_OF_CHILDREN' => $no_of_children,
-        ':DATE_RETIREMENT' => $date_retirement,
-        ':PERSONAL_CONTACT' => $personal_contact,
-        ':EMERGENCY_CONTACT' => $emergency_contact,
-    );
-
-    // Bind the parameters for Soldier table using the function
-    bindParams($stmt, $params);
+    // Bind the parameters for Soldier table
+    oci_bind_by_name($stmt, ':soldier_id', $soldier_id);
+    oci_bind_by_name($stmt, ':name', $name);
+    oci_bind_by_name($stmt, ':rank', $rank);
+    oci_bind_by_name($stmt, ':trade', $trade);
+    oci_bind_by_name($stmt, ':company', $company);
+    oci_bind_by_name($stmt, ':gender', $gender);
+    oci_bind_by_name($stmt, ':religion', $religion);
+    oci_bind_by_name($stmt, ':date_of_birth', $date_of_birth);
+    oci_bind_by_name($stmt, ':date_of_joining', $date_of_joining);
+    oci_bind_by_name($stmt, ':blood_group', $blood_group);
+    oci_bind_by_name($stmt, ':marital_status', $marital_status);
+    oci_bind_by_name($stmt, ':village', $village);
+    oci_bind_by_name($stmt, ':thana', $thana);
+    oci_bind_by_name($stmt, ':district', $district);
+    oci_bind_by_name($stmt, ':height', $height);
+    oci_bind_by_name($stmt, ':weight', $weight);
+    oci_bind_by_name($stmt, ':living_status', $living_status);
+    oci_bind_by_name($stmt, ':parent_unit', $parent_unit);
+    oci_bind_by_name($stmt, ':mission', $mission);
+    oci_bind_by_name($stmt, ':med_category', $med_category);
+    oci_bind_by_name($stmt, ':no_of_children', $no_of_children);
+    oci_bind_by_name($stmt, ':date_retirement', $date_retirement);
+    oci_bind_by_name($stmt, ':personal_contact', $personal_contact);
+    oci_bind_by_name($stmt, ':emergency_contact', $emergency_contact);
 
     // Execute the INSERT statement for Soldier table
     $result = oci_execute($stmt);
-
     if ($result !== false) {
         $updateResult = updateUserAccess($conn, $soldier_id, 'soldier');
         if ($updateResult) {
@@ -98,10 +83,9 @@ if (isset($_POST['submit'])) {
         header("Location: edit_soldier.php?soldier=$soldier_id");
         exit();
     }
-
     oci_free_statement($stmt);
 }
-<<<<<<< HEAD
+
 // Fetch data for the trade table
 $queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
 $stmtTrade = oci_parse($conn, $queryTrade);
@@ -144,8 +128,8 @@ while ($row = oci_fetch_assoc($stmt)) {
     $company->COMPANYNAME = $row['COMPANYNAME'];
     $companyList[] = $company;
 }
-=======
->>>>>>> 371ffbeab4393b3b461cc37bceabd45f30b11468
+
+oci_free_statement($stmt);
 
 include '../includes/header.php';
 ?>
@@ -332,7 +316,7 @@ include '../includes/header.php';
                                             </div>
                                             <div class="col">
                                                 <label for="district">District</label>
-                                                <select id="district" class="form-control" disabled>
+                                                <select name="district" id="district" class="form-control" disabled>
                                                     <option value="">Select</option>
                                                 </select>
                                             </div>
