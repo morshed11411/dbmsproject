@@ -13,6 +13,38 @@ $soldierList = [];
 $byRankCount = [];
 $soldiersByRank = [];
 
+function deleteSoldierAndUser($conn, $soldier_id) {
+    $deleteSoldierQuery = "DELETE FROM SOLDIER WHERE SOLDIERID = :soldier_id";
+    $stmtSoldier = oci_parse($conn, $deleteSoldierQuery);
+    oci_bind_by_name($stmtSoldier, ':soldier_id', $soldier_id);
+    $resultSoldier = oci_execute($stmtSoldier);
+    oci_free_statement($stmtSoldier);
+
+    $deleteUserQuery = "DELETE FROM USERS WHERE SOLDIERID = :soldier_id";
+    $stmtUser = oci_parse($conn, $deleteUserQuery);
+    oci_bind_by_name($stmtUser, ':soldier_id', $soldier_id);
+    $resultUser = oci_execute($stmtUser);
+    oci_free_statement($stmtUser);
+
+    return $resultSoldier && $resultUser;
+}
+
+// Usage example to delete a soldier and user
+if (isset($_POST['delete_soldier_submit'])) {
+    $soldier_id = $_POST['delete_soldier_id'];
+    $deletionResult = deleteSoldierAndUser($conn, $soldier_id);
+
+    if ($deletionResult) {
+        $_SESSION['success'] = "Soldier and User deleted successfully.";
+    } else {
+        $error = oci_error($conn);
+        $_SESSION['error'] = "Failed to delete soldier and user: " . $error['message'];
+    }
+
+    // Redirect to the soldiers page or any other appropriate page
+    header("Location: soldiers.php");
+    exit();
+}
 
 if ($role === 'admin') {
     if (isset($_GET['company'])) {
