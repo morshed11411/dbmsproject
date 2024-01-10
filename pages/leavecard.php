@@ -1,8 +1,6 @@
 <?php
 include '../includes/connection.php';
 include '../includes/head.php';
-require_once('../assets/phpqrcode/qrlib.php');
-require_once('../assets/tcpdf/tcpdf.php');
 
 if (isset($_GET['soldier_id'])) {
     $soldierId = $_GET['soldier_id'];
@@ -72,11 +70,6 @@ $uploadedImages = oci_fetch_assoc($stmt);
 oci_free_statement($stmt);
 oci_close($conn);
 
-ob_start();
-QRcode::png($soldier['LEAVEID'], null, QR_ECLEVEL_H, 3);
-$imageData = ob_get_contents();
-ob_end_clean();
-$base64Image = base64_encode($imageData);
 
 ?>
 
@@ -211,9 +204,11 @@ $base64Image = base64_encode($imageData);
             </tr>
             <tr>
                 <td style="vertical-align: middle; text-align: center;">
-                    <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode">
+                 <!-- 
+				 <img src="data:image/png;base64,<?php echo $base64Image; ?>" alt="Barcode"> 
+				 -->
                 </td>
-                <td style="vertical-align: middle; text-align: right;">
+                <td style="vertical-align: middle; text-align: right; padding-left:250px;">
                     <div class="sign-block">
                         <p class="signature-line" style="text-align: center;">
                             <?php if ($uploadedImages && $uploadedImages['SIGNATURE_PATH']): ?>
