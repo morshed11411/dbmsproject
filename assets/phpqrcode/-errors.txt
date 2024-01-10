@@ -358,4 +358,8 @@
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\upcs\assets\phpqrcode\qrsplit.php</b> on line <b>53</b><br />
 <br />
 <b>Warning</b>:  Trying to access array offset on value of type int in <b>C:\xampp\htdocs\upcs\assets\phpqrcode\qrsplit.php</b> on line <b>62</b><br />
+<<<<<<< HEAD
 2023-11-24 14:39:26: empty string!!!2023-11-29 15:18:44: empty string!!!2023-11-29 15:19:07: empty string!!!2023-11-29 15:19:11: empty string!!!2023-11-29 16:08:54: empty string!!!2024-01-09 20:23:36: empty string!!!2024-01-09 20:23:45: empty string!!!
+=======
+2023-11-24 14:39:26: empty string!!!2023-11-29 15:18:44: empty string!!!2023-11-29 15:19:07: empty string!!!2023-11-29 15:19:11: empty string!!!2023-11-29 16:08:54: empty string!!!2024-01-09 20:21:35: empty string!!!2024-01-09 20:21:43: empty string!!!2024-01-09 20:21:47: empty string!!!2024-01-09 20:23:08: empty string!!!2024-01-09 20:23:13: empty string!!!2024-01-09 20:25:33: empty string!!!
+>>>>>>> 371ffbeab4393b3b461cc37bceabd45f30b11468
