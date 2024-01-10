@@ -101,6 +101,48 @@ if (isset($_POST['submit'])) {
 
     oci_free_statement($stmt);
 }
+// Fetch data for the trade table
+$queryTrade = "SELECT TRADEID, TRADE FROM TRADE";
+$stmtTrade = oci_parse($conn, $queryTrade);
+oci_execute($stmtTrade);
+
+$tradeList = array();
+while ($rowTrade = oci_fetch_assoc($stmtTrade)) {
+    $trade = new stdClass();
+    $trade->TradeID = $rowTrade['TRADEID'];
+    $trade->Trade = $rowTrade['TRADE'];
+    $tradeList[] = $trade;
+}
+
+oci_free_statement($stmtTrade);
+
+// Fetch data for the rank table
+$queryRank = "SELECT RANKID, RANK FROM Ranks";
+$stmtRank = oci_parse($conn, $queryRank);
+oci_execute($stmtRank);
+
+$rankList = array();
+while ($rowRank = oci_fetch_assoc($stmtRank)) {
+    $rank = new stdClass();
+    $rank->RankID = $rowRank['RANKID'];
+    $rank->Rank = $rowRank['RANK'];
+    $rankList[] = $rank;
+}
+
+oci_free_statement($stmtRank);
+
+$query = "SELECT COMPANYID, COMPANYNAME FROM Company";
+$stmt = oci_parse($conn, $query);
+oci_execute($stmt);
+
+$companyList = array();
+
+while ($row = oci_fetch_assoc($stmt)) {
+    $company = new stdClass();
+    $company->COMPANYID = $row['COMPANYID'];
+    $company->COMPANYNAME = $row['COMPANYNAME'];
+    $companyList[] = $company;
+}
 
 include '../includes/header.php';
 ?>
