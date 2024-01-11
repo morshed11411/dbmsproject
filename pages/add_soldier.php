@@ -125,8 +125,8 @@ $companyList = array();
 
 while ($row = oci_fetch_assoc($stmt)) {
     $company = new stdClass();
-    $company->COMPANYID = $row['COMPANYID'];
-    $company->COMPANYNAME = $row['COMPANYNAME'];
+    $company->CompanyID = $row['COMPANYID'];
+    $company->Company = $row['COMPANYNAME'];
     $companyList[] = $company;
 }
 
@@ -150,6 +150,14 @@ include '../includes/header.php';
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <?php
+
+                        $unitList = array("1 Sig Bn", "2 Sig Bn", "3 Sig Bn", "4 Sig Bn", "5 Sig Bn", "6 Sig Bn", "7 Sig Bn", "8 Sig Bn", "9 Sig Bn", "10 Sig Bn", "11 Sig Bn", "12 Sig Bn");
+                        $missionList = array("Completed", "Not Completed");
+                        $medCategoryList = array("A", "B", "C", "D", "E");
+                        $numberOfChildrenList = array("N/A", "1", "2", "3", "4", "5");
+                        ?>
+
                         <form method="post" action="">
                             <div class="row">
                                 <div class="col-md-3">
@@ -165,41 +173,34 @@ include '../includes/header.php';
 
                                     <div class="form-group">
                                         <label for="rank_id">Rank:</label>
-                                        <select name="rank_id" id="rank_id" class="form-control custom-select" required>
-                                            <option value="">Select Rank</option>
-                                            <?php foreach ($rankList as $rank): ?>
-                                                <option value="<?php echo $rank->RankID ?>">
-                                                    <?php echo $rank->Rank ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <?php
+                                        // Extract the values from the objects in $rankList
+                                        $rankValues = array_column($rankList, 'Rank');
+                                        $rankIDs = array_column($rankList, 'RankID');
+                                        echo createSelectElement("rank_id", $rankValues, $rankIDs);
+                                        ?>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="trade_id">Trade:</label>
-                                        <select name="trade_id" id="trade_id" class="form-control custom-select"
-                                            required>
-                                            <option value="">Select Trade</option>
-                                            <?php foreach ($tradeList as $trade): ?>
-                                                <option value="<?php echo $trade->TradeID ?>">
-                                                    <?php echo $trade->Trade ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <?php
+                                        // Extract the values from the objects in $tradeList
+                                        $tradeValues = array_column($tradeList, 'Trade');
+                                        $tradeIDs = array_column($tradeList, 'TradeID');
+                                        echo createSelectElement("trade_id", $tradeValues, $tradeIDs);
+                                        ?>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="company_id">Company:</label>
-                                        <select name="company_id" id="company_id" class="form-control custom-select"
-                                            required>
-                                            <option value="">Select Company</option>
-                                            <?php foreach ($companyList as $company): ?>
-                                                <option value="<?php echo $company->COMPANYID ?>">
-                                                    <?php echo $company->COMPANYNAME ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <?php
+                                        // Extract the values from the objects in $companyList
+                                        $companyValues = array_column($companyList, 'Company');
+                                        $companyIDs = array_column($companyList, 'CompanyID');
+                                        echo createSelectElement("company_id", $companyValues, $companyIDs);
+                                        ?>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="date_of_joining">Date of Joining:</label>
                                         <input type="date" name="date_of_joining" id="date_of_joining"
@@ -214,61 +215,29 @@ include '../includes/header.php';
                                     </div>
                                     <div class="form-group">
                                         <label for="gender">Gender:</label>
-                                        <select name="gender" id="gender" class="form-control" required>
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
+                                        <?php echo createSelectElement("gender", array("Male", "Female")); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="religion">Religion:</label>
-                                        <select name="religion" id="religion" class="form-control" required>
-                                            <option value="">Select Religion</option>
-                                            <option value="Islam">Islam</option>
-                                            <option value="Hindu">Hindu</option>
-                                            <option value="Christian">Christian</option>
-                                            <option value="Other">Other</option>
-                                        </select>
+                                        <?php echo createSelectElement("religion", array("Islam", "Hindu", "Christian", "Other")); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="blood_group">Blood Group:</label>
-                                        <select name="blood_group" id="blood_group" class="form-control" required>
-                                            <option value="">Select Blood Group</option>
-                                            <option value="A+">A+</option>
-                                            <option value="A-">A-</option>
-                                            <option value="B+">B+</option>
-                                            <option value="B-">B-</option>
-                                            <option value="AB+">AB+</option>
-                                            <option value="AB-">AB-</option>
-                                            <option value="O+">O+</option>
-                                            <option value="O-">O-</option>
-                                        </select>
+                                        <?php echo createSelectElement("blood_group", array("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="marital_status">Marital Status:</label>
-                                        <select name="marital_status" id="marital_status" class="form-control" required>
-                                            <option value="">Select Marital Status</option>
-                                            <option value="Married">Married</option>
-                                            <option value="Unmarried">Unmarried</option>
-                                        </select>
+                                        <?php echo createSelectElement("marital_status", array("Married", "Unmarried")); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="living_status">Living Status:</label>
-                                        <select name="living_status" id="living_status" class="form-control" required>
-                                            <option value="">Select Living Status</option>
-                                            <option value="Inliving">Inliving</option>
-                                            <option value="Outliving">Outliving</option>
-                                            <option value="Barak">Offrs Mess</option>
-                                            <option value="Barak">Snk Mess</option>
-                                        </select>
+                                        <?php echo createSelectElement("living_status", array("Inliving", "Outliving", "Offrs Mess", "Snk Mess")); ?>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="height">Height (ft/in):</label>
-
                                         <div class="row">
-
                                             <div class="col">
                                                 <select name="height_ft" id="height_ft" class="form-control">
                                                     <option value="5">5 ft</option>
@@ -303,17 +272,9 @@ include '../includes/header.php';
                                         <div class="row">
                                             <div class="col">
                                                 <label for="divisionSelect">Division</label>
-                                                <select id="divisionSelect" class="form-control">
-                                                    <option value="">Select</option>
-                                                    <option value="Barisal">Barisal</option>
-                                                    <option value="Chittagong">Chittagong</option>
-                                                    <option value="Dhaka">Dhaka</option>
-                                                    <option value="Khulna">Khulna</option>
-                                                    <option value="Mymensingh">Mymensingh</option>
-                                                    <option value="Rajshahi">Rajshahi</option>
-                                                    <option value="Rangpur">Rangpur</option>
-                                                    <option value="Sylhet">Sylhet</option>
-                                                </select>
+                                                <?php echo createSelectElement("divisionSelect", array("Select", "Dhaka", "Barisal","Chittagong", "Khulna","Mymensingh", "Rajshahi", "Rangpur", "Sylhet")); ?>
+
+               
                                             </div>
                                             <div class="col">
                                                 <label for="district">District</label>
@@ -344,64 +305,25 @@ include '../includes/header.php';
 
                                     <div class="form-group">
                                         <label for="parent_unit">Parent Unit:</label>
-                                        <?php
-                                    // Define the unitList array
-                                    $unitList = array("1 Sig Bn", "2 Sig Bn", "3 Sig Bn", "4 Sig Bn", "5 Sig Bn", "6 Sig Bn", "7 Sig Bn", "8 Sig Bn", "9 Sig Bn", "10 Sig Bn", "11 Sig Bn", "12 Sig Bn");
-                                    
-                                    // Get the select element
-                                    $selectElement = "<select name='parent_unit' id='parent_unit' class='form-control' required>";
-                                    
-                                    // Loop through the unitList array and create an option element for each value
-                                    foreach ($unitList as $unit) {
-                                      $selectElement.= "<option value='". $unit. "'>". $unit. "</option>";
-                                    }
-                                    
-                                    // Close the select element
-                                    $selectElement.= "</select>";
-                                    
-                                    // Output the select element
-                                    echo $selectElement;
-                                    ?>
+                                        <?php echo createSelectElement("parent_unit", $unitList); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="mission">Mission:</label>
-                                        <select name="mission" id="mission" class="form-control" required>
-                                            <option value="">Select Mission</option>
-                                            <option value="Completed">Completed</option>
-                                            <option value="Not Completed">Not Completed</option>
-                                        </select>
+                                        <?php echo createSelectElement("mission", $missionList); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="med_category">Medical Category:</label>
-                                        <select name="med_category" id="med_category" class="form-control" required>
-                                            <option value="">Select Medical Category</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
-                                            <option value="E">E</option>
-                                        </select>
+                                        <?php echo createSelectElement("med_category", $medCategoryList); ?>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_of_children">Number of Children:</label>
-                                        <select name="no_of_children" id="no_of_children" class="form-control" required>
-                                            <option value="">Select</option>
-                                            <option value="">N/A</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
+                                        <?php echo createSelectElement("no_of_children", $numberOfChildrenList); ?>
                                     </div>
-
-                                </div>
-                                <div class="col-md-3">
-
                                 </div>
                             </div>
                             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                         </form>
+
                     </div>
                 </div>
             </div>

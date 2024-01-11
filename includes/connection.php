@@ -1,10 +1,16 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+// error_reporting(0);
+// ini_set('display_errors', 0);
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+
+$db_user = 'upcs';
+$db_password = '12345';
+$db_host = 'localhost/XEPDB1';
+
 
 $current_page = basename($_SERVER['PHP_SELF']);
 
@@ -18,10 +24,6 @@ if (isset($_SESSION['default_password']) && $_SESSION['default_password'] == tru
 
 }
 
-$db_user = 'upcs';
-$db_password = '12345';
-$db_host = 'localhost/XEPDB1';
-
 
 
 // Establish Oracle database connection
@@ -32,4 +34,6 @@ if (!$conn) {
     exit;
 }
 
+
+  
 ?>

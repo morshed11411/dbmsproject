@@ -2,22 +2,44 @@
 // Assuming $conn is your Oracle database connection
 include '../includes/connection.php';
 
-function createSelectElement($arrayName, $arrayValues) {
+// This function creates a select element
+function createSelectElement($arrayName, $arrayOptions, $arrayValues = null)
+{
     // Get the select element
-    $selectElement = "<select name='". $arrayName. "' id='". $arrayName. "' class='form-control' required>";
-  
-    // Loop through the array values and create an option element for each value
-    foreach ($arrayValues as $value) {
-      $selectElement.= "<option value='". $value. "'>". $value. "</option>";
+    $selectElement = "<select name='" . $arrayName . "' id='" . $arrayName . "' class='form-control' required>";
+
+    // Loop through the array options and create an option element for each option
+    foreach ($arrayOptions as $key => $option) {
+        // Use the provided values if available, otherwise use option names as values
+        $value = ($arrayValues && isset($arrayValues[$key])) ? $arrayValues[$key] : $option;
+        $selectElement .= "<option value='" . $value . "'>" . $option . "</option>";
     }
-  
+
     // Close the select element
-    $selectElement.= "</select>";
-  
+    $selectElement .= "</select>";
+
     // Return the select element
     return $selectElement;
-  }
-  
+}
+
+function createMultiSelect($name, $values, $ids)
+{
+    $html = '<div class="form-group" data-select2-id="30">';
+    $html .= '<div class="select2-purple" data-select2-id="29">';
+
+    $html .= '<select class="select2" multiple="multiple" data-placeholder="Select " style="width: 100%;" name="' . $name . '">';
+
+    foreach ($values as $index => $value) {
+        $html .= '<option value="' . $ids[$index] . '">' . $value . '</option>';
+    }
+
+    $html .= '</select>';
+    $html .= '</div>'; 
+    $html .= '</div>'; 
+    return $html;
+
+}
+
 function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $onLeave = false, $company = null, $status = null)
 {
     $query = "SELECT S.SOLDIERID, R.RANK, S.NAME, S.BLOODGROUP, S.DATEOFBIRTH, S.DISTRICT, T.TRADE, C.COMPANYNAME
@@ -46,10 +68,10 @@ function getSoldiers($conn, $soldierId = null, $rank = null, $category = null, $
         }
     }
     $conditions[] = ($onLeave)
-    ? "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
+        ? "S.SOLDIERID IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
                         JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
                         WHERE ONLEAVE = 1)"
-    : "S.SOLDIERID NOT IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
+        : "S.SOLDIERID NOT IN (SELECT SOLDIER.SOLDIERID FROM LEAVEMODULE 
                             JOIN SOLDIER ON LEAVEMODULE.SOLDIERID = SOLDIER.SOLDIERID 
                             WHERE ONLEAVE = 1)";
 
@@ -187,24 +209,24 @@ if ($role == 'manager') {
     $allOfficer = getSoldiers($conn, null, null, 'Officer', $coyid, null, null);
     $allJCO = getSoldiers($conn, null, null, 'JCO', false, $coyid, null);
     $allORS = getSoldiers($conn, null, null, 'ORS', false, $coyid, null);
-    
+
     // Get counts for present, absent, and on leave for each category
     $allPresent = getSoldiers($conn, null, null, null, false, $coyid, null);
     $allAbsent = getSoldiers($conn, null, null, null, true, $coyid, null);
     $allOnLeave = getSoldiers($conn, null, null, null, true, $coyid, null);
-    
+
     $officerPresent = getSoldiers($conn, null, null, 'Officer', false, $coyid, null);
     $officerAbsent = getSoldiers($conn, null, null, 'Officer', true, $coyid, null);
     $officerOnLeave = getSoldiers($conn, null, null, 'Officer', true, $coyid, null);
-    
+
     $jcoPresent = getSoldiers($conn, null, null, 'JCO', false, $coyid, null);
     $jcoAbsent = getSoldiers($conn, null, null, 'JCO', true, $coyid, null);
     $jcoOnLeave = getSoldiers($conn, null, null, 'JCO', true, $coyid, null);
-    
+
     $orsPresent = getSoldiers($conn, null, null, 'ORS', false, $coyid, null);
     $orsAbsent = getSoldiers($conn, null, null, 'ORS', true, $coyid, null);
     $orsOnLeave = getSoldiers($conn, null, null, 'ORS', true, $coyid, null);
-    
+
 
 }
 
