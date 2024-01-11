@@ -6,6 +6,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+
+$db_user = 'upcs';
+$db_password = '12345';
+$db_host = 'localhost/XEPDB1';
+
+
 $current_page = basename($_SERVER['PHP_SELF']);
 
 if (isset($_SESSION['default_password']) && $_SESSION['default_password'] == true) {
@@ -17,10 +23,6 @@ if (isset($_SESSION['default_password']) && $_SESSION['default_password'] == tru
     }
 
 }
-
-$db_user = 'upcs';
-$db_password = '12345';
-$db_host = 'localhost/XEPDB1';
 
 
 
