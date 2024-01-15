@@ -67,105 +67,76 @@ $result = getLeaveCountsByDateRange($conn, $companies, $startDate, $endDate);
 
 <?php include '../includes/alert.php'; ?>
 <section class="content">
-<div class="row">
-    <div class="col-lg-3 col-6">
-    <div class="small-box border-primary">
-            <div class="inner">
-                <h3><?php echo count($postedTotal); ?></h3>
-                <p>Total Soldiers</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-users"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-6">
-    <div class="small-box border-primary">
-            <div class="inner">
-                <h3><?php echo count($allOfficer); ?></h3>
-                <p>Total Officer</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user-tie"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-6">
-    <div class="small-box border-primary">
-            <div class="inner">
-                <h3><?php echo count($allJCO); ?></h3>
-                <p>Total JCO</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user-secret"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-6">
-    <div class="small-box border-primary">
-            <div class="inner">
-                <h3><?php echo count($allORS); ?></h3>
-                <p>All Other Ranks</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-user"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- /.row -->
-
-
-    <!-- Notice Board and Random Data Table -->
-    <div class="row d-flex">
-
-        <!-- <div class="col-lg-6 flex-fill">
-            <div class="card h-100">
-                <div class="card-header bg-info">
-                    <h3 class="card-title   text-light">Notice Board</h3>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box border-primary">
+                <div class="inner">
+                    <h3>
+                        <?php echo count($postedTotal); ?>
+                    </h3>
+                    <p>Total Soldiers</p>
                 </div>
-                <div class="card-body overflow-auto">
-                    <ul class="list-unstyled">
-                        <?php if (empty($notifications)): ?>
-                            <p>No notifications available.</p>
-                        <?php else: ?>
-                            <?php $noNotification = true; // Assume no unread notifications initially ?>
-                            <?php foreach ($notifications as $notification): ?>
-                                <?php if ($notification['STATUS']) { ?>
-                                    <li>
-                                        <i class="fas fa-bullhorn"></i> <span>
-                                            <?php echo $notification['MESSAGE']; ?>
-                                        </span>
-                                        <?php
-                                        // Display the time difference
-                                        displayTimeDifference($notification['CREATED_AT']);
-                                        ?>
-                                    </li>
-                                    <?php $noNotification = false; // Found an unread notification ?>
-                                <?php } ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </ul>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
                 </div>
             </div>
-        </div> -->
+        </div>
 
-        <div class="col-lg-12 flex-fill">
-            <div class="card h-100"> <!-- Added 'h-100' to make the card fill the column height -->
-                <div class="card-header bg-info">
-                    <h3 class="card-title   text-light">Leave State</h3>
+        <div class="col-lg-3 col-6">
+            <div class="small-box border-primary">
+                <div class="inner">
+                    <h3>
+                        <?php echo count($allOfficer); ?>
+                    </h3>
+                    <p>Total Officer</p>
                 </div>
-                <div class="card-body">
-                    <canvas id="leave-counts-chart" width="400" height="150"></canvas>
+                <div class="icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box border-primary">
+                <div class="inner">
+                    <h3>
+                        <?php echo count($allJCO); ?>
+                    </h3>
+                    <p>Total JCO</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box border-primary">
+                <div class="inner">
+                    <h3>
+                        <?php echo count($allORS); ?>
+                    </h3>
+                    <p>All Other Ranks</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
                 </div>
             </div>
         </div>
     </div>
-    <br>
+
+<!-- 
+    <div class="col-lg-12 flex-fill">
+        <div class="card h-100"> 
+            <div class="card-header bg-info">
+                <h3 class="card-title   text-light">Leave State</h3>
+            </div>
+            <div class="card-body">
+                <canvas id="leave-counts-chart" width="400" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+     -->
     <div class="row">
         <!-- Left Column -->
         <div class="col-lg-6">

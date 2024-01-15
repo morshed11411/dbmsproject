@@ -35,8 +35,7 @@ if (isset($_SESSION['role'])) {
 }
 ?>
 
-<!-- <?php
-session_start(); // Start the session
+<?php
 
 // Define user roles
 $appts = [
@@ -91,4 +90,4 @@ function canAccessCompanyData($userRole, $companyID)
 }
 
 
-?> -->
+?> 

@@ -28,6 +28,7 @@ if (isset($_SESSION['userid'])) {
 }
 ?>
 
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
   <!-- Navbar content -->
 
@@ -46,15 +47,15 @@ if (isset($_SESSION['userid'])) {
   <!-- Display "Dark Mode" on mobile devices -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <div class="custom-control custom-switch align-items-center">
-            <input type="checkbox" class="custom-control-input" id="darkModeToggle">
-            <label class="custom-control-label d-none d-md-block" for="darkModeToggle">
-                <i class="fas fa-moon"></i>
-            </label>
-            <label class="custom-control-label d-md-none md-1" for="darkModeToggle"></label>
-        </div>
+      <div class="custom-control custom-switch align-items-center">
+        <input type="checkbox" class="custom-control-input" id="darkModeToggle">
+        <label class="custom-control-label d-none d-md-block" for="darkModeToggle">
+          <i class="fas fa-moon"></i>
+        </label>
+        <label class="custom-control-label d-md-none md-1" for="darkModeToggle"></label>
+      </div>
     </li>
-</ul>
+  </ul>
 
 
   <!-- Display Date and Time -->

@@ -1,0 +1,40 @@
+1. edit soldier page update
+2. Unit settings
+3. Add the date of joining unit in the serving status
+4. Add last year OPR
+
+
+Feature Implementation
+1. Advance Search
+    a. search by course cadre
+    b. service age, unit posting age, 
+    c. search by punishment 
+    d. search by team.
+    e. search by appointment
+
+
+2. Training and Event Forecast
+    a. import all the training event
+
+3. While sending leave show the team state, training state and pleave cycle.
+   add date for each training cycle
+
+
+4. Dasahboard
+   Show the total leave state in pie chart.
+
+
+5. Show the leave by year and keep a button to change the year
+   Create a page for leave report where giving year and soldier id will show all the leave history of the soldier of the year
+
+Team
+-----
+1. Team participation history of every soldier
+2. Individual remark can be added for the team participant
+3. 
+
+
+Observation List
+----------------
+
+Soldier will have a Observation tab in the profile and any Officer can add Observation to the soldier with a remark. 

@@ -162,12 +162,12 @@ include '../includes/header.php';
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="soldier_id">Soldier ID:</label>
+                                        <label for="soldier_id">Personal Number:</label>
                                         <input type="number" name="soldier_id" id="soldier_id" class="form-control"
                                             minlength="4" maxlength="7" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Name:</label>
+                                        <label for="name">Full Name:</label>
                                         <input type="text" name="name" id="name" class="form-control" required>
                                     </div>
 
@@ -272,9 +272,17 @@ include '../includes/header.php';
                                         <div class="row">
                                             <div class="col">
                                                 <label for="divisionSelect">Division</label>
-                                                <?php echo createSelectElement("divisionSelect", array("Select", "Dhaka", "Barisal","Chittagong", "Khulna","Mymensingh", "Rajshahi", "Rangpur", "Sylhet")); ?>
-
-               
+                                                <select id="divisionSelect" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Barisal">Barisal</option>
+                                                    <option value="Chittagong">Chittagong</option>
+                                                    <option value="Dhaka">Dhaka</option>
+                                                    <option value="Khulna">Khulna</option>
+                                                    <option value="Mymensingh">Mymensingh</option>
+                                                    <option value="Rajshahi">Rajshahi</option>
+                                                    <option value="Rangpur">Rangpur</option>
+                                                    <option value="Sylhet">Sylhet</option>
+                                                </select>
                                             </div>
                                             <div class="col">
                                                 <label for="district">District</label>

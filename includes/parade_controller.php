@@ -7,6 +7,7 @@ function createSelectElement($arrayName, $arrayOptions, $arrayValues = null)
 {
     // Get the select element
     $selectElement = "<select name='" . $arrayName . "' id='" . $arrayName . "' class='form-control' required>";
+    $selectElement .= "<option value=''>Select</option>";
 
     // Loop through the array options and create an option element for each option
     foreach ($arrayOptions as $key => $option) {
